@@ -1,0 +1,56 @@
+{
+  "name": "swc-register",
+  "version": "0.0.0",
+  "description": "Faster swc nodejs binding",
+  "keywords": [
+    "swc",
+    "babel",
+    "esbuild",
+    "rust",
+    "n-api",
+    "napi",
+    "node-rs",
+    "uglify",
+    "terser",
+    "webpack",
+    "ts-node",
+    "typescript",
+    "tsc"
+  ],
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "*.node",
+    "LICENSE"
+  ],
+  "repository": "git@github.com:Brooooooklyn/swc-register.git",
+  "author": "LongYinan <lynweklm@gmail.com>",
+  "license": "MIT",
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "engines": {
+    "node": ">= 8.9"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "napi --platform ./swc",
+    "build-release": "napi --release --platform ./swc"
+  },
+  "devDependencies": {
+    "napi-rs": "^0.2.4"
+  },
+  "dependencies": {
+    "@node-rs/helper": "^0.2.1",
+    "pirates": "^4.0.1",
+    "source-map": "^0.7.3",
+    "source-map-support": "^0.5.19"
+  }
+}
