@@ -19,7 +19,3 @@ jemallocator = { version = "0.3", features = ["disable_initial_exec_tls"] }
 
 [build-dependencies]
 napi-build = "0.2"
-
-[profile.release]
-opt-level = 3
-lto = true

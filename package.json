@@ -1,5 +1,5 @@
 {
-  "name": "swc-register",
+  "name": "node-swc",
   "version": "0.0.0",
   "description": "Faster swc nodejs binding",
   "keywords": [
