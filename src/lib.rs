@@ -3,18 +3,18 @@ extern crate napi;
 #[macro_use]
 extern crate napi_derive;
 
-use swc::config::JscConfig;
 use std::path::PathBuf;
 use std::str;
 use std::str::FromStr;
 use std::sync::Arc;
+use swc::config::JscConfig;
 
 use napi::{CallContext, Env, Error, JsBuffer, JsObject, JsString, Module, Result, Status, Task};
 use once_cell::sync::OnceCell;
 
 use swc::{
   common::{self, errors::Handler, FileName, FilePathMapping, SourceMap},
-  config::{Config, Options, JscTarget, ModuleConfig, SourceMapsConfig},
+  config::{Config, JscTarget, ModuleConfig, Options, SourceMapsConfig},
   ecmascript::parser::{Syntax, TsConfig},
   ecmascript::transforms::modules,
   Compiler, TransformOutput,
@@ -64,27 +64,33 @@ impl TransformTask {
     let mut config = Config::default();
     options.source_maps = Some(SourceMapsConfig::Bool(true));
     config.jsc = JscConfig::default();
-    config.jsc.target = JscTarget::Es5;
+    config.jsc.target = JscTarget::Es2018;
     config.module = Some(ModuleConfig::CommonJs(modules::util::Config::default()));
     options.config = Some(config);
     options.is_module = false;
+    options.disable_hygiene = true;
     let program = c.run(|| {
-      c.parse_js(fm, JscTarget::Es5, Syntax::Typescript(
-        TsConfig {
+      c.parse_js(
+        fm,
+        JscTarget::Es2018,
+        Syntax::Typescript(TsConfig {
           tsx: true,
           decorators: true,
           dynamic_import: true,
           no_early_errors: true,
           dts: false,
-        }
-      ), true , true)
-        .map_err(|e| Error {
-          status: Status::GenericFailure,
-          reason: format!("Parse js failed {}", e),
-        })
+        }),
+        true,
+        true,
+      )
+      .map_err(|e| Error {
+        status: Status::GenericFailure,
+        reason: format!("Parse js failed {}", e),
+      })
     })?;
 
-    c.process_js(program, &options).map_err(|e| Error::new(Status::GenericFailure, format!("Process js failed {}", e)))
+    c.process_js(program, &options)
+      .map_err(|e| Error::new(Status::GenericFailure, format!("Process js failed {}", e)))
   }
 }
 
@@ -100,10 +106,7 @@ impl Task for TransformTask {
     let mut result = env.create_object()?;
     result.set_named_property("code", env.create_string_from_std(output.code)?)?;
     if let Some(m) = output.map {
-      result.set_named_property(
-        "map",
-        env.create_string_from_std(m)?,
-      )?;
+      result.set_named_property("map", env.create_string_from_std(m)?)?;
     }
     Ok(result)
   }
