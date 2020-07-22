@@ -7,16 +7,14 @@ use std::path::PathBuf;
 use std::str;
 use std::str::FromStr;
 use std::sync::Arc;
-use swc::config::JscConfig;
 
 use napi::{CallContext, Env, Error, JsBuffer, JsObject, JsString, Module, Result, Status, Task};
 use once_cell::sync::OnceCell;
-
+use serde::{Deserialize, Serialize};
 use swc::{
   common::{self, errors::Handler, FileName, FilePathMapping, SourceMap},
-  config::{Config, JscTarget, ModuleConfig, Options, SourceMapsConfig},
+  config::{Config, JscConfig, JscTarget, ModuleConfig, Options, SourceMapsConfig},
   ecmascript::parser::{Syntax, TsConfig},
-  ecmascript::transforms::modules,
   Compiler, TransformOutput,
 };
 
@@ -26,18 +24,39 @@ static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 
 static COMPILER: OnceCell<Compiler> = OnceCell::new();
 
+#[derive(Serialize, Deserialize)]
+pub struct RegisterOptions {
+  target: JscTarget,
+  module: ModuleConfig,
+  sourcemap: SourceMapsConfig,
+  hygiene: bool,
+  tsx: bool,
+  decorators: bool,
+  dynamic_import: bool,
+  no_early_errors: bool,
+}
+
 pub struct TransformTask {
   source: JsBuffer,
   filename: String,
+  options: RegisterOptions,
 }
 
 impl TransformTask {
-  pub fn new(source: JsBuffer, filename: String) -> Self {
-    Self { source, filename }
+  pub fn new(source: JsBuffer, filename: String, options: RegisterOptions) -> Self {
+    Self {
+      source,
+      filename,
+      options,
+    }
   }
 
   #[inline]
-  pub fn perform(source: JsBuffer, filename: &str) -> Result<TransformOutput> {
+  pub fn perform(
+    source: JsBuffer,
+    filename: &str,
+    register_options: &RegisterOptions,
+  ) -> Result<TransformOutput> {
     let c = COMPILER.get_or_init(|| {
       let cm = Arc::new(SourceMap::new(FilePathMapping::empty()));
       let handler = Handler::with_tty_emitter(
@@ -64,20 +83,19 @@ impl TransformTask {
     let mut config = Config::default();
     options.source_maps = Some(SourceMapsConfig::Bool(true));
     config.jsc = JscConfig::default();
-    config.jsc.target = JscTarget::Es2018;
-    config.module = Some(ModuleConfig::CommonJs(modules::util::Config::default()));
+    config.jsc.target = register_options.target;
+    config.module = Some(register_options.module.clone());
     options.config = Some(config);
-    options.is_module = false;
-    options.disable_hygiene = true;
+    options.disable_hygiene = !register_options.hygiene;
     let program = c.run(|| {
       c.parse_js(
         fm,
-        JscTarget::Es2018,
+        register_options.target,
         Syntax::Typescript(TsConfig {
-          tsx: true,
-          decorators: true,
-          dynamic_import: true,
-          no_early_errors: true,
+          tsx: register_options.tsx,
+          decorators: register_options.decorators,
+          dynamic_import: register_options.dynamic_import,
+          no_early_errors: register_options.no_early_errors,
           dts: false,
         }),
         true,
@@ -99,7 +117,7 @@ impl Task for TransformTask {
   type JsValue = JsObject;
 
   fn compute(&mut self) -> Result<Self::Output> {
-    TransformTask::perform(self.source, self.filename.as_str())
+    TransformTask::perform(self.source, self.filename.as_str(), &self.options)
   }
 
   fn resolve(&self, env: &mut Env, output: Self::Output) -> Result<Self::JsValue> {
@@ -121,10 +139,17 @@ fn init(module: &mut Module) -> Result<()> {
   Ok(())
 }
 
-#[js_function(2)]
+#[js_function(3)]
 fn transform_sync(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let output = TransformTask::perform(ctx.get::<JsBuffer>(0)?, filename.as_str()?)?;
+  let options_str = ctx.get::<JsString>(2)?;
+  let options: RegisterOptions = serde_json::from_str(options_str.as_str()?).map_err(|e| {
+    Error::new(
+      Status::InvalidArg,
+      format!("Options is not a valid json {}", e),
+    )
+  })?;
+  let output = TransformTask::perform(ctx.get::<JsBuffer>(0)?, filename.as_str()?, &options)?;
   let mut result = ctx.env.create_object()?;
   result.set_named_property("code", ctx.env.create_string_from_std(output.code)?)?;
   result.set_named_property(
@@ -136,9 +161,20 @@ fn transform_sync(ctx: CallContext) -> Result<JsObject> {
   Ok(result)
 }
 
-#[js_function(2)]
+#[js_function(3)]
 fn transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let task = TransformTask::new(ctx.get::<JsBuffer>(0)?, filename.as_str()?.to_owned());
+  let options_str = ctx.get::<JsString>(2)?;
+  let options: RegisterOptions = serde_json::from_str(options_str.as_str()?).map_err(|e| {
+    Error::new(
+      Status::InvalidArg,
+      format!("Options is not a valid json {}", e),
+    )
+  })?;
+  let task = TransformTask::new(
+    ctx.get::<JsBuffer>(0)?,
+    filename.as_str()?.to_owned(),
+    options,
+  );
   ctx.env.spawn(task)
 }

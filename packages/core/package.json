@@ -1,0 +1,36 @@
+{
+  "name": "@swc-node/core",
+  "version": "0.0.0",
+  "description": "Faster swc nodejs binding",
+  "keywords": [
+    "swc",
+    "babel",
+    "esbuild",
+    "rust",
+    "n-api",
+    "napi",
+    "node-rs",
+    "uglify",
+    "napi-rs",
+    "terser",
+    "webpack",
+    "ts-node",
+    "typescript",
+    "tsc"
+  ],
+  "author": "LongYinan <lynweklm@gmail.com>",
+  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "license": "MIT",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+  },
+  "dependencies": {
+    "@node-rs/helper": "^0.2.1"
+  }
+}

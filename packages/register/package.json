@@ -1,0 +1,41 @@
+{
+  "name": "@swc-node/register",
+  "version": "0.0.0",
+  "description": "SWC node register",
+  "keywords": [
+    "swc",
+    "babel",
+    "ts-node",
+    "napi-rs",
+    "uglify",
+    "node-rs",
+    "napi-rs",
+    "napi",
+    "n-api",
+    "esbuild",
+    "tsc",
+    "webpack"
+  ],
+  "author": "LongYinan <lynweklm@gmail.com>",
+  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+  },
+  "dependencies": {
+    "@swc-node/core": "^0.0.0",
+    "pirates": "^4.0.1",
+    "source-map": "^0.7.3",
+    "source-map-support": "^0.5.19"
+  }
+}

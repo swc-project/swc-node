@@ -1,8 +1,6 @@
-const { loadBinding } = require('@node-rs/helper')
+const { transformSync } = require('@swc-node/core')
 const sourceMapSupport = require('source-map-support')
 const { addHook } = require('pirates')
-
-const { transformSync } = loadBinding(__dirname, 'swc')
 
 const DEFAULT_EXTENSIONS = Object.freeze([
   '.js',
@@ -38,9 +36,20 @@ function compile(sourcecode, filename) {
   return code
 }
 
-module.exports = function register() {
+const defaultOptions = {
+  target: 'es2018',
+  module: 'commonjs',
+  sourcemap: true,
+  hygiene: false,
+  tsx: false,
+  decorators: false,
+  dynamic_import: false,
+  no_early_errors: true,
+}
+
+module.exports = function register(options = {}) {
   installSourceMapSupport()
-  addHook(compile, {
+  addHook((code, filename) => compile(code, filename, { ...defaultOptions, ...options }), {
     exts: DEFAULT_EXTENSIONS,
   })
 }
