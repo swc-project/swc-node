@@ -1,16 +1,8 @@
 const { transformSync } = require('@swc-node/core')
-const sourceMapSupport = require('source-map-support')
 const { addHook } = require('pirates')
+const sourceMapSupport = require('source-map-support')
 
-const DEFAULT_EXTENSIONS = Object.freeze([
-  '.js',
-  '.jsx',
-  '.es6',
-  '.es',
-  '.mjs',
-  '.ts',
-  '.tsx'
-])
+const DEFAULT_EXTENSIONS = Object.freeze(['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'])
 
 const SourcemapMap = new Map()
 
@@ -30,8 +22,12 @@ function installSourceMapSupport() {
   })
 }
 
-function compile(sourcecode, filename) {
-  const { code, map } = transformSync(Buffer.isBuffer(sourcecode) ? code : Buffer.from(sourcecode), filename)
+function compile(sourcecode, filename, options) {
+  const { code, map } = transformSync(
+    Buffer.isBuffer(sourcecode) ? sourcecode : Buffer.from(sourcecode),
+    filename,
+    JSON.stringify(options),
+  )
   SourcemapMap.set(filename, map)
   return code
 }
@@ -47,9 +43,18 @@ const defaultOptions = {
   no_early_errors: true,
 }
 
+function convertOptions(options) {
+  return {
+    ...options,
+    module: {
+      type: options.module,
+    },
+  }
+}
+
 module.exports = function register(options = {}) {
   installSourceMapSupport()
-  addHook((code, filename) => compile(code, filename, { ...defaultOptions, ...options }), {
+  addHook((code, filename) => compile(code, filename, convertOptions({ ...defaultOptions, ...options })), {
     exts: DEFAULT_EXTENSIONS,
   })
 }

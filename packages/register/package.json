@@ -20,11 +20,7 @@
   "homepage": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
   "main": "index.js",
-  "files": [
-    "index.js",
-    "README.md",
-    "LICENSE"
-  ],
+  "files": ["index.js", "README.md", "LICENSE"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Brooooooklyn/swc-node.git"

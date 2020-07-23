@@ -1,0 +1,20 @@
+{
+  "name": "@swc-node/integrate",
+  "version": "0.0.0",
+  "description": "Integrate testing",
+  "keywords": ["ava", "swc", "ts-node"],
+  "author": "LongYinan <lynweklm@gmail.com>",
+  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+  }
+}
