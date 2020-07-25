@@ -28,33 +28,14 @@ function compile(sourcecode, filename, options) {
     filename,
     JSON.stringify(options),
   )
+  console.log(code)
   SourcemapMap.set(filename, map)
   return code
 }
 
-const defaultOptions = {
-  target: 'es2018',
-  module: 'commonjs',
-  sourcemap: true,
-  hygiene: false,
-  tsx: false,
-  decorators: false,
-  dynamic_import: false,
-  no_early_errors: true,
-}
-
-function convertOptions(options) {
-  return {
-    ...options,
-    module: {
-      type: options.module,
-    },
-  }
-}
-
 module.exports = function register(options = {}) {
   installSourceMapSupport()
-  addHook((code, filename) => compile(code, filename, convertOptions({ ...defaultOptions, ...options })), {
+  addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,
   })
 }
