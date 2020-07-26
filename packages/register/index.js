@@ -28,7 +28,6 @@ function compile(sourcecode, filename, options) {
     filename,
     JSON.stringify(options),
   )
-  console.log(code)
   SourcemapMap.set(filename, map)
   return code
 }
