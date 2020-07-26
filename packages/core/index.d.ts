@@ -10,6 +10,8 @@ export interface Options {
 }
 
 export function transformSync(
+  source: string | Buffer,
+  path: string,
   options?: Options,
 ): {
   code: string
@@ -17,6 +19,8 @@ export function transformSync(
 }
 
 export function transform(
+  source: string | Buffer,
+  path: string,
   options?: Options,
 ): Promise<{
   code: string

@@ -23,11 +23,7 @@ function installSourceMapSupport() {
 }
 
 function compile(sourcecode, filename, options) {
-  const { code, map } = transformSync(
-    Buffer.isBuffer(sourcecode) ? sourcecode : Buffer.from(sourcecode),
-    filename,
-    JSON.stringify(options),
-  )
+  const { code, map } = transformSync(sourcecode, filename, options)
   SourcemapMap.set(filename, map)
   return code
 }
