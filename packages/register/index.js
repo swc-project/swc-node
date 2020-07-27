@@ -2,7 +2,7 @@ const { transformSync } = require('@swc-node/core')
 const { addHook } = require('pirates')
 const sourceMapSupport = require('source-map-support')
 
-const DEFAULT_EXTENSIONS = Object.freeze(['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'])
+const DEFAULT_EXTENSIONS = Object.freeze(['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts'])
 
 const SourcemapMap = new Map()
 

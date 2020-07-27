@@ -13,7 +13,9 @@ use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 use swc::{
   common::{self, errors::Handler, FileName, FilePathMapping, SourceMap},
-  config::{Config, JscConfig, JscTarget, ModuleConfig, Options, SourceMapsConfig},
+  config::{
+    Config, JscConfig, JscTarget, ModuleConfig, Options, SourceMapsConfig, TransformConfig,
+  },
   ecmascript::parser::{Syntax, TsConfig},
   Compiler, TransformOutput,
 };
@@ -25,15 +27,16 @@ static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 static COMPILER: OnceCell<Compiler> = OnceCell::new();
 
 #[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct RegisterOptions {
   target: JscTarget,
   module: ModuleConfig,
   sourcemap: SourceMapsConfig,
-  hygiene: bool,
   tsx: bool,
-  decorators: bool,
+  legacy_decorator: bool,
   dynamic_import: bool,
   no_early_errors: bool,
+  filename: String,
 }
 
 pub struct TransformTask {
@@ -81,33 +84,26 @@ impl TransformTask {
     );
     let mut options = Options::default();
     let mut config = Config::default();
+    let mut transform_config = TransformConfig::default();
+    options.is_module = true;
     options.source_maps = Some(SourceMapsConfig::Bool(true));
+    transform_config.legacy_decorator = register_options.legacy_decorator;
     config.jsc = JscConfig::default();
     config.jsc.target = register_options.target;
+    config.jsc.transform = Some(transform_config);
+    config.jsc.syntax = Some(Syntax::Typescript(TsConfig {
+      tsx: register_options.tsx,
+      decorators: register_options.legacy_decorator,
+      dynamic_import: register_options.dynamic_import,
+      dts: false,
+      no_early_errors: register_options.no_early_errors,
+    }));
     config.module = Some(register_options.module.clone());
     options.config = Some(config);
-    options.disable_hygiene = !register_options.hygiene;
-    let program = c.run(|| {
-      c.parse_js(
-        fm,
-        register_options.target,
-        Syntax::Typescript(TsConfig {
-          tsx: register_options.tsx,
-          decorators: register_options.decorators,
-          dynamic_import: register_options.dynamic_import,
-          no_early_errors: register_options.no_early_errors,
-          dts: false,
-        }),
-        true,
-        true,
-      )
-      .map_err(|e| Error {
-        status: Status::GenericFailure,
-        reason: format!("Parse js failed {}", e),
-      })
-    })?;
+    options.disable_hygiene = false;
+    options.filename = register_options.filename.clone();
 
-    c.process_js(program, &options)
+    c.process_js_file(fm, &options)
       .map_err(|e| Error::new(Status::GenericFailure, format!("Process js failed {}", e)))
   }
 }
