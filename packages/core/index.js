@@ -4,7 +4,7 @@ const defaultOptions = {
   target: 'es2018',
   module: 'commonjs',
   sourcemap: true,
-  decorators: false,
+  legacyDecorator: false,
   dynamicImport: false,
   noEarlyErrors: true,
 }
