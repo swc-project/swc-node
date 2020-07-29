@@ -27,14 +27,13 @@
     "node": ">= 8.9"
   },
   "scripts": {
-    "build": "napi --platform ./packages/core/swc",
-    "build-release": "napi --release --platform ./packages/core/swc",
+    "build": "napi --release --platform ./packages/core/swc",
     "format": "run-p format:md format:json format:source format:yml",
     "format:json": "prettier --parser json --write '**/*.json'",
     "format:md": "prettier --parser markdown --write './*.md' './packages/**/*.md'",
     "format:source": "prettier --config ./package.json './packages/**/*.{ts,tsx,js}' --write",
     "format:yml": "prettier --parser yaml --write './*.{yml,yaml}'",
-    "lint": "node --max-old-space-size=8192 ./node_modules/.bin/eslint . -c ./.eslintrc.yml 'packages/**/*.{js,ts,tsx}'",
+    "lint": "eslint -c ./.eslintrc.yml 'packages/**/*.{js,ts,tsx}'",
     "test": "ava"
   },
   "devDependencies": {

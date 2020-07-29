@@ -1,0 +1,22 @@
+{
+  "name": "@swc-node/jest",
+  "version": "0.0.0",
+  "description": "swc preprocessor for jest with source map support",
+  "keywords": ["swc", "jest", "ts-jest", "napi", "N-API", "typescript", "node-rs", "napi-rs", "ts-node"],
+  "author": "LongYinan <lynweklm@gmail.com>",
+  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "license": "MIT",
+  "main": "index.js",
+  "files": ["index.js", "LICENSE"],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/node-swc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/node-swc/issues"
+  }
+}

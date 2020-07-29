@@ -1,27 +1,9 @@
 const { transformSync } = require('@swc-node/core')
+const { SourcemapMap, installSourceMapSupport } = require('@swc-node/sourcemap-support')
 const { addHook } = require('pirates')
-const sourceMapSupport = require('source-map-support')
 const ts = require('typescript')
 
 const DEFAULT_EXTENSIONS = Object.freeze(['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts'])
-
-const SourcemapMap = new Map()
-
-function installSourceMapSupport() {
-  sourceMapSupport.install({
-    handleUncaughtExceptions: false,
-    environment: 'node',
-    retrieveSourceMap(file) {
-      if (SourcemapMap.has(file)) {
-        return {
-          url: file,
-          map: SourcemapMap.get(file),
-        }
-      }
-      return null
-    },
-  })
-}
 
 function toTsTarget(target) {
   switch (target) {
@@ -84,7 +66,7 @@ function compile(sourcecode, filename, options) {
   }
 }
 
-module.exports = function register(options = {}) {
+module.exports.register = function register(options = {}) {
   installSourceMapSupport()
   addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,

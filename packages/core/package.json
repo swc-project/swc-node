@@ -22,7 +22,16 @@
   "homepage": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
   "main": "index.js",
-  "types": "index.d.ts",
+  "typings": "index.d.ts",
+  "files": ["index.js", "index.d.ts", "*.node"],
+  "os": ["darwin", "linux", "win32"],
+  "engines": {
+    "node": ">= 8.9"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Brooooooklyn/swc-node.git"

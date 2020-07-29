@@ -1,5 +1,3 @@
-const register = require('@swc-node/register')
+const { register } = require('@swc-node/register')
 
-register({
-  hygiene: true,
-})
+register()
