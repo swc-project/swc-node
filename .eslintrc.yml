@@ -175,11 +175,11 @@ rules:
 
 overrides:
   - files:
-      - ./**/*.js
+      - ./scripts/**/*.js
     plugins:
       - '@typescript-eslint'
     parserOptions:
-      project: ./tsconfig.json
+      project: ./scripts/tsconfig.json
     rules:
       '@typescript-eslint/prefer-nullish-coalescing': 0
       '@typescript-eslint/prefer-optional-chain': 0

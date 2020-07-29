@@ -34,8 +34,6 @@
   },
   "dependencies": {
     "@swc-node/core": "^0.0.0",
-    "pirates": "^4.0.1",
-    "source-map": "^0.7.3",
-    "source-map-support": "^0.5.19"
+    "pirates": "^4.0.1"
   }
 }
