@@ -72,7 +72,9 @@ jobs:
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
 
       - name: 'Build'
-        run: yarn build
+        run: |
+          cargo build --release
+          yarn build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
