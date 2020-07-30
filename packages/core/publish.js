@@ -24,7 +24,3 @@ for (const name of platforms) {
     stdio: 'inherit',
   })
 }
-
-execSync('git checkout .', {
-  stdio: 'inherit',
-})
