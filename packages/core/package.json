@@ -46,10 +46,5 @@
   },
   "dependencies": {
     "@node-rs/helper": "^0.2.1"
-  },
-  "optionalDependencies": {
-    "@swc-node/core-darwin": "^0.1.1",
-    "@swc-node/core-linux": "^0.1.1",
-    "@swc-node/core-win32": "^0.1.1"
   }
 }
