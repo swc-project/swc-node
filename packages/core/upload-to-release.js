@@ -5,7 +5,7 @@ const { Octokit } = require('@octokit/rest')
 const chalk = require('chalk')
 const putasset = require('putasset')
 
-const supporttedPlatforms = []
+const platforms = require('./platforms')
 
 const headCommit = execSync('git log -1 --pretty=%B', {
   encoding: 'utf8',
@@ -30,8 +30,8 @@ const headCommit = execSync('git log -1 --pretty=%B', {
       tag_name: core.tag,
     })
     await Promise.all(
-      supporttedPlatforms.map(async (platform) => {
-        const binary = join('package', 'core', `bindings-${platform}`, `swc.${platform}.node`)
+      platforms.map(async (platform) => {
+        const binary = join(__dirname, `bindings-${platform}`, `swc.${platform}.node`)
         const downloadUrl = await putasset(process.env.GITHUB_TOKEN, {
           owner,
           repo,

@@ -164,7 +164,7 @@ jobs:
 
       - name: Upload artifacts to Github release
         run: |
-          node scripts/upload-to-release.js
+          node packages/core/upload-to-release.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
