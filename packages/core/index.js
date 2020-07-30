@@ -31,7 +31,7 @@ try {
   try {
     bindings = require(`@swc-node/core-${platform()}`)
   } catch (e) {
-    throw new TypeError('Not compatible with your platform')
+    throw new TypeError('Not compatible with your platform. Error message: ' + e.message)
   }
 }
 
