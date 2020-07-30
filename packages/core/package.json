@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/core",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "Faster swc nodejs binding",
   "keywords": [
     "swc",
@@ -46,5 +46,10 @@
   },
   "dependencies": {
     "@node-rs/helper": "^0.2.1"
+  },
+  "optionalDependencies": {
+    "@swc-node/core-darwin": "^0.1.1",
+    "@swc-node/core-linux": "^0.1.1",
+    "@swc-node/core-win32": "^0.1.1"
   }
 }
