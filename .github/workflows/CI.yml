@@ -173,7 +173,6 @@ jobs:
         shell: bash
       - name: Lerna publish
         run: |
-          find ./packages/ -type d -maxdepth 1 -exec cp LICENSE {} \\;
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
           npx lerna publish from-package --no-verify-access --yes
         env:

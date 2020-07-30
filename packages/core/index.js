@@ -1,3 +1,5 @@
+const { platform } = require('os')
+
 const { loadBinding } = require('@node-rs/helper')
 
 const defaultOptions = {
@@ -20,7 +22,18 @@ function convertOptions(options, path) {
   })
 }
 
-const bindings = loadBinding(__dirname, 'swc')
+let bindings
+
+try {
+  bindings = loadBinding(__dirname, 'swc')
+  // eslint-disable-next-line no-empty
+} catch (e) {
+  try {
+    bindings = require(`@swc-node/core-${platform()}`)
+  } catch (e) {
+    throw new TypeError('Not compatible with your platform')
+  }
+}
 
 module.exports = {
   transformSync: function transformSync(code, path, options = {}) {

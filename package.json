@@ -27,7 +27,7 @@
     "node": ">= 8.9"
   },
   "scripts": {
-    "build": "napi --release --platform ./packages/core/swc",
+    "build": "napi --release --platform ./packages/core",
     "format": "run-p format:md format:json format:source format:yml",
     "format:json": "prettier --parser json --write '**/*.json'",
     "format:md": "prettier --parser markdown --write './*.md' './packages/**/*.md'",

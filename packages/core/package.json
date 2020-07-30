@@ -23,8 +23,9 @@
   "license": "MIT",
   "main": "index.js",
   "typings": "index.d.ts",
-  "files": ["index.js", "index.d.ts", "*.node"],
+  "files": ["index.js", "index.d.ts"],
   "os": ["darwin", "linux", "win32"],
+  "cpu": ["x64"],
   "engines": {
     "node": ">= 8.9"
   },
@@ -38,6 +39,10 @@
   },
   "bugs": {
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
+  },
+  "scripts": {
+    "prepublish": "node ./publish.js",
+    "version": "node ./version.js"
   },
   "dependencies": {
     "@node-rs/helper": "^0.2.1"
