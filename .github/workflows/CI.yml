@@ -120,7 +120,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: bindings-${{ env.PLATFORM_NAME }}
-          path: packages/core/swc.${{ env.PLATFORM_NAME }}.node
+          path: packages/core
 
       - name: List packages
         run: ls -R packages
