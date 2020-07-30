@@ -12,6 +12,9 @@
     "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
+  "dependencies": {
+    "@swc-node/core": "^0.1.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Brooooooklyn/node-swc.git"
