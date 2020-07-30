@@ -3,7 +3,7 @@
   "description": "The Windows 64-bit binary for @swc-node/core.",
   "repository": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "swc.win32.node",
   "files": ["swc.win32.node"],
   "publishConfig": {
