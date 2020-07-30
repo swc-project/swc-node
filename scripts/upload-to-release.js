@@ -31,7 +31,7 @@ const headCommit = execSync('git log -1 --pretty=%B', {
     })
     await Promise.all(
       supporttedPlatforms.map(async (platform) => {
-        const binary = join('package', 'core', `swc.${platform}.node`)
+        const binary = join('package', 'core', `bindings-${platform}`, `swc.${platform}.node`)
         const downloadUrl = await putasset(process.env.GITHUB_TOKEN, {
           owner,
           repo,
