@@ -1,6 +1,8 @@
 # `swc-node`
 
-![](https://github.com/Brooooooklyn/swc-node/workflows/CI/badge.svg)
+![https://github.com/Brooooooklyn/swc-node/actions](https://github.com/Brooooooklyn/swc-node/workflows/CI/badge.svg)
+![https://npmcharts.com/compare/@swc/core?minimal=true](https://img.shields.io/npm/dm/@swc-core/core.svg?sanitize=true)
+![https://github.com/Brooooooklyn/swc-node/blob/master/LICENSE](https://img.shields.io/npm/l/@swc-node/core.svg?sanitize=true)
 
 ## Support matrix
 
@@ -18,7 +20,7 @@ Usage: [@swc-node/core](./packages/core)
 
 ### Benchmark
 
-> transform AjaxObservable.ts to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
+> transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
 
 ```
 @swc-node/core x 151 ops/sec ±3.74% (77 runs sampled)
@@ -33,6 +35,32 @@ Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/cor
 Fastest jest `TypeScript` transformer.
 
 Detail: [@swc-node/jest](./packages/jest)
+
+### Performance glance
+
+> Testing in pure `TypeScript` project, compile target is `ES2018`.
+
+#### ts-jest
+
+```
+Test Suites: 48 passed, 48 total
+Tests:       239 passed, 239 total
+Snapshots:   49 passed, 49 total
+Time:        49.808 s
+Ran all test suites.
+✨  Done in 54.35s.
+```
+
+#### @swc-node/jest
+
+```
+Test Suites: 49 passed, 49 total
+Tests:       250 passed, 250 total
+Snapshots:   53 passed, 53 total
+Time:        9.921 s
+Ran all test suites.
+✨  Done in 15.79s.
+```
 
 ## @swc-node/register
 

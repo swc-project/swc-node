@@ -158,8 +158,8 @@ jobs:
         with:
           path: packages/core
 
-      - name: List artifacts
-        run: ls -R artifacts
+      - name: List packages
+        run: ls -R packages
         shell: bash
 
       - name: Upload artifacts to Github release
@@ -168,9 +168,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: List packages
-        run: ls -R packages
-        shell: bash
       - name: Lerna publish
         run: |
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
