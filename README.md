@@ -29,10 +29,10 @@ Detail: [@swc-node/core](./packages/core)
 > transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
 
 ```
-@swc-node/core x 151 ops/sec ±3.74% (77 runs sampled)
-@swc/core x 107 ops/sec ±0.51% (78 runs sampled)
-esbuild x 52.89 ops/sec ±1.58% (67 runs sampled)
-typescript x 21.08 ops/sec ±9.68% (40 runs sampled)
+@swc-node/core x 140 ops/sec ±0.97% (79 runs sampled)
+@swc/core x 88.78 ops/sec ±1.00% (76 runs sampled)
+esbuild x 82.50 ops/sec ±1.06% (70 runs sampled)
+typescript x 30.68 ops/sec ±9.89% (54 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
 ```
 

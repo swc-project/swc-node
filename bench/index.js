@@ -10,7 +10,7 @@ const ts = require('typescript')
 const suite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
 
 const SOURCE_PATH = require.resolve('rxjs/src/internal/observable/dom/AjaxObservable.ts')
-const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
+const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf8')
 
 async function run() {
   const service = await startService()

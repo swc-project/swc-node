@@ -8,18 +8,7 @@ const defaultOptions = {
   sourcemap: true,
   legacyDecorator: false,
   dynamicImport: false,
-  noEarlyErrors: true,
-}
-
-function convertOptions(options, path) {
-  return JSON.stringify({
-    ...options,
-    filename: path,
-    tsx: path.endsWith('.tsx'),
-    module: {
-      type: options.module,
-    },
-  })
+  tsx: false,
 }
 
 let bindings
@@ -38,10 +27,28 @@ try {
 module.exports = {
   transformSync: function transformSync(code, path, options = {}) {
     const source = Buffer.isBuffer(code) ? code : Buffer.from(code)
-    return bindings.transformSync(source, path, convertOptions({ ...defaultOptions, ...options }, path))
+    return bindings.transformSync(
+      source,
+      path,
+      typeof options.target === 'undefined' ? defaultOptions.target : options.target,
+      typeof options.module === 'undefined' ? defaultOptions.module : options.module,
+      typeof options.sourcemap === 'undefined' ? defaultOptions.sourcemap : options.sourcemap,
+      typeof options.legacyDecorator === 'undefined' ? defaultOptions.legacyDecorator : options.legacyDecorator,
+      typeof options.dynamicImport === 'undefined' ? defaultOptions.dynamicImport : options.dynamicImport,
+      typeof options.tsx === 'undefined' ? defaultOptions.tsx : options.tsx,
+    )
   },
-  transform: function transform(code, path, options = {}) {
+  transform: function transform(code, path, options = defaultOptions) {
     const source = Buffer.isBuffer(code) ? code : Buffer.from(code)
-    return bindings.transformSync(source, path, convertOptions({ ...defaultOptions, ...options }))
+    return bindings.transform(
+      source,
+      path,
+      typeof options.target === 'undefined' ? defaultOptions.target : options.target,
+      typeof options.module === 'undefined' ? defaultOptions.module : options.module,
+      typeof options.sourcemap === 'undefined' ? defaultOptions.sourcemap : options.sourcemap,
+      typeof options.legacyDecorator === 'undefined' ? defaultOptions.legacyDecorator : options.legacyDecorator,
+      typeof options.dynamicImport === 'undefined' ? defaultOptions.dynamicImport : options.dynamicImport,
+      typeof options.tsx === 'undefined' ? defaultOptions.tsx : options.tsx,
+    )
   },
 }
