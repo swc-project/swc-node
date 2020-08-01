@@ -24,6 +24,8 @@ Detail: [@swc-node/core](./packages/core)
 
 ### Benchmark
 
+> ⚠️ Notes: `transformSync` API in esbuild has huge overhead. So `swc` is only faster than esbuild in `transformSync` API. In the `transform` API, `esbuild` is about **5x faster** than `swc`.
+
 > transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
 
 ```

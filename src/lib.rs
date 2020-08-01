@@ -12,13 +12,13 @@ use napi::{CallContext, Env, Error, JsBuffer, JsObject, JsString, Module, Result
 use once_cell::sync::OnceCell;
 use serde::{Deserialize, Serialize};
 use swc::{
-  common::{self, errors::Handler, FileName, FilePathMapping, SourceMap},
   config::{
     Config, JscConfig, JscTarget, ModuleConfig, Options, SourceMapsConfig, TransformConfig,
   },
-  ecmascript::parser::{Syntax, TsConfig},
   Compiler, TransformOutput,
 };
+use swc_common::{self, errors::Handler, FileName, FilePathMapping, SourceMap};
+use swc_ecmascript::parser::{Syntax, TsConfig};
 
 #[cfg(all(unix, not(target_env = "musl")))]
 #[global_allocator]
@@ -63,7 +63,7 @@ impl TransformTask {
     let c = COMPILER.get_or_init(|| {
       let cm = Arc::new(SourceMap::new(FilePathMapping::empty()));
       let handler = Handler::with_tty_emitter(
-        common::errors::ColorConfig::Always,
+        swc_common::errors::ColorConfig::Always,
         true,
         false,
         Some(cm.clone()),
