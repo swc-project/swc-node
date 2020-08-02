@@ -4,7 +4,6 @@ export interface Options {
   sourcemap?: boolean | 'inline'
   legacyDecorator?: boolean
   dynamicImport?: boolean
-  noEarlyErrors?: boolean
 }
 
 export function transformSync(

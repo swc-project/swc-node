@@ -16,24 +16,37 @@ async function run() {
   const service = await startService()
 
   suite
-    .add('@swc/core', () => {
-      transformSync(SOURCE_CODE, {
-        filename: SOURCE_PATH,
+    .add('@swc-node/core', () => {
+      transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {
         jsc: {
-          target: 'es2015',
+          target: 'es2016',
           parser: {
             syntax: 'typescript',
           },
         },
+        minify: false,
+        isModule: true,
         module: {
           type: 'commonjs',
         },
+        sourceMaps: true,
       })
     })
-    .add('@swc-node/core', () => {
-      transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {
-        target: 'es2015',
-        module: 'commonjs',
+    .add('@swc/core', () => {
+      transformSync(SOURCE_CODE, {
+        filename: SOURCE_PATH,
+        jsc: {
+          target: 'es2016',
+          parser: {
+            syntax: 'typescript',
+          },
+        },
+        minify: false,
+        isModule: true,
+        module: {
+          type: 'commonjs',
+        },
+        sourceMaps: true,
       })
     })
     .add('esbuild', () => {
@@ -42,14 +55,14 @@ async function run() {
         loader: 'ts',
         sourcemap: true,
         minify: false,
-        target: 'es2015',
+        target: 'es2016',
       })
     })
     .add('typescript', () => {
       ts.transpileModule(SOURCE_CODE, {
         fileName: SOURCE_PATH,
         compilerOptions: {
-          target: ts.ScriptTarget.ES2015,
+          target: ts.ScriptTarget.ES2016,
           module: ts.ModuleKind.CommonJS,
           isolatedModules: true,
           sourceMap: true,

@@ -5,7 +5,7 @@ module.exports = {
     const [, , transformOptions = {}] =
       (jestConfig.transform || []).find(([, transformerPath]) => transformerPath === __filename) || []
     if (/\.(t|j)sx?$/.test(path)) {
-      return transformSync(src, path, { ...transformOptions, filename: path })
+      return transformSync(src, path, transformOptions)
     }
     return src
   },

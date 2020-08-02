@@ -2,26 +2,6 @@ const { platform } = require('os')
 
 const { loadBinding } = require('@node-rs/helper')
 
-const defaultOptions = {
-  target: 'es2018',
-  module: 'commonjs',
-  sourcemap: true,
-  legacyDecorator: false,
-  dynamicImport: false,
-  noEarlyErrors: true,
-}
-
-function convertOptions(options, path) {
-  return JSON.stringify({
-    ...options,
-    filename: path,
-    tsx: path.endsWith('.tsx'),
-    module: {
-      type: options.module,
-    },
-  })
-}
-
 let bindings
 
 try {
@@ -36,12 +16,29 @@ try {
 }
 
 module.exports = {
-  transformSync: function transformSync(code, path, options = {}) {
-    const source = Buffer.isBuffer(code) ? code : Buffer.from(code)
-    return bindings.transformSync(source, path, convertOptions({ ...defaultOptions, ...options }, path))
+  transformSync: function transformSync(source, path, options = {}) {
+    options.filename = path
+    if (!options.jsc) {
+      options.jsc = {
+        target: 'es2018',
+        parser: {
+          syntax: 'typescript',
+        },
+      }
+    }
+    if (!options.module) {
+      options.module = {
+        type: 'commonjs',
+      }
+    }
+    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(options)))
   },
-  transform: function transform(code, path, options = {}) {
-    const source = Buffer.isBuffer(code) ? code : Buffer.from(code)
-    return bindings.transformSync(source, path, convertOptions({ ...defaultOptions, ...options }))
+  transform: function transform(source, path, options = {}) {
+    options.filename = path
+    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
+    if (options.jsc && options.jsc.parser) {
+      options.jsc.parser.tsx = path.endsWith('.tsx')
+    }
+    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(options)))
   },
 }

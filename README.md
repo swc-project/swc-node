@@ -28,11 +28,26 @@ Detail: [@swc-node/core](./packages/core)
 
 > transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
 
+**Hardware info**:
+
 ```
-@swc-node/core x 151 ops/sec ±3.74% (77 runs sampled)
-@swc/core x 107 ops/sec ±0.51% (78 runs sampled)
-esbuild x 52.89 ops/sec ±1.58% (67 runs sampled)
-typescript x 21.08 ops/sec ±9.68% (40 runs sampled)
+Model Name: MacBook Pro
+Model Identifier: MacBookPro15,1
+Processor Name: 6-Core Intel Core i9
+Processor Speed: 2.9 GHz
+Number of Processors: 1
+Total Number of Cores: 6
+L2 Cache (per Core): 256 KB
+L3 Cache: 12 MB
+Hyper-Threading Technology: Enabled
+Memory: 32 GB
+```
+
+```bash
+@swc-node/core x 217 ops/sec ±1.84% (85 runs sampled)
+@swc/core x 137 ops/sec ±1.17% (78 runs sampled)
+esbuild x 78.60 ops/sec ±1.13% (67 runs sampled)
+typescript x 27.35 ops/sec ±9.13% (52 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
 ```
 
