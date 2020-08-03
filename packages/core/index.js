@@ -35,7 +35,7 @@ module.exports = {
       module: {
         type: opts.module || 'commonjs',
       },
-      sourceMaps: opts.sourcemap,
+      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     }
     return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
@@ -59,7 +59,7 @@ module.exports = {
       module: {
         type: opts.module || 'commonjs',
       },
-      sourceMaps: opts.sourcemap,
+      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     }
     return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
