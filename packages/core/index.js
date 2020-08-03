@@ -37,11 +37,7 @@ module.exports = {
       },
       sourceMaps: opts.sourcemap,
     }
-    try {
-      return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
-    } catch (e) {
-      return source
-    }
+    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
   transform: function transform(source, path, options) {
     const opts = options == null ? {} : options
