@@ -3,7 +3,7 @@
   "description": "The macOS 64-bit binary for @swc-node/core.",
   "repository": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "main": "swc.darwin.node",
   "files": ["swc.darwin.node"],
   "publishConfig": {

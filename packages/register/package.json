@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/register",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "SWC node register",
   "keywords": [
     "swc",
@@ -33,7 +33,7 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "dependencies": {
-    "@swc-node/core": "^0.1.11",
+    "@swc-node/core": "^0.1.12",
     "@swc-node/sourcemap-support": "^0.1.7",
     "pirates": "^4.0.1"
   }
