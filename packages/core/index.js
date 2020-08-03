@@ -26,6 +26,9 @@ module.exports = {
         },
       }
     }
+    if (options.jsc.parser) {
+      options.jsc.parser.tsx = path.endsWith('.tsx')
+    }
     if (!options.module) {
       options.module = {
         type: 'commonjs',
@@ -35,9 +38,21 @@ module.exports = {
   },
   transform: function transform(source, path, options = {}) {
     options.filename = path
-    // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-    if (options.jsc && options.jsc.parser) {
+    if (!options.jsc) {
+      options.jsc = {
+        target: 'es2018',
+        parser: {
+          syntax: 'typescript',
+        },
+      }
+    }
+    if (options.jsc.parser) {
       options.jsc.parser.tsx = path.endsWith('.tsx')
+    }
+    if (!options.module) {
+      options.module = {
+        type: 'commonjs',
+      }
     }
     return bindings.transformSync(source, path, Buffer.from(JSON.stringify(options)))
   },
