@@ -6,7 +6,6 @@ let bindings
 
 try {
   bindings = loadBinding(__dirname, 'swc')
-  // eslint-disable-next-line no-empty
 } catch (e) {
   try {
     bindings = require(`@swc-node/core-${platform()}`)
@@ -16,44 +15,56 @@ try {
 }
 
 module.exports = {
-  transformSync: function transformSync(source, path, options = {}) {
-    options.filename = path
-    if (!options.jsc) {
-      options.jsc = {
+  transformSync: function transformSync(source, path, options) {
+    const opts = options == null ? {} : options
+    const swcOptions = {
+      filename: path,
+      jsc: {
         target: 'es2018',
         parser: {
           syntax: 'typescript',
+          tsx: path.endsWith('.tsx'),
+          decorators: Boolean(opts.legacyDecorator),
+          dynamicImport: Boolean(opts.dynamicImport),
         },
-      }
+        transform: {
+          legacyDecorator: Boolean(opts.legacyDecorator),
+        },
+      },
+      isModule: true,
+      module: {
+        type: opts.module || 'commonjs',
+      },
+      sourceMaps: opts.sourcemap,
     }
-    if (options.jsc.parser) {
-      options.jsc.parser.tsx = path.endsWith('.tsx')
+    try {
+      return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
+    } catch (e) {
+      return source
     }
-    if (!options.module) {
-      options.module = {
-        type: 'commonjs',
-      }
-    }
-    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(options)))
   },
-  transform: function transform(source, path, options = {}) {
-    options.filename = path
-    if (!options.jsc) {
-      options.jsc = {
+  transform: function transform(source, path, options) {
+    const opts = options == null ? {} : options
+    const swcOptions = {
+      filename: path,
+      jsc: {
         target: 'es2018',
         parser: {
           syntax: 'typescript',
+          tsx: path.endsWith('.tsx'),
+          decorators: Boolean(opts.legacyDecorator),
+          dynamicImport: Boolean(opts.dynamicImport),
         },
-      }
+        transform: {
+          legacyDecorator: Boolean(opts.legacyDecorator),
+        },
+      },
+      isModule: true,
+      module: {
+        type: opts.module || 'commonjs',
+      },
+      sourceMaps: opts.sourcemap,
     }
-    if (options.jsc.parser) {
-      options.jsc.parser.tsx = path.endsWith('.tsx')
-    }
-    if (!options.module) {
-      options.module = {
-        type: 'commonjs',
-      }
-    }
-    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(options)))
+    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
 }
