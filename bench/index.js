@@ -14,11 +14,7 @@ const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
 
 async function run() {
   const service = await startService()
-  transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {
-    target: 'es2016',
-    module: 'commonjs',
-    sourcemap: true,
-  })
+
   suite
     .add('@swc-node/core', () => {
       transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {

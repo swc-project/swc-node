@@ -24,11 +24,12 @@ module.exports = {
         parser: {
           syntax: 'typescript',
           tsx: path.endsWith('.tsx'),
-          decorators: Boolean(opts.legacyDecorator),
+          decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {
-          legacyDecorator: Boolean(opts.legacyDecorator),
+          legacyDecorator: Boolean(opts.experimentalDecorators),
+          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
         },
       },
       isModule: true,
@@ -48,11 +49,12 @@ module.exports = {
         parser: {
           syntax: 'typescript',
           tsx: path.endsWith('.tsx'),
-          decorators: Boolean(opts.legacyDecorator),
+          decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {
-          legacyDecorator: Boolean(opts.legacyDecorator),
+          legacyDecorator: Boolean(opts.experimentalDecorators),
+          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
         },
       },
       isModule: true,
