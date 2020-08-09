@@ -23,7 +23,7 @@ module.exports = {
         target: 'es2018',
         parser: {
           syntax: 'typescript',
-          tsx: path.endsWith('.tsx'),
+          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
           decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
@@ -48,7 +48,7 @@ module.exports = {
         target: 'es2018',
         parser: {
           syntax: 'typescript',
-          tsx: path.endsWith('.tsx'),
+          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
           decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
