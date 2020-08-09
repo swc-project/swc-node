@@ -3,6 +3,7 @@ export interface Options {
   module?: 'commonjs' | 'umd' | 'amd' | 'es6'
   sourcemap?: boolean | 'inline'
   legacyDecorator?: boolean
+  emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
 }
 

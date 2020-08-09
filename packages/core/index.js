@@ -28,7 +28,8 @@ module.exports = {
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {
-          legacyDecorator: Boolean(opts.legacyDecorator),
+          legacyDecorator: Boolean(opts.experimentalDecorators),
+          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
         },
       },
       isModule: true,
@@ -52,7 +53,8 @@ module.exports = {
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {
-          legacyDecorator: Boolean(opts.legacyDecorator),
+          legacyDecorator: Boolean(opts.experimentalDecorators),
+          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
         },
       },
       isModule: true,
