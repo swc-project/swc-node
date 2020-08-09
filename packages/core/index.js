@@ -24,7 +24,7 @@ module.exports = {
         parser: {
           syntax: 'typescript',
           tsx: path.endsWith('.tsx'),
-          decorators: Boolean(opts.legacyDecorator),
+          decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {
@@ -49,7 +49,7 @@ module.exports = {
         parser: {
           syntax: 'typescript',
           tsx: path.endsWith('.tsx'),
-          decorators: Boolean(opts.legacyDecorator),
+          decorators: Boolean(opts.experimentalDecorators),
           dynamicImport: Boolean(opts.dynamicImport),
         },
         transform: {

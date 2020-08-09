@@ -46,7 +46,7 @@ function compile(sourcecode, filename, options) {
       fileName: filename,
       compilerOptions: {
         jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') ? ts.JsxEmit.React : ts.JsxEmit.None,
-        experimentalDecorators: Boolean(options.legacyDecorator),
+        experimentalDecorators: Boolean(options.experimentalDecorators),
         emitDecoratorMetadata: Boolean(options.emitDecoratorMetadata),
         module: toModule(options.module || 'commonjs'),
         moduleResolution: ts.ModuleResolutionKind.NodeJs,
