@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.2...@swc-node/core@0.2.3) (2020-08-10)
+
+### Bug Fixes
+
+- **core:** strip TypeScript class properties without value assigned ([88f7022](https://github.com/Brooooooklyn/swc-node/commit/88f7022bb555cc2063c4f95743a88633a6aadb46))
+
 ## [0.2.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.1...@swc-node/core@0.2.2) (2020-08-10)
 
 ### Bug Fixes
