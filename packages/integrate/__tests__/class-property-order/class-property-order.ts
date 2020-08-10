@@ -5,5 +5,7 @@ interface Container {
 export class Base<C extends Container = Container> {
   readonly log = this.container.logger.child({ component: this.constructor.name })
 
-  constructor(protected readonly container: C) {}
+  constructor(protected readonly container: C) {
+    this.log()
+  }
 }
