@@ -8,6 +8,8 @@ export interface Options {
   dynamicImport?: boolean
 }
 
+export const SWC_VERSION: string
+
 export function transformSync(
   source: string | Buffer,
   path: string,
