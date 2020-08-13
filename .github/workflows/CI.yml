@@ -139,6 +139,16 @@ jobs:
       - name: Test bindings
         run: yarn test
 
+  dependabot:
+    needs:
+      - test_binding
+    runs-on: ubuntu-latest
+    steps:
+      - name: auto-merge
+        uses: ridedott/dependabot-auto-merge-action@master
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   publish:
     name: Publish
     if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
