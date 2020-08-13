@@ -41,7 +41,7 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "scripts": {
-    "prepublish": "node ./publish.js",
+    "prepublishOnly": "node ./publish.js",
     "version": "node ./version.js"
   },
   "dependencies": {
