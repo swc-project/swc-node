@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.3...@swc-node/core@0.2.4) (2020-08-13)
+
+### Bug Fixes
+
+- **core:** bugfix from upstream ([2bcb946](https://github.com/Brooooooklyn/swc-node/commit/2bcb9461d7d3c2dba9944f1c3bc746dc5c375ca3))
+
 ## [0.2.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.2...@swc-node/core@0.2.3) (2020-08-10)
 
 ### Bug Fixes
