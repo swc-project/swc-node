@@ -59,7 +59,7 @@
     "nyc": "^15.1.0",
     "prettier": "^2.0.5",
     "putasset": "^5.0.3",
-    "sinon": "^9.0.2",
+    "sinon": "^9.0.3",
     "source-map-support": "^0.5.19",
     "three.js": "^0.77.1",
     "ts-node": "^8.10.2",
