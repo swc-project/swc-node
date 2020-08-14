@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.4...@swc-node/core@0.2.5) (2020-08-14)
+
+### Bug Fixes
+
+- **core:** Allow referencing global idents even when it's injected ([dcf44e5](https://github.com/Brooooooklyn/swc-node/commit/dcf44e5631cfaed68310e2447882ff3aa88b652a))
+
 ## [0.2.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.3...@swc-node/core@0.2.4) (2020-08-13)
 
 ### Bug Fixes
