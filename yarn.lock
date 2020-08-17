@@ -1239,10 +1239,10 @@
   resolved "https://registry.yarnpkg.com/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@swc/core@^1.2.19":
-  version "1.2.19"
-  resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.2.19.tgz#2f64618a9aa02c8c50748fa24ef0c40b93f8daea"
-  integrity sha512-ka00OQEULhuojZ7Gkx690ID/rlOesqQqx2DnMHOB5VMRIUG4tlFVDXH/T7z1uh1iJ+4ymeVbjn71hWN50210BQ==
+"@swc/core@^1.2.20":
+  version "1.2.20"
+  resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.2.20.tgz#85caf231372630cb1c1de9d6b32ec9f808a4e010"
+  integrity sha512-m32hJGQ7zL4rMTG5TzYCJ8hJibg7KLZ1bD5F/HH/fGRPrdPBUGUTtKe8p3f+2gaGf3J07IYaYS4s7uZtmWnRqw==
   dependencies:
     mkdirp "^0.5.1"
     node-fetch "^2.6.0"
