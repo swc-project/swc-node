@@ -39,7 +39,7 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.3",
-    "@swc/core": "^1.2.19",
+    "@swc/core": "^1.2.20",
     "@types/sinon": "^9.0.4",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
