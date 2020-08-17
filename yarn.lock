@@ -2908,10 +2908,10 @@ es6-promisify@^5.0.0:
   dependencies:
     es6-promise "^4.0.3"
 
-esbuild@^0.6.22:
-  version "0.6.22"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.22.tgz#cadabf5d8762d105206c501a31c2c0afe6b0ffd3"
-  integrity sha512-dgcdoOZ7rghMageuGFS6geQ77UacoZ/qrd0MRc2iPnYtMNfQ1cJ7mVkotVpUDJYdOWvLVa87NFEtqPg7D2mKSA==
+esbuild@^0.6.25:
+  version "0.6.25"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.6.25.tgz#060f95ed171dba4e6e86e6920f2aff328f96e99e"
+  integrity sha512-yOSDMlo0tmhF023LL37UVK/WHIM8UttxiUM0iOHb/DgB9Mk02wQAAHEso2ZkTY3ImpGDRQM0JnIif7aZAmGm2w==
 
 escape-goat@^2.0.0:
   version "2.1.1"
