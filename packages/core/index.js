@@ -66,5 +66,5 @@ module.exports = {
     return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
 
-  SWC_VERSION: '3262052',
+  SWC_VERSION: '3262052e',
 }

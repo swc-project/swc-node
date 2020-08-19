@@ -58,8 +58,12 @@ impl TransformTask {
       source,
     );
 
-    c.process_js_file(fm, &register_options)
-      .map_err(|e| Error::new(Status::GenericFailure, format!("Process js failed {}", e)))
+    c.process_js_file(fm, &register_options).map_err(|e| {
+      Error::new(
+        Status::GenericFailure,
+        format!("Process js file: {} failed {}", filename, e),
+      )
+    })
   }
 }
 
