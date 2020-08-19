@@ -35,6 +35,7 @@
   "dependencies": {
     "@swc-node/core": "^0.2.6",
     "@swc-node/sourcemap-support": "^0.1.7",
+    "debug": "^4.1.1",
     "pirates": "^4.0.1"
   }
 }

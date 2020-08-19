@@ -34,7 +34,7 @@
     "format:source": "prettier --config ./package.json './packages/**/*.{ts,tsx,js}' --write",
     "format:yml": "prettier --parser yaml --write './*.{yml,yaml}'",
     "lint": "eslint -c ./.eslintrc.yml 'packages/**/*.{js,ts,tsx}'",
-    "test": "ava"
+    "test": "SWC_NODE_PROJECT='./packages/integrate/tsconfig.test.json' ava"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
@@ -86,7 +86,7 @@
   },
   "ava": {
     "extensions": ["ts", "tsx"],
-    "require": ["./packages/integrate/ava.setup"],
+    "require": ["@swc-node/register"],
     "files": ["packages/**/*.spec.{ts,tsx}"]
   },
   "nyc": {
