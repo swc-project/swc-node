@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.2.6...@swc-node/register@0.3.0) (2020-08-20)
+
+### BREAKING CHANGE
+
+- **register:** respect tsconfig.json in SWC_NODE_PROJECT
+
 ## [0.2.6](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.2.5...@swc-node/register@0.2.6) (2020-08-18)
 
 **Note:** Version bump only for package @swc-node/register

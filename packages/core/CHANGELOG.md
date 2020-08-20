@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.6...@swc-node/core@0.2.7) (2020-08-20)
+
+### Features
+
+- **core:** add filename to error message if compile failed ([dddf0ac](https://github.com/Brooooooklyn/swc-node/commit/dddf0acac53723db382d79a82cb6153b5dd10dd6))
+
 ## [0.2.6](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.5...@swc-node/core@0.2.6) (2020-08-18)
 
 ### Performance Improvements
