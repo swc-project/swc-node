@@ -2,13 +2,8 @@ name: CI
 
 on:
   push:
-    branches:
-      - '**'
-    tags-ignore:
-      - '**'
+    branches: [master, develop]
   pull_request:
-    branches:
-      - '**'
 
 jobs:
   build:
