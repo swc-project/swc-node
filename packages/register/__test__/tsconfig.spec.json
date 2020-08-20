@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES3",
+    "jsx": "react-native",
+    "module": "System",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}

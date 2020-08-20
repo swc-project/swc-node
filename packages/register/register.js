@@ -122,6 +122,8 @@ function readDefaultTsConfig() {
   return compilerOptions
 }
 
+module.exports.readDefaultTsConfig = readDefaultTsConfig
+
 module.exports.register = function register(options = readDefaultTsConfig()) {
   installSourceMapSupport()
   addHook((code, filename) => compile(code, filename, options), {
