@@ -63,7 +63,7 @@ module.exports = {
       },
       sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     }
-    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
+    return bindings.transform(source, path, Buffer.from(JSON.stringify(swcOptions)))
   },
 
   SWC_VERSION: '3262052e',

@@ -33,22 +33,33 @@ Detail: [@swc-node/core](./packages/core)
 ```
 Model Name: MacBook Pro
 Model Identifier: MacBookPro15,1
-Processor Name: 6-Core Intel Core i9
-Processor Speed: 2.9 GHz
+Processor Name: 6-Core Intel Core i7
+Processor Speed: 2.6 GHz
 Number of Processors: 1
 Total Number of Cores: 6
 L2 Cache (per Core): 256 KB
 L3 Cache: 12 MB
 Hyper-Threading Technology: Enabled
-Memory: 32 GB
+Memory: 16 GB
 ```
 
+#### `transformSync`
+
 ```bash
-@swc-node/core x 217 ops/sec ±1.84% (85 runs sampled)
-@swc/core x 137 ops/sec ±1.17% (78 runs sampled)
-esbuild x 78.60 ops/sec ±1.13% (67 runs sampled)
-typescript x 27.35 ops/sec ±9.13% (52 runs sampled)
+@swc-node/core x 172 ops/sec ±2.66% (79 runs sampled)
+@swc/core x 78.72 ops/sec ±2.82% (68 runs sampled)
+esbuild x 51.85 ops/sec ±2.91% (54 runs sampled)
+typescript x 24.39 ops/sec ±17.26% (48 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
+```
+
+#### `transform`
+
+```bash
+@swc-node/core x 135 ops/sec ±1.99% (70 runs sampled)
+@swc/core x 64.12 ops/sec ±1.23% (74 runs sampled)
+esbuild x 463 ops/sec ±2.08% (76 runs sampled)
+Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
 ```
 
 ## @swc-node/jest

@@ -123,8 +123,8 @@ fn transform_sync(ctx: CallContext) -> Result<JsObject> {
 #[js_function(3)]
 fn transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_str = ctx.get::<JsString>(2)?;
-  let options: Options = serde_json::from_str(options_str.as_str()?).map_err(|e| {
+  let options_buf = ctx.get::<JsBuffer>(2)?;
+  let options: Options = serde_json::from_slice(&options_buf).map_err(|e| {
     Error::new(
       Status::InvalidArg,
       format!("Options is not a valid json {}", e),
