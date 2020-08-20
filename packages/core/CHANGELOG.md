@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.9](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.8...@swc-node/core@0.2.9) (2020-08-20)
+
+### Bug Fixes
+
+- **core:** transform api ([11f2601](https://github.com/Brooooooklyn/swc-node/commit/11f26018a0860afcf33b7e86dcc44975096489e4))
+
 ## [0.2.8](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.7...@swc-node/core@0.2.8) (2020-08-20)
 
 **Note:** Version bump only for package @swc-node/core
