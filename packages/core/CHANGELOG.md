@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.9...@swc-node/core@0.3.0) (2020-08-21)
+
+### Features
+
+- **core:** TypeScript 4.0 ([c18ab85](https://github.com/Brooooooklyn/swc-node/commit/c18ab85f6911ca44e6db70894ee21a0653695411))
+
 ## [0.2.9](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.8...@swc-node/core@0.2.9) (2020-08-20)
 
 ### Bug Fixes
