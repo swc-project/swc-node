@@ -63,7 +63,7 @@
     "source-map-support": "^0.5.19",
     "three.js": "^0.77.1",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "typescript": "^4.0.2"
   },
   "lint-staged": {
     "*.@(js|ts|tsx)": ["prettier --write"],
