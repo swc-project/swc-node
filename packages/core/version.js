@@ -5,7 +5,7 @@ const { version } = require('./package.json')
 const platforms = require('./platforms')
 const updatePackageJson = require('./update-package')
 
-for (const name of platforms) {
+for (const name of [platforms, 'linux-musl']) {
   const pkgDir = path.join(__dirname, 'npm', `core-${name}`)
   updatePackageJson(path.join(pkgDir, 'package.json'), {
     version,
