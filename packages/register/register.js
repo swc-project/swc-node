@@ -79,13 +79,16 @@ function compile(sourcecode, filename, options) {
     const { code, map } = transformSync(sourcecode, filename, {
       target: toTsTarget(options.target || ts.ScriptTarget.ES2018),
       module: toModule(options.module || ts.ModuleKind.ES2015),
-      sourcemap: options.sourceMap === false,
+      sourcemap: options.sourceMap !== false,
       jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || (options.jsx && options.jsx !== ts.JsxEmit.None),
       experimentalDecorators: options.experimentalDecorators || false,
       emitDecoratorMetadata: options.emitDecoratorMetadata || false,
       dynamicImport: options.module && options.module >= ts.ModuleKind.ES2020,
     })
-    SourcemapMap.set(filename, map)
+    // in case of map is undefined
+    if (map) {
+      SourcemapMap.set(filename, map)
+    }
     return code
   }
 }
