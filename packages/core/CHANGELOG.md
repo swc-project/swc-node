@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.0...@swc-node/core@0.4.1) (2020-08-23)
+
+### Bug Fixes
+
+- wrong benchmark setup ([7bd298d](https://github.com/Brooooooklyn/swc-node/commit/7bd298d1d4cf3dddf770caa75671e681066e5b83))
+
 # [0.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.3.0...@swc-node/core@0.4.0) (2020-08-23)
 
 ### Bug Fixes

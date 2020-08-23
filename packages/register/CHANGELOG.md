@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.3.4...@swc-node/register@0.4.0) (2020-08-23)
+
+### Bug Fixes
+
+- **register:** missing register.js file in package.json ([366d370](https://github.com/Brooooooklyn/swc-node/commit/366d3706af778e47f0427f92fe1a171cd43e2a62))
+
+### BREAKING CHANGES
+
+- **register:** missing files
+
 ## [0.3.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.3.3...@swc-node/register@0.3.4) (2020-08-23)
 
 **Note:** Version bump only for package @swc-node/register
