@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 const fs = require('fs')
+const os = require('os')
 
 const { transformSync: transformSyncNapi, transform: transformNapi } = require('@swc-node/core')
 const { transformSync, transform } = require('@swc/core')
@@ -8,7 +9,6 @@ const chalk = require('chalk')
 const { transformSync: transformSyncEsbuild, startService } = require('esbuild')
 const ts = require('typescript')
 
-const os = require('os')
 const cpuCount = os.cpus().length
 
 const syncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
@@ -95,7 +95,7 @@ async function runAsync() {
       name: '@swc-node/core',
       fn: (deferred) => {
         Promise.all(
-          new Array(cpuCount).map(() => {
+          Array.from({ length: cpuCount }).map(() => {
             return transformNapi(SOURCE_CODE, SOURCE_PATH, {
               target: 'es2016',
               module: 'commonjs',
@@ -118,7 +118,7 @@ async function runAsync() {
       name: '@swc/core',
       fn: (deferred) => {
         Promise.all(
-          new Array(cpuCount).map(() => {
+          Array.from({ length: cpuCount }).map(() => {
             return transform(SOURCE_CODE, {
               filename: SOURCE_PATH,
               jsc: {
@@ -148,15 +148,15 @@ async function runAsync() {
       name: 'esbuild',
       fn: (deferred) => {
         Promise.all(
-          new Array(cpuCount).map(() => {
+          Array.from({ length: cpuCount }).map(() =>
             service.transform(SOURCE_CODE, {
               sourcefile: SOURCE_PATH,
               loader: 'ts',
               sourcemap: true,
               minify: false,
               target: 'es2016',
-            })
-          }),
+            }),
+          ),
         ).then(() => {
           deferred.resolve()
         })
@@ -166,6 +166,7 @@ async function runAsync() {
       queued: true,
     })
     .on('cycle', function (event) {
+      event.target.hz = event.target.hz * cpuCount
       console.info(String(event.target))
     })
     .on('complete', function () {
