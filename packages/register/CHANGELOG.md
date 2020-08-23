@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.0...@swc-node/register@0.4.1) (2020-08-23)
+
+### Bug Fixes
+
+- **register:** should not install sourcemap if sourcemap is undefined ([517f927](https://github.com/Brooooooklyn/swc-node/commit/517f927d20f79c8bbcd81bb6d445c52b0602f203))
+
 # [0.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.3.4...@swc-node/register@0.4.0) (2020-08-23)
 
 ### Bug Fixes
