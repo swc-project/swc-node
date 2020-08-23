@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.3.0...@swc-node/core@0.4.0) (2020-08-23)
+
+### Bug Fixes
+
+- **core:** version.js ([f8ba87d](https://github.com/Brooooooklyn/swc-node/commit/f8ba87d13bb9768c1725512fba5168027a3319ac))
+
+### Features
+
+- **core:** support linux musl ([9e1bac7](https://github.com/Brooooooklyn/swc-node/commit/9e1bac7a55d4c6dd9f99eaaf1acbade16339c8fe))
+
 # [0.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.2.9...@swc-node/core@0.3.0) (2020-08-21)
 
 ### Features
