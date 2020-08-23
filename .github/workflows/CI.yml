@@ -92,6 +92,39 @@ jobs:
           cargo install cargo-cache --no-default-features --features ci-autoclean
           cargo-cache
 
+  build_musl:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    name: stable - linux-musl - node@12
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to registry
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
+        env:
+          DOCKER_REGISTRY_URL: docker.pkg.github.com
+          DOCKER_USERNAME: ${{ github.actor }}
+          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull docker image
+        run: |
+          docker pull docker.pkg.github.com/napi-rs/napi-rs/rust-nodejs-alpine:lts
+          docker tag docker.pkg.github.com/napi-rs/napi-rs/rust-nodejs-alpine:lts builder
+      - name: 'Install dependencies'
+        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
+
+      - name: 'Build'
+        run: |
+          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "cargo build --release"
+          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "./node_modules/.bin/napi build --platform --musl --release ./packages/core/swc"
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: bindings-linux-musl
+          path: packages/core/*.node
+
   test_binding:
     name: Test bindings on ${{ matrix.os }} - node@${{ matrix.node }}
     needs:
@@ -134,9 +167,47 @@ jobs:
       - name: Test bindings
         run: yarn test
 
+  test_musl_binding:
+    name: Test bindings on alpine - node@${{ matrix.node }}
+    needs:
+      - build_musl
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ['12', '14']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: bindings-linux-musl
+          path: packages/core
+
+      - name: List packages
+        run: ls -R packages
+        shell: bash
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: npm-cache-linux-musl-node@${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            npm-cache-
+
+      - name: 'Install dependencies'
+        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
+
+      - name: Run simple tests
+        run: docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs node:${{ matrix.node }}-alpine sh -c "node ./packages/core/simple-tests.js"
+
   dependabot:
     needs:
       - test_binding
+      - test_musl_binding
     runs-on: ubuntu-latest
     steps:
       - name: auto-merge
@@ -149,7 +220,9 @@ jobs:
     name: Publish
     if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
     runs-on: ubuntu-latest
-    needs: test_binding
+    needs:
+      - test_binding
+      - test_musl_binding
 
     steps:
       - uses: actions/checkout@v2

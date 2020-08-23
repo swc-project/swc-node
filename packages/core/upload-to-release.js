@@ -30,7 +30,7 @@ const headCommit = execSync('git log -1 --pretty=%B', {
       tag_name: core.tag,
     })
     await Promise.all(
-      platforms.map(async (platform) => {
+      [...platforms, 'linux-musl'].map(async (platform) => {
         const binary = join(__dirname, `bindings-${platform}`, `swc.${platform}.node`)
         const downloadUrl = await putasset(process.env.GITHUB_TOKEN, {
           owner,

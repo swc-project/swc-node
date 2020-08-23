@@ -45,6 +45,6 @@
     "version": "node ./version.js"
   },
   "dependencies": {
-    "@node-rs/helper": "^0.2.1"
+    "@node-rs/helper": "^0.3.0"
   }
 }
