@@ -48,6 +48,7 @@ async function run() {
           type: 'commonjs',
         },
         sourceMaps: true,
+        swcrc: false,
       })
     })
     .add('esbuild', () => {
@@ -132,6 +133,7 @@ async function runAsync() {
                 type: 'commonjs',
               },
               sourceMaps: true,
+              swcrc: false,
             })
           }),
         ).then(() => {
