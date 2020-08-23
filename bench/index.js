@@ -8,6 +8,9 @@ const chalk = require('chalk')
 const { transformSync: transformSyncEsbuild, startService } = require('esbuild')
 const ts = require('typescript')
 
+const os = require('os')
+const cpuCount = os.cpus().length
+
 const syncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
 
 const asyncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
@@ -90,11 +93,15 @@ async function runAsync() {
     .add({
       name: '@swc-node/core',
       fn: (deferred) => {
-        transformNapi(SOURCE_CODE, SOURCE_PATH, {
-          target: 'es2016',
-          module: 'commonjs',
-          sourcemap: true,
-        })
+        Promise.all(
+          new Array(cpuCount).map(() => {
+            return transformNapi(SOURCE_CODE, SOURCE_PATH, {
+              target: 'es2016',
+              module: 'commonjs',
+              sourcemap: true,
+            })
+          }),
+        )
           .then(() => {
             deferred.resolve()
           })
@@ -109,21 +116,25 @@ async function runAsync() {
     .add({
       name: '@swc/core',
       fn: (deferred) => {
-        transform(SOURCE_CODE, {
-          filename: SOURCE_PATH,
-          jsc: {
-            target: 'es2016',
-            parser: {
-              syntax: 'typescript',
-            },
-          },
-          minify: false,
-          isModule: true,
-          module: {
-            type: 'commonjs',
-          },
-          sourceMaps: true,
-        }).then(() => {
+        Promise.all(
+          new Array(cpuCount).map(() => {
+            return transform(SOURCE_CODE, {
+              filename: SOURCE_PATH,
+              jsc: {
+                target: 'es2016',
+                parser: {
+                  syntax: 'typescript',
+                },
+              },
+              minify: false,
+              isModule: true,
+              module: {
+                type: 'commonjs',
+              },
+              sourceMaps: true,
+            })
+          }),
+        ).then(() => {
           deferred.resolve()
         })
       },
@@ -134,17 +145,19 @@ async function runAsync() {
     .add({
       name: 'esbuild',
       fn: (deferred) => {
-        service
-          .transform(SOURCE_CODE, {
-            sourcefile: SOURCE_PATH,
-            loader: 'ts',
-            sourcemap: true,
-            minify: false,
-            target: 'es2016',
-          })
-          .then(() => {
-            deferred.resolve()
-          })
+        Promise.all(
+          new Array(cpuCount).map(() => {
+            service.transform(SOURCE_CODE, {
+              sourcefile: SOURCE_PATH,
+              loader: 'ts',
+              sourcemap: true,
+              minify: false,
+              target: 'es2016',
+            })
+          }),
+        ).then(() => {
+          deferred.resolve()
+        })
       },
       defer: true,
       async: true,
