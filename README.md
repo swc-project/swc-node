@@ -53,12 +53,21 @@ typescript x 24.39 ops/sec ±17.26% (48 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
 ```
 
-#### `transform`
+#### `transform` single thread
 
 ```bash
 @swc-node/core x 135 ops/sec ±1.99% (70 runs sampled)
 @swc/core x 64.12 ops/sec ±1.23% (74 runs sampled)
 esbuild x 463 ops/sec ±2.08% (76 runs sampled)
+Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
+```
+
+#### `transform` parallel
+
+```bash
+@swc-node/core x 406 ops/sec ±4.16% (56 runs sampled)
+@swc/core x 181 ops/sec ±7.14% (41 runs sampled)
+esbuild x 928 ops/sec ±3.72% (70 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
 ```
 
