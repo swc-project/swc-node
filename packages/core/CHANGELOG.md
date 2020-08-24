@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.1...@swc-node/core@0.4.2) (2020-08-24)
+
+### Bug Fixes
+
+- **core:** linux musl addon loader ([c6e8a78](https://github.com/Brooooooklyn/swc-node/commit/c6e8a7858f504eaabf07254cf7e3ec42eee432eb))
+
 ## [0.4.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.0...@swc-node/core@0.4.1) (2020-08-23)
 
 ### Bug Fixes
