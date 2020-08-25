@@ -2383,10 +2383,10 @@ atob@^2.1.2:
   resolved "https://registry.npmjs.org/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-ava@^3.12.0:
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/ava/-/ava-3.12.0.tgz#82c837cfcd3bec980f491cabb7ca1e2b071a16c7"
-  integrity sha512-NRzhU/w4lIzZqJ2sLYZ6C91ZNl5v6JOWC6gb89/9NaN05vXMQylJPbVFMF3aIah5e6Lo4Ub86aey0wZ+uL+FiQ==
+ava@^3.12.1:
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/ava/-/ava-3.12.1.tgz#0181b5ca10d178539a0d503e0fc9244146303717"
+  integrity sha512-cS41+X+UfrcPed+CIgne/YV/6eWxaUjHEPH+W8WvNSqWTWku5YitjZGE5cMHFuJxwHELdR541xTBRn8Uwi4PSw==
   dependencies:
     "@concordance/react" "^2.0.0"
     acorn "^8.0.1"
