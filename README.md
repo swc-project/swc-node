@@ -46,29 +46,30 @@ Memory: 16 GB
 #### `transformSync`
 
 ```bash
-@swc-node/core x 172 ops/sec ±2.66% (79 runs sampled)
-@swc/core x 78.72 ops/sec ±2.82% (68 runs sampled)
-esbuild x 51.85 ops/sec ±2.91% (54 runs sampled)
-typescript x 24.39 ops/sec ±17.26% (48 runs sampled)
+@swc-node/core x 208 ops/sec ±1.01% (82 runs sampled)
+@swc/core x 122 ops/sec ±2.86% (78 runs sampled)
+esbuild x 50.71 ops/sec ±2.17% (65 runs sampled)
+typescript x 28.16 ops/sec ±10.53% (51 runs sampled)
+babel x 27.70 ops/sec ±9.81% (53 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
 ```
 
 #### `transform` single thread
 
 ```bash
-@swc-node/core x 135 ops/sec ±1.99% (70 runs sampled)
-@swc/core x 64.12 ops/sec ±1.23% (74 runs sampled)
-esbuild x 463 ops/sec ±2.08% (76 runs sampled)
-Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
+@swc-node/core x 161 ops/sec ±2.04% (73 runs sampled)
+@swc/core x 104 ops/sec ±2.44% (69 runs sampled)
+esbuild x 463 ops/sec ±1.99% (77 runs sampled)
+Transform rxjs/AjaxObservable.ts async benchmark bench suite: Fastest is esbuild
 ```
 
 #### `transform` parallel
 
 ```bash
-@swc-node/core x 406 ops/sec ±4.16% (56 runs sampled)
-@swc/core x 181 ops/sec ±7.14% (41 runs sampled)
-esbuild x 928 ops/sec ±3.72% (70 runs sampled)
-Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
+@swc-node/core x 514 ops/sec ±2.31% (67 runs sampled)
+@swc/core x 361 ops/sec ±1.26% (70 runs sampled)
+esbuild x 986 ops/sec ±2.04% (75 runs sampled)
+Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is esbuild
 ```
 
 ## @swc-node/jest
@@ -80,27 +81,28 @@ Detail: [@swc-node/jest](./packages/jest)
 ### Performance glance
 
 > Testing in pure `TypeScript` project, compile target is `ES2018`.
+> Running with `npx jest --no-cache`, `ts-jest` was configured with `isolatedModules: true`
 
 #### ts-jest
 
 ```
-Test Suites: 48 passed, 48 total
-Tests:       239 passed, 239 total
-Snapshots:   49 passed, 49 total
-Time:        49.808 s
+Test Suites: 49 passed, 49 total
+Tests:       254 passed, 254 total
+Snapshots:   53 passed, 53 total
+Time:        54.631 s
 Ran all test suites.
-✨  Done in 54.35s.
+✨  Done in 62.71s.
 ```
 
 #### @swc-node/jest
 
 ```
 Test Suites: 49 passed, 49 total
-Tests:       250 passed, 250 total
+Tests:       254 passed, 254 total
 Snapshots:   53 passed, 53 total
-Time:        9.921 s
+Time:        10.511 s
 Ran all test suites.
-✨  Done in 15.79s.
+✨  Done in 14.34s.
 ```
 
 ## @swc-node/register

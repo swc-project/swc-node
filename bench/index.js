@@ -2,6 +2,9 @@
 const fs = require('fs')
 const os = require('os')
 
+const babel = require('@babel/core')
+const envPreset = require('@babel/preset-env')
+const tsPreset = require('@babel/preset-typescript')
 const { transformSync: transformSyncNapi, transform: transformNapi } = require('@swc-node/core')
 const { transformSync, transform } = require('@swc/core')
 const { Suite } = require('benchmark')
@@ -13,7 +16,9 @@ const cpuCount = os.cpus().length
 
 const syncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
 
-const asyncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
+const asyncSuite = new Suite('Transform rxjs/AjaxObservable.ts async benchmark')
+
+const parallelSuite = new Suite('Transform rxjs/AjaxObservable.ts parallel benchmark')
 
 const SOURCE_PATH = require.resolve('rxjs/src/internal/observable/dom/AjaxObservable.ts')
 const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
@@ -71,6 +76,15 @@ async function run() {
         },
       })
     })
+    .add('babel', () => {
+      babel.transform(SOURCE_CODE, {
+        filename: SOURCE_PATH,
+        presets: [tsPreset, [envPreset, { targets: { node: 'current' }, modules: 'commonjs' }]],
+        configFile: false,
+        babelrc: false,
+        sourceMaps: true,
+      })
+    })
     .on('cycle', function (event) {
       console.info(String(event.target))
     })
@@ -84,18 +98,18 @@ async function run() {
   await task
 }
 
-async function runAsync() {
+async function runAsync(parallel = 1, suite = asyncSuite) {
   const service = await startService()
   let defer
   const task = new Promise((resolve) => {
     defer = resolve
   })
-  asyncSuite
+  suite
     .add({
       name: '@swc-node/core',
       fn: (deferred) => {
         Promise.all(
-          Array.from({ length: cpuCount }).map(() => {
+          Array.from({ length: parallel }).map(() => {
             return transformNapi(SOURCE_CODE, SOURCE_PATH, {
               target: 'es2016',
               module: 'commonjs',
@@ -118,7 +132,7 @@ async function runAsync() {
       name: '@swc/core',
       fn: (deferred) => {
         Promise.all(
-          Array.from({ length: cpuCount }).map(() => {
+          Array.from({ length: parallel }).map(() => {
             return transform(SOURCE_CODE, {
               filename: SOURCE_PATH,
               jsc: {
@@ -148,7 +162,7 @@ async function runAsync() {
       name: 'esbuild',
       fn: (deferred) => {
         Promise.all(
-          Array.from({ length: cpuCount }).map(() =>
+          Array.from({ length: parallel }).map(() =>
             service.transform(SOURCE_CODE, {
               sourcefile: SOURCE_PATH,
               loader: 'ts',
@@ -166,7 +180,7 @@ async function runAsync() {
       queued: true,
     })
     .on('cycle', function (event) {
-      event.target.hz = event.target.hz * cpuCount
+      event.target.hz = event.target.hz * parallel
       console.info(String(event.target))
     })
     .on('complete', function () {
@@ -181,4 +195,5 @@ async function runAsync() {
 
 run()
   .then(() => runAsync())
+  .then(() => runAsync(cpuCount, parallelSuite))
   .catch(console.error)
