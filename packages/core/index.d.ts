@@ -19,6 +19,15 @@ export function transformSync(
   map: string
 }
 
+export function transformJest(
+  source: string | Buffer,
+  path: string,
+  options?: Options,
+): {
+  code: string
+  map: string
+}
+
 export function transform(
   source: string | Buffer,
   path: string,

@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "napi build --release --platform ./packages/core/swc",
+    "build:debug": "napi build --platform ./packages/core/swc",
     "format": "run-p format:md format:json format:source format:yml",
     "format:json": "prettier --parser json --write '**/*.json'",
     "format:md": "prettier --parser markdown --write './*.md' './packages/**/*.md'",
