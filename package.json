@@ -42,7 +42,7 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@octokit/rest": "^18.0.3",
+    "@octokit/rest": "^18.0.4",
     "@swc/core": "^1.2.21",
     "@types/sinon": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
