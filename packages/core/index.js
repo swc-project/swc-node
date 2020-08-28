@@ -37,84 +37,43 @@ if (!bindings) {
   }
 }
 
+function transformOption(path, options) {
+  const opts = options == null ? {} : options
+  return Buffer.from(
+    JSON.stringify({
+      filename: path,
+      jsc: {
+        target: opts.target || 'es2018',
+        parser: {
+          syntax: 'typescript',
+          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
+          decorators: Boolean(opts.experimentalDecorators),
+          dynamicImport: Boolean(opts.dynamicImport),
+        },
+        transform: {
+          legacyDecorator: Boolean(opts.experimentalDecorators),
+          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
+        },
+      },
+      isModule: true,
+      module: {
+        type: opts.module || 'commonjs',
+      },
+      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
+      swcrc: false,
+    }),
+  )
+}
+
 module.exports = {
   transformSync: function transformSync(source, path, options) {
-    const opts = options == null ? {} : options
-    const swcOptions = {
-      filename: path,
-      jsc: {
-        target: opts.target || 'es2018',
-        parser: {
-          syntax: 'typescript',
-          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-          decorators: Boolean(opts.experimentalDecorators),
-          dynamicImport: Boolean(opts.dynamicImport),
-        },
-        transform: {
-          legacyDecorator: Boolean(opts.experimentalDecorators),
-          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
-        },
-      },
-      isModule: true,
-      module: {
-        type: opts.module || 'commonjs',
-      },
-      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
-      swcrc: false,
-    }
-    return bindings.transformSync(source, path, Buffer.from(JSON.stringify(swcOptions)))
+    return bindings.transformSync(source, path, transformOption(path, options))
   },
   transformJest: function transformJest(source, path, options) {
-    const opts = options == null ? {} : options
-    const swcOptions = {
-      filename: path,
-      jsc: {
-        target: opts.target || 'es2018',
-        parser: {
-          syntax: 'typescript',
-          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-          decorators: Boolean(opts.experimentalDecorators),
-          dynamicImport: Boolean(opts.dynamicImport),
-        },
-        transform: {
-          legacyDecorator: Boolean(opts.experimentalDecorators),
-          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
-        },
-      },
-      isModule: true,
-      module: {
-        type: opts.module || 'commonjs',
-      },
-      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
-      swcrc: false,
-    }
-    return bindings.transformJest(source, path, Buffer.from(JSON.stringify(swcOptions)))
+    return bindings.transformJest(source, path, transformOption(path, options))
   },
   transform: function transform(source, path, options) {
-    const opts = options == null ? {} : options
-    const swcOptions = {
-      filename: path,
-      jsc: {
-        target: opts.target || 'es2018',
-        parser: {
-          syntax: 'typescript',
-          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-          decorators: Boolean(opts.experimentalDecorators),
-          dynamicImport: Boolean(opts.dynamicImport),
-        },
-        transform: {
-          legacyDecorator: Boolean(opts.experimentalDecorators),
-          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
-        },
-      },
-      isModule: true,
-      module: {
-        type: opts.module || 'commonjs',
-      },
-      swcrc: false,
-      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
-    }
-    return bindings.transform(source, path, Buffer.from(JSON.stringify(swcOptions)))
+    return bindings.transform(source, path, transformOption(path, options))
   },
 
   SWC_VERSION: '1.2.21',

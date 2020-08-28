@@ -1,16 +1,17 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-const fs = require('fs')
-const os = require('os')
+import fs from 'fs'
+import os from 'os'
 
-const babel = require('@babel/core')
-const envPreset = require('@babel/preset-env')
-const tsPreset = require('@babel/preset-typescript')
-const { transformSync: transformSyncNapi, transform: transformNapi } = require('@swc-node/core')
-const { transformSync, transform } = require('@swc/core')
-const { Suite } = require('benchmark')
-const chalk = require('chalk')
-const { transformSync: transformSyncEsbuild, startService } = require('esbuild')
-const ts = require('typescript')
+import * as babel from '@babel/core'
+// @ts-expect-error
+import * as envPreset from '@babel/preset-env'
+// @ts-expect-error
+import * as tsPreset from '@babel/preset-typescript'
+import { transformSync as transformSyncNapi, transform as transformNapi } from '@swc-node/core'
+import { transformSync, transform } from '@swc/core'
+import Benchmark, { Suite } from 'benchmark'
+import chalk from 'chalk'
+import { transformSync as transformSyncEsbuild, startService } from 'esbuild'
+import ts from 'typescript'
 
 const cpuCount = os.cpus().length
 
@@ -25,7 +26,7 @@ const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
 
 async function run() {
   const service = await startService()
-  let defer
+  let defer: () => void
   const task = new Promise((resolve) => {
     defer = resolve
   })
@@ -85,11 +86,15 @@ async function run() {
         sourceMaps: true,
       })
     })
-    .on('cycle', function (event) {
+    .on('cycle', function (event: Benchmark.Event) {
       console.info(String(event.target))
     })
-    .on('complete', function () {
-      console.info(`${this.name} bench suite: Fastest is ${chalk.green(this.filter('fastest').map('name'))}`)
+    .on('complete', function (this: Benchmark.Target & Benchmark.Suite) {
+      console.info(
+        `${this.name} bench suite: Fastest is ${chalk.green(
+          this.filter('fastest').map((s: Benchmark.Target) => s.name),
+        )}`,
+      )
       service.stop()
       defer()
     })
@@ -100,14 +105,14 @@ async function run() {
 
 async function runAsync(parallel = 1, suite = asyncSuite) {
   const service = await startService()
-  let defer
+  let defer: () => void
   const task = new Promise((resolve) => {
     defer = resolve
   })
   suite
     .add({
       name: '@swc-node/core',
-      fn: (deferred) => {
+      fn: (deferred: any) => {
         Promise.all(
           Array.from({ length: parallel }).map(() => {
             return transformNapi(SOURCE_CODE, SOURCE_PATH, {
@@ -130,7 +135,7 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
     })
     .add({
       name: '@swc/core',
-      fn: (deferred) => {
+      fn: (deferred: any) => {
         Promise.all(
           Array.from({ length: parallel }).map(() => {
             return transform(SOURCE_CODE, {
@@ -150,9 +155,13 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
               swcrc: false,
             })
           }),
-        ).then(() => {
-          deferred.resolve()
-        })
+        )
+          .then(() => {
+            deferred.resolve()
+          })
+          .catch((e) => {
+            console.error(e)
+          })
       },
       defer: true,
       async: true,
@@ -160,7 +169,7 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
     })
     .add({
       name: 'esbuild',
-      fn: (deferred) => {
+      fn: (deferred: any) => {
         Promise.all(
           Array.from({ length: parallel }).map(() =>
             service.transform(SOURCE_CODE, {
@@ -171,20 +180,28 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
               target: 'es2016',
             }),
           ),
-        ).then(() => {
-          deferred.resolve()
-        })
+        )
+          .then(() => {
+            deferred.resolve()
+          })
+          .catch((e) => {
+            console.error(e)
+          })
       },
       defer: true,
       async: true,
       queued: true,
     })
-    .on('cycle', function (event) {
-      event.target.hz = event.target.hz * parallel
+    .on('cycle', function (event: Benchmark.Event) {
+      event.target.hz = event.target!.hz! * parallel
       console.info(String(event.target))
     })
-    .on('complete', function () {
-      console.info(`${this.name} bench suite: Fastest is ${chalk.green(this.filter('fastest').map('name'))}`)
+    .on('complete', function (this: Benchmark.Target & Benchmark.Suite) {
+      console.info(
+        `${this.name} bench suite: Fastest is ${chalk.green(
+          this.filter('fastest').map((t: Benchmark.Target) => t.name),
+        )}`,
+      )
       service.stop()
       defer()
     })
