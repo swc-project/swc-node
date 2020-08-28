@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.2...@swc-node/core@0.5.0) (2020-08-28)
+
+### Features
+
+- **core:** provide jest hoist plugin ([f3638f2](https://github.com/Brooooooklyn/swc-node/commit/f3638f2004b9fb323261a301b6fe354255846965))
+
 ## [0.4.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.1...@swc-node/core@0.4.2) (2020-08-24)
 
 ### Bug Fixes
