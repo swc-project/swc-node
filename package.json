@@ -27,6 +27,7 @@
     "node": ">= 8.9"
   },
   "scripts": {
+    "bench": "node -r @swc-node/register ./bench/index.ts",
     "build": "napi build --release --platform ./packages/core/swc",
     "build:debug": "napi build --platform ./packages/core/swc",
     "format": "run-p format:md format:json format:source format:yml",
@@ -45,6 +46,8 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.4",
     "@swc/core": "^1.2.21",
+    "@types/babel__core": "^7.1.9",
+    "@types/benchmark": "^1.0.33",
     "@types/sinon": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^3.10.1",
     "@typescript-eslint/parser": "^3.10.1",
