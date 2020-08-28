@@ -13,11 +13,31 @@ use once_cell::sync::OnceCell;
 use swc::{config::Options, Compiler, TransformOutput};
 use swc_common::{self, errors::Handler, FileName, FilePathMapping, SourceMap};
 
+mod jest;
+
 #[cfg(all(unix, not(target_env = "musl")))]
 #[global_allocator]
 static ALLOC: jemallocator::Jemalloc = jemallocator::Jemalloc;
 
+#[cfg(windows)]
+#[global_allocator]
+static ALLOC: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 static COMPILER: OnceCell<Compiler> = OnceCell::new();
+
+#[inline]
+pub(crate) fn get_compiler() -> &'static Compiler {
+  COMPILER.get_or_init(|| {
+    let cm = Arc::new(SourceMap::new(FilePathMapping::empty()));
+    let handler = Handler::with_tty_emitter(
+      swc_common::errors::ColorConfig::Always,
+      true,
+      false,
+      Some(cm.clone()),
+    );
+    Compiler::new(cm.clone(), Arc::new(handler))
+  })
+}
 
 pub struct TransformTask {
   source: String,
@@ -40,16 +60,7 @@ impl TransformTask {
     filename: &str,
     register_options: &Options,
   ) -> Result<TransformOutput> {
-    let c = COMPILER.get_or_init(|| {
-      let cm = Arc::new(SourceMap::new(FilePathMapping::empty()));
-      let handler = Handler::with_tty_emitter(
-        swc_common::errors::ColorConfig::Always,
-        true,
-        false,
-        Some(cm.clone()),
-      );
-      Compiler::new(cm.clone(), Arc::new(handler))
-    });
+    let c = get_compiler();
     let fm = c.cm.new_source_file(
       FileName::Real(
         PathBuf::from_str(filename)
@@ -91,6 +102,8 @@ fn init(module: &mut Module) -> Result<()> {
   module.create_named_method("transformSync", transform_sync)?;
 
   module.create_named_method("transform", transform)?;
+
+  module.create_named_method("transformJest", jest_transform)?;
   Ok(())
 }
 
@@ -113,9 +126,10 @@ fn transform_sync(ctx: CallContext) -> Result<JsObject> {
   result.set_named_property("code", ctx.env.create_string_from_std(output.code)?)?;
   result.set_named_property(
     "map",
-    ctx
-      .env
-      .create_string_from_std(output.map.unwrap_or("".to_owned()))?,
+    match output.map {
+      None => ctx.env.get_null()?.into_unknown()?,
+      Some(sm) => ctx.env.create_string_from_std(sm)?.into_unknown()?,
+    },
   )?;
   Ok(result)
 }
@@ -136,4 +150,31 @@ fn transform(ctx: CallContext) -> Result<JsObject> {
     options,
   );
   ctx.env.spawn(task)
+}
+
+#[js_function(3)]
+fn jest_transform(ctx: CallContext) -> Result<JsObject> {
+  let filename = ctx.get::<JsString>(1)?;
+  let options_buf = ctx.get::<JsBuffer>(2)?;
+  let options: Options = serde_json::from_slice(&options_buf).map_err(|e| {
+    Error::new(
+      Status::InvalidArg,
+      format!("Options is not a valid json {}", e),
+    )
+  })?;
+  let output = jest::jest_transform(
+    ctx.get::<JsString>(0)?.as_str()?.to_owned(),
+    filename.as_str()?,
+    &options,
+  )?;
+  let mut result = ctx.env.create_object()?;
+  result.set_named_property("code", ctx.env.create_string_from_std(output.code)?)?;
+  result.set_named_property(
+    "map",
+    match output.map {
+      None => ctx.env.get_null()?.into_unknown()?,
+      Some(sm) => ctx.env.create_string_from_std(sm)?.into_unknown()?,
+    },
+  )?;
+  Ok(result)
 }
