@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/core",
-  "version": "0.4.2",
+  "version": "0.5.0",
   "description": "Faster swc nodejs binding",
   "keywords": [
     "swc",
