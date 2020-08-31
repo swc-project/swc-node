@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/jest",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "swc preprocessor for jest with source map support",
   "keywords": ["swc", "jest", "ts-jest", "napi", "N-API", "typescript", "node-rs", "napi-rs", "ts-node"],
   "author": "LongYinan <lynweklm@gmail.com>",
@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@swc-node/core": "^0.5.0"
+    "@swc-node/core": "^0.6.0"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@0.1.27...@swc-node/jest@0.3.0) (2020-08-31)
+
+### Features
+
+- **core:** provide jest hoist plugin ([f3638f2](https://github.com/Brooooooklyn/node-swc/commit/f3638f2004b9fb323261a301b6fe354255846965))
+- **jest:** provide jest preset config ([7750ef5](https://github.com/Brooooooklyn/node-swc/commit/7750ef5d7cff3977a2b96f4d76810043e5f0988d))
+
 # [0.2.0](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@0.1.27...@swc-node/jest@0.2.0) (2020-08-28)
 
 ### Features
