@@ -160,6 +160,9 @@ jobs:
           name: bindings-${{ env.PLATFORM_NAME }}
           path: packages/core
 
+      - name: Build TypeScript
+        run: yarn build:ts
+
       - name: List packages
         run: ls -R packages
         shell: bash
@@ -201,8 +204,11 @@ jobs:
       - name: 'Install dependencies'
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
 
+      - name: Build TypeScript
+        run: yarn build:ts
+
       - name: Run simple tests
-        run: docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs node:${{ matrix.node }}-alpine sh -c "node ./packages/core/simple-tests.js"
+        run: docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs node:${{ matrix.node }}-alpine sh -c "node -r @swc-node/register ./packages/core/simple-tests.ts"
 
   dependabot:
     needs:
@@ -232,15 +238,11 @@ jobs:
         with:
           node-version: 12
 
-      - name: Cache NPM dependencies
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: npm-cache-ubuntu-latest-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            npm-cache-
       - name: 'Install dependencies'
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
+
+      - name: Build TypeScript
+        run: yarn build:ts
 
       - name: Download all artifacts
         uses: actions/download-artifact@v2
@@ -253,7 +255,7 @@ jobs:
 
       - name: Upload artifacts to Github release
         run: |
-          node packages/core/upload-to-release.js
+          node -r @swc-node/register packages/core/lib/upload-to-release.js
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

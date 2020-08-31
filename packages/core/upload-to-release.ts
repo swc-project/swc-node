@@ -1,18 +1,19 @@
-const { execSync } = require('child_process')
-const { join } = require('path')
+import { execSync } from 'child_process'
+import { join } from 'path'
 
-const { Octokit } = require('@octokit/rest')
-const chalk = require('chalk')
-const putasset = require('putasset')
+import { Octokit } from '@octokit/rest'
+import chalk from 'chalk'
+// @ts-expect-error
+import putasset from 'putasset'
 
-const platforms = require('./platforms')
+import platforms from './platforms'
 
 const headCommit = execSync('git log -1 --pretty=%B', {
   encoding: 'utf8',
 })
 
 ;(async () => {
-  const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/')
+  const [owner, repo] = process.env.GITHUB_REPOSITORY!.split('/')
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
   })
@@ -47,10 +48,7 @@ const headCommit = execSync('git log -1 --pretty=%B', {
   console.error(e)
 })
 
-/**
- * @param {string} tag
- */
-function parseTag(tag) {
+function parseTag(tag: string) {
   const [, packageWithVersion] = tag.split('/')
   const [name, version] = packageWithVersion.split('@')
   const isNativePackage = name === 'core'

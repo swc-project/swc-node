@@ -6,9 +6,9 @@
   "author": "LongYinan <lynweklm@gmail.com>",
   "homepage": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "files": ["index.js", "README.md", "LICENSE", "index.d.ts"],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": ["lib", "README.md", "LICENSE"],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -22,5 +22,8 @@
   },
   "bugs": {
     "url": "https://github.com/Brooooooklyn/node-swc/issues"
+  },
+  "devDependencies": {
+    "@types/source-map-support": "^0.5.3"
   }
 }
