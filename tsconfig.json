@@ -20,7 +20,7 @@
     "forceConsistentCasingInFileNames": true,
     "preserveSymlinks": true,
     "target": "ES2018",
-    "inlineSourceMap": true,
+    "sourceMap": true,
     "esModuleInterop": true,
     "stripInternal": true,
     "resolveJsonModule": true,

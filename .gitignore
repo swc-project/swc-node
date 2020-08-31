@@ -163,3 +163,4 @@ dist
 Cargo.lock
 
 *.node
+lib

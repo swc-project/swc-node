@@ -1,9 +1,9 @@
-const { execSync } = require('child_process')
-const path = require('path')
+import { execSync } from 'child_process'
+import path from 'path'
 
-const { version } = require('./package.json')
-const platforms = require('./platforms')
-const updatePackageJson = require('./update-package')
+import { version } from './package.json'
+import platforms from './platforms'
+import updatePackageJson from './update-package'
 
 for (const name of [...platforms, 'linux-musl']) {
   const pkgDir = path.join(__dirname, 'npm', `core-${name}`)

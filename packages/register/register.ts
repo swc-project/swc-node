@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/prefer-nullish-coalescing */
-const { existsSync } = require('fs')
-const { join, parse } = require('path')
+import { existsSync } from 'fs'
+import { join, parse } from 'path'
 
-const { transformSync } = require('@swc-node/core')
-const { SourcemapMap, installSourceMapSupport } = require('@swc-node/sourcemap-support')
-const debug = require('debug')('@swc-node')
-const { addHook } = require('pirates')
-const ts = require('typescript')
+import { transformSync } from '@swc-node/core'
+import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
+import debugFactory from 'debug'
+import { addHook } from 'pirates'
+import * as ts from 'typescript'
 
-const DEFAULT_EXTENSIONS = Object.freeze(['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts'])
+const debug = debugFactory('@swc-node')
 
-/**
- * @param {import('typescript').ScriptTarget} target
- */
-function toTsTarget(target) {
+const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts']
+
+function toTsTarget(target: ts.ScriptTarget) {
   switch (target) {
     case ts.ScriptTarget.ES3:
       return 'es3'
@@ -38,10 +36,7 @@ function toTsTarget(target) {
   }
 }
 
-/**
- * @param {import('typescript').ModuleKind} moduleKind
- */
-function toModule(moduleKind) {
+function toModule(moduleKind: ts.ModuleKind) {
   switch (moduleKind) {
     case ts.ModuleKind.CommonJS:
       return 'commonjs'
@@ -59,12 +54,11 @@ function toModule(moduleKind) {
   }
 }
 
-/**
- * @param {string} sourcecode
- * @param {string} filename
- * @param {import('typescript').CompilerOptions} options
- */
-function compile(sourcecode, filename, options) {
+function compile(
+  sourcecode: string,
+  filename: string,
+  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+) {
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
     delete options.fallbackToTs
     const { outputText, sourceMapText } = ts.transpileModule(sourcecode, {
@@ -77,13 +71,13 @@ function compile(sourcecode, filename, options) {
     return outputText
   } else {
     const { code, map } = transformSync(sourcecode, filename, {
-      target: toTsTarget(options.target || ts.ScriptTarget.ES2018),
-      module: toModule(options.module || ts.ModuleKind.ES2015),
+      target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
+      module: toModule(options.module ?? ts.ModuleKind.ES2015),
       sourcemap: options.sourceMap !== false,
-      jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || (options.jsx && options.jsx !== ts.JsxEmit.None),
-      experimentalDecorators: options.experimentalDecorators || false,
-      emitDecoratorMetadata: options.emitDecoratorMetadata || false,
-      dynamicImport: options.module && options.module >= ts.ModuleKind.ES2020,
+      jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx),
+      experimentalDecorators: options.experimentalDecorators ?? false,
+      emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
+      dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
     })
     // in case of map is undefined
     if (map) {
@@ -93,16 +87,14 @@ function compile(sourcecode, filename, options) {
   }
 }
 
-function readDefaultTsConfig() {
+export function readDefaultTsConfig() {
   const tsConfigPath =
-    process.env.SWC_NODE_PROJECT || process.env.TS_NODE_PROJECT || join(process.cwd(), 'tsconfig.json')
+    process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json')
 
-  /**@type {import('typescript').CompilerOptions} */
-  let compilerOptions = {
+  let compilerOptions: Partial<ts.CompilerOptions & { fallbackToTs: (path: string) => boolean }> = {
     target: ts.ScriptTarget.ES2018,
     module: ts.ModuleKind.CommonJS,
     moduleResolution: ts.ModuleResolutionKind.NodeJs,
-    jsx: false,
     sourceMap: true,
     esModuleInterop: true,
   }
@@ -125,9 +117,7 @@ function readDefaultTsConfig() {
   return compilerOptions
 }
 
-module.exports.readDefaultTsConfig = readDefaultTsConfig
-
-module.exports.register = function register(options = readDefaultTsConfig()) {
+export function register(options = readDefaultTsConfig()) {
   installSourceMapSupport()
   addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,

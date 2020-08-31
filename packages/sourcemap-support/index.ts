@@ -1,8 +1,8 @@
-const sourceMapSupport = require('source-map-support')
+import sourceMapSupport from 'source-map-support'
 
-const SourcemapMap = new Map()
+export const SourcemapMap = new Map()
 
-function installSourceMapSupport() {
+export function installSourceMapSupport() {
   sourceMapSupport.install({
     handleUncaughtExceptions: false,
     environment: 'node',
@@ -17,6 +17,3 @@ function installSourceMapSupport() {
     },
   })
 }
-
-module.exports.SourcemapMap = SourcemapMap
-module.exports.installSourceMapSupport = installSourceMapSupport

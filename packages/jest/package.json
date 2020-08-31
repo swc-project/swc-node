@@ -6,8 +6,8 @@
   "author": "LongYinan <lynweklm@gmail.com>",
   "homepage": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
-  "main": "index.js",
-  "files": ["index.js", "LICENSE"],
+  "main": "./lib/index.js",
+  "files": ["lib", "jest-preset.js", "LICENSE"],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

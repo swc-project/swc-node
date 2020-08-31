@@ -29,6 +29,7 @@
   "scripts": {
     "bench": "node -r @swc-node/register ./bench/index.ts",
     "build": "napi build --release --platform ./packages/core/swc",
+    "build:ts": "tsc -b tsconfig.project.json",
     "build:debug": "napi build --platform ./packages/core/swc",
     "format": "run-p format:md format:json format:source format:yml",
     "format:json": "prettier --parser json --write '**/*.json'",
@@ -45,7 +46,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.4",
-    "@swc/core": "^1.2.21",
+    "@swc/core": "^1.2.22",
     "@types/babel__core": "^7.1.9",
     "@types/benchmark": "^1.0.33",
     "@types/sinon": "^9.0.5",

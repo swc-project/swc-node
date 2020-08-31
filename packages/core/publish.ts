@@ -1,10 +1,10 @@
-const { execSync } = require('child_process')
-const fs = require('fs')
-const path = require('path')
+import { execSync } from 'child_process'
+import fs from 'fs'
+import path from 'path'
 
-const { version } = require('./package.json')
-const platforms = require('./platforms')
-const updatePackageJson = require('./update-package')
+import { version } from './package.json'
+import platforms from './platforms'
+import updatePackageJson from './update-package'
 
 updatePackageJson(path.join(__dirname, 'package.json'), {
   optionalDependencies: platforms.reduce((acc, cur) => {
