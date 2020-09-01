@@ -42,7 +42,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/plugin-transform-typescript": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.4",
