@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.6.0...@swc-node/core@0.6.1) (2020-09-01)
+
+### Bug Fixes
+
+- **core:** macOS 10.13 compatible issue ([c5917ac](https://github.com/Brooooooklyn/swc-node/commit/c5917ac54678757afeca1600ff2a9c459190dfd1))
+
 # [0.6.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.4.2...@swc-node/core@0.6.0) (2020-08-31)
 
 ### Features
