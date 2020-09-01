@@ -77,9 +77,18 @@ jobs:
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
 
       - name: 'Build'
+        if: matrix.os != 'macos-latest'
         run: |
           cargo build --release
           yarn build
+
+      - name: 'Build'
+        if: matrix.os == 'macos-latest'
+        run: |
+          cargo build --release
+          yarn build
+        env:
+          MACOSX_DEPLOYMENT_TARGET: '10.13'
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
