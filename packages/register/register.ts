@@ -77,7 +77,7 @@ function compile(
       jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx),
       experimentalDecorators: options.experimentalDecorators ?? false,
       emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
-      dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
+      dynamicImport: options.target ? options.target >= ts.ScriptTarget.ES2018 : true,
     })
     // in case of map is undefined
     if (map) {
