@@ -8,7 +8,7 @@ use std::str;
 use std::str::FromStr;
 use std::sync::Arc;
 
-use napi::{CallContext, Env, Error, JsBuffer, JsObject, JsString, Module, Result, Status, Task};
+use napi::{CallContext, Env, Error, JsObject, JsString, Module, Result, Status, Task};
 use once_cell::sync::OnceCell;
 use swc::{config::Options, Compiler, TransformOutput};
 use swc_common::{self, errors::Handler, FileName, FilePathMapping, SourceMap};
@@ -110,13 +110,8 @@ fn init(module: &mut Module) -> Result<()> {
 #[js_function(3)]
 fn transform_sync(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_buf = ctx.get::<JsBuffer>(2)?;
-  let options: Options = serde_json::from_slice(&options_buf).map_err(|e| {
-    Error::new(
-      Status::InvalidArg,
-      format!("Options is not a valid json {}", e),
-    )
-  })?;
+  let options_obj = ctx.get::<JsObject>(2)?;
+  let options: Options = ctx.env.from_js_value(options_obj)?;
   let output = TransformTask::perform(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?,
@@ -137,13 +132,8 @@ fn transform_sync(ctx: CallContext) -> Result<JsObject> {
 #[js_function(3)]
 fn transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_buf = ctx.get::<JsBuffer>(2)?;
-  let options: Options = serde_json::from_slice(&options_buf).map_err(|e| {
-    Error::new(
-      Status::InvalidArg,
-      format!("Options is not a valid json {}", e),
-    )
-  })?;
+  let options_obj = ctx.get::<JsObject>(2)?;
+  let options: Options = ctx.env.from_js_value(options_obj)?;
   let task = TransformTask::new(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?.to_owned(),
@@ -155,13 +145,8 @@ fn transform(ctx: CallContext) -> Result<JsObject> {
 #[js_function(3)]
 fn jest_transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_buf = ctx.get::<JsBuffer>(2)?;
-  let options: Options = serde_json::from_slice(&options_buf).map_err(|e| {
-    Error::new(
-      Status::InvalidArg,
-      format!("Options is not a valid json {}", e),
-    )
-  })?;
+  let options_obj = ctx.get::<JsObject>(2)?;
+  let options: Options = ctx.env.from_js_value(options_obj)?;
   let output = jest::jest_transform(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?,

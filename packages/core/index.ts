@@ -52,30 +52,28 @@ if (!bindings) {
 
 function transformOption(path: string, options?: Options) {
   const opts = options == null ? {} : options
-  return Buffer.from(
-    JSON.stringify({
-      filename: path,
-      jsc: {
-        target: opts.target ?? 'es2018',
-        parser: {
-          syntax: 'typescript',
-          tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-          decorators: Boolean(opts.experimentalDecorators),
-          dynamicImport: Boolean(opts.dynamicImport),
-        },
-        transform: {
-          legacyDecorator: Boolean(opts.experimentalDecorators),
-          decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
-        },
+  return {
+    filename: path,
+    jsc: {
+      target: opts.target ?? 'es2018',
+      parser: {
+        syntax: 'typescript',
+        tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
+        decorators: Boolean(opts.experimentalDecorators),
+        dynamicImport: Boolean(opts.dynamicImport),
       },
-      isModule: true,
-      module: {
-        type: opts.module ?? 'commonjs',
+      transform: {
+        legacyDecorator: Boolean(opts.experimentalDecorators),
+        decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
       },
-      sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
-      swcrc: false,
-    }),
-  )
+    },
+    isModule: true,
+    module: {
+      type: opts.module ?? 'commonjs',
+    },
+    sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
+    swcrc: false,
+  }
 }
 
 export function transformSync(source: string, path: string, options?: Options) {
