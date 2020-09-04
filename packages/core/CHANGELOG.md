@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.6.1...@swc-node/core@0.7.0) (2020-09-04)
+
+### Features
+
+- **core:** upgrade to napi@0.5 ([bf5f2c4](https://github.com/Brooooooklyn/swc-node/commit/bf5f2c4b9efc074e0b1ff62f8d7ee2b1c578228f))
+
 ## [0.6.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.6.0...@swc-node/core@0.6.1) (2020-09-01)
 
 ### Bug Fixes
