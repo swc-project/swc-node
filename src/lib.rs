@@ -110,8 +110,9 @@ fn init(module: &mut Module) -> Result<()> {
 #[js_function(3)]
 fn transform_sync(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_obj = ctx.get::<JsObject>(2)?;
-  let options: Options = ctx.env.from_js_value(options_obj)?;
+  let options_string = ctx.get::<JsString>(2)?;
+  let options: Options = serde_json::from_str(options_string.as_str()?)
+    .map_err(|e| Error::new(Status::InvalidArg, format!("{}", e)))?;
   let output = TransformTask::perform(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?,
@@ -132,8 +133,9 @@ fn transform_sync(ctx: CallContext) -> Result<JsObject> {
 #[js_function(3)]
 fn transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_obj = ctx.get::<JsObject>(2)?;
-  let options: Options = ctx.env.from_js_value(options_obj)?;
+  let options_string = ctx.get::<JsString>(2)?;
+  let options: Options = serde_json::from_str(options_string.as_str()?)
+    .map_err(|e| Error::new(Status::InvalidArg, format!("{}", e)))?;
   let task = TransformTask::new(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?.to_owned(),
@@ -145,8 +147,9 @@ fn transform(ctx: CallContext) -> Result<JsObject> {
 #[js_function(3)]
 fn jest_transform(ctx: CallContext) -> Result<JsObject> {
   let filename = ctx.get::<JsString>(1)?;
-  let options_obj = ctx.get::<JsObject>(2)?;
-  let options: Options = ctx.env.from_js_value(options_obj)?;
+  let options_string = ctx.get::<JsString>(2)?;
+  let options: Options = serde_json::from_str(options_string.as_str()?)
+    .map_err(|e| Error::new(Status::InvalidArg, format!("{}", e)))?;
   let output = jest::jest_transform(
     ctx.get::<JsString>(0)?.as_str()?.to_owned(),
     filename.as_str()?,

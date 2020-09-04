@@ -1,4 +1,3 @@
-import { platform } from 'os'
 import { join } from 'path'
 
 import { loadBinding } from '@node-rs/helper'
@@ -13,46 +12,11 @@ export interface Options {
   dynamicImport?: boolean
 }
 
-let bindings: any
-let linuxError: Error | null = null
-
-try {
-  bindings = loadBinding(join(require.resolve('@swc-node/core'), '..', '..'), 'swc')
-} catch (e) {
-  const platformName = platform()
-  try {
-    bindings = require(`@swc-node/core-${platformName}`)
-  } catch (e) {
-    if (platformName !== 'linux') {
-      throw new TypeError('Not compatible with your platform. Error message: ' + e.message)
-    } else {
-      linuxError = e
-    }
-  }
-}
-
-if (!bindings) {
-  try {
-    require.resolve('@swc-node/core-linux-musl')
-  } catch (e) {
-    throw new TypeError(
-      `Could not load @swc-node/core-linux-musl, You may need add @swc-node/core-linux-musl to optionalDependencies of your project`,
-    )
-  }
-  try {
-    bindings = require('@swc-node/core-linux-musl')
-  } catch (e) {
-    throw new TypeError(
-      `Linux glibc version load error: ${linuxError!.message}; Linux musl version load error: Error message: ${
-        e.message
-      }`,
-    )
-  }
-}
+const bindings = loadBinding(join(require.resolve('@swc-node/core'), '..', '..'), 'swc', '@swc-node/core')
 
 function transformOption(path: string, options?: Options) {
   const opts = options == null ? {} : options
-  return {
+  return JSON.stringify({
     filename: path,
     jsc: {
       target: opts.target ?? 'es2018',
@@ -73,7 +37,7 @@ function transformOption(path: string, options?: Options) {
     },
     sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     swcrc: false,
-  }
+  })
 }
 
 export function transformSync(source: string, path: string, options?: Options) {
