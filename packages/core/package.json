@@ -26,6 +26,10 @@
   "files": ["lib"],
   "os": ["darwin", "linux", "win32"],
   "cpu": ["x64"],
+  "napi": {
+    "name": "swc",
+    "musl": ["linux"]
+  },
   "engines": {
     "node": ">= 8.9"
   },
@@ -41,10 +45,10 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "scripts": {
-    "prepublishOnly": "node -r @swc-node/register ./publish.ts",
-    "version": "node -r @swc-node/register ./version.ts"
+    "prepublishOnly": "napi prepublish",
+    "version": "napi version"
   },
   "dependencies": {
-    "@node-rs/helper": "^0.3.1"
+    "@node-rs/helper": "^0.4.0"
   }
 }

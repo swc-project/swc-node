@@ -1,4 +1,6 @@
 name: CI
+env:
+  DEBUG: 'napi:*'
 
 on:
   push:
@@ -127,7 +129,7 @@ jobs:
       - name: 'Build'
         run: |
           docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "cargo build --release"
-          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "./node_modules/.bin/napi build --platform --musl --release ./packages/core/swc"
+          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "./node_modules/.bin/napi build --platform --musl --release -c ./packages/core/package.json ./packages/core"
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
@@ -253,26 +255,17 @@ jobs:
       - name: Build TypeScript
         run: yarn build:ts
 
-      - name: Download Self artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: bindings-linux
-          path: packages/core
-
       - name: Download all artifacts
         uses: actions/download-artifact@v2
         with:
-          path: packages/core
+          path: artifacts
 
       - name: List packages
         run: ls -R packages
         shell: bash
 
-      - name: Upload artifacts to Github release
-        run: |
-          node -r @swc-node/register packages/core/upload-to-release.ts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Move artifacts
+        run: yarn artifacts
 
       - name: Lerna publish
         run: |
@@ -280,3 +273,4 @@ jobs:
           npx lerna publish from-package --no-verify-access --yes
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
