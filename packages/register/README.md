@@ -10,6 +10,12 @@ register({
 })
 ```
 
+### CLI
+
+```
+node -r @swc-node/register index.ts
+```
+
 ### Mocha
 
 ```
