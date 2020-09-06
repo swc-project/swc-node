@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.7](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.6...@swc-node/register@0.4.7) (2020-09-06)
+
+**Note:** Version bump only for package @swc-node/register
+
 ## [0.4.6](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.5...@swc-node/register@0.4.6) (2020-09-04)
 
 **Note:** Version bump only for package @swc-node/register

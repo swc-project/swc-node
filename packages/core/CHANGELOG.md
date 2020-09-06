@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.0...@swc-node/core@0.7.1) (2020-09-06)
+
+### Bug Fixes
+
+- **core:** wrong this in function call expr in optional chains ([5d9966f](https://github.com/Brooooooklyn/swc-node/commit/5d9966f9eb4b1026356a3f824568f9804faa05ff))
+
 # [0.7.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.6.1...@swc-node/core@0.7.0) (2020-09-04)
 
 ### Features

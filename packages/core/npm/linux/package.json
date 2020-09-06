@@ -3,7 +3,7 @@
   "description": "The Linux 64-bit binary for @swc-node/core.",
   "repository": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "swc.linux.node",
   "files": ["swc.linux.node"],
   "publishConfig": {
