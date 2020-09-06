@@ -52,4 +52,4 @@ export function transform(source: string, path: string, options?: Options) {
   return bindings.transform(source, path, transformOption(path, options))
 }
 
-export const SWC_VERSION = '1.2.22'
+export const SWC_VERSION = '57112fc'
