@@ -24,7 +24,7 @@ Detail: [@swc-node/core](./packages/core)
 
 ### Benchmark
 
-> ⚠️ Notes: `transformSync` API in esbuild has huge overhead. So `swc` is only faster than esbuild in `transformSync` API. In the `transform` API, `esbuild` is about **1.2x ~ 2x faster** than `swc`.
+> ⚠️ Notes: `transformSync` API in esbuild has huge overhead. So `swc` is only faster than esbuild in `transformSync` API. In the `transform` API, `esbuild` is about **1 ~ 1.6x faster** than `swc`.
 
 > transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
 
@@ -46,30 +46,27 @@ Memory: 16 GB
 #### `transformSync`
 
 ```bash
-@swc-node/core x 300 ops/sec ±2.93% (80 runs sampled)
-@swc/core x 326 ops/sec ±1.58% (86 runs sampled)
-esbuild x 44.93 ops/sec ±1.10% (58 runs sampled)
-typescript x 27.77 ops/sec ±9.67% (53 runs sampled)
-babel x 23.08 ops/sec ±10.45% (45 runs sampled)
-Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc/core
+@swc-node/core x 368 ops/sec ±4.18% (84 runs sampled)
+esbuild x 42.16 ops/sec ±1.76% (55 runs sampled)
+typescript x 24.52 ops/sec ±14.38% (51 runs sampled)
+babel x 22.08 ops/sec ±10.17% (44 runs sampled)
+Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
 ```
 
 #### `transform` single thread
 
 ```bash
-@swc-node/core x 247 ops/sec ±3.94% (74 runs sampled)
-@swc/core x 244 ops/sec ±1.90% (76 runs sampled)
-esbuild x 448 ops/sec ±2.75% (75 runs sampled)
+@swc-node/core x 291 ops/sec ±1.66% (78 runs sampled)
+esbuild x 454 ops/sec ±3.66% (73 runs sampled)
 Transform rxjs/AjaxObservable.ts async benchmark bench suite: Fastest is esbuild
 ```
 
 #### `transform` parallel
 
 ```bash
-@swc-node/core x 727 ops/sec ±1.20% (71 runs sampled)
-@swc/core x 794 ops/sec ±2.65% (69 runs sampled)
-esbuild x 1,009 ops/sec ±2.37% (69 runs sampled)
-Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is esbuild
+@swc-node/core x 946 ops/sec ±2.36% (74 runs sampled)
+esbuild x 931 ops/sec ±3.56% (65 runs sampled)
+Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is @swc-node/core,esbuild
 ```
 
 ## @swc-node/jest
