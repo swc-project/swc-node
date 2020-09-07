@@ -56,7 +56,7 @@
     "ava": "^3.12.1",
     "benchmark": "^2.1.4",
     "chalk": "^4.1.0",
-    "esbuild": "^0.6.30",
+    "esbuild": "^0.6.31",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
