@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.1...@swc-node/core@0.7.2) (2020-09-07)
+
+### Bug Fixes
+
+- **core:** wrong assertion in hygiene ([b28cc10](https://github.com/Brooooooklyn/swc-node/commit/b28cc10875a0c98db78f402dfa5d3762ec77cd31))
+
 ## [0.7.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.0...@swc-node/core@0.7.1) (2020-09-06)
 
 ### Bug Fixes
