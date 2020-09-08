@@ -61,7 +61,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.3.0",
     "napi-rs": "^0.3.1",
