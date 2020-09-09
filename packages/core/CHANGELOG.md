@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.2...@swc-node/core@0.7.3) (2020-09-09)
+
+### Bug Fixes
+
+- **core:** conditional expr in callee & do not rename new keywords in meta properties ([c893622](https://github.com/Brooooooklyn/swc-node/commit/c8936229782164fe54bd864ecc2d8049827fd1ef))
+
 ## [0.7.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.1...@swc-node/core@0.7.2) (2020-09-07)
 
 ### Bug Fixes
