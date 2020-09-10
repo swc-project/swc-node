@@ -10,12 +10,14 @@ export interface Options {
   experimentalDecorators?: boolean
   emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
+  esModuleInterop?: boolean
 }
 
 const bindings = loadBinding(join(require.resolve('@swc-node/core'), '..', '..'), 'swc', '@swc-node/core')
 
 function transformOption(path: string, options?: Options) {
   const opts = options == null ? {} : options
+  opts.esModuleInterop = opts.esModuleInterop ?? true
   return JSON.stringify({
     filename: path,
     jsc: {
@@ -34,6 +36,7 @@ function transformOption(path: string, options?: Options) {
     isModule: true,
     module: {
       type: opts.module ?? 'commonjs',
+      noInterop: !opts.esModuleInterop,
     },
     sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     swcrc: false,
