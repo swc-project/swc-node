@@ -6062,10 +6062,10 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-napi-rs@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/napi-rs/-/napi-rs-0.3.6.tgz#b30f12d54fb0d22f6f1d53675245baf17d774a4c"
-  integrity sha512-5AM6s387taiQ+RhKLcObVX0fhSJr1ZJ5MWwe5xGy+tI1T9vyVbKcO3f0+tJxUJItpAwWkfSlCLuOBYzvqbke9Q==
+napi-rs@^0.3.7:
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/napi-rs/-/napi-rs-0.3.7.tgz#f8b30c04e609ec814db73820f3780ec3f183a44c"
+  integrity sha512-wYBDkMq/Uw9re0gHdIkMHDYwnV2G82j5wixO5wXVw+aL5WkxvXoGHRxlg+TFUWfe6YckHeFfcHOzUpAiSEGfZg==
   dependencies:
     "@octokit/rest" "^18.0.4"
     chalk "^4.1.0"
