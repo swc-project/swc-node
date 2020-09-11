@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.10](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.9...@swc-node/register@0.4.10) (2020-09-11)
+
+### Bug Fixes
+
+- **core:** add support for esModuleInterop ([a7f3331](https://github.com/Brooooooklyn/swc-node/commit/a7f3331f06d597e39cb44be8a8d73f264a417a71))
+
 ## [0.4.9](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.8...@swc-node/register@0.4.9) (2020-09-09)
 
 **Note:** Version bump only for package @swc-node/register
