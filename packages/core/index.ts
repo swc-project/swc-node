@@ -55,4 +55,4 @@ export function transform(source: string, path: string, options?: Options) {
   return bindings.transform(source, path, transformOption(path, options))
 }
 
-export const SWC_VERSION = '3a26d3d'
+export const SWC_VERSION = '4d5a0da'
