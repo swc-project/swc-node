@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.4...@swc-node/core@0.7.5) (2020-09-13)
+
+### Bug Fixes
+
+- **core:** cjs import order and resolver issues ([deca648](https://github.com/Brooooooklyn/swc-node/commit/deca64873c897bddffae4a3c3186966626d274c4))
+
 ## [0.7.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.3...@swc-node/core@0.7.4) (2020-09-11)
 
 ### Bug Fixes
