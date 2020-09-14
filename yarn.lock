@@ -1859,7 +1859,7 @@
     "@octokit/plugin-request-log" "^1.0.0"
     "@octokit/plugin-rest-endpoint-methods" "3.17.0"
 
-"@octokit/rest@^18.0.4", "@octokit/rest@^18.0.5":
+"@octokit/rest@^18.0.5":
   version "18.0.5"
   resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-18.0.5.tgz#1f1498dcdc2d85d0f86b8168e4ff5779842b2742"
   integrity sha512-SPKI24tQXrr1XsnaIjv2x0rl4M5eF1+hj8+vMe3d/exZ7NnL5sTe1BuFyCyJyrc+j1HkXankvgGN9zT0rwBwtg==
@@ -1931,10 +1931,10 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@swc-node/core-linux-musl@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.npmjs.org/@swc-node/core-linux-musl/-/core-linux-musl-0.6.1.tgz#45e2e0b695f594df944f892e9f82a2ce77266bf1"
-  integrity sha512-VcQ1kdeRw1D8/uMk90wHSMJmT41Tex8iytuGKBl/bVOZ5wPD9wA3Sz5ieMgt4CNiUtVITTlpyTJuQgO526W7Ug==
+"@swc-node/core-linux-musl@^0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@swc-node/core-linux-musl/-/core-linux-musl-0.7.5.tgz#ecf62110eaf9fc353f554d47fe41d064f4f0369e"
+  integrity sha512-QztcJZ5CxS0SpxROiPTu5cS4lIHozBx9MVPN9NQoI/JzndEDVmC1GBUhmnRXDD9y8CtPyPFueXPGanxYYiN/og==
 
 "@swc/core-darwin@^1.2.28":
   version "1.2.28"
@@ -6062,12 +6062,12 @@ nanomatch@^1.2.9:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-napi-rs@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/napi-rs/-/napi-rs-0.3.7.tgz#f8b30c04e609ec814db73820f3780ec3f183a44c"
-  integrity sha512-wYBDkMq/Uw9re0gHdIkMHDYwnV2G82j5wixO5wXVw+aL5WkxvXoGHRxlg+TFUWfe6YckHeFfcHOzUpAiSEGfZg==
+napi-rs@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/napi-rs/-/napi-rs-0.3.8.tgz#f832fc7fdd261331fa3cfc2d6fb49a4d00cce79e"
+  integrity sha512-+6gE9HYhyAGERLdPW1SNMDM84o2CpPCb6QedX0eQGBP820e4EB1CXbTHbVn1f3QKh6yZ6AQMrOr0v0edu0i72Q==
   dependencies:
-    "@octokit/rest" "^18.0.4"
+    "@octokit/rest" "^18.0.5"
     chalk "^4.1.0"
     clipanion "^2.5.0"
     debug "^4.1.1"
@@ -6078,7 +6078,7 @@ napi-rs@^0.3.7:
     toml "^3.0.0"
     tslib "^2.0.1"
   optionalDependencies:
-    "@swc-node/core-linux-musl" "^0.6.1"
+    "@swc-node/core-linux-musl" "^0.7.5"
 
 natural-compare@^1.4.0:
   version "1.4.0"
