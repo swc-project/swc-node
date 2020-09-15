@@ -35,6 +35,7 @@
   "dependencies": {
     "@swc-node/core": "^0.7.5",
     "@swc-node/sourcemap-support": "^0.1.8",
+    "chalk": "^4.1.0",
     "debug": "^4.1.1",
     "pirates": "^4.0.1"
   },

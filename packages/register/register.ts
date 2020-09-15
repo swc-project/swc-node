@@ -1,15 +1,15 @@
-import { existsSync } from 'fs'
-import { join, parse } from 'path'
+import { platform } from 'os'
+import { join } from 'path'
 
 import { transformSync } from '@swc-node/core'
 import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
-import debugFactory from 'debug'
 import { addHook } from 'pirates'
 import * as ts from 'typescript'
 
-const debug = debugFactory('@swc-node')
+import { readDefaultTsConfig } from './read-default-tsconfig'
 
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts']
+const PLATFORM = platform()
 
 function toTsTarget(target: ts.ScriptTarget) {
   switch (target) {
@@ -59,6 +59,14 @@ function compile(
   filename: string,
   options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
 ) {
+  if (options.files && (options.files as string[]).length) {
+    if (PLATFORM === 'win32' && (options.files as string[]).every((file) => filename !== join(process.cwd(), file))) {
+      return sourcecode
+    }
+    if (PLATFORM !== 'win32' && (options.files as string[]).every((file) => !filename.endsWith(file))) {
+      return sourcecode
+    }
+  }
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
     delete options.fallbackToTs
     const { outputText, sourceMapText } = ts.transpileModule(sourcecode, {
@@ -86,36 +94,6 @@ function compile(
     }
     return code
   }
-}
-
-export function readDefaultTsConfig() {
-  const tsConfigPath =
-    process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json')
-
-  let compilerOptions: Partial<ts.CompilerOptions & { fallbackToTs: (path: string) => boolean }> = {
-    target: ts.ScriptTarget.ES2018,
-    module: ts.ModuleKind.CommonJS,
-    moduleResolution: ts.ModuleResolutionKind.NodeJs,
-    sourceMap: true,
-    esModuleInterop: true,
-  }
-
-  if (tsConfigPath && existsSync(tsConfigPath)) {
-    try {
-      debug(`Read config file from ${tsConfigPath}`)
-      const { config } = ts.readConfigFile(tsConfigPath, ts.sys.readFile)
-
-      const { options, errors } = ts.parseJsonConfigFileContent(config, ts.sys, parse(tsConfigPath).dir)
-      if (!errors.length) {
-        compilerOptions = options
-      } else {
-        debug(`Convert compiler options from json failed`, errors)
-      }
-    } catch (e) {
-      debug(`Read ${tsConfigPath} failed: ${e.message}`)
-    }
-  }
-  return compilerOptions
 }
 
 export function register(options = readDefaultTsConfig()) {
