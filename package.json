@@ -46,7 +46,7 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "@octokit/rest": "^18.0.5",
+    "@octokit/rest": "^18.0.6",
     "@swc/core": "^1.2.28",
     "@types/babel__core": "^7.1.9",
     "@types/benchmark": "^1.0.33",
