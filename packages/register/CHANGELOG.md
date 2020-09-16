@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.10...@swc-node/register@0.5.0) (2020-09-16)
+
+### Features
+
+- **register:** support read include/exclude config from tsconfig ([0dec2cd](https://github.com/Brooooooklyn/swc-node/commit/0dec2cdcf002c361abef068cf227a8bfe6cdea2a))
+
 ## [0.4.11](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.10...@swc-node/register@0.4.11) (2020-09-13)
 
 **Note:** Version bump only for package @swc-node/register
