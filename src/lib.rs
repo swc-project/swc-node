@@ -14,6 +14,7 @@ use swc::{config::Options, Compiler, TransformOutput};
 use swc_common::{self, errors::Handler, FileName, FilePathMapping, SourceMap};
 
 mod jest;
+mod plugin;
 
 #[cfg(all(unix, not(target_env = "musl")))]
 #[global_allocator]
@@ -104,6 +105,13 @@ fn init(module: &mut Module) -> Result<()> {
   module.create_named_method("transform", transform)?;
 
   module.create_named_method("transformJest", jest_transform)?;
+
+  module.create_named_method("transformFactory", plugin::transform_factory)?;
+
+  module.create_named_method(
+    "transformSyncWithPlugins",
+    plugin::transform_sync_with_plugins,
+  )?;
   Ok(())
 }
 
