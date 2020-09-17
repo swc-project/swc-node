@@ -59,6 +59,9 @@ function compile(
   filename: string,
   options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
 ) {
+  if (filename.endsWith('.d.ts')) {
+    return ''
+  }
   if (options.files && (options.files as string[]).length) {
     if (PLATFORM === 'win32' && (options.files as string[]).every((file) => filename !== join(process.cwd(), file))) {
       return sourcecode
