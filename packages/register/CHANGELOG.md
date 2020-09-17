@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.5.0...@swc-node/register@0.5.1) (2020-09-17)
+
+### Bug Fixes
+
+- **register:** add fastpath to handle .d.ts file ([afe4ca9](https://github.com/Brooooooklyn/swc-node/commit/afe4ca921985ecce907cb752fb674c8278041bc0))
+
 # [0.5.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.4.10...@swc-node/register@0.5.0) (2020-09-16)
 
 ### Features
