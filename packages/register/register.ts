@@ -8,7 +8,7 @@ import * as ts from 'typescript'
 
 import { readDefaultTsConfig } from './read-default-tsconfig'
 
-const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx', '.d.ts']
+const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
 const PLATFORM = platform()
 
 function toTsTarget(target: ts.ScriptTarget) {
