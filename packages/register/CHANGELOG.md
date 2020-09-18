@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.5.1...@swc-node/register@0.5.2) (2020-09-18)
+
+### Bug Fixes
+
+- **register:** remove .d.ts from extensions ([62b6a69](https://github.com/Brooooooklyn/swc-node/commit/62b6a69704d9a2f908489728bfbd41b24672612e))
+
 ## [0.5.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@0.5.0...@swc-node/register@0.5.1) (2020-09-17)
 
 ### Bug Fixes
