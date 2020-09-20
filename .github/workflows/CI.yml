@@ -1,6 +1,4 @@
 name: CI
-env:
-  DEBUG: 'napi:*'
 
 on:
   push:
@@ -8,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  test:
     if: "!contains(github.event.head_commit.message, 'skip ci')"
 
     strategy:
@@ -27,46 +25,6 @@ jobs:
         with:
           node-version: 12
 
-      - name: Set platform name
-        run: |
-          export NODE_PLATFORM_NAME=$(node -e "console.log(require('os').platform())")
-          echo "::set-env name=PLATFORM_NAME::$NODE_PLATFORM_NAME"
-        shell: bash
-
-      - name: Install llvm
-        if: matrix.os == 'windows-latest'
-        run: choco install -y llvm
-
-      - name: Set llvm path
-        if: matrix.os == 'windows-latest'
-        uses: allenevans/set-env@v1.0.0
-        with:
-          LIBCLANG_PATH: 'C:\\Program Files\\LLVM\\bin'
-
-      - name: Install
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          profile: minimal
-          override: true
-
-      - name: Generate Cargo.lock
-        uses: actions-rs/cargo@v1
-        with:
-          command: generate-lockfile
-
-      - name: Cache cargo registry
-        uses: actions/cache@v1
-        with:
-          path: ~/.cargo/registry
-          key: stable-${{ matrix.os }}-node@12-cargo-registry-trimmed-${{ hashFiles('**/Cargo.lock') }}
-
-      - name: Cache cargo index
-        uses: actions/cache@v1
-        with:
-          path: ~/.cargo/git
-          key: stable-${{ matrix.os }}gnu-node@12-cargo-index-trimmed-${{ hashFiles('**/Cargo.lock') }}
-
       - name: Cache NPM dependencies
         uses: actions/cache@v1
         with:
@@ -78,153 +36,15 @@ jobs:
       - name: 'Install dependencies'
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
 
-      - name: 'Build'
-        if: matrix.os != 'macos-latest'
-        run: |
-          cargo build --release
-          yarn build
-
-      - name: 'Build'
-        if: matrix.os == 'macos-latest'
-        run: |
-          cargo build --release
-          yarn build
-        env:
-          MACOSX_DEPLOYMENT_TARGET: '10.13'
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: bindings-${{ env.PLATFORM_NAME }}
-          path: packages/core/swc.${{ env.PLATFORM_NAME }}.node
-
-      - name: Clear the cargo caches
-        run: |
-          cargo install cargo-cache --no-default-features --features ci-autoclean
-          cargo-cache
-
-  build_musl:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
-    name: stable - linux-musl - node@12
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Login to registry
-        run: |
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY_URL
-        env:
-          DOCKER_REGISTRY_URL: docker.pkg.github.com
-          DOCKER_USERNAME: ${{ github.actor }}
-          DOCKER_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Pull docker image
-        run: |
-          docker pull docker.pkg.github.com/napi-rs/napi-rs/rust-nodejs-alpine:lts
-          docker tag docker.pkg.github.com/napi-rs/napi-rs/rust-nodejs-alpine:lts builder
-      - name: 'Install dependencies'
-        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
-
-      - name: 'Build'
-        run: |
-          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "cargo build --release"
-          docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs builder sh -c "./node_modules/.bin/napi build --platform --musl --release -c ./packages/core/package.json ./packages/core"
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: bindings-linux-musl
-          path: packages/core/*.node
-
-  test_binding:
-    name: Test bindings on ${{ matrix.os }} - node@${{ matrix.node }}
-    needs:
-      - build
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        node: ['10', '12', '14']
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Set platform name
-        run: |
-          export NODE_PLATFORM_NAME=$(node -e "console.log(require('os').platform())")
-          echo "::set-env name=PLATFORM_NAME::$NODE_PLATFORM_NAME"
-        shell: bash
-
-      # Do not cache node_modules, or yarn workspace links broken
-      - name: 'Install dependencies'
-        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: bindings-${{ env.PLATFORM_NAME }}
-          path: packages/core
-
       - name: Build TypeScript
-        run: yarn build:ts
-
-      - name: List packages
-        run: ls -R packages
-        shell: bash
+        run: yarn build
 
       - name: Test bindings
         run: yarn test
 
-  test_musl_binding:
-    name: Test bindings on alpine - node@${{ matrix.node }}
-    needs:
-      - build_musl
-    strategy:
-      fail-fast: false
-      matrix:
-        node: ['12', '14']
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: bindings-linux-musl
-          path: packages/core
-
-      - name: List packages
-        run: ls -R packages
-        shell: bash
-
-      - name: Cache NPM dependencies
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: npm-cache-linux-musl-node@${{ matrix.node }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            npm-cache-
-
-      - name: 'Install dependencies'
-        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
-
-      - name: Build TypeScript
-        run: yarn build:ts
-
-      - name: Run simple tests
-        run: docker run --rm -v $(pwd)/.cargo:/root/.cargo -v $(pwd):/node-rs -w /node-rs node:${{ matrix.node }}-alpine sh -c "node -r @swc-node/register ./packages/core/simple-tests.ts"
-
   dependabot:
     needs:
-      - test_binding
-      - test_musl_binding
+      - test
     runs-on: ubuntu-latest
     steps:
       - name: auto-merge
@@ -238,8 +58,7 @@ jobs:
     if: "startsWith(github.event.head_commit.message, 'chore(release): publish')"
     runs-on: ubuntu-latest
     needs:
-      - test_binding
-      - test_musl_binding
+      - test
 
     steps:
       - uses: actions/checkout@v2
@@ -254,18 +73,6 @@ jobs:
 
       - name: Build TypeScript
         run: yarn build:ts
-
-      - name: Download all artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
-
-      - name: List packages
-        run: ls -R packages
-        shell: bash
-
-      - name: Move artifacts
-        run: yarn artifacts
 
       - name: Lerna publish
         run: |

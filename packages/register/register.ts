@@ -26,11 +26,10 @@ function toTsTarget(target: ts.ScriptTarget) {
     case ts.ScriptTarget.ES2018:
       return 'es2018'
     case ts.ScriptTarget.ES2019:
-      return 'es2019'
     case ts.ScriptTarget.ES2020:
     case ts.ScriptTarget.ESNext:
     case ts.ScriptTarget.Latest:
-      return 'es2020'
+      return 'es2019'
     case ts.ScriptTarget.JSON:
       return 'es5'
   }

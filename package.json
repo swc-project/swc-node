@@ -29,9 +29,7 @@
   "scripts": {
     "artifacts": "napi artifacts",
     "bench": "node -r @swc-node/register ./bench/index.ts",
-    "build": "napi build --release --platform -c ./packages/core/package.json ./packages/core",
-    "build:debug": "napi build --platform -c ./packages/core/package.json ./packages/core",
-    "build:ts": "tsc -b tsconfig.project.json",
+    "build": "tsc -b tsconfig.project.json",
     "format": "run-p format:md format:json format:source format:yml",
     "format:json": "prettier --parser json --write '**/*.json'",
     "format:md": "prettier --parser markdown --write './*.md' './packages/**/*.md'",
@@ -47,7 +45,6 @@
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.6",
-    "@swc/core": "^1.2.28",
     "@types/babel__core": "^7.1.9",
     "@types/benchmark": "^1.0.33",
     "@types/lodash": "^4.14.161",
