@@ -1,9 +1,7 @@
-import { join } from 'path'
-
-import { loadBinding } from '@node-rs/helper'
+import { transform as swcTransform, transformSync as swcTransformSync, Options as SwcOptions } from '@swc/core'
 
 export interface Options {
-  target?: 'es3' | 'es5' | 'es2015' | 'es2016' | 'es2017' | 'es2018' | 'es2019' | 'es2020'
+  target?: 'es3' | 'es5' | 'es2015' | 'es2016' | 'es2017' | 'es2018' | 'es2019'
   module?: 'commonjs' | 'umd' | 'amd' | 'es6'
   sourcemap?: boolean | 'inline'
   jsx?: boolean
@@ -13,17 +11,15 @@ export interface Options {
   esModuleInterop?: boolean
 }
 
-const bindings = loadBinding(join(require.resolve('@swc-node/core'), '..', '..'), 'swc', '@swc-node/core')
-
-function transformOption(path: string, options?: Options) {
+function transformOption(path: string, options?: Options, jest = false): SwcOptions {
   const opts = options == null ? {} : options
   opts.esModuleInterop = opts.esModuleInterop ?? true
-  return JSON.stringify({
+  return {
     filename: path,
     jsc: {
       target: opts.target ?? 'es2018',
       parser: {
-        syntax: 'typescript',
+        syntax: 'typescript' as const,
         tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
         decorators: Boolean(opts.experimentalDecorators),
         dynamicImport: Boolean(opts.dynamicImport),
@@ -31,28 +27,30 @@ function transformOption(path: string, options?: Options) {
       transform: {
         legacyDecorator: Boolean(opts.experimentalDecorators),
         decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
+        hidden: {
+          jest,
+        },
       },
     },
+    minify: false,
     isModule: true,
     module: {
-      type: opts.module ?? 'commonjs',
+      type: 'commonjs',
       noInterop: !opts.esModuleInterop,
     },
     sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     swcrc: false,
-  })
+  }
 }
 
 export function transformSync(source: string, path: string, options?: Options) {
-  return bindings.transformSync(source, path, transformOption(path, options))
+  return swcTransformSync(source, transformOption(path, options))
 }
 
 export function transformJest(source: string, path: string, options?: Options) {
-  return bindings.transformJest(source, path, transformOption(path, options))
+  return swcTransformSync(source, transformOption(path, options, true))
 }
 
 export function transform(source: string, path: string, options?: Options) {
-  return bindings.transform(source, path, transformOption(path, options))
+  return swcTransform(source, transformOption(path, options))
 }
-
-export const SWC_VERSION = '4d5a0da'

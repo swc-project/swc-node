@@ -26,10 +26,6 @@
   "files": ["lib"],
   "os": ["darwin", "linux", "win32"],
   "cpu": ["x64"],
-  "napi": {
-    "name": "swc",
-    "musl": ["linux"]
-  },
   "engines": {
     "node": ">= 8.9"
   },
@@ -49,6 +45,6 @@
     "version": "napi version"
   },
   "dependencies": {
-    "@node-rs/helper": "^0.4.0"
+    "@swc/core": "^1.2.30"
   }
 }
