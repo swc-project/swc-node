@@ -27,7 +27,6 @@
     "node": ">= 8.9"
   },
   "scripts": {
-    "artifacts": "napi artifacts",
     "bench": "node -r @swc-node/register ./bench/index.ts",
     "build": "tsc -b tsconfig.project.json",
     "format": "run-p format:md format:json format:source format:yml",
