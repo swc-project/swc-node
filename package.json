@@ -45,7 +45,7 @@
     "@babel/preset-typescript": "^7.10.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@octokit/rest": "^18.0.6",
-    "@types/babel__core": "^7.1.9",
+    "@types/babel__core": "^7.1.10",
     "@types/benchmark": "^1.0.33",
     "@types/lodash": "^4.14.161",
     "@types/sinon": "^9.0.5",
