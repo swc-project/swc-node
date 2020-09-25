@@ -40,10 +40,6 @@
   "bugs": {
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
-  "scripts": {
-    "prepublishOnly": "napi prepublish",
-    "version": "napi version"
-  },
   "dependencies": {
     "@swc/core": "^1.2.34"
   }
