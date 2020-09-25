@@ -45,6 +45,6 @@
     "version": "napi version"
   },
   "dependencies": {
-    "@swc/core": "^1.2.33"
+    "@swc/core": "^1.2.34"
   }
 }
