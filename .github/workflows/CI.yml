@@ -72,7 +72,9 @@ jobs:
         run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
 
       - name: Build TypeScript
-        run: yarn build:ts
+        run: |
+          yarn build
+          rm ./packages/*/lib/tsconfig.project.tsbuildinfo
 
       - name: Lerna publish
         run: |
