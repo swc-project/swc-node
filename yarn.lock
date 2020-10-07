@@ -1848,31 +1848,31 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
-"@swc/core-darwin@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@swc/core-darwin/-/core-darwin-1.2.35.tgz#c1475186e7135258e5c712523f4e355f5efa4bc8"
-  integrity sha512-RD4kGhZLj6P7gi1GX61Vnz0+X/xiRh058qUbiuiqCQIu1Vw0tWd3+x+8bs/Fifmy9Yus3Fx1Gn/CymuMwWZUEQ==
+"@swc/core-darwin@^1.2.36":
+  version "1.2.36"
+  resolved "https://registry.yarnpkg.com/@swc/core-darwin/-/core-darwin-1.2.36.tgz#8715c7ca6ec352424ae1fc3ad1bff19f1f03a97e"
+  integrity sha512-2BvqKmdkPwS41QTZ0bkj2emdY8xsscMaUY3CtllQJOhY0oIw6kycNNfreAumVUU93eAXdympBj7yBTNkRil0gQ==
 
-"@swc/core-linux@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@swc/core-linux/-/core-linux-1.2.35.tgz#2b134f3347892435a91eba998c183161a77a3f8e"
-  integrity sha512-njJVfcFaUjeszC9Us53ovPVbjn7MXenIFzZVls1jnpqsBnbv9HUOsAeFNDfK1YTkeJ+ivyNW3d5Es0rbgseAng==
+"@swc/core-linux@^1.2.36":
+  version "1.2.36"
+  resolved "https://registry.yarnpkg.com/@swc/core-linux/-/core-linux-1.2.36.tgz#cac9db6ab811be9e5deca0fb55bc2125dbc14842"
+  integrity sha512-xUnn1rj7QYypaol5pjGgiGBHi/YsV55OpGLQDDM5FMxjwY6QLw9zJAHFprZpMbjOIKplKOujUyOwbpkhPzUdzA==
 
-"@swc/core-win32@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@swc/core-win32/-/core-win32-1.2.35.tgz#6cfd43bfc1256f9ec95eeac7fa3e416c2ae30c40"
-  integrity sha512-YCvs57x+8DHaDUdBxYkuw8qUEoBGWYcPtdHRK8RrsUZCwCjAnLWWy07T7bShjCAPX8NNszk7XIaywbJ77Sr9gg==
+"@swc/core-win32@^1.2.36":
+  version "1.2.36"
+  resolved "https://registry.yarnpkg.com/@swc/core-win32/-/core-win32-1.2.36.tgz#13fb85ae579a3d0d73defe11239cb566110315c9"
+  integrity sha512-O3HJ+Gd1RRsjdTPsvrjLw/ZTRo5N/V4u9+UFNgU9A5jUnhmAuyoUGSa+AHOOGQfSmLkrE6WF3+iz4apAYmnIOw==
 
-"@swc/core@^1.2.35":
-  version "1.2.35"
-  resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.2.35.tgz#cadbcc033dd31ddb18cbe5255cb5cbae476c67cd"
-  integrity sha512-HOpw8orJh0kDgaLkT/7s1nA047dSB0Xxu80uaQHio2NeWdUi6L1hauFI9zI1diX5v/dx4j0x/lccO++blcIh1w==
+"@swc/core@^1.2.36":
+  version "1.2.36"
+  resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.2.36.tgz#ce32c6553438e1980113d66f7d7a7b52b2a810b6"
+  integrity sha512-hi/LRHkTS3ICjhm1sl2/AM3hv8OClqdp9jFZt/sKAxVgj61xS9kD9uYiDE0MKZiwMlcTNE5bH8kY1XhqCL25rg==
   dependencies:
     "@node-rs/helper" "^0.4.0"
   optionalDependencies:
-    "@swc/core-darwin" "^1.2.35"
-    "@swc/core-linux" "^1.2.35"
-    "@swc/core-win32" "^1.2.35"
+    "@swc/core-darwin" "^1.2.36"
+    "@swc/core-linux" "^1.2.36"
+    "@swc/core-win32" "^1.2.36"
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
