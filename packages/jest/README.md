@@ -27,7 +27,10 @@ module.exports = {
       // configuration
       {
         dynamicImport: true,
-      }
+        react: {
+          pragma: 'h',
+        },
+      },
     ],
   },
 }

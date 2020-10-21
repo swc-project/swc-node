@@ -1,4 +1,9 @@
-import { transform as swcTransform, transformSync as swcTransformSync, Options as SwcOptions } from '@swc/core'
+import {
+  transform as swcTransform,
+  transformSync as swcTransformSync,
+  Options as SwcOptions,
+  ReactConfig,
+} from '@swc/core'
 
 export interface Options {
   target?: 'es3' | 'es5' | 'es2015' | 'es2016' | 'es2017' | 'es2018' | 'es2019'
@@ -9,6 +14,7 @@ export interface Options {
   emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
   esModuleInterop?: boolean
+  react?: Partial<ReactConfig>
 }
 
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
@@ -27,6 +33,8 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
       transform: {
         legacyDecorator: Boolean(opts.experimentalDecorators),
         decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
+        // @ts-expect-error
+        react: options?.react,
         hidden: {
           jest,
         },
