@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.0.0...@swc-node/core@1.1.0) (2020-10-21)
+
+### Features
+
+- **core:** support react config in transformOptions ([313e021](https://github.com/Brooooooklyn/swc-node/commit/313e02128f833b09f4bf6dd9200b82819cb734cc))
+
 ## [0.7.6](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@0.7.4...@swc-node/core@0.7.6) (2020-09-16)
 
 ### Bug Fixes
