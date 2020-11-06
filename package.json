@@ -45,7 +45,7 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/babel__core": "^7.1.12",
     "@types/benchmark": "^2.1.0",
-    "@types/lodash": "^4.14.164",
+    "@types/lodash": "^4.14.165",
     "@types/sinon": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.6.1",
