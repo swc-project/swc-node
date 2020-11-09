@@ -41,6 +41,6 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "dependencies": {
-    "@swc/core": "^1.2.37"
+    "@swc/core": "^1.2.38"
   }
 }
