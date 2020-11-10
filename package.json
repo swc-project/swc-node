@@ -48,7 +48,7 @@
     "@types/lodash": "^4.14.165",
     "@types/sinon": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
-    "@typescript-eslint/parser": "^4.6.1",
+    "@typescript-eslint/parser": "^4.7.0",
     "ava": "^3.13.0",
     "benchmark": "^2.1.4",
     "chalk": "^4.1.0",
