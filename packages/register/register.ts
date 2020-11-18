@@ -1,5 +1,5 @@
 import { platform } from 'os'
-import { join } from 'path'
+import { resolve } from 'path'
 
 import { transformSync } from '@swc-node/core'
 import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
@@ -62,7 +62,10 @@ function compile(
     return ''
   }
   if (options.files && (options.files as string[]).length) {
-    if (PLATFORM === 'win32' && (options.files as string[]).every((file) => filename !== join(process.cwd(), file))) {
+    if (
+      PLATFORM === 'win32' &&
+      (options.files as string[]).every((file) => filename !== resolve(process.cwd(), file))
+    ) {
       return sourcecode
     }
     if (PLATFORM !== 'win32' && (options.files as string[]).every((file) => !filename.endsWith(file))) {
