@@ -3648,10 +3648,10 @@ es6-promisify@^5.0.0:
   dependencies:
     es6-promise "^4.0.3"
 
-esbuild@^0.8.11:
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.11.tgz#45b0066433463bb16e1bfef1cb7b2f8822de32fc"
-  integrity sha512-PTBeZ71qh7/Dm/57Sd10VG9TMKQAUbM9W6WD59ZYV62dDA/2a1xybzWqR3X7zbtxyqtFfY1PhYtg85QV0mrXNg==
+esbuild@^0.8.13:
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.13.tgz#f56a579b5a21203cbdd3f22ab82d948844f8020d"
+  integrity sha512-2coHQuLEBa87GMgCo8uvBselsd3+QEy7lbOdS6nj6aESu8P01kH3sZPjPktDAXWZToU4eyz4jDGBGOui2IXvnA==
 
 escalade@^3.0.2:
   version "3.1.0"
