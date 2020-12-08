@@ -49,7 +49,7 @@
     "@types/sinon": "^9.0.9",
     "@typescript-eslint/eslint-plugin": "^4.9.0",
     "@typescript-eslint/parser": "^4.9.0",
-    "ava": "^3.13.0",
+    "ava": "^3.14.0",
     "benchmark": "^2.1.4",
     "chalk": "^4.1.0",
     "esbuild": "^0.8.20",
