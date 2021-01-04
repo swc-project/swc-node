@@ -27,7 +27,7 @@ const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
 async function run() {
   const service = await startService()
   let defer: () => void
-  const task = new Promise((resolve) => {
+  const task = new Promise<void>((resolve) => {
     defer = resolve
   })
 
@@ -106,7 +106,7 @@ async function run() {
 async function runAsync(parallel = 1, suite = asyncSuite) {
   const service = await startService()
   let defer: () => void
-  const task = new Promise((resolve) => {
+  const task = new Promise<void>((resolve) => {
     defer = resolve
   })
   suite
