@@ -91,7 +91,7 @@ function compile(
       react: (options.jsxFactory || options.jsxFragmentFactory) ? {
         pragma: options.jsxFactory,
         pragmaFrag: options.jsxFragmentFactory
-      } : false,
+      } : undefined,
       experimentalDecorators: options.experimentalDecorators ?? false,
       emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
       dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
