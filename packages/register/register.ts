@@ -88,6 +88,10 @@ function compile(
       module: toModule(options.module ?? ts.ModuleKind.ES2015),
       sourcemap: options.sourceMap !== false,
       jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx),
+      react: (options.jsxFactory || options.jsxFragmentFactory) ? {
+        pragma: options.jsxFactory,
+        pragmaFrag: options.jsxFragmentFactory
+      } : undefined,
       experimentalDecorators: options.experimentalDecorators ?? false,
       emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
       dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
