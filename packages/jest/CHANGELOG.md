@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@1.0.3...@swc-node/jest@1.1.0) (2021-01-25)
+
+### Features
+
+- **jest:** cache transpile result to avoid source code to be compiled mult times ([77cc3d8](https://github.com/Brooooooklyn/node-swc/commit/77cc3d8ea82728b9b486e1b5fd898f82180c3f37))
+
 ## [1.0.3](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@1.0.2...@swc-node/jest@1.0.3) (2021-01-04)
 
 **Note:** Version bump only for package @swc-node/jest

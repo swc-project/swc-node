@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.0.3...@swc-node/register@1.0.4) (2021-01-25)
+
+### Bug Fixes
+
+- adhere to ReactConfig type ([8d44f6a](https://github.com/Brooooooklyn/swc-node/commit/8d44f6ad067a833dfc461f5eb8a2c5491d968810))
+- support custom jsx pragma ([3b98312](https://github.com/Brooooooklyn/swc-node/commit/3b983121fecd666eef0ae6ff8c4f1df19563fca8))
+
 ## [1.0.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.0.2...@swc-node/register@1.0.3) (2021-01-04)
 
 **Note:** Version bump only for package @swc-node/register
