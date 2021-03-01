@@ -38,7 +38,7 @@
     "test": "ava"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.1",
+    "@babel/core": "^7.13.8",
     "@babel/plugin-transform-typescript": "^7.12.17",
     "@babel/preset-env": "^7.13.5",
     "@babel/preset-typescript": "^7.13.0",
