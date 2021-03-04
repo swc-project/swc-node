@@ -14,6 +14,7 @@ export interface Options {
   emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
   esModuleInterop?: boolean
+  keepClassNames?: boolean
   react?: Partial<ReactConfig>
 }
 
@@ -39,6 +40,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
           jest,
         },
       },
+      keepClassNames: opts.keepClassNames,
     },
     minify: false,
     isModule: true,

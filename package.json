@@ -18,11 +18,17 @@
     "tsc"
   ],
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": "git@github.com:Brooooooklyn/swc-register.git",
   "author": "LongYinan <lynweklm@gmail.com>",
   "license": "MIT",
-  "os": ["darwin", "linux", "win32"],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "engines": {
     "node": ">= 8.9"
   },
@@ -35,17 +41,19 @@
     "format:source": "prettier --config ./package.json './packages/**/*.{ts,tsx,js}' --write",
     "format:yml": "prettier --parser yaml --write './*.{yml,yaml}'",
     "lint": "eslint -c ./.eslintrc.yml 'packages/**/*.{js,ts,tsx}'",
-    "test": "ava"
+    "test": "ava",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",
-    "@babel/plugin-transform-typescript": "^7.12.17",
+    "@babel/plugin-transform-typescript": "^7.13.0",
     "@babel/preset-env": "^7.13.9",
     "@babel/preset-typescript": "^7.13.0",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@types/babel__core": "^7.1.12",
     "@types/benchmark": "^2.1.0",
     "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.31",
     "@types/sinon": "^9.0.10",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "@typescript-eslint/parser": "^4.16.1",
@@ -68,10 +76,18 @@
     "typescript": "^4.2.2"
   },
   "lint-staged": {
-    "*.@(js|ts|tsx)": ["prettier --write"],
-    "*.@(yml|yaml)": ["prettier --parser yaml --write"],
-    "*.md": ["prettier --parser markdown --write"],
-    "*.json": ["prettier --parser json --write"]
+    "*.@(js|ts|tsx)": [
+      "prettier --write"
+    ],
+    "*.@(yml|yaml)": [
+      "prettier --parser yaml --write"
+    ],
+    "*.md": [
+      "prettier --parser markdown --write"
+    ],
+    "*.json": [
+      "prettier --parser json --write"
+    ]
   },
   "prettier": {
     "printWidth": 120,
@@ -81,24 +97,34 @@
     "arrowParens": "always",
     "parser": "typescript"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "ava": {
-    "extensions": ["ts", "tsx"],
-    "require": ["@swc-node/register"],
-    "files": ["packages/**/*.spec.{ts,tsx}"],
+    "extensions": [
+      "ts",
+      "tsx"
+    ],
+    "require": [
+      "@swc-node/register"
+    ],
+    "files": [
+      "packages/**/*.spec.{ts,tsx}"
+    ],
     "environmentVariables": {
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript",
-    "extension": [".ts"],
-    "include": ["packages/**/*.ts"],
-    "exclude": ["packages/**/*.spec.ts", "**/__tests__/**/*.*", "**/vendors/**/*.*"],
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "packages/**/*.ts"
+    ],
+    "exclude": [
+      "packages/**/*.spec.ts",
+      "**/__tests__/**/*.*",
+      "**/vendors/**/*.*"
+    ],
     "check-coverage": false
   }
 }
