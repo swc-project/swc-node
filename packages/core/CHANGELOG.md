@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.2.0...@swc-node/core@1.3.0) (2021-03-04)
+
+### Features
+
+- **core:** support keepClassNames in Config ([fcbadd5](https://github.com/Brooooooklyn/swc-node/commit/fcbadd59d1752e26f1838d29ba98c2b525dda110))
+
 # [1.2.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.1.2...@swc-node/core@1.2.0) (2021-01-25)
 
 ### Features
