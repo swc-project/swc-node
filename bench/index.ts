@@ -7,13 +7,12 @@ import * as envPreset from '@babel/preset-env'
 // @ts-expect-error
 import * as tsPreset from '@babel/preset-typescript'
 import { transformSync as transformSyncNapi, transform as transformNapi } from '@swc-node/core'
-import { transformSync, transform } from '@swc/core'
 import Benchmark, { Suite } from 'benchmark'
 import chalk from 'chalk'
-import { transformSync as transformSyncEsbuild, startService } from 'esbuild'
+import { transformSync as transformSyncEsbuild, transform as transformEsbuild } from 'esbuild'
 import ts from 'typescript'
 
-const cpuCount = os.cpus().length
+const cpuCount = os.cpus().length - 1
 
 const syncSuite = new Suite('Transform rxjs/AjaxObservable.ts benchmark')
 
@@ -25,7 +24,6 @@ const SOURCE_PATH = require.resolve('rxjs/src/internal/observable/dom/AjaxObserv
 const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
 
 async function run() {
-  const service = await startService()
   let defer: () => void
   const task = new Promise<void>((resolve) => {
     defer = resolve
@@ -37,24 +35,6 @@ async function run() {
         target: 'es2016',
         module: 'commonjs',
         sourcemap: true,
-      })
-    })
-    .add('@swc/core', () => {
-      transformSync(SOURCE_CODE, {
-        filename: SOURCE_PATH,
-        jsc: {
-          target: 'es2016',
-          parser: {
-            syntax: 'typescript',
-          },
-        },
-        minify: false,
-        isModule: true,
-        module: {
-          type: 'commonjs',
-        },
-        sourceMaps: true,
-        swcrc: false,
       })
     })
     .add('esbuild', () => {
@@ -95,7 +75,6 @@ async function run() {
           this.filter('fastest').map((s: Benchmark.Target) => s.name),
         )}`,
       )
-      service.stop()
       defer()
     })
     .run()
@@ -104,7 +83,6 @@ async function run() {
 }
 
 async function runAsync(parallel = 1, suite = asyncSuite) {
-  const service = await startService()
   let defer: () => void
   const task = new Promise<void>((resolve) => {
     defer = resolve
@@ -134,45 +112,11 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
       queued: true,
     })
     .add({
-      name: '@swc/core',
-      fn: (deferred: any) => {
-        Promise.all(
-          Array.from({ length: parallel }).map(() => {
-            return transform(SOURCE_CODE, {
-              filename: SOURCE_PATH,
-              jsc: {
-                target: 'es2016',
-                parser: {
-                  syntax: 'typescript',
-                },
-              },
-              minify: false,
-              isModule: true,
-              module: {
-                type: 'commonjs',
-              },
-              sourceMaps: true,
-              swcrc: false,
-            })
-          }),
-        )
-          .then(() => {
-            deferred.resolve()
-          })
-          .catch((e) => {
-            console.error(e)
-          })
-      },
-      defer: true,
-      async: true,
-      queued: true,
-    })
-    .add({
       name: 'esbuild',
       fn: (deferred: any) => {
         Promise.all(
           Array.from({ length: parallel }).map(() =>
-            service.transform(SOURCE_CODE, {
+            transformEsbuild(SOURCE_CODE, {
               sourcefile: SOURCE_PATH,
               loader: 'ts',
               sourcemap: true,
@@ -202,7 +146,6 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
           this.filter('fastest').map((t: Benchmark.Target) => t.name),
         )}`,
       )
-      service.stop()
       defer()
     })
     .run()
@@ -211,6 +154,5 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
 }
 
 run()
-  .then(() => runAsync())
   .then(() => runAsync(cpuCount, parallelSuite))
   .catch(console.error)
