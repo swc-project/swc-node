@@ -3415,10 +3415,10 @@ es6-error@^4.0.1:
   resolved "https://registry.npmjs.org/es6-error/-/es6-error-4.1.1.tgz#9e3af407459deed47e9a91f9b885a84eb05c561d"
   integrity sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==
 
-esbuild@^0.11.6:
-  version "0.11.6"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.6.tgz#20961309c4cfed00b71027e18806150358d0cbb0"
-  integrity sha512-L+nKW9ftVS/N2CVJMR9YmXHbkm+vHzlNYuo09rzipQhF7dYNvRLfWoEPSDRTl10and4owFBV9rJ2CTFNtLIOiw==
+esbuild@^0.11.8:
+  version "0.11.8"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.8.tgz#dcab565c3a61f2395aba37a78e93d5ab882bd865"
+  integrity sha512-dUZj5etA0e+SChqRMswgUj8TAj5ay7z06/BD32t0pRWgMDh8S/NTW7e7O1jLVIDeAECsRXkIzG2o+jpBwchq7w==
 
 escalade@^3.1.1:
   version "3.1.1"
