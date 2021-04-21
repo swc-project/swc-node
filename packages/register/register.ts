@@ -99,6 +99,7 @@ function compile(
       emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
       dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
       esModuleInterop: options.esModuleInterop ?? false,
+      keepClassNames: true,
     })
     // in case of map is undefined
     if (map) {
