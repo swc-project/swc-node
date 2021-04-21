@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.0.5...@swc-node/register@1.1.0) (2021-04-21)
+
+### Features
+
+- **register:** use keepClassNames: true by default ([5936616](https://github.com/Brooooooklyn/swc-node/commit/59366169c700544bf287b7a68e883efaaad6806b))
+
 ## [1.0.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.0.4...@swc-node/register@1.0.5) (2021-03-04)
 
 **Note:** Version bump only for package @swc-node/register
