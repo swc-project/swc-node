@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@1.1.1...@swc-node/jest@1.2.0) (2021-04-23)
+
+### Features
+
+- **jest:** support jest 27 transformerConfig ([e2a51b2](https://github.com/Brooooooklyn/node-swc/commit/e2a51b2873898dcfc0a1b03a49f48ce70ea70f0a))
+
 ## [1.1.1](https://github.com/Brooooooklyn/node-swc/compare/@swc-node/jest@1.1.0...@swc-node/jest@1.1.1) (2021-03-04)
 
 **Note:** Version bump only for package @swc-node/jest
