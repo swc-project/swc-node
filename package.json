@@ -55,7 +55,7 @@
     "benchmark": "^2.1.4",
     "chalk": "^4.1.1",
     "esbuild": "^0.11.14",
-    "eslint": "^7.24.0",
+    "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
