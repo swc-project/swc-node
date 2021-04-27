@@ -31,6 +31,6 @@
       "@swc-node/*": ["./*/src/index.ts"]
     }
   },
-  "include": ["./packages", "bench"],
+  "include": ["./packages", "bench", "./jest.config.js"],
   "exclude": ["node_modules"]
 }
