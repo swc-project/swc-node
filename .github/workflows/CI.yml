@@ -40,7 +40,9 @@ jobs:
         run: yarn build
 
       - name: Test bindings
-        run: yarn test
+        run: |
+          yarn test
+          yarn test:jest
 
   publish:
     name: Publish
