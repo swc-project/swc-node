@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.3.0...@swc-node/core@1.4.0) (2021-04-28)
+
+### Features
+
+- **core:** expose inline and both config for sourcemap ([780f2bb](https://github.com/Brooooooklyn/swc-node/commit/780f2bb81053af6fc6af865a979059ffff470eac))
+
 # [1.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.2.0...@swc-node/core@1.3.0) (2021-03-04)
 
 ### Features
