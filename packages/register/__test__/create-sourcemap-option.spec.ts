@@ -1,0 +1,20 @@
+import { Config } from '@swc/core'
+import test from 'ava'
+import { CompilerOptions } from 'typescript'
+
+import { createSourcemapOption } from '../register'
+
+const FIXTURES: [CompilerOptions, Config['sourceMaps']][] = [
+  [{ sourceMap: true, inlineSourceMap: true }, 'both'],
+  [{ sourceMap: false, inlineSourceMap: true }, 'inline'],
+  [{ sourceMap: true, inlineSourceMap: false }, true],
+  [{ sourceMap: false, inlineSourceMap: false }, false],
+  [{ inlineSourceMap: true }, 'both'],
+  [{ inlineSourceMap: false }, true],
+]
+
+for (const [config, expect] of FIXTURES) {
+  test(`should create ${expect} from ${JSON.stringify(config)}`, (t) => {
+    t.is(createSourcemapOption(config), expect)
+  })
+}
