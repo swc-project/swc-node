@@ -1,5 +1,7 @@
 # `swc-node`
 
+> 🚀 Help me to become a full-time open-source developer by [sponsoring me on Github](https://github.com/sponsors/Brooooooklyn)
+
 **_Fast `TypeScript/JavaScript` transformer without `node-gyp` and postinstall script_**.
 
 <p>

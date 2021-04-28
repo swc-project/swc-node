@@ -40,5 +40,9 @@
   },
   "dependencies": {
     "@swc/core": "^1.2.54"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Brooooooklyn"
   }
 }

@@ -86,7 +86,7 @@ function compile(
     const { code, map } = transformSync(sourcecode, filename, {
       target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
       module: toModule(options.module ?? ts.ModuleKind.ES2015),
-      sourcemap: options.sourceMap !== false,
+      sourcemap: createSourcemapOption(options),
       jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx),
       react:
         options.jsxFactory || options.jsxFragmentFactory
@@ -114,4 +114,15 @@ export function register(options = readDefaultTsConfig()) {
   addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,
   })
+}
+
+// @internal
+export function createSourcemapOption(options: ts.CompilerOptions) {
+  return options.sourceMap !== false
+    ? options.inlineSourceMap
+      ? 'both'
+      : true
+    : options.inlineSourceMap
+    ? 'inline'
+    : false
 }

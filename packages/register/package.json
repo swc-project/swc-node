@@ -41,5 +41,9 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.5"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Brooooooklyn"
   }
 }
