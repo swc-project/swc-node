@@ -5,11 +5,11 @@ import { CompilerOptions } from 'typescript'
 import { createSourcemapOption } from '../register'
 
 const FIXTURES: [CompilerOptions, Config['sourceMaps']][] = [
-  [{ sourceMap: true, inlineSourceMap: true }, 'both'],
+  [{ sourceMap: true, inlineSourceMap: true }, 'inline'],
   [{ sourceMap: false, inlineSourceMap: true }, 'inline'],
   [{ sourceMap: true, inlineSourceMap: false }, true],
   [{ sourceMap: false, inlineSourceMap: false }, false],
-  [{ inlineSourceMap: true }, 'both'],
+  [{ inlineSourceMap: true }, 'inline'],
   [{ inlineSourceMap: false }, true],
 ]
 
