@@ -120,7 +120,7 @@ export function register(options = readDefaultTsConfig()) {
 export function createSourcemapOption(options: ts.CompilerOptions) {
   return options.sourceMap !== false
     ? options.inlineSourceMap
-      ? 'both'
+      ? 'inline'
       : true
     : options.inlineSourceMap
     ? 'inline'
