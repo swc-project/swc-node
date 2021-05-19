@@ -45,5 +45,13 @@
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/Brooooooklyn"
+  },
+  "exports": {
+    ".": {
+      "node": "./index.js"
+    },
+    "./read-default-tsconfig": {
+      "node": "./lib/read-default-tsconfig.js"
+    }
   }
 }
