@@ -18,7 +18,7 @@
   "homepage": "https://github.com/Brooooooklyn/swc-node",
   "license": "MIT",
   "main": "./index.js",
-  "files": ["lib", "LICENSE"],
+  "files": ["lib", "LICENSE", "index.js"],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
