@@ -1,4 +1,7 @@
 # `@swc-node/core`
+<a href="https://npmcharts.com/compare/@swc-node/core?minimal=true"><img src="https://img.shields.io/npm/dm/@swc-node/core.svg?sanitize=true" alt="Downloads" /></a>
+
+> 🚀 Help me to become a full-time open-source developer by [sponsoring me on Github](https://github.com/sponsors/Brooooooklyn)
 
 ## Benchmark
 
@@ -22,6 +25,45 @@ export interface Options {
   experimentalDecorators?: boolean
   emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
+  esModuleInterop?: boolean
+  keepClassNames?: boolean
+  react?: Partial<ReactConfig>
+}
+
+export interface ReactConfig {
+  /**
+   * Replace the function used when compiling JSX expressions.
+   *
+   * Defaults to `React.createElement`.
+   */
+  pragma: string;
+  /**
+   * Replace the component used when compiling JSX fragments.
+   *
+   * Defaults to `React.Fragment`
+   */
+  pragmaFrag: string;
+  /**
+   * Toggles whether or not to throw an error if a XML namespaced tag name is used. For example:
+   * `<f:image />`
+   *
+   * Though the JSX spec allows this, it is disabled by default since React's
+   * JSX does not currently have support for it.
+   *
+   */
+  throwIfNamespace: boolean;
+  /**
+   * Toggles plugins that aid in development, such as @swc/plugin-transform-react-jsx-self
+   * and @swc/plugin-transform-react-jsx-source.
+   *
+   * Defaults to `false`,
+   *
+   */
+  development: boolean;
+  /**
+   * Use `Object.assign()` instead of `_extends`. Defaults to false.
+   */
+  useBuiltins: boolean;
 }
 
 export function transformSync(

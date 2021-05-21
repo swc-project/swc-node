@@ -1,0 +1,44 @@
+{
+  "name": "@swc-node/loader",
+  "version": "1.0.0",
+  "description": "Webpack loader powered by swc",
+  "keywords": [
+    "swc",
+    "babel",
+    "loader",
+    "ts-loader",
+    "babel-loader",
+    "swc-loader",
+    "napi-rs",
+    "napi",
+    "node-api",
+    "tsc"
+  ],
+  "author": "LongYinan <longyinan.brooklyn@bytedance.com>",
+  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "license": "MIT",
+  "main": "./index.js",
+  "files": ["lib", "LICENSE"],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "dependencies": {
+    "@swc-node/core": "^1.4.0",
+    "@swc-node/register": "^1.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/Brooooooklyn"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5.28.0"
+  }
+}

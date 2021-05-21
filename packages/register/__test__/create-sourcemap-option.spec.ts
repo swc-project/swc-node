@@ -2,7 +2,7 @@ import { Config } from '@swc/core'
 import test from 'ava'
 import { CompilerOptions } from 'typescript'
 
-import { createSourcemapOption } from '../register'
+import { createSourcemapOption } from '../read-default-tsconfig'
 
 const FIXTURES: [CompilerOptions, Config['sourceMaps']][] = [
   [{ sourceMap: true, inlineSourceMap: true }, 'inline'],

@@ -1,5 +1,9 @@
 # `@swc-node/register`
 
+<a href="https://npmcharts.com/compare/@swc-node/register?minimal=true"><img src="https://img.shields.io/npm/dm/@swc-node/register.svg?sanitize=true" alt="Downloads" /></a>
+
+> 🚀 Help me to become a full-time open-source developer by [sponsoring me on Github](https://github.com/sponsors/Brooooooklyn)
+
 ## Usage
 
 ```ts
