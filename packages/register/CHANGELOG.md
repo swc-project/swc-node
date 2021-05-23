@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.0...@swc-node/register@1.3.1) (2021-05-23)
+
+### Bug Fixes
+
+- **register:** exports field in package.json ([bd0459d](https://github.com/Brooooooklyn/swc-node/commit/bd0459da56930bf0334bcb5cc5059edfec9fa99c))
+
 # [1.3.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.2.1...@swc-node/register@1.3.0) (2021-05-21)
 
 ### Features
