@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.5.0...@swc-node/core@1.5.1) (2021-06-07)
+
+### Bug Fixes
+
+- **register:** always enable dynamicImport ([0eb1bf2](https://github.com/Brooooooklyn/swc-node/commit/0eb1bf2e0bce97ca70d72dc13c51c8eac221029d))
+
 # [1.5.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.4.0...@swc-node/core@1.5.0) (2021-05-21)
 
 ### Features
