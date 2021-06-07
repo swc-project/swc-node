@@ -1,7 +1,6 @@
 import { transform } from '@swc-node/core'
 import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from '@swc-node/register/read-default-tsconfig'
 import { CompilerOptions, convertCompilerOptionsFromJson } from 'typescript'
-
 import type { LoaderContext } from 'webpack'
 
 export function loader(

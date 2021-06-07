@@ -7,8 +7,5 @@
   },
   "include": ["."],
   "exclude": ["lib"],
-  "references": [
-    { "path": "../core" },
-    { "path": "../register" }
-  ]
+  "references": [{ "path": "../core" }, { "path": "../register" }]
 }

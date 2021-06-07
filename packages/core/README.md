@@ -1,4 +1,5 @@
 # `@swc-node/core`
+
 <a href="https://npmcharts.com/compare/@swc-node/core?minimal=true"><img src="https://img.shields.io/npm/dm/@swc-node/core.svg?sanitize=true" alt="Downloads" /></a>
 
 > 🚀 Help me to become a full-time open-source developer by [sponsoring me on Github](https://github.com/sponsors/Brooooooklyn)
@@ -36,13 +37,13 @@ export interface ReactConfig {
    *
    * Defaults to `React.createElement`.
    */
-  pragma: string;
+  pragma: string
   /**
    * Replace the component used when compiling JSX fragments.
    *
    * Defaults to `React.Fragment`
    */
-  pragmaFrag: string;
+  pragmaFrag: string
   /**
    * Toggles whether or not to throw an error if a XML namespaced tag name is used. For example:
    * `<f:image />`
@@ -51,7 +52,7 @@ export interface ReactConfig {
    * JSX does not currently have support for it.
    *
    */
-  throwIfNamespace: boolean;
+  throwIfNamespace: boolean
   /**
    * Toggles plugins that aid in development, such as @swc/plugin-transform-react-jsx-self
    * and @swc/plugin-transform-react-jsx-source.
@@ -59,11 +60,11 @@ export interface ReactConfig {
    * Defaults to `false`,
    *
    */
-  development: boolean;
+  development: boolean
   /**
    * Use `Object.assign()` instead of `_extends`. Defaults to false.
    */
-  useBuiltins: boolean;
+  useBuiltins: boolean
 }
 
 export function transformSync(

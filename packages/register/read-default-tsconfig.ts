@@ -1,11 +1,10 @@
 import { existsSync } from 'fs'
 import { join, parse } from 'path'
 
+import type { Options } from '@swc-node/core'
 import chalk from 'chalk'
 import debugFactory from 'debug'
 import * as ts from 'typescript'
-
-import type { Options } from '@swc-node/core'
 
 const debug = debugFactory('@swc-node')
 
@@ -57,6 +56,7 @@ function toTsTarget(target: ts.ScriptTarget) {
       return 'es2018'
     case ts.ScriptTarget.ES2019:
     case ts.ScriptTarget.ES2020:
+    case ts.ScriptTarget.ES2021:
     case ts.ScriptTarget.ESNext:
     case ts.ScriptTarget.Latest:
       return 'es2019'
@@ -110,7 +110,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
         : undefined,
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
-    dynamicImport: options.module ? options.module >= ts.ModuleKind.ES2020 : true,
+    dynamicImport: true,
     esModuleInterop: options.esModuleInterop ?? false,
     keepClassNames: true,
   }
