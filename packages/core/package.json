@@ -39,7 +39,7 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "dependencies": {
-    "@swc/core": "^1.2.59"
+    "@swc/core": "^1.2.60"
   },
   "funding": {
     "type": "github",
