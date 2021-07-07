@@ -46,7 +46,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@types/babel__core": "^7.1.14",
     "@types/benchmark": "^2.1.0",
-    "@types/lodash": "^4.14.170",
+    "@types/lodash": "^4.14.171",
     "@types/node": "^16.0.0",
     "@types/sinon": "^10.0.2",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
