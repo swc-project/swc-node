@@ -44,7 +44,7 @@
     "@babel/plugin-transform-typescript": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
-    "@types/babel__core": "^7.1.14",
+    "@types/babel__core": "^7.1.15",
     "@types/benchmark": "^2.1.0",
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.0.0",
