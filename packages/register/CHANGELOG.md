@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.2...@swc-node/register@1.3.3) (2021-08-01)
+
+### Bug Fixes
+
+- **register:** make typescript a dependency ([#563](https://github.com/Brooooooklyn/swc-node/issues/563)) ([9152f74](https://github.com/Brooooooklyn/swc-node/commit/9152f74c8494a603315a0bcfd6f05e9a691879d2))
+
 ## [1.3.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.1...@swc-node/register@1.3.2) (2021-06-07)
 
 ### Bug Fixes

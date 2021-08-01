@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/loader",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Webpack loader powered by swc",
   "keywords": [
     "swc",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@swc-node/core": "^1.5.1",
-    "@swc-node/register": "^1.3.2"
+    "@swc-node/register": "^1.3.3"
   },
   "repository": {
     "type": "git",
