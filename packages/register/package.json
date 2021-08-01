@@ -37,7 +37,8 @@
     "@swc-node/sourcemap-support": "^0.1.8",
     "chalk": "^4.1.1",
     "debug": "^4.3.2",
-    "pirates": "^4.0.1"
+    "pirates": "^4.0.1",
+    "typescript": "^4.3.5"
   },
   "devDependencies": {
     "@types/debug": "^4.1.7"
