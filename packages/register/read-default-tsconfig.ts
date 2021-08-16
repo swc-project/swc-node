@@ -40,7 +40,7 @@ export function readDefaultTsConfig(
   return compilerOptions
 }
 
-function toTsTarget(target: ts.ScriptTarget) {
+function toTsTarget(target: ts.ScriptTarget): Options['target'] {
   switch (target) {
     case ts.ScriptTarget.ES3:
       return 'es3'
@@ -55,11 +55,13 @@ function toTsTarget(target: ts.ScriptTarget) {
     case ts.ScriptTarget.ES2018:
       return 'es2018'
     case ts.ScriptTarget.ES2019:
+      return 'es2019'
     case ts.ScriptTarget.ES2020:
+      return 'es2020'
     case ts.ScriptTarget.ES2021:
     case ts.ScriptTarget.ESNext:
     case ts.ScriptTarget.Latest:
-      return 'es2019'
+      return 'es2021'
     case ts.ScriptTarget.JSON:
       return 'es5'
   }
