@@ -16,13 +16,16 @@
 | ------------------- | ------ | ------ | ------ | ------ |
 | Windows x64         | ✓      | ✓      | ✓      | ✓      |
 | Windows x32         | ✓      | ✓      | ✓      | ✓      |
+| Windows arm64       | ✓      | ✓      | ✓      | ✓      |
 | macOS x64           | ✓      | ✓      | ✓      | ✓      |
 | macOS arm64         | ✓      | ✓      | ✓      | ✓      |
 | Linux x64 gnu       | ✓      | ✓      | ✓      | ✓      |
 | Linux x64 musl      | ✓      | ✓      | ✓      | ✓      |
 | Linux arm gnueabihf | ✓      | ✓      | ✓      | ✓      |
 | Linux arm64 gnu     | ✓      | ✓      | ✓      | ✓      |
+| Linux arm64 musl    | ✓      | ✓      | ✓      | ✓      |
 | Android arm64       | ✓      | ✓      | ✓      | ✓      |
+| FreeBSD x64         | ✓      | ✓      | ✓      | ✓      |
 
 ## @swc-node/core
 
@@ -52,18 +55,18 @@ Memory: 16 GB
 #### `transformSync`
 
 ```bash
-@swc-node/core x 434 ops/sec ±0.48% (90 runs sampled)
-esbuild x 51.82 ops/sec ±3.89% (66 runs sampled)
-typescript x 23.91 ops/sec ±12.38% (49 runs sampled)
-babel x 22.93 ops/sec ±9.21% (45 runs sampled)
-Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is @swc-node/core
+@swc-node/core x 426 ops/sec ±2.38% (89 runs sampled)
+esbuild x 442 ops/sec ±3.15% (80 runs sampled)
+typescript x 21.83 ops/sec ±9.40% (42 runs sampled)
+babel x 25.37 ops/sec ±10.32% (49 runs sampled)
+Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
 ```
 
 #### `transform` parallel
 
 ```bash
-@swc-node/core x 1,032 ops/sec ±2.68% (72 runs sampled)
-esbuild x 928 ops/sec ±1.48% (78 runs sampled)
+@swc-node/core x 1,046 ops/sec ±4.00% (73 runs sampled)
+esbuild x 930 ops/sec ±1.61% (78 runs sampled)
 Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is @swc-node/core
 ```
 
@@ -111,10 +114,8 @@ Detail: [@swc-node/register](./packages/register)
 ### Install dependencies
 
 - `yarn@1.x` latest
-- `rust@nightly` latest
 
 ### Build and test
 
 - `yarn`
-- `cargo build --release && yarn build`
 - `yarn test`
