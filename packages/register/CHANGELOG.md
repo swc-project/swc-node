@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.3...@swc-node/register@1.3.4) (2021-08-16)
+
+### Bug Fixes
+
+- **register:** outdated ts->swc config ([cff217b](https://github.com/Brooooooklyn/swc-node/commit/cff217b9b45199c580e9ed308f3826b577776bb3))
+
 ## [1.3.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.2...@swc-node/register@1.3.3) (2021-08-01)
 
 ### Bug Fixes
