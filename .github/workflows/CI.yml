@@ -26,7 +26,7 @@ jobs:
           node-version: 14
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: node_modules
           key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('yarn.lock') }}
@@ -43,17 +43,6 @@ jobs:
         run: |
           yarn test
           yarn test:jest
-
-  merge:
-    name: Auto Merge
-    runs-on: ubuntu-latest
-    needs:
-      - test
-    steps:
-      - name: Auto merge
-        uses: ridedott/merge-me-action@v2
-        with:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
   publish:
     name: Publish
