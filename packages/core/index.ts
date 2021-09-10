@@ -12,6 +12,9 @@ export interface Options {
   module?: 'commonjs' | 'umd' | 'amd' | 'es6'
   sourcemap?: Config['sourceMaps']
   jsx?: boolean
+  paths?: {
+    [from: string]: [string]
+  }
   experimentalDecorators?: boolean
   emitDecoratorMetadata?: boolean
   dynamicImport?: boolean
@@ -42,6 +45,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
         },
       },
       keepClassNames: opts.keepClassNames,
+      paths: opts.paths,
     },
     minify: false,
     isModule: true,
