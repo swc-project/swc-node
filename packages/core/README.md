@@ -29,6 +29,9 @@ export interface Options {
   esModuleInterop?: boolean
   keepClassNames?: boolean
   react?: Partial<ReactConfig>
+  paths?: {
+    [from: string]: [string]
+  }
 }
 
 export interface ReactConfig {
