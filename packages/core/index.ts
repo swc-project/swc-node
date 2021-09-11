@@ -18,6 +18,9 @@ export interface Options {
   esModuleInterop?: boolean
   keepClassNames?: boolean
   react?: Partial<ReactConfig>
+  paths?: {
+    [from: string]: [string]
+  }
 }
 
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
@@ -42,6 +45,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
         },
       },
       keepClassNames: opts.keepClassNames,
+      paths: opts.paths,
     },
     minify: false,
     isModule: true,
