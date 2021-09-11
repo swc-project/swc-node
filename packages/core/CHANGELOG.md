@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.5.1...@swc-node/core@1.6.0) (2021-09-11)
+
+### Bug Fixes
+
+- typecheck ([d39561d](https://github.com/Brooooooklyn/swc-node/commit/d39561d3215b5ce2c81f59f51045a1ac7535fe18))
+- **register:** outdated ts->swc config ([cff217b](https://github.com/Brooooooklyn/swc-node/commit/cff217b9b45199c580e9ed308f3826b577776bb3))
+
+### Features
+
+- add typescript path support ([54615b8](https://github.com/Brooooooklyn/swc-node/commit/54615b880d70bc41c547cd13cacc2ebefd0bd82c))
+
 ## [1.5.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.5.0...@swc-node/core@1.5.1) (2021-06-07)
 
 ### Bug Fixes
