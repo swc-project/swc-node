@@ -34,7 +34,7 @@ export function readDefaultTsConfig(
         )
       }
     } catch (e) {
-      console.info(chalk.yellow(`Read ${tsConfigPath} failed: ${e.message}`))
+      console.info(chalk.yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
     }
   }
   return compilerOptions
