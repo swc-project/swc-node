@@ -55,18 +55,28 @@ Memory: 16 GB
 #### `transformSync`
 
 ```bash
-@swc-node/core x 426 ops/sec ±2.38% (89 runs sampled)
-esbuild x 442 ops/sec ±3.15% (80 runs sampled)
-typescript x 21.83 ops/sec ±9.40% (42 runs sampled)
-babel x 25.37 ops/sec ±10.32% (49 runs sampled)
+esbuild x 510 ops/sec ±1.28% (88 runs sampled)
+@swc-node/core x 438 ops/sec ±1.00% (88 runs sampled)
+typescript x 28.83 ops/sec ±10.20% (52 runs sampled)
+babel x 24.21 ops/sec ±10.66% (46 runs sampled)
 Transform rxjs/AjaxObservable.ts benchmark bench suite: Fastest is esbuild
 ```
 
 #### `transform` parallel
 
+`UV_THREADPOOL_SIZE=11 yarn bench`
+
 ```bash
-@swc-node/core x 1,046 ops/sec ±4.00% (73 runs sampled)
-esbuild x 930 ops/sec ±1.61% (78 runs sampled)
+@swc-node/core x 1,253 ops/sec ±0.90% (75 runs sampled)
+esbuild x 914 ops/sec ±1.31% (77 runs sampled)
+Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is @swc-node/core
+```
+
+`yarn bench`
+
+```bash
+@swc-node/core x 1,123 ops/sec ±0.95% (77 runs sampled)
+esbuild x 847 ops/sec ±3.74% (71 runs sampled)
 Transform rxjs/AjaxObservable.ts parallel benchmark bench suite: Fastest is @swc-node/core
 ```
 

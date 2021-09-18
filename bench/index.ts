@@ -30,27 +30,28 @@ async function run() {
   })
 
   syncSuite
-    .add('@swc-node/core', () => {
-      transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {
-        target: 'es2016',
-        module: 'commonjs',
-        sourcemap: true,
-      })
-    })
     .add('esbuild', () => {
       transformSyncEsbuild(SOURCE_CODE, {
         sourcefile: SOURCE_PATH,
         loader: 'ts',
         sourcemap: true,
         minify: false,
+        target: 'es2015',
+      })
+    })
+    .add('@swc-node/core', () => {
+      transformSyncNapi(SOURCE_CODE, SOURCE_PATH, {
+        // SWC target es2016 is es2015 in TypeScript
         target: 'es2016',
+        module: 'commonjs',
+        sourcemap: true,
       })
     })
     .add('typescript', () => {
       ts.transpileModule(SOURCE_CODE, {
         fileName: SOURCE_PATH,
         compilerOptions: {
-          target: ts.ScriptTarget.ES2016,
+          target: ts.ScriptTarget.ES2015,
           module: ts.ModuleKind.CommonJS,
           isolatedModules: true,
           sourceMap: true,
@@ -60,7 +61,10 @@ async function run() {
     .add('babel', () => {
       babel.transform(SOURCE_CODE, {
         filename: SOURCE_PATH,
-        presets: [tsPreset, [envPreset, { targets: { node: 'current' }, modules: 'commonjs' }]],
+        presets: [
+          tsPreset,
+          [envPreset, { useBuiltIns: false, loose: true, targets: 'Chrome > 52', modules: 'commonjs' }],
+        ],
         configFile: false,
         babelrc: false,
         sourceMaps: true,
@@ -121,7 +125,7 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
               loader: 'ts',
               sourcemap: true,
               minify: false,
-              target: 'es2016',
+              target: 'es2015',
             }),
           ),
         )
