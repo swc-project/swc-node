@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.6.0...@swc-node/core@1.7.0) (2021-10-16)
+
+### Features
+
+- **core:** add swc option to pass raw SwcOptions ([dbee70c](https://github.com/Brooooooklyn/swc-node/commit/dbee70c4157ee6c03fe3f2ae7a834195487dfe38))
+
 # [1.6.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.5.1...@swc-node/core@1.6.0) (2021-09-11)
 
 ### Bug Fixes

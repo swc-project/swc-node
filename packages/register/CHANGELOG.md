@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.6](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.5...@swc-node/register@1.3.6) (2021-10-16)
+
+### Bug Fixes
+
+- **register:** basePath arg to ts should be cwd ([e5d4c31](https://github.com/Brooooooklyn/swc-node/commit/e5d4c3118b73bb38d4710daa84befff0e16d8d81))
+
 ## [1.3.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/register@1.3.4...@swc-node/register@1.3.5) (2021-09-11)
 
 **Note:** Version bump only for package @swc-node/register
