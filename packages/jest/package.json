@@ -17,10 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brooooooklyn/node-swc.git"
+    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Brooooooklyn/node-swc/issues"
+    "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "funding": {
     "type": "github",
