@@ -7,6 +7,9 @@ import {
   JscTarget,
 } from '@swc/core'
 
+// Oldest LTS Node.js supported target
+const DEFAULT_ES_TARGET: JscTarget = 'es2018'
+
 export interface Options {
   target?: JscTarget
   module?: 'commonjs' | 'umd' | 'amd' | 'es6'
@@ -21,6 +24,7 @@ export interface Options {
   paths?: {
     [from: string]: [string]
   }
+  swc?: SwcOptions
 }
 
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
@@ -29,7 +33,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
   return {
     filename: path,
     jsc: {
-      target: opts.target ?? 'es2018',
+      target: opts.target ?? DEFAULT_ES_TARGET,
       parser: {
         syntax: 'typescript' as const,
         tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
@@ -55,6 +59,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
     },
     sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
     swcrc: false,
+    ...(options?.swc ?? {}),
   }
 }
 
