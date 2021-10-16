@@ -15,7 +15,7 @@
     "url": "https://github.com/Brooooooklyn/swc-node/issues"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.1",
-    "jest": "^27.0.6"
+    "@types/jest": "^27.0.2",
+    "jest": "^27.2.5"
   }
 }

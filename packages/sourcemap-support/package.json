@@ -18,7 +18,7 @@
     "url": "git+https://github.com/Brooooooklyn/node-swc.git"
   },
   "dependencies": {
-    "source-map-support": "^0.5.19"
+    "source-map-support": "^0.5.20"
   },
   "bugs": {
     "url": "https://github.com/Brooooooklyn/node-swc/issues"
