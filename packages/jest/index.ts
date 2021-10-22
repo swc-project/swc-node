@@ -35,8 +35,9 @@ export = {
       cacheHash.update(src)
       const hash = cacheHash.digest('hex')
       const cacheKey = `${path}-${hash}`
-      if (Cache.has(cacheKey)) {
-        return Cache.get(cacheKey)
+      const maybeCachedEntry = Cache.get(cacheKey)
+      if (maybeCachedEntry !== undefined) {
+        return maybeCachedEntry
       }
       const output = transformJest(src, path, getJestTransformConfig(jestConfig))
       Cache.set(cacheKey, output)
