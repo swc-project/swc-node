@@ -39,6 +39,6 @@
     "url": "https://github.com/sponsors/Brooooooklyn"
   },
   "devDependencies": {
-    "@types/webpack": "^5.28.0"
+    "webpack": "^5.60.0"
   }
 }

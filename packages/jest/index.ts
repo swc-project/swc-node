@@ -1,7 +1,7 @@
 import { createHash } from 'crypto'
 
 import { Options, transformJest } from '@swc-node/core'
-import { Output } from '@swc/core'
+import type { Output } from '@swc/core'
 
 const Cache = new Map<string, Output>()
 

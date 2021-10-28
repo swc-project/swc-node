@@ -15,6 +15,9 @@
   "dependencies": {
     "@swc-node/core": "^1.7.0"
   },
+  "devDependencies": {
+    "@swc/core": "^1.2.104"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Brooooooklyn/swc-node.git"
