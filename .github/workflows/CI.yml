@@ -23,26 +23,26 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
 
       - name: Cache NPM dependencies
         uses: actions/cache@v2
         with:
-          path: node_modules
-          key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            npm-cache-
+          path: ~/.pnpm-store
+          key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: 'Install dependencies'
-        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
+        run: |
+          npm install -g pnpm
+          pnpm install --frozen-lockfile
 
       - name: Build TypeScript
-        run: yarn build
+        run: pnpm build
 
       - name: Test bindings
         run: |
-          yarn test
-          yarn test:jest
+          pnpm test
+          pnpm test:jest
 
   publish:
     name: Publish
@@ -57,14 +57,22 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 14
+          node-version: 16
+
+      - name: Cache NPM dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: 'Install dependencies'
-        run: yarn install --frozen-lockfile --registry https://registry.npmjs.org
+        run: |
+          npm install -g pnpm
+          pnpm install --frozen-lockfile
 
       - name: Build TypeScript
         run: |
-          yarn build
+          pnpm build
           rm ./packages/*/lib/tsconfig.project.tsbuildinfo
 
       - name: Lerna publish

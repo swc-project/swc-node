@@ -1,5 +1,6 @@
 import fs from 'fs'
 import os from 'os'
+import { join } from 'path'
 
 import * as babel from '@babel/core'
 // @ts-expect-error
@@ -20,7 +21,7 @@ const asyncSuite = new Suite('Transform rxjs/AjaxObservable.ts async benchmark')
 
 const parallelSuite = new Suite('Transform rxjs/AjaxObservable.ts parallel benchmark')
 
-const SOURCE_PATH = require.resolve('rxjs/src/internal/observable/dom/AjaxObservable.ts')
+const SOURCE_PATH = join(__dirname, '..', 'node_modules', 'rxjs', 'src', 'internal', 'ajax', 'ajax.ts')
 const SOURCE_CODE = fs.readFileSync(SOURCE_PATH, 'utf-8')
 
 async function run() {
