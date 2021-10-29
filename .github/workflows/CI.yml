@@ -34,7 +34,7 @@ jobs:
       - name: 'Install dependencies'
         run: |
           npm install -g pnpm
-          pnpm install --frozen-lockfile
+          pnpm install
 
       - name: Build TypeScript
         run: pnpm build
@@ -68,7 +68,7 @@ jobs:
       - name: 'Install dependencies'
         run: |
           npm install -g pnpm
-          pnpm install --frozen-lockfile
+          pnpm install
 
       - name: Build TypeScript
         run: |

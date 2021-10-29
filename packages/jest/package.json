@@ -13,10 +13,10 @@
     "access": "public"
   },
   "dependencies": {
+    "@node-rs/xxhash": "^1.0.0",
     "@swc-node/core": "^1.7.1"
   },
   "devDependencies": {
-    "@node-rs/xxhash": "^1.0.0",
     "@swc/core": "^1.2.104"
   },
   "repository": {
