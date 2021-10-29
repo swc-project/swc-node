@@ -22,10 +22,6 @@
   "repository": "git@github.com:Brooooooklyn/swc-register.git",
   "author": "LongYinan <lynweklm@gmail.com>",
   "license": "MIT",
-  "os": ["darwin", "linux", "win32"],
-  "engines": {
-    "node": ">= 8.9"
-  },
   "scripts": {
     "bench": "node -r @swc-node/register ./bench/index.ts",
     "build": "tsc -b tsconfig.project.json",
@@ -44,9 +40,9 @@
     "@babel/plugin-transform-typescript": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-typescript": "^7.15.0",
-    "@swc-node/core": "*",
-    "@swc-node/jest": "*",
-    "@swc-node/register": "*",
+    "@swc-node/core": "^1.7.0",
+    "@swc-node/jest": "^1.3.3",
+    "@swc-node/register": "^1.3.6",
     "@types/babel__core": "^7.1.16",
     "@types/benchmark": "^2.1.1",
     "@types/lodash": "^4.14.176",
