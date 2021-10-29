@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.3...@swc-node/jest@1.3.4) (2021-10-29)
+
+### Performance Improvements
+
+- **jest:** replace sha1 with xxhash for better performance ([8d436dd](https://github.com/Brooooooklyn/swc-node/commit/8d436dd7000b9fee21c278bd294c017216e02b69))
+
 ## [1.3.3](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.2...@swc-node/jest@1.3.3) (2021-10-16)
 
 **Note:** Version bump only for package @swc-node/jest
