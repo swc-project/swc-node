@@ -1,5 +1,4 @@
-import { createHash } from 'crypto'
-
+import { xxh64 } from '@node-rs/xxhash'
 import { Options, transformJest } from '@swc-node/core'
 import type { Output } from '@swc/core'
 
@@ -30,10 +29,7 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
 export = {
   process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27) {
     if (/\.(t|j)sx?$/.test(path)) {
-      // sha1 is fast, and we don't care about security here
-      const cacheHash = createHash('sha1')
-      cacheHash.update(src)
-      const hash = cacheHash.digest('hex')
+      const hash = xxh64(src).toString(16)
       const cacheKey = `${path}-${hash}`
       const maybeCachedEntry = Cache.get(cacheKey)
       if (maybeCachedEntry !== undefined) {

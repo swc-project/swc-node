@@ -91,11 +91,13 @@ importers:
 
   packages/jest:
     specifiers:
+      '@node-rs/xxhash': ^1.0.0
       '@swc-node/core': ^1.7.0
       '@swc/core': ^1.2.104
     dependencies:
       '@swc-node/core': link:../core
     devDependencies:
+      '@node-rs/xxhash': 1.0.0
       '@swc/core': 1.2.104
 
   packages/loader:
@@ -2431,6 +2433,147 @@ packages:
       { integrity: sha512-R5wEmm8nbuQU0YGGmYVjEc0OHtYsuXdpRG+Ut/3wZ9XAvQWyThN08bTh2cBJgoZxHQUPtvRfeQuxcAgLuiBISg== }
     dependencies:
       '@napi-rs/triples': 1.0.3
+
+  /@node-rs/xxhash-android-arm64/1.0.0:
+    resolution:
+      { integrity: sha512-42kUl4BftrywIz5ce8vjRop9/+W+0thwOL8Q0xFvOnlKIrFBprbF0qGTC67p+GJVGIJFU8SD8ykVF0aN7SpGUA== }
+    engines: { node: '>= 12' }
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-darwin-arm64/1.0.0:
+    resolution:
+      { integrity: sha512-MMXib4NbxQ3nIMu7d+jQsvhx/afO3GW5FnCOZYKxRgvwmu/s0emu3/nbDIV4d19gVrZE76o9zbAcgGkbZ5p02g== }
+    engines: { node: '>= 12' }
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-darwin-x64/1.0.0:
+    resolution:
+      { integrity: sha512-aBOj3UwGTnLRfutS/70GkAdZTBtqNputxs9IUXvmHcXApqM750NNTtp/bqUhebKf9Lp9VjiR3Y1T2/YPvTYZjw== }
+    engines: { node: '>= 12' }
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-freebsd-x64/1.0.0:
+    resolution:
+      { integrity: sha512-RucPV0CBFZv4TTac4YhI4XFCPwPKPd8kePzy+YBCY+lt341A09tIIE60GDX0LExpTHKEp/+1375SE/x8QtJj4Q== }
+    engines: { node: '>= 12' }
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm-gnueabihf/1.0.0:
+    resolution:
+      { integrity: sha512-pLTgTyQr1C9HZBoEbAPuNebeylWPGMa+gPilqpstg/aRmHleasPWBjURbX8UMK9iGADeS0OhV/p3XueQ6369MQ== }
+    engines: { node: '>= 12' }
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm64-gnu/1.0.0:
+    resolution:
+      { integrity: sha512-o4UdKnTe0x6n7/3vVpIORF9p7M9R8latdvQ/fjOgCou80peSboC9AZprsqUGPiEZ7YG5+ZphMF4S8+TEZoaLSg== }
+    engines: { node: '>= 12' }
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-arm64-musl/1.0.0:
+    resolution:
+      { integrity: sha512-AjGWZiCkoqaS3SYXdMr9470bVj9QtzZND2amYHWcj6Thi0fl3jiZ1n7gMmzEYuUxSfeNWqWMY5u0G82sbmsi9Q== }
+    engines: { node: '>= 12' }
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-x64-gnu/1.0.0:
+    resolution:
+      { integrity: sha512-zJpQTjDrSz//IZ9YoNOoOEz2XnFIMprn4KKCvyEBkx6r16kAvzzTpynqFOcQvXWSErW4PAf8QkgY4hv+R0S89Q== }
+    engines: { node: '>= 12' }
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-linux-x64-musl/1.0.0:
+    resolution:
+      { integrity: sha512-tJu5ubJ/ljmFaMuQBjSs7z8UHhAh9fK6V9I58wHETjU8Q+8r2IYarwsQ4e4fmochDjz3/R8xm02WMHR7s5I/vw== }
+    engines: { node: '>= 12' }
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-arm64-msvc/1.0.0:
+    resolution:
+      { integrity: sha512-gAPGspa5BIZ/6SQMgCzhSEOfgOgTaNpGf6oFFo+Q05AOkPUwkWS+BOpuYhoopFWUIr23Q7Ej2Ne8MYpQknC3og== }
+    engines: { node: '>= 12' }
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-ia32-msvc/1.0.0:
+    resolution:
+      { integrity: sha512-RHEf9Q5kpjH6f+qH5BQdQmwuBV+VG0kWG5xCcsExJ9D6tn899XSZxRPeJNS8AgJvr+mz1nfJzEx8DR2ZzWP+ZQ== }
+    engines: { node: '>= 12' }
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash-win32-x64-msvc/1.0.0:
+    resolution:
+      { integrity: sha512-xT5Xu5mGfgEGoeNRMuqkyM7KdZEL0H4e4RxF+k/B67U/0K0t5fAs2EVH2qDCG2McgbND85G4BMUzdyaMuEuaSQ== }
+    engines: { node: '>= 12' }
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@node-rs/xxhash/1.0.0:
+    resolution:
+      { integrity: sha512-wVhbJT3QumfE7zlMLAZoAllaUufN5r3ia8vatKaqcG/Bau9SdFmcZpo8IuWDfSX+Jqyh9dViSRpUYChrVUvyFw== }
+    engines: { node: '>= 12' }
+    dependencies:
+      '@node-rs/helper': 1.2.1
+    optionalDependencies:
+      '@node-rs/xxhash-android-arm64': 1.0.0
+      '@node-rs/xxhash-darwin-arm64': 1.0.0
+      '@node-rs/xxhash-darwin-x64': 1.0.0
+      '@node-rs/xxhash-freebsd-x64': 1.0.0
+      '@node-rs/xxhash-linux-arm-gnueabihf': 1.0.0
+      '@node-rs/xxhash-linux-arm64-gnu': 1.0.0
+      '@node-rs/xxhash-linux-arm64-musl': 1.0.0
+      '@node-rs/xxhash-linux-x64-gnu': 1.0.0
+      '@node-rs/xxhash-linux-x64-musl': 1.0.0
+      '@node-rs/xxhash-win32-arm64-msvc': 1.0.0
+      '@node-rs/xxhash-win32-ia32-msvc': 1.0.0
+      '@node-rs/xxhash-win32-x64-msvc': 1.0.0
+    dev: true
 
   /@nodelib/fs.scandir/2.1.5:
     resolution:
