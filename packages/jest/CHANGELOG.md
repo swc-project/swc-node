@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.4...@swc-node/jest@1.3.5) (2021-10-29)
+
+### Bug Fixes
+
+- **jest:** xxhash should be dependency ([5559136](https://github.com/Brooooooklyn/swc-node/commit/555913638c07d17470d80a9944cba9e7a18bd94c))
+
 ## [1.3.4](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.3...@swc-node/jest@1.3.4) (2021-10-29)
 
 ### Performance Improvements
