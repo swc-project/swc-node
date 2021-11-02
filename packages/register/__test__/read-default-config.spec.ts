@@ -21,7 +21,7 @@ test('should RESPECT SWC_NODE_PROJECT env', (t) => {
   process.env.SWC_NODE_PROJECT = configPath
   const defaultOptions = readDefaultTsConfig()
   const { config } = ts.readConfigFile(configPath, ts.sys.readFile)
-  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd())
+  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(configPath))
   t.deepEqual(omit(defaultOptions, 'files'), options)
 })
 
@@ -32,7 +32,7 @@ test('should RESPECT TS_NODE_PROJECT env', (t) => {
   process.env.TS_NODE_PROJECT = configPath
   const defaultOptions = readDefaultTsConfig()
   const { config } = ts.readConfigFile(configPath, ts.sys.readFile)
-  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd())
+  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(configPath))
   t.deepEqual(omit(defaultOptions, 'files'), options)
 })
 
