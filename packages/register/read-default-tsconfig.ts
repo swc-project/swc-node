@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { join } from 'path'
+import { join, dirname } from 'path'
 
 import type { Options } from '@swc-node/core'
 import chalk from 'chalk'
@@ -24,7 +24,7 @@ export function readDefaultTsConfig(
       debug(`Read config file from ${tsConfigPath}`)
       const { config } = ts.readConfigFile(tsConfigPath, ts.sys.readFile)
 
-      const { options, errors, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, process.cwd())
+      const { options, errors, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(tsConfigPath))
       if (!errors.length) {
         compilerOptions = options
         compilerOptions.files = fileNames
