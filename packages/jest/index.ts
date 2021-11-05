@@ -28,7 +28,7 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
 
 export = {
   process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27) {
-    if (/\.(t|j)sx?$/.test(path)) {
+    if (/\.(tsx?|jsx?|mjs)$/.test(path)) {
       const hash = xxh64(src).toString(16)
       const cacheKey = `${path}-${hash}`
       const maybeCachedEntry = Cache.get(cacheKey)
