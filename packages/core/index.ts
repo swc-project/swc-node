@@ -58,6 +58,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
       noInterop: !opts.esModuleInterop,
     },
     sourceMaps: typeof opts.sourcemap === 'undefined' ? true : opts.sourcemap,
+    inlineSourcesContent: true,
     swcrc: false,
     ...(options?.swc ?? {}),
   }
