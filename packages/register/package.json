@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/register",
-  "version": "1.3.8",
+  "version": "1.4.0",
   "description": "SWC node register",
   "keywords": [
     "swc",
