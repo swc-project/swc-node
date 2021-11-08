@@ -33,6 +33,7 @@
     "lint": "eslint -c ./.eslintrc.yml \"packages/**/*.{js,ts,tsx}\"",
     "test": "ava",
     "test:jest": "jest --config jest.config.js",
+    "version": "pnpm install && git add .",
     "postinstall": "husky install"
   },
   "devDependencies": {
