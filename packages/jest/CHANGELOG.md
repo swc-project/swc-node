@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.5...@swc-node/jest@1.4.0) (2021-11-08)
+
+### Features
+
+- accept to transpile files with .mjs extension ([c1df0c8](https://github.com/Brooooooklyn/swc-node/commit/c1df0c827b8f8abaa7c5b04d837884378438385a))
+
 ## [1.3.5](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.4...@swc-node/jest@1.3.5) (2021-10-29)
 
 ### Bug Fixes

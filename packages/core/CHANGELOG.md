@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.7.1...@swc-node/core@1.8.0) (2021-11-08)
+
+### Features
+
+- **core:** enable inlineSourcesContent by default ([c2d1d3f](https://github.com/Brooooooklyn/swc-node/commit/c2d1d3f34e4f3c9b5f974c641075877e02e28ebb))
+
 ## [1.7.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/core@1.7.0...@swc-node/core@1.7.1) (2021-10-29)
 
 **Note:** Version bump only for package @swc-node/core
