@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.4.0...@swc-node/jest@1.4.1) (2021-11-14)
+
+### Bug Fixes
+
+- **jest:** internal cache logic duplicated with jest cache ([43a36b9](https://github.com/Brooooooklyn/swc-node/commit/43a36b9be9aec0295a4a8d549fa189bef095d44f))
+
 # [1.4.0](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.3.5...@swc-node/jest@1.4.0) (2021-11-08)
 
 ### Features
