@@ -2,8 +2,6 @@ import { xxh64 } from '@node-rs/xxhash'
 import { Options, transformJest } from '@swc-node/core'
 import type { Output } from '@swc/core'
 
-const Cache = new Map<string, Output>()
-
 interface JestConfig26 {
   transform: [match: string, transformerPath: string, options: Options][]
 }
@@ -27,18 +25,13 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
 }
 
 export = {
-  process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27) {
+  process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27): Output | string {
     if (/\.(tsx?|jsx?|mjs)$/.test(path)) {
-      const hash = xxh64(src).toString(16)
-      const cacheKey = `${path}-${hash}`
-      const maybeCachedEntry = Cache.get(cacheKey)
-      if (maybeCachedEntry !== undefined) {
-        return maybeCachedEntry
-      }
-      const output = transformJest(src, path, getJestTransformConfig(jestConfig))
-      Cache.set(cacheKey, output)
-      return output
+      return transformJest(src, path, getJestTransformConfig(jestConfig))
     }
     return src
+  },
+  getCacheKey(src: string, _filepath: string, config: Options) {
+    return xxh64(src + JSON.stringify(config)).toString(16)
   },
 }
