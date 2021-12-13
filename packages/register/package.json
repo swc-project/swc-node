@@ -35,14 +35,14 @@
   "dependencies": {
     "@swc-node/core": "^1.8.0",
     "@swc-node/sourcemap-support": "^0.1.10",
-    "chalk": "^4.1.2",
-    "debug": "^4.3.2",
-    "pirates": "^4.0.1",
+    "chalk": "4",
+    "debug": "^4.3.3",
+    "pirates": "^4.0.4",
     "tslib": "^2.3.1",
-    "typescript": "^4.4.4"
+    "typescript": "^4.5.3"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.104",
+    "@swc/core": "^1.2.119",
     "@types/debug": "^4.1.7"
   },
   "funding": {
