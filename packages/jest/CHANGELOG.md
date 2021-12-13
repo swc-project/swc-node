@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.4.1...@swc-node/jest@1.4.2) (2021-12-13)
+
+**Note:** Version bump only for package @swc-node/jest
+
 ## [1.4.1](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/jest@1.4.0...@swc-node/jest@1.4.1) (2021-11-14)
 
 ### Bug Fixes

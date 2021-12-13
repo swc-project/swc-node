@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.11](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/loader@1.1.10...@swc-node/loader@1.1.11) (2021-12-13)
+
+**Note:** Version bump only for package @swc-node/loader
+
 ## [1.1.10](https://github.com/Brooooooklyn/swc-node/compare/@swc-node/loader@1.1.9...@swc-node/loader@1.1.10) (2021-11-08)
 
 **Note:** Version bump only for package @swc-node/loader
