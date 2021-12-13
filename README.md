@@ -123,9 +123,15 @@ Detail: [@swc-node/register](./packages/register)
 
 ### Install dependencies
 
-- `yarn@1.x` latest
+- `pnpm` latest
 
 ### Build and test
 
-- `yarn`
-- `yarn test`
+- `pnpm install`
+- `pnpm test`
+
+## Sponsors
+
+<p align="center">
+  <img src="https://sponsors.lyn.one/sponsors.svg" alt="sponsors" />
+</p>
