@@ -30,6 +30,7 @@ export interface Options {
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
   const opts = options == null ? {} : options
   opts.esModuleInterop = opts.esModuleInterop ?? true
+  const sourceMapDefault = jest ? 'inline' : true
   return {
     filename: path,
     jsc: {
@@ -57,7 +58,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
       type: 'commonjs',
       noInterop: !opts.esModuleInterop,
     },
-    sourceMaps: typeof opts.sourcemap === 'undefined' ? 'inline' : opts.sourcemap,
+    sourceMaps: typeof opts.sourcemap === 'undefined' ? sourceMapDefault : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
     ...(options?.swc ?? {}),
