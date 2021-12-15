@@ -91,7 +91,7 @@ importers:
   packages/jest:
     specifiers:
       '@node-rs/xxhash': ^1.0.1
-      '@swc-node/core': ^1.8.1
+      '@swc-node/core': ^1.8.2
       '@swc/core': ^1.2.119
     dependencies:
       '@node-rs/xxhash': 1.0.1
@@ -101,8 +101,8 @@ importers:
 
   packages/loader:
     specifiers:
-      '@swc-node/core': ^1.8.1
-      '@swc-node/register': ^1.4.1
+      '@swc-node/core': ^1.8.2
+      '@swc-node/register': ^1.4.2
       webpack: ^5.65.0
     dependencies:
       '@swc-node/core': link:../core
@@ -112,7 +112,7 @@ importers:
 
   packages/register:
     specifiers:
-      '@swc-node/core': ^1.8.1
+      '@swc-node/core': ^1.8.2
       '@swc-node/sourcemap-support': ^0.1.11
       '@swc/core': ^1.2.119
       '@types/debug': ^4.1.7
