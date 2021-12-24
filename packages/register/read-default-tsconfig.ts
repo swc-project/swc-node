@@ -77,7 +77,10 @@ function toModule(moduleKind: ts.ModuleKind) {
       return 'amd'
     case ts.ModuleKind.ES2015:
     case ts.ModuleKind.ES2020:
+    case ts.ModuleKind.ES2022:
     case ts.ModuleKind.ESNext:
+    case ts.ModuleKind.Node12:
+    case ts.ModuleKind.NodeNext:
     case ts.ModuleKind.None:
       return 'es6'
     case ts.ModuleKind.System:
