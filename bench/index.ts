@@ -9,7 +9,7 @@ import * as envPreset from '@babel/preset-env'
 import * as tsPreset from '@babel/preset-typescript'
 import { transformSync as transformSyncNapi, transform as transformNapi } from '@swc-node/core'
 import Benchmark, { Suite } from 'benchmark'
-import chalk from 'chalk'
+import { green } from 'colorette'
 import { transformSync as transformSyncEsbuild, transform as transformEsbuild } from 'esbuild'
 import ts from 'typescript'
 
@@ -76,8 +76,10 @@ async function run() {
     })
     .on('complete', function (this: Benchmark.Target & Benchmark.Suite) {
       console.info(
-        `${this.name} bench suite: Fastest is ${chalk.green(
-          this.filter('fastest').map((s: Benchmark.Target) => s.name),
+        `${this.name} bench suite: Fastest is ${green(
+          this.filter('fastest')
+            .map((s: Benchmark.Target) => s.name)
+            .join(''),
         )}`,
       )
       defer()
@@ -147,8 +149,10 @@ async function runAsync(parallel = 1, suite = asyncSuite) {
     })
     .on('complete', function (this: Benchmark.Target & Benchmark.Suite) {
       console.info(
-        `${this.name} bench suite: Fastest is ${chalk.green(
-          this.filter('fastest').map((t: Benchmark.Target) => t.name),
+        `${this.name} bench suite: Fastest is ${green(
+          this.filter('fastest')
+            .map((t: Benchmark.Target) => t.name)
+            .join(''),
         )}`,
       )
       defer()

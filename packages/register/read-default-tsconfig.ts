@@ -2,7 +2,7 @@ import { existsSync } from 'fs'
 import { join, dirname } from 'path'
 
 import type { Options } from '@swc-node/core'
-import chalk from 'chalk'
+import { yellow } from 'colorette'
 import debugFactory from 'debug'
 import * as ts from 'typescript'
 
@@ -30,11 +30,11 @@ export function readDefaultTsConfig(
         compilerOptions.files = fileNames
       } else {
         console.info(
-          chalk.yellow(`Convert compiler options from json failed, ${errors.map((d) => d.messageText).join('\n')}`),
+          yellow(`Convert compiler options from json failed, ${errors.map((d) => d.messageText).join('\n')}`),
         )
       }
     } catch (e) {
-      console.info(chalk.yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
+      console.info(yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
     }
   }
   return compilerOptions
