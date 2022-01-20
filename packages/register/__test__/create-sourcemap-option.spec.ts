@@ -15,6 +15,6 @@ const FIXTURES: [CompilerOptions, Config['sourceMaps']][] = [
 
 for (const [config, expect] of FIXTURES) {
   test(`should create ${expect} from ${JSON.stringify(config)}`, (t) => {
-    t.is(createSourcemapOption(config), expect)
+    t.is(createSourcemapOption(config), expect!)
   })
 }
