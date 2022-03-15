@@ -20,7 +20,13 @@
   "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "index.js",
-  "files": ["index.js", "lib", "README.md", "LICENSE", "*.d.ts"],
+  "files": [
+    "index.js",
+    "lib",
+    "README.md",
+    "LICENSE",
+    "*.d.ts"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
@@ -63,6 +69,11 @@
     "./read-default-tsconfig": {
       "node": "./lib/read-default-tsconfig.js"
     },
-    "./register": "./lib/register.js"
+    "./register": {
+      "require": "./lib/register.js"
+    },
+    "./esm": {
+      "import": "./esm/esm.mjs"
+    }
   }
 }

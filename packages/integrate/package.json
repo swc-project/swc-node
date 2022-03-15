@@ -2,7 +2,11 @@
   "name": "@swc-node/integrate",
   "version": "0.1.1",
   "description": "Integrate testing",
-  "keywords": ["ava", "swc", "ts-node"],
+  "keywords": [
+    "ava",
+    "swc",
+    "ts-node"
+  ],
   "author": "LongYinan <github@lyn.one>",
   "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",

@@ -73,6 +73,8 @@ switch (target) {
   case ts.ScriptTarget.ES2019:
     return 'es2019'
   case ts.ScriptTarget.ES2020:
+  case ts.ScriptTarget.ES2021:
+  case ts.ScriptTarget.ES2022:
   case ts.ScriptTarget.ESNext:
   case ts.ScriptTarget.Latest:
     return 'es2020'

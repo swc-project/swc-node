@@ -7,7 +7,11 @@
   "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "./lib/index.js",
-  "files": ["lib", "jest-preset.js", "LICENSE"],
+  "files": [
+    "lib",
+    "jest-preset.js",
+    "LICENSE"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

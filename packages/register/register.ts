@@ -1,7 +1,7 @@
 import { platform } from 'os'
 import { resolve } from 'path'
 
-import { transformSync } from '@swc-node/core'
+import { transform, transformSync } from '@swc-node/core'
 import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
 import { addHook } from 'pirates'
 import * as ts from 'typescript'
@@ -15,6 +15,34 @@ export function compile(
   sourcecode: string,
   filename: string,
   options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+): string
+
+export function compile(
+  sourcecode: string,
+  filename: string,
+  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  async: false,
+): string
+
+export function compile(
+  sourcecode: string,
+  filename: string,
+  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  async: true,
+): Promise<string>
+
+export function compile(
+  sourcecode: string,
+  filename: string,
+  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  async: boolean,
+): string | Promise<string>
+
+export function compile(
+  sourcecode: string,
+  filename: string,
+  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  async = false,
 ) {
   if (filename.endsWith('.d.ts')) {
     return ''
@@ -40,6 +68,14 @@ export function compile(
       SourcemapMap.set(filename, sourceMapText)
     }
     return outputText
+  } else if (async) {
+    return transform(sourcecode, filename, tsCompilerOptionsToSwcConfig(options, filename)).then(({ code, map }) => {
+      // in case of map is undefined
+      if (map) {
+        SourcemapMap.set(filename, map)
+      }
+      return code
+    })
   } else {
     const swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
     if (process.env.SWCRC === 'true') {
