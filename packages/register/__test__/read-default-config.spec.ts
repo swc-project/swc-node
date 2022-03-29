@@ -2,6 +2,7 @@ import { join, dirname } from 'path'
 
 import test from 'ava'
 import { omit } from 'lodash'
+import sinon from 'sinon'
 import * as ts from 'typescript'
 
 import { readDefaultTsConfig } from '../read-default-tsconfig'
@@ -44,5 +45,35 @@ test('should RESPECT tsconfig path in subdirectory', (t) => {
   const defaultOptions = readDefaultTsConfig()
   const { config } = ts.readConfigFile(configPath, ts.sys.readFile)
   const { options } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(configPath))
+  t.deepEqual(omit(defaultOptions, 'files'), options)
+})
+
+test('should return default compiler options when the tsConfigPath is invalid', (t) => {
+  const configPath = join(__dirname, 'invalid', 'tsconfig.json')
+
+  delete process.env.SWC_NODE_PROJECT
+  delete process.env.TS_NODE_PROJECT
+  process.env.TS_NODE_PROJECT = configPath
+
+  const defaultOptions = readDefaultTsConfig()
+  t.snapshot(defaultOptions)
+})
+
+test('should RESPECT tsconfig path in subdirectory with a relative path', (t) => {
+  const configPath = join('..', '__test__', 'tsconfig.spec.json')
+  const fullConfigPath = join(__dirname, 'tsconfig.spec.json')
+
+  delete process.env.SWC_NODE_PROJECT
+  delete process.env.TS_NODE_PROJECT
+  process.env.TS_NODE_PROJECT = configPath
+
+  sinon.replace(process, 'cwd', () => __dirname)
+
+  const defaultOptions = readDefaultTsConfig()
+
+  sinon.restore()
+
+  const { config } = ts.readConfigFile(fullConfigPath, ts.sys.readFile)
+  const { options } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(fullConfigPath))
   t.deepEqual(omit(defaultOptions, 'files'), options)
 })

@@ -1,5 +1,5 @@
 import { existsSync } from 'fs'
-import { join, dirname } from 'path'
+import { join, dirname, resolve } from 'path'
 
 import type { Options } from '@swc-node/core'
 import { yellow } from 'colorette'
@@ -19,24 +19,31 @@ export function readDefaultTsConfig(
     esModuleInterop: true,
   }
 
-  if (tsConfigPath && existsSync(tsConfigPath)) {
-    try {
-      debug(`Read config file from ${tsConfigPath}`)
-      const { config } = ts.readConfigFile(tsConfigPath, ts.sys.readFile)
-
-      const { options, errors, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(tsConfigPath))
-      if (!errors.length) {
-        compilerOptions = options
-        compilerOptions.files = fileNames
-      } else {
-        console.info(
-          yellow(`Convert compiler options from json failed, ${errors.map((d) => d.messageText).join('\n')}`),
-        )
-      }
-    } catch (e) {
-      console.info(yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
-    }
+  if (!tsConfigPath) {
+    return compilerOptions
   }
+
+  const fullTsConfigPath = resolve(tsConfigPath)
+
+  if (!existsSync(fullTsConfigPath)) {
+    return compilerOptions
+  }
+
+  try {
+    debug(`Read config file from ${fullTsConfigPath}`)
+    const { config } = ts.readConfigFile(fullTsConfigPath, ts.sys.readFile)
+
+    const { options, errors, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(fullTsConfigPath))
+    if (!errors.length) {
+      compilerOptions = options
+      compilerOptions.files = fileNames
+    } else {
+      console.info(yellow(`Convert compiler options from json failed, ${errors.map((d) => d.messageText).join('\n')}`))
+    }
+  } catch (e) {
+    console.info(yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
+  }
+
   return compilerOptions
 }
 
