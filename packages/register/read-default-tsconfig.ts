@@ -125,5 +125,6 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     dynamicImport: true,
     esModuleInterop: options.esModuleInterop ?? false,
     keepClassNames: true,
+    paths: options.paths as Options['paths'],
   }
 }
