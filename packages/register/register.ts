@@ -52,7 +52,7 @@ export function compile(
 
 export function register(options = readDefaultTsConfig()) {
   installSourceMapSupport()
-  addHook((code, filename) => compile(code, filename, options), {
+  return addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,
   })
 }
