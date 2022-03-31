@@ -10,6 +10,15 @@
   <a href="https://github.com/Brooooooklyn/swc-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@swc-node/core.svg?sanitize=true" alt="License" /></a>
 </p>
 
+## Usage
+
+Run TypeScript with node, without compilation or typechecking:
+
+```bash
+npm i -D @swc-node/register
+node -r @swc-node/register script.ts
+```
+
 ## Support matrix
 
 |                     | node10 | node12 | node14 | node16 |
