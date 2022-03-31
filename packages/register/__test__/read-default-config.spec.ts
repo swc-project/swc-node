@@ -56,7 +56,13 @@ test('should return default compiler options when the tsConfigPath is invalid', 
   process.env.TS_NODE_PROJECT = configPath
 
   const defaultOptions = readDefaultTsConfig()
-  t.snapshot(defaultOptions)
+  t.deepEqual(defaultOptions, {
+    target: ts.ScriptTarget.ES2018,
+    module: ts.ModuleKind.CommonJS,
+    moduleResolution: ts.ModuleResolutionKind.NodeJs,
+    sourceMap: true,
+    esModuleInterop: true,
+  })
 })
 
 test('should RESPECT tsconfig path in subdirectory with a relative path', (t) => {
