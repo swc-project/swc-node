@@ -50,9 +50,10 @@ export function compile(
   }
 }
 
-export function register(options = readDefaultTsConfig()) {
+export function register(options = readDefaultTsConfig(), hookOpts = {}) {
   installSourceMapSupport()
   return addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,
+    ...hookOpts,
   })
 }
