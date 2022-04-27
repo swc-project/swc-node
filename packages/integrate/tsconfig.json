@@ -3,9 +3,10 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "./lib"
+    "outDir": "./lib",
+    "jsx": "react-jsx"
   },
-  "references": [{ "path": "../register" }],
   "include": ["."],
+  "files": ["./package.json"],
   "exclude": ["lib"]
 }

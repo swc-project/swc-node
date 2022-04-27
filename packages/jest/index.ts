@@ -1,5 +1,6 @@
 import { xxh64 } from '@node-rs/xxhash'
 import { Options, transformJest } from '@swc-node/core'
+import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from '@swc-node/register/read-default-tsconfig'
 import type { Output } from '@swc/core'
 
 interface JestConfig26 {
@@ -27,7 +28,10 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
 export = {
   process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27): Output | string {
     if (/\.(tsx?|jsx?|mjs)$/.test(path)) {
-      return transformJest(src, path, getJestTransformConfig(jestConfig))
+      return transformJest(src, path, {
+        ...tsCompilerOptionsToSwcConfig(readDefaultTsConfig(), path),
+        ...getJestTransformConfig(jestConfig),
+      })
     }
     return src
   },

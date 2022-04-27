@@ -3,8 +3,8 @@
   "version": "1.4.3",
   "description": "swc preprocessor for jest with source map support",
   "keywords": ["swc", "jest", "ts-jest", "napi", "N-API", "typescript", "node-rs", "napi-rs", "ts-node"],
-  "author": "LongYinan <lynweklm@gmail.com>",
-  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "author": "LongYinan <github@lyn.one>",
+  "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "./lib/index.js",
   "files": ["lib", "jest-preset.js", "LICENSE"],
@@ -13,18 +13,19 @@
     "access": "public"
   },
   "dependencies": {
-    "@node-rs/xxhash": "^1.1.4",
-    "@swc-node/core": "^1.8.2"
+    "@node-rs/xxhash": "^1.2.0",
+    "@swc-node/core": "^1.8.2",
+    "@swc-node/register": "^1.4.2"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.133"
+    "@swc/core": "^1.2.172"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+    "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+    "url": "https://github.com/swc-project/swc-node/issues"
   },
   "funding": {
     "type": "github",

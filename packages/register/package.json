@@ -16,8 +16,8 @@
     "tsc",
     "webpack"
   ],
-  "author": "LongYinan <lynweklm@gmail.com>",
-  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "author": "LongYinan <github@lyn.one>",
+  "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "index.js",
   "files": ["index.js", "lib", "README.md", "LICENSE", "*.d.ts"],
@@ -27,25 +27,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+    "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+    "url": "https://github.com/swc-project/swc-node/issues"
   },
   "dependencies": {
     "@swc-node/core": "^1.8.2",
     "@swc-node/sourcemap-support": "^0.1.11",
     "colorette": "^2.0.16",
-    "debug": "^4.3.3",
-    "pirates": "^4.0.4",
-    "tslib": "^2.3.1",
-    "typescript": "^4.5.4"
+    "debug": "^4.3.4",
+    "pirates": "^4.0.5",
+    "tslib": "^2.4.0",
+    "typescript": "^4.6.3"
   },
   "peerDependencies": {
     "typescript": ">= 4.3"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.133",
+    "@swc/core": "^1.2.172",
     "@types/debug": "^4.1.7"
   },
   "funding": {

@@ -40,4 +40,4 @@ module.exports = {
 }
 ```
 
-[List of all of the available configuration options](https://github.com/Brooooooklyn/swc-node/blob/master/packages/core/index.ts#L6).
+[List of all of the available configuration options](https://github.com/swc-project/swc-node/blob/master/packages/core/index.ts#L6).

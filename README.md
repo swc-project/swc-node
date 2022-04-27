@@ -5,9 +5,9 @@
 **_Fast `TypeScript/JavaScript` transformer without `node-gyp` and postinstall script_**.
 
 <p>
-  <a href="https://github.com/Brooooooklyn/swc-node/actions"><img src="https://github.com/Brooooooklyn/swc-node/workflows/CI/badge.svg" alt="Build Status" /></a>
+  <a href="https://github.com/swc-project/swc-node/actions"><img src="https://github.com/swc-project/swc-node/workflows/CI/badge.svg" alt="Build Status" /></a>
   <a href="https://npmcharts.com/compare/@swc-node/core?minimal=true"><img src="https://img.shields.io/npm/dm/@swc-node/core.svg?sanitize=true" alt="Downloads" /></a>
-  <a href="https://github.com/Brooooooklyn/swc-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@swc-node/core.svg?sanitize=true" alt="License" /></a>
+  <a href="https://github.com/swc-project/swc-node/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@swc-node/core.svg?sanitize=true" alt="License" /></a>
 </p>
 
 ## Usage

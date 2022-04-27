@@ -15,7 +15,7 @@
     "tsc"
   ],
   "author": "LongYinan <longyinan.brooklyn@bytedance.com>",
-  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "./index.js",
   "files": ["lib", "LICENSE", "index.js"],
@@ -29,16 +29,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+    "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+    "url": "https://github.com/swc-project/swc-node/issues"
   },
   "funding": {
     "type": "github",
     "url": "https://github.com/sponsors/Brooooooklyn"
   },
   "devDependencies": {
-    "webpack": "^5.66.0"
+    "webpack": "^5.72.0"
   }
 }
