@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.4.2...@swc-node/register@1.5.0) (2022-04-27)
+
+### Features
+
+- **jest:** read tsconfig for default jest transform options ([8c180e6](https://github.com/swc-project/swc-node/commit/8c180e68abbc66aa68f83b401d985a6c8617baa9))
+- **register:** always resolve full file path for tsconfig and add paths if available ([#646](https://github.com/swc-project/swc-node/issues/646)) ([3062413](https://github.com/swc-project/swc-node/commit/3062413e464a5b5706c5ac4912f43ef7451fe73b))
+- **register:** return addHook result to it can be reverted ([222e205](https://github.com/swc-project/swc-node/commit/222e2056351e3a2ba2a4764537c9410b0112051e)), closes [/github.com/facebook/jest/blob/199f9811ae68b15879cbe18b7ef7ebd61eefcf23/packages/jest-config/src/readConfigFileAndSetRootDir.ts#L83-101](https://github.com//github.com/facebook/jest/blob/199f9811ae68b15879cbe18b7ef7ebd61eefcf23/packages/jest-config/src/readConfigFileAndSetRootDir.ts/issues/L83-101)
+- **register:** support hook options ([4c6dad7](https://github.com/swc-project/swc-node/commit/4c6dad7bfbf4563c44bd25476a6ab5d78cff55dc))
+
 ## [1.4.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.4.1...@swc-node/register@1.4.2) (2021-12-15)
 
 **Note:** Version bump only for package @swc-node/register
