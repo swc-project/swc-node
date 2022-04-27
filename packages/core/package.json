@@ -18,8 +18,8 @@
     "typescript",
     "tsc"
   ],
-  "author": "LongYinan <lynweklm@gmail.com>",
-  "homepage": "https://github.com/Brooooooklyn/swc-node",
+  "author": "LongYinan <github@lyn.one>",
+  "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -33,13 +33,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Brooooooklyn/swc-node.git"
+    "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/Brooooooklyn/swc-node/issues"
+    "url": "https://github.com/swc-project/swc-node/issues"
   },
   "dependencies": {
-    "@swc/core": "^1.2.133"
+    "@swc/core": "^1.2.172"
   },
   "funding": {
     "type": "github",

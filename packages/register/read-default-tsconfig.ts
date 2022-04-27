@@ -66,6 +66,7 @@ function toTsTarget(target: ts.ScriptTarget): Options['target'] {
     case ts.ScriptTarget.ES2020:
       return 'es2020'
     case ts.ScriptTarget.ES2021:
+    case ts.ScriptTarget.ES2022:
     case ts.ScriptTarget.ESNext:
     case ts.ScriptTarget.Latest:
       return 'es2021'
