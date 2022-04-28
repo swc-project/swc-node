@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.0...@swc-node/register@1.5.1) (2022-04-28)
+
+### Bug Fixes
+
+- **register:** move typescript to devDependencies ([c0011ca](https://github.com/swc-project/swc-node/commit/c0011ca0eb535f7eacf184ec116c775121c64905))
+
 # [1.5.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.4.2...@swc-node/register@1.5.0) (2022-04-27)
 
 ### Features

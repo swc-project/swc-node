@@ -100,7 +100,7 @@ importers:
     specifiers:
       '@node-rs/xxhash': ^1.2.0
       '@swc-node/core': ^1.9.0
-      '@swc-node/register': ^1.5.0
+      '@swc-node/register': ^1.5.1
       '@swc/core': ^1.2.172
     dependencies:
       '@node-rs/xxhash': 1.2.0
@@ -112,7 +112,7 @@ importers:
   packages/loader:
     specifiers:
       '@swc-node/core': ^1.9.0
-      '@swc-node/register': ^1.5.0
+      '@swc-node/register': ^1.5.1
       webpack: ^5.72.0
     dependencies:
       '@swc-node/core': link:../core
@@ -138,10 +138,10 @@ importers:
       debug: 4.3.4
       pirates: 4.0.5
       tslib: 2.4.0
-      typescript: 4.6.3
     devDependencies:
       '@swc/core': 1.2.172
       '@types/debug': 4.1.7
+      typescript: 4.6.3
 
   packages/sourcemap-support:
     specifiers:
@@ -8513,6 +8513,7 @@ packages:
     resolution: {integrity: sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /uid-number/0.0.6:
     resolution: {integrity: sha1-DqEOgDXo61uOREnwbaHHMGY7qoE=}

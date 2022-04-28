@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.2.0...@swc-node/loader@1.2.1) (2022-04-28)
+
+**Note:** Version bump only for package @swc-node/loader
+
 # [1.2.0](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.1.12...@swc-node/loader@1.2.0) (2022-04-27)
 
 ### Features
