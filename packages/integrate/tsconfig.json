@@ -4,7 +4,8 @@
     "composite": true,
     "rootDir": ".",
     "outDir": "./lib",
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["node", "jest"]
   },
   "include": ["."],
   "files": ["./package.json"],

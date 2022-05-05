@@ -9,5 +9,6 @@
     { "path": "./packages/jest/tsconfig.project.json" },
     { "path": "./packages/sourcemap-support" },
     { "path": "./packages/loader/tsconfig.project.json" }
-  ]
+  ],
+  "include": []
 }

@@ -25,11 +25,13 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
   return {}
 }
 
+const defaultTsConfig = readDefaultTsConfig()
+
 export = {
   process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27): Output | string {
     if (/\.(tsx?|jsx?|mjs)$/.test(path)) {
       return transformJest(src, path, {
-        ...tsCompilerOptionsToSwcConfig(readDefaultTsConfig(), path),
+        ...tsCompilerOptionsToSwcConfig(defaultTsConfig, path),
         ...getJestTransformConfig(jestConfig),
       })
     }
