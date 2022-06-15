@@ -44,7 +44,7 @@ Detail: [@swc-node/core](./packages/core)
 
 ### Benchmark
 
-> transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.js)
+> transform RxJS `AjaxObservable.ts` to ES2015 & CommonJS `JavaScript`. Benchmark code: [bench](./bench/index.ts)
 
 **Hardware info**:
 
