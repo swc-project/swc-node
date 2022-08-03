@@ -126,6 +126,11 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     dynamicImport: true,
     esModuleInterop: options.esModuleInterop ?? false,
     keepClassNames: true,
-    paths: options.paths as Options['paths'],
+    paths: Object.fromEntries(
+      Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
+        aliasKey,
+        (aliasPaths as string[] ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
+      ]),
+    ) as Options['paths'],
   }
 }
