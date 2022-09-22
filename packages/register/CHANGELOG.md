@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.1...@swc-node/register@1.5.2) (2022-09-22)
+
+### Bug Fixes
+
+- **register:** support paths alias with baseUrl ([2a6848a](https://github.com/swc-project/swc-node/commit/2a6848a00b8931f41b62f6b5a519bdbc548bfec3))
+
 ## [1.5.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.0...@swc-node/register@1.5.1) (2022-04-28)
 
 ### Bug Fixes

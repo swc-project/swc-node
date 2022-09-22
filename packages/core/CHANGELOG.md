@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.9.0...@swc-node/core@1.9.1) (2022-09-22)
+
+### Bug Fixes
+
+- **core:** move @swc/core to peerDependencies ([821542b](https://github.com/swc-project/swc-node/commit/821542bb254c7f840443bc45f0505fa478983496))
+
 # [1.9.0](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.8.2...@swc-node/core@1.9.0) (2022-04-27)
 
 ### Features

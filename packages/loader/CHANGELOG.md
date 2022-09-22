@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.2.1...@swc-node/loader@1.2.2) (2022-09-22)
+
+### Bug Fixes
+
+- **loader:** fix logic when no compilerOptions passed by webpack ([1606f3c](https://github.com/swc-project/swc-node/commit/1606f3cf20e1a5d1d6ea3144b22366a59849822c))
+
 ## [1.2.1](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.2.0...@swc-node/loader@1.2.1) (2022-04-28)
 
 **Note:** Version bump only for package @swc-node/loader
