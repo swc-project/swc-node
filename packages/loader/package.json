@@ -27,6 +27,10 @@
     "@swc-node/core": "^1.9.0",
     "@swc-node/register": "^1.5.1"
   },
+  "peerDependencies": {
+    "typescript": ">= 4.3",
+    "webpack": ">= 5.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/swc-project/swc-node.git"
@@ -39,6 +43,7 @@
     "url": "https://github.com/sponsors/Brooooooklyn"
   },
   "devDependencies": {
-    "webpack": "^5.72.0"
+    "webpack": "^5.74.0",
+    "typescript": "^4.8.3"
   }
 }

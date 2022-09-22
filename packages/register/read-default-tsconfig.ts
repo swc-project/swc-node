@@ -87,7 +87,7 @@ function toModule(moduleKind: ts.ModuleKind) {
     case ts.ModuleKind.ES2020:
     case ts.ModuleKind.ES2022:
     case ts.ModuleKind.ESNext:
-    case ts.ModuleKind.Node12:
+    case ts.ModuleKind.Node16:
     case ts.ModuleKind.NodeNext:
     case ts.ModuleKind.None:
       return 'es6'
@@ -129,7 +129,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     paths: Object.fromEntries(
       Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
         aliasKey,
-        (aliasPaths as string[] ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
+        ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
       ]),
     ) as Options['paths'],
   }

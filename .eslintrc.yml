@@ -40,6 +40,7 @@ rules:
 
   'import/first': 2
   'import/newline-after-import': 2
+  'import/no-extraneous-dependencies': 2
   'import/order':
     [
       2,

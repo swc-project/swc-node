@@ -15,12 +15,13 @@
     "url": "https://github.com/swc-project/swc-node/issues"
   },
   "devDependencies": {
-    "@swc-node/core": "^1.8.2",
-    "@types/jest": "^27.4.1",
-    "@types/react": "^18.0.8",
-    "@types/react-dom": "^18.0.0",
-    "jest": "^28.0.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "@swc-node/core": "^1.9.0",
+    "@types/jest": "^29.0.3",
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
+    "jest": "^29.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sinon": "^14.0.0"
   }
 }

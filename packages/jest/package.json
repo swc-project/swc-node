@@ -13,12 +13,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@node-rs/xxhash": "^1.2.0",
+    "@node-rs/xxhash": "^1.2.1",
     "@swc-node/core": "^1.9.0",
     "@swc-node/register": "^1.5.1"
   },
-  "devDependencies": {
-    "@swc/core": "^1.2.172"
+  "peerDependencies": {
+    "@swc/core": ">= 1.3"
   },
   "repository": {
     "type": "git",

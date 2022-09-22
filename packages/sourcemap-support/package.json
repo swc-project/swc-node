@@ -24,6 +24,6 @@
     "url": "https://github.com/swc-project/swc-node/issues"
   },
   "devDependencies": {
-    "@types/source-map-support": "^0.5.4"
+    "@types/source-map-support": "^0.5.6"
   }
 }
