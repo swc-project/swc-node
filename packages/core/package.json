@@ -38,8 +38,8 @@
   "bugs": {
     "url": "https://github.com/swc-project/swc-node/issues"
   },
-  "dependencies": {
-    "@swc/core": "^1.2.172"
+  "peerDependencies": {
+    "@swc/core": ">= 1.3"
   },
   "funding": {
     "type": "github",
