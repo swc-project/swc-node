@@ -26,14 +26,15 @@ jobs:
           node-version: 16
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: npm-cache-${{ matrix.os }}-node@16
 
       - name: 'Install dependencies'
         run: |
-          npm install -g pnpm
+          npm install -g corepack
+          corepack enable
           pnpm install
 
       - name: Build TypeScript
@@ -60,7 +61,7 @@ jobs:
           node-version: 16
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
           key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('pnpm-lock.yaml') }}
