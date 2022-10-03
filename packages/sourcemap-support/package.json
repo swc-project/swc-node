@@ -18,7 +18,8 @@
     "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "dependencies": {
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "tslib": "^2.4.0"
   },
   "bugs": {
     "url": "https://github.com/swc-project/swc-node/issues"
