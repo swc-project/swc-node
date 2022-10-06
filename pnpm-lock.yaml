@@ -102,7 +102,7 @@ importers:
     specifiers:
       '@node-rs/xxhash': ^1.2.1
       '@swc-node/core': ^1.9.1
-      '@swc-node/register': ^1.5.2
+      '@swc-node/register': ^1.5.3
       '@swc/core': '>= 1.3'
     dependencies:
       '@node-rs/xxhash': 1.2.1
@@ -113,7 +113,7 @@ importers:
   packages/loader:
     specifiers:
       '@swc-node/core': ^1.9.1
-      '@swc-node/register': ^1.5.2
+      '@swc-node/register': ^1.5.3
       typescript: ^4.8.3
       webpack: ^5.74.0
     dependencies:
@@ -126,7 +126,7 @@ importers:
   packages/register:
     specifiers:
       '@swc-node/core': ^1.9.1
-      '@swc-node/sourcemap-support': ^0.2.1
+      '@swc-node/sourcemap-support': ^0.2.2
       '@swc/core': ^1.3.2
       '@types/debug': ^4.1.7
       colorette: ^2.0.19

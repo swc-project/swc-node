@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.2.1...@swc-node/sourcemap-support@0.2.2) (2022-10-06)
+
+### Bug Fixes
+
+- **sourcemap-support:** add "tslib" as a dependnecy for "sourcemap-suport" ([#670](https://github.com/swc-project/swc-node/issues/670)) ([ec9ffeb](https://github.com/swc-project/swc-node/commit/ec9ffeb8691ac6c8d6b08c85f0f6890fc99004e9))
+
 ## [0.2.1](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.2.0...@swc-node/sourcemap-support@0.2.1) (2022-09-22)
 
 **Note:** Version bump only for package @swc-node/sourcemap-support

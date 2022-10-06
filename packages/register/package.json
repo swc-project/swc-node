@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/register",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "SWC node register",
   "keywords": [
     "swc",
@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@swc-node/core": "^1.9.1",
-    "@swc-node/sourcemap-support": "^0.2.1",
+    "@swc-node/sourcemap-support": "^0.2.2",
     "colorette": "^2.0.19",
     "debug": "^4.3.4",
     "pirates": "^4.0.5",

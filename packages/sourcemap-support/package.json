@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/sourcemap-support",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Runtime sourcemap support in NodeJS",
   "keywords": ["swc", "ts-node", "N-API", "NAPI", "napi-rs", "node-rs", "rust", "esbuild", "typescript"],
   "author": "LongYinan <github@lyn.one>",
