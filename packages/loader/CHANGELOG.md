@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.2.3...@swc-node/loader@1.2.4) (2022-10-06)
+
+### Bug Fixes
+
+- **register:** @swc/core should be in peerDependencies ([cb05cae](https://github.com/swc-project/swc-node/commit/cb05cae69dd92d13593c210f8c0044b6aff8ff1c))
+
 ## [1.2.3](https://github.com/swc-project/swc-node/compare/@swc-node/loader@1.2.2...@swc-node/loader@1.2.3) (2022-10-06)
 
 **Note:** Version bump only for package @swc-node/loader

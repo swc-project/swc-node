@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.3...@swc-node/register@1.5.4) (2022-10-06)
+
+### Bug Fixes
+
+- **register:** @swc/core should be in peerDependencies ([cb05cae](https://github.com/swc-project/swc-node/commit/cb05cae69dd92d13593c210f8c0044b6aff8ff1c))
+
 ## [1.5.3](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.2...@swc-node/register@1.5.3) (2022-10-06)
 
 **Note:** Version bump only for package @swc-node/register
