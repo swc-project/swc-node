@@ -35,6 +35,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
     filename: path,
     jsc: {
       target: opts.target ?? DEFAULT_ES_TARGET,
+      externalHelpers: jest ? true : false,
       parser: {
         syntax: 'typescript' as const,
         tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
