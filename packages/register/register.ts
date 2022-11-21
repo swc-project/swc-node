@@ -41,7 +41,14 @@ export function compile(
     }
     return outputText
   } else {
-    const { code, map } = transformSync(sourcecode, filename, tsCompilerOptionsToSwcConfig(options, filename))
+    const swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
+    if (process.env.SWCRC === 'true') {
+      // when SWCRC environment variable is set to true it will use swcrc file
+      swcRegisterConfig.swc = {
+        swcrc: true,
+      }
+    }
+    const { code, map } = transformSync(sourcecode, filename, swcRegisterConfig)
     // in case of map is undefined
     if (map) {
       SourcemapMap.set(filename, map)

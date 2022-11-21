@@ -19,6 +19,11 @@ npm i -D @swc-node/register
 node -r @swc-node/register script.ts
 ```
 
+Set environment variable SWCRC=true when you would like to load .swcrc file
+```bash
+SWCRC=true node -r @swc-node/register script.ts
+```
+
 ## Support matrix
 
 |                     | node10 | node12 | node14 | node16 |
