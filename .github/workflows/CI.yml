@@ -14,7 +14,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
-    name: stable - ${{ matrix.os }} - node@16
+    name: stable - ${{ matrix.os }} - node@18
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -23,13 +23,13 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Cache NPM dependencies
         uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key: npm-cache-${{ matrix.os }}-node@16
+          key: npm-cache-${{ matrix.os }}-node@18
 
       - name: 'Install dependencies'
         run: |
@@ -58,17 +58,18 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Cache NPM dependencies
         uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key: npm-cache-${{ matrix.os }}-node@14-${{ hashFiles('pnpm-lock.yaml') }}
+          key: npm-cache-${{ matrix.os }}-node@18
 
       - name: 'Install dependencies'
         run: |
-          npm install -g pnpm
+          npm install -g corepack
+          corepack enable
           pnpm install
 
       - name: Build TypeScript
