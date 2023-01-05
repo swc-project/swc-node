@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.9.1...@swc-node/core@1.9.2) (2023-01-05)
+
+### Bug Fixes
+
+- **jest:** add externalHelpers:true for jest ([#673](https://github.com/swc-project/swc-node/issues/673)) ([e353c1a](https://github.com/swc-project/swc-node/commit/e353c1a4843671fc7a8f5ccc5727ab260e060565))
+
 ## [1.9.1](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.9.0...@swc-node/core@1.9.1) (2022-09-22)
 
 ### Bug Fixes
