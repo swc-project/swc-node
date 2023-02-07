@@ -1,7 +1,7 @@
 import { xxh64 } from '@node-rs/xxhash'
+import type { Output } from '@swc/core'
 import { Options, transformJest } from '@swc-node/core'
 import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from '@swc-node/register/read-default-tsconfig'
-import type { Output } from '@swc/core'
 
 interface JestConfig26 {
   transform: [match: string, transformerPath: string, options: Options][]

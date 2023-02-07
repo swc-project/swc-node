@@ -132,5 +132,10 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
         ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
       ]),
     ) as Options['paths'],
+    swc: {
+      jsc: {
+        externalHelpers: false,
+      },
+    },
   }
 }
