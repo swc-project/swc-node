@@ -126,7 +126,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     swc: {
       filename,
       jsc: {
-        externalHelpers: false,
+        externalHelpers: Boolean(options.importHelpers),
         parser: {
           syntax: 'typescript',
           tsx: isJsx,
