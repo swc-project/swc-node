@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.7](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.6...@swc-node/register@1.5.7) (2023-02-07)
+
+### Bug Fixes
+
+- **register:** align externalHelpers with tsconfig.importHelpers ([2f3e155](https://github.com/swc-project/swc-node/commit/2f3e155b400605130ada4ef7dc6cfa5dfedd0c0c))
+
 ## [1.5.6](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.5...@swc-node/register@1.5.6) (2023-02-07)
 
 ### Bug Fixes
