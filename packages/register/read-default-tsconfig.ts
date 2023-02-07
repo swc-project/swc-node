@@ -107,20 +107,11 @@ export function createSourcemapOption(options: ts.CompilerOptions) {
 }
 
 export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filename: string): Options {
+  const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   return {
     target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     sourcemap: createSourcemapOption(options),
-    jsx: filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx),
-    react:
-      options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
-        ? {
-            pragma: options.jsxFactory,
-            pragmaFrag: options.jsxFragmentFactory,
-            importSource: options.jsxImportSource,
-            runtime: (options.jsx ?? 0) >= ts.JsxEmit.ReactJSX ? 'automatic' : 'classic',
-          }
-        : undefined,
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     dynamicImport: true,
@@ -133,8 +124,25 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
       ]),
     ) as Options['paths'],
     swc: {
+      filename,
       jsc: {
         externalHelpers: false,
+        parser: {
+          syntax: 'typescript',
+          tsx: isJsx,
+        },
+        transform: {
+          react:
+            options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
+              ? {
+                  pragma: options.jsxFactory,
+                  pragmaFrag: options.jsxFragmentFactory,
+                  importSource: options.jsxImportSource ?? 'react',
+                  runtime: (options.jsx ?? 0) >= ts.JsxEmit.ReactJSX ? 'automatic' : 'classic',
+                  useBuiltins: true,
+                }
+              : undefined,
+        },
       },
     },
   }
