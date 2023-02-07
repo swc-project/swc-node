@@ -81,6 +81,7 @@ importers:
   packages/integrate:
     specifiers:
       '@swc-node/core': ^1.9.2
+      '@swc/helpers': ^0.4.14
       '@types/jest': ^29.4.0
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
@@ -90,6 +91,7 @@ importers:
       sinon: ^15.0.1
     devDependencies:
       '@swc-node/core': link:../core
+      '@swc/helpers': 0.4.14
       '@types/jest': 29.4.0
       '@types/react': 18.0.27
       '@types/react-dom': 18.0.10
@@ -132,6 +134,7 @@ importers:
       '@swc-node/core': ^1.9.2
       '@swc-node/sourcemap-support': ^0.2.4
       '@swc/core': ^1.3.32
+      '@swc/helpers': ^0.4.14
       '@types/debug': ^4.1.7
       colorette: ^2.0.19
       debug: ^4.3.4
@@ -149,6 +152,7 @@ importers:
       tslib: 2.5.0
     devDependencies:
       '@swc/core': 1.3.32
+      '@swc/helpers': 0.4.14
       '@types/debug': 4.1.7
       lodash: 4.17.21
       sinon: 15.0.1
@@ -3398,6 +3402,12 @@ packages:
       '@swc/core-win32-arm64-msvc': 1.3.32
       '@swc/core-win32-ia32-msvc': 1.3.32
       '@swc/core-win32-x64-msvc': 1.3.32
+    dev: true
+
+  /@swc/helpers/0.4.14:
+    resolution: {integrity: sha512-4C7nX/dvpzB7za4Ql9K81xK3HPxCpHMgwTZVyf+9JQ6VUbn9jjZVN7/Nkdz/Ugzs2CSjqnL/UPXroiVBVHUWUw==}
+    dependencies:
+      tslib: 2.5.0
     dev: true
 
   /@swc/wasm/1.2.122:
