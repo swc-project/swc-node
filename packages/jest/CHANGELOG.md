@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/swc-project/swc-node/compare/@swc-node/jest@1.5.9...@swc-node/jest@1.6.0) (2023-02-10)
+
+### Features
+
+- **register:** experimental esm loader ([#643](https://github.com/swc-project/swc-node/issues/643)) ([0b4d305](https://github.com/swc-project/swc-node/commit/0b4d30505408f6f07c1ff8ea5c1953e1d22bb4e1))
+
 ## [1.5.9](https://github.com/swc-project/swc-node/compare/@swc-node/jest@1.5.8...@swc-node/jest@1.5.9) (2023-02-10)
 
 **Note:** Version bump only for package @swc-node/jest

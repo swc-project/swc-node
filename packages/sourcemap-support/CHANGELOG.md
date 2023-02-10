@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.2.4...@swc-node/sourcemap-support@0.3.0) (2023-02-10)
+
+### Features
+
+- **register:** experimental esm loader ([#643](https://github.com/swc-project/swc-node/issues/643)) ([0b4d305](https://github.com/swc-project/swc-node/commit/0b4d30505408f6f07c1ff8ea5c1953e1d22bb4e1))
+
 ## [0.2.4](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.2.3...@swc-node/sourcemap-support@0.2.4) (2023-02-07)
 
 **Note:** Version bump only for package @swc-node/sourcemap-support
