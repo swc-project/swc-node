@@ -114,15 +114,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     sourcemap: createSourcemapOption(options),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
-    dynamicImport: true,
     esModuleInterop: options.esModuleInterop ?? false,
-    keepClassNames: true,
-    paths: Object.fromEntries(
-      Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
-        aliasKey,
-        ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
-      ]),
-    ) as Options['paths'],
     swc: {
       filename,
       jsc: {
@@ -130,7 +122,15 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
         parser: {
           syntax: 'typescript',
           tsx: isJsx,
+          dynamicImport: true,
         },
+        paths: Object.fromEntries(
+          Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
+            aliasKey,
+            ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
+          ]),
+        ) as Options['paths'],
+        keepClassNames: true,
         transform: {
           react:
             options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
