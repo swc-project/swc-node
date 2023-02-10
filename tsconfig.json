@@ -29,7 +29,8 @@
     "baseUrl": "./packages",
     "paths": {
       "@swc-node/core": ["@swc-node/core/index.ts"],
-      "@swc-node/register/*": ["./register/*"]
+      "@swc-node/register/*": ["./register/*"],
+      "@integrate/*": ["./integrate/src/*"]
     }
   },
   "include": ["./packages", "bench", "./jest.config.js"],
