@@ -66,10 +66,11 @@ function toTsTarget(target: ts.ScriptTarget): Options['target'] {
     case ts.ScriptTarget.ES2020:
       return 'es2020'
     case ts.ScriptTarget.ES2021:
+      return 'es2021'
     case ts.ScriptTarget.ES2022:
     case ts.ScriptTarget.ESNext:
     case ts.ScriptTarget.Latest:
-      return 'es2021'
+      return 'es2022'
     case ts.ScriptTarget.JSON:
       return 'es5'
   }
@@ -109,7 +110,6 @@ export function createSourcemapOption(options: ts.CompilerOptions) {
 export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filename: string): Options {
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   return {
-    target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     sourcemap: createSourcemapOption(options),
     experimentalDecorators: options.experimentalDecorators ?? false,
@@ -131,6 +131,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
           ]),
         ) as Options['paths'],
         keepClassNames: true,
+        target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
         transform: {
           react:
             options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource

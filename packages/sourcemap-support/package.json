@@ -2,13 +2,27 @@
   "name": "@swc-node/sourcemap-support",
   "version": "0.2.4",
   "description": "Runtime sourcemap support in NodeJS",
-  "keywords": ["swc", "ts-node", "N-API", "NAPI", "napi-rs", "node-rs", "rust", "esbuild", "typescript"],
+  "keywords": [
+    "swc",
+    "ts-node",
+    "N-API",
+    "NAPI",
+    "napi-rs",
+    "node-rs",
+    "rust",
+    "esbuild",
+    "typescript"
+  ],
   "author": "LongYinan <github@lyn.one>",
   "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  "files": ["lib", "README.md", "LICENSE"],
+  "files": [
+    "lib",
+    "README.md",
+    "LICENSE"
+  ],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"

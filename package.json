@@ -18,17 +18,20 @@
     "tsc"
   ],
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": "git@github.com:swc/swc-node.git",
   "author": "LongYinan <github@lyn.one>",
   "license": "MIT",
   "scripts": {
     "bench": "node -r @swc-node/register ./bench/index.ts",
     "build": "tsc -b tsconfig.project.json",
-    "format": "prettier . -w",
-    "lint": "eslint -c ./.eslintrc.yml \"packages/**/*.{js,ts,tsx}\"",
+    "format": "prettier --config ./package.json . -w",
+    "lint": "eslint -c ./.eslintrc.yml .",
     "test": "ava",
     "test:jest": "jest --config jest.config.js",
+    "test:module": "cross-env SWC_NODE_PROJECT=packages/integrate-module/tsconfig.json node --loader=@swc-node/register/esm packages/integrate-module/src/index.ts",
     "version": "pnpm install && git add .",
     "postinstall": "husky install"
   },
@@ -50,6 +53,7 @@
     "ava": "^5.2.0",
     "benchmark": "^2.1.4",
     "colorette": "^2.0.19",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.17.6",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
@@ -68,10 +72,12 @@
     "typescript": "^4.9.5"
   },
   "lint-staged": {
-    "*.@(js|ts|tsx)": ["prettier --write"],
-    "*.@(yml|yaml)": ["prettier --parser yaml --write"],
-    "*.md": ["prettier --parser markdown --write"],
-    "*.json": ["prettier --parser json --write"]
+    "*.@(js|ts|tsx|mts)": [
+      "eslint --fix"
+    ],
+    "*.@(js|ts|tsx|mts|yml|yaml|md|json)": [
+      "prettier --write"
+    ]
   },
   "prettier": {
     "printWidth": 120,
@@ -81,12 +87,19 @@
     "arrowParens": "always"
   },
   "ava": {
-    "extensions": ["ts", "tsx"],
-    "require": ["@swc-node/register"],
-    "files": ["packages/**/*.spec.{ts,tsx}"],
+    "extensions": [
+      "ts",
+      "tsx"
+    ],
+    "require": [
+      "@swc-node/register"
+    ],
+    "files": [
+      "packages/**/*.spec.{ts,tsx}"
+    ],
     "environmentVariables": {
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
-  "packageManager": "pnpm@7.26.3"
+  "packageManager": "pnpm@7.27.0"
 }

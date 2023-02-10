@@ -20,22 +20,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - uses: pnpm/action-setup@v2
+
       - name: Setup node
         uses: actions/setup-node@v3
         with:
           node-version: 18
-
-      - name: Cache NPM dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: npm-cache-${{ matrix.os }}-node@18
+          cache: 'pnpm'
 
       - name: 'Install dependencies'
-        run: |
-          npm install -g corepack
-          corepack enable
-          pnpm install -r
+        run: pnpm install -r
 
       - name: Build TypeScript
         run: pnpm build
@@ -44,6 +38,7 @@ jobs:
         run: |
           pnpm test
           pnpm test:jest
+          pnpm test:module
 
   publish:
     name: Publish

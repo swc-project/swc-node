@@ -17,29 +17,14 @@ Run TypeScript with node, without compilation or typechecking:
 ```bash
 npm i -D @swc-node/register
 node -r @swc-node/register script.ts
+node -r @swc-node/register/esm script.ts # for esm project
 ```
 
 Set environment variable SWCRC=true when you would like to load .swcrc file
+
 ```bash
 SWCRC=true node -r @swc-node/register script.ts
 ```
-
-## Support matrix
-
-|                     | node10 | node12 | node14 | node16 |
-| ------------------- | ------ | ------ | ------ | ------ |
-| Windows x64         | ✓      | ✓      | ✓      | ✓      |
-| Windows x32         | ✓      | ✓      | ✓      | ✓      |
-| Windows arm64       | ✓      | ✓      | ✓      | ✓      |
-| macOS x64           | ✓      | ✓      | ✓      | ✓      |
-| macOS arm64         | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 gnu       | ✓      | ✓      | ✓      | ✓      |
-| Linux x64 musl      | ✓      | ✓      | ✓      | ✓      |
-| Linux arm gnueabihf | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 gnu     | ✓      | ✓      | ✓      | ✓      |
-| Linux arm64 musl    | ✓      | ✓      | ✓      | ✓      |
-| Android arm64       | ✓      | ✓      | ✓      | ✓      |
-| FreeBSD x64         | ✓      | ✓      | ✓      | ✓      |
 
 ## @swc-node/core
 
