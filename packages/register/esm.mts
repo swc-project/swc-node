@@ -9,8 +9,8 @@ import { compile } from '../lib/register.js'
 
 type ResolveFn = (
   specifier: string,
-  context: { conditions: string[]; parentURL: string | undefined },
-  defaultResolve: ResolveFn,
+  context?: { conditions: string[]; parentURL: string | undefined },
+  defaultResolve?: ResolveFn,
 ) => Promise<{ url: string }>
 
 const DEFAULT_EXTENSIONS = ['.ts', '.tsx', '.mts', '.cts']
@@ -48,12 +48,12 @@ async function checkRequestURL(parentURL: string, requestURL: string) {
   }
 }
 
-export const resolve: ResolveFn = async (specifier, context, defaultResolve) => {
+export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
   const rawUrl = TRANSFORM_MAP.get(specifier)
   if (rawUrl) {
-    return { url: rawUrl, format: 'module' }
+    return { url: rawUrl, format: 'module', shortCircuit: true }
   }
-  const { parentURL } = context
+  const { parentURL } = context ?? {}
   if (parentURL && TRANSFORM_MAP.has(parentURL) && specifier.startsWith('.')) {
     const existedURL = await checkRequestURL(parentURL, specifier)
     if (existedURL) {
@@ -61,6 +61,7 @@ export const resolve: ResolveFn = async (specifier, context, defaultResolve) => 
       TRANSFORM_MAP.set(url, existedURL)
       return {
         url,
+        shortCircuit: true,
         format: 'module',
       }
     }
@@ -68,19 +69,19 @@ export const resolve: ResolveFn = async (specifier, context, defaultResolve) => 
   if (DEFAULT_EXTENSIONS.some((ext) => specifier.endsWith(ext))) {
     const newUrl = `${specifier}.mjs`
     TRANSFORM_MAP.set(newUrl, fileURLToPath(specifier))
-    return Promise.resolve({ url: newUrl, format: 'module' })
+    return {
+      shortCircuit: true,
+      url: newUrl,
+      format: 'module',
+    }
   }
   if (parentURL && isAbsolute(parentURL)) {
-    return defaultResolve(
-      specifier,
-      {
-        ...context,
-        parentURL: pathToFileURL(parentURL).toString(),
-      },
-      defaultResolve,
-    )
+    return nextResolve!(specifier, {
+      ...context!,
+      parentURL: pathToFileURL(parentURL).toString(),
+    })
   }
-  return defaultResolve(specifier, context, defaultResolve)
+  return nextResolve!(specifier)
 }
 
 type LoadFn = (
@@ -97,6 +98,7 @@ export const load: LoadFn = async (url, context, defaultLoad) => {
     return {
       format: context.format,
       source: code,
+      shortCircuit: true,
     }
   }
   return defaultLoad(url, context, defaultLoad)

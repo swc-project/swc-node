@@ -44,6 +44,7 @@ jobs:
         run: |
           pnpm test
           pnpm test:jest
+          pnpm test:module
 
   publish:
     name: Publish
