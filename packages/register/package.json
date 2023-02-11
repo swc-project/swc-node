@@ -23,6 +23,7 @@
   "files": [
     "index.js",
     "lib",
+    "esm",
     "README.md",
     "LICENSE",
     "*.d.ts"
