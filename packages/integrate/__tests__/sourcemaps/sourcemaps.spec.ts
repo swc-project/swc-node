@@ -1,3 +1,5 @@
+import { join } from 'path'
+
 import test from 'ava'
 
 // @ts-expect-error
@@ -20,5 +22,11 @@ interface _Unused8 {}
 interface _Unused9 {}
 
 test('should work with sourcemaps', (t) => {
-  t.snapshot(new Error().stack)
+  const projectRoot = join(__dirname, '..', '..', '..', '..')
+  t.snapshot(
+    new Error().stack
+      ?.split('\n')
+      .map((l) => l.replace(projectRoot, ''))
+      .join('\n'),
+  )
 })
