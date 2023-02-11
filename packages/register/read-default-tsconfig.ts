@@ -97,26 +97,18 @@ function toModule(moduleKind: ts.ModuleKind) {
   }
 }
 
-export function createSourcemapOption(options: ts.CompilerOptions) {
-  return options.sourceMap !== false
-    ? options.inlineSourceMap
-      ? 'inline'
-      : true
-    : options.inlineSourceMap
-    ? 'inline'
-    : false
-}
-
 export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filename: string): Options {
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
-    sourcemap: createSourcemapOption(options),
+    sourcemap: Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     esModuleInterop: options.esModuleInterop ?? false,
     swc: {
       filename,
+      inputSourceMap: options.inlineSourceMap,
+      sourceRoot: options.sourceRoot,
       jsc: {
         externalHelpers: Boolean(options.importHelpers),
         parser: {
