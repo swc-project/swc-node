@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.0...@swc-node/register@1.6.1) (2023-02-11)
+
+### Bug Fixes
+
+- **register:** include esm files ([8d6b0b7](https://github.com/swc-project/swc-node/commit/8d6b0b77d5ec725ff75989455f8163d88c306878))
+
 # [1.6.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.5.8...@swc-node/register@1.6.0) (2023-02-10)
 
 ### Features

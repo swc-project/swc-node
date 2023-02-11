@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/swc-project/swc-node/compare/@swc-node/jest@1.6.0...@swc-node/jest@1.6.1) (2023-02-11)
+
+**Note:** Version bump only for package @swc-node/jest
+
 # [1.6.0](https://github.com/swc-project/swc-node/compare/@swc-node/jest@1.5.9...@swc-node/jest@1.6.0) (2023-02-10)
 
 ### Features
