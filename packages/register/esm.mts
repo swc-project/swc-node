@@ -2,6 +2,8 @@ import { promises as fs, constants as FSConstants } from 'fs'
 import { join, parse, isAbsolute } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 
+import ts from 'typescript'
+
 // @ts-expect-error
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
@@ -93,7 +95,8 @@ type LoadFn = (
 export const load: LoadFn = async (url, context, defaultLoad) => {
   const filePath = TRANSFORM_MAP.get(url)
   if (filePath) {
-    const tsconfig = readDefaultTsConfig()
+    const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
+    tsconfig.module = ts.ModuleKind.ESNext
     const code = await compile(await fs.readFile(filePath, 'utf8'), filePath, tsconfig, true)
     return {
       format: context.format,
