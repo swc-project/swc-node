@@ -1,7 +1,7 @@
 import { platform } from 'os'
 import { resolve } from 'path'
 
-import { transform, transformSync } from '@swc-node/core'
+import { transform, transformSync, Options } from '@swc-node/core'
 import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
 import { addHook } from 'pirates'
 import * as ts from 'typescript'
@@ -77,12 +77,16 @@ export function compile(
       return code
     })
   } else {
-    const swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
-    if (process.env.SWCRC === 'true') {
+    let swcRegisterConfig: Options
+    if (process.env.SWCRC) {
       // when SWCRC environment variable is set to true it will use swcrc file
-      swcRegisterConfig.swc = {
-        swcrc: true,
+      swcRegisterConfig = {
+        swc: {
+          swcrc: true,
+        },
       }
+    } else {
+      swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
     }
     const { code, map } = transformSync(sourcecode, filename, swcRegisterConfig)
     // in case of map is undefined
@@ -93,7 +97,11 @@ export function compile(
   }
 }
 
-export function register(options = readDefaultTsConfig(), hookOpts = {}) {
+export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {}) {
+  if (!process.env.SWCRC) {
+    options = readDefaultTsConfig()
+  }
+  options.module = ts.ModuleKind.CommonJS
   installSourceMapSupport()
   return addHook((code, filename) => compile(code, filename, options), {
     exts: DEFAULT_EXTENSIONS,
