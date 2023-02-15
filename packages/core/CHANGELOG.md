@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.0...@swc-node/core@1.10.1) (2023-02-15)
+
+### Bug Fixes
+
+- **core:** enforce sourcemap: 'inline' for jest ([#695](https://github.com/swc-project/swc-node/issues/695)) ([2439b7e](https://github.com/swc-project/swc-node/commit/2439b7e2cd28fee7d0d1038b91baeb042a32c146))
+
 # [1.10.0](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.9.2...@swc-node/core@1.10.0) (2023-02-10)
 
 ### Features

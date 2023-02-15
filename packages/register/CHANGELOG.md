@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.1...@swc-node/register@1.6.2) (2023-02-15)
+
+### Bug Fixes
+
+- **register:** enforece module option in register/esm ([#694](https://github.com/swc-project/swc-node/issues/694)) ([860d1f6](https://github.com/swc-project/swc-node/commit/860d1f6f5f7ece197e92a822470a093ae7a7a68a))
+
 ## [1.6.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.0...@swc-node/register@1.6.1) (2023-02-11)
 
 ### Bug Fixes
