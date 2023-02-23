@@ -1,5 +1,5 @@
-import { promises as fs, constants as FSConstants } from 'fs'
-import { join, parse, isAbsolute } from 'path'
+import { constants as FSConstants, promises as fs } from 'fs'
+import { isAbsolute, join, parse } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 import ts from 'typescript'
@@ -53,7 +53,7 @@ async function checkRequestURL(parentURL: string, requestURL: string) {
 export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
   const rawUrl = TRANSFORM_MAP.get(specifier)
   if (rawUrl) {
-    return { url: rawUrl, format: 'module', shortCircuit: true }
+    return { url: new URL(rawUrl).href, format: 'module', shortCircuit: true }
   }
   const { parentURL } = context ?? {}
   if (parentURL && TRANSFORM_MAP.has(parentURL) && specifier.startsWith('.')) {
@@ -62,7 +62,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
       const url = `${existedURL}.mjs`
       TRANSFORM_MAP.set(url, existedURL)
       return {
-        url,
+        url: new URL(url).href,
         shortCircuit: true,
         format: 'module',
       }
@@ -73,7 +73,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
     TRANSFORM_MAP.set(newUrl, fileURLToPath(specifier))
     return {
       shortCircuit: true,
-      url: newUrl,
+      url: new URL(newUrl).href,
       format: 'module',
     }
   }
