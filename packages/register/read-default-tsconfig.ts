@@ -115,6 +115,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
           syntax: 'typescript',
           tsx: isJsx,
           dynamicImport: true,
+          decorators: options.experimentalDecorators,
         },
         paths: Object.fromEntries(
           Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
@@ -125,6 +126,8 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
         keepClassNames: true,
         target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
         transform: {
+          decoratorMetadata: options.emitDecoratorMetadata,
+          legacyDecorator: options.experimentalDecorators,
           react:
             options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
               ? {
