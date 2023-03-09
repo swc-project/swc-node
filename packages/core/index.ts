@@ -32,26 +32,28 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
   opts.esModuleInterop = opts.esModuleInterop ?? true
   return {
     filename: path,
-    jsc: {
-      target: opts.target ?? DEFAULT_ES_TARGET,
-      externalHelpers: jest ? true : false,
-      parser: {
-        syntax: 'typescript' as const,
-        tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-        decorators: Boolean(opts.experimentalDecorators),
-        dynamicImport: Boolean(opts.dynamicImport),
-      },
-      transform: {
-        legacyDecorator: Boolean(opts.experimentalDecorators),
-        decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
-        react: options?.react,
-        hidden: {
-          jest,
+    jsc: options?.swc?.swcrc
+      ? undefined
+      : {
+          target: opts.target ?? DEFAULT_ES_TARGET,
+          externalHelpers: jest ? true : false,
+          parser: {
+            syntax: 'typescript' as const,
+            tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
+            decorators: Boolean(opts.experimentalDecorators),
+            dynamicImport: Boolean(opts.dynamicImport),
+          },
+          transform: {
+            legacyDecorator: Boolean(opts.experimentalDecorators),
+            decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
+            react: options?.react,
+            hidden: {
+              jest,
+            },
+          },
+          keepClassNames: opts.keepClassNames,
+          paths: opts.paths,
         },
-      },
-      keepClassNames: opts.keepClassNames,
-      paths: opts.paths,
-    },
     minify: false,
     isModule: true,
     module: {
