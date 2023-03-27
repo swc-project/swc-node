@@ -7,7 +7,7 @@
 ## Usage
 
 ```ts
-const register = require('@swc-node/register')
+const { register } = require('@swc-node/register/register')
 
 register({
   ...
