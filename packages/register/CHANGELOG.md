@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.3](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.2...@swc-node/register@1.6.3) (2023-03-31)
+
+### Bug Fixes
+
+- **core,register:** ts Compiler to Swc Config: respects decorators config and SWCRC=true ([#702](https://github.com/swc-project/swc-node/issues/702)) ([d421ca8](https://github.com/swc-project/swc-node/commit/d421ca8aa02a07ea01b1f97e2f38d696d84e4531))
+
 ## [1.6.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.1...@swc-node/register@1.6.2) (2023-02-15)
 
 ### Bug Fixes
