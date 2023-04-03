@@ -1,8 +1,8 @@
 import { platform } from 'os'
 import { resolve } from 'path'
 
-import { transform, transformSync, Options } from '@swc-node/core'
-import { SourcemapMap, installSourceMapSupport } from '@swc-node/sourcemap-support'
+import { Options, transform, transformSync } from '@swc-node/core'
+import { installSourceMapSupport, SourcemapMap } from '@swc-node/sourcemap-support'
 import { addHook } from 'pirates'
 import * as ts from 'typescript'
 
@@ -10,6 +10,24 @@ import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from './read-defaul
 
 const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
 const PLATFORM = platform()
+
+const injectInlineSourceMap = ({
+  filename,
+  code,
+  map,
+}: {
+  filename: string
+  code: string
+  map: string | undefined
+}): string => {
+  if (map) {
+    SourcemapMap.set(filename, map)
+    const base64Map = Buffer.from(map, 'utf8').toString('base64')
+    const sourceMapContent = `//# sourceMappingURL=data:application/json;charset=utf-8;base64,${base64Map}`
+    return `${code}\n${sourceMapContent}`
+  }
+  return code
+}
 
 export function compile(
   sourcecode: string,
@@ -64,17 +82,10 @@ export function compile(
       fileName: filename,
       compilerOptions: options,
     })
-    if (sourceMapText) {
-      SourcemapMap.set(filename, sourceMapText)
-    }
-    return outputText
+    return injectInlineSourceMap({ filename, code: outputText, map: sourceMapText })
   } else if (async) {
     return transform(sourcecode, filename, tsCompilerOptionsToSwcConfig(options, filename)).then(({ code, map }) => {
-      // in case of map is undefined
-      if (map) {
-        SourcemapMap.set(filename, map)
-      }
-      return code
+      return injectInlineSourceMap({ filename, code, map })
     })
   } else {
     let swcRegisterConfig: Options
@@ -89,11 +100,7 @@ export function compile(
       swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
     }
     const { code, map } = transformSync(sourcecode, filename, swcRegisterConfig)
-    // in case of map is undefined
-    if (map) {
-      SourcemapMap.set(filename, map)
-    }
-    return code
+    return injectInlineSourceMap({ filename, code, map })
   }
 }
 
