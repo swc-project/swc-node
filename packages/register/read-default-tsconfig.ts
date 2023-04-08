@@ -101,7 +101,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
-    sourcemap: Boolean(options.sourceMap),
+    sourcemap: options.sourceMap && options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     esModuleInterop: options.esModuleInterop ?? false,
