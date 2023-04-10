@@ -47,6 +47,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
             legacyDecorator: Boolean(opts.experimentalDecorators),
             decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
             react: options?.react,
+            // @ts-expect-error
             hidden: {
               jest,
             },
