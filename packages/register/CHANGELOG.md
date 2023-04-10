@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.4](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.3...@swc-node/register@1.6.4) (2023-04-10)
+
+### Bug Fixes
+
+- **register:** make sourcemaps work with both error stack & debugger ([#707](https://github.com/swc-project/swc-node/issues/707)) ([334ada1](https://github.com/swc-project/swc-node/commit/334ada16617011f00b5cb6b240e7f62f08296761))
+- **register:** url now returns the href of a url object ([#698](https://github.com/swc-project/swc-node/issues/698)) ([fd63aa1](https://github.com/swc-project/swc-node/commit/fd63aa1660140bc922fd810b51f27f756a719acb))
+
 ## [1.6.3](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.2...@swc-node/register@1.6.3) (2023-03-31)
 
 ### Bug Fixes

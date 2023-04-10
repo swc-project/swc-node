@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.3](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.2...@swc-node/core@1.10.3) (2023-04-10)
+
+**Note:** Version bump only for package @swc-node/core
+
 ## [1.10.2](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.1...@swc-node/core@1.10.2) (2023-03-31)
 
 ### Bug Fixes
