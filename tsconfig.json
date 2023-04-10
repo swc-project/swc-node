@@ -15,8 +15,6 @@
     "noUnusedParameters": true,
     "strict": true,
     "skipLibCheck": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "suppressExcessPropertyErrors": true,
     "forceConsistentCasingInFileNames": true,
     "preserveSymlinks": true,
     "target": "ES2018",
