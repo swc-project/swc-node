@@ -121,7 +121,7 @@ test('should set all values', (t) => {
   const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
   const expected = {
     module: 'commonjs',
-    sourcemap: options.sourceMap,
+    sourcemap: 'inline',
     experimentalDecorators: options.experimentalDecorators,
     emitDecoratorMetadata: options.emitDecoratorMetadata,
     esModuleInterop: options.esModuleInterop,
