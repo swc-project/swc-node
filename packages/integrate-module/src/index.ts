@@ -6,6 +6,7 @@ import { supportedExtensions } from 'file-type'
 
 import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
+import { baz } from './subdirectory/index.mjs'
 
 await test('file-type should work', () => {
   assert.ok(supportedExtensions.has('jpg'))
@@ -17,4 +18,8 @@ await test('resolve adjacent file path', () => {
 
 await test('resolve nested file path', () => {
   assert.equal(bar(), 'bar')
+})
+
+await test('resolve nested entry point', () => {
+  assert.equal(baz(), 'baz')
 })
