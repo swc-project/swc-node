@@ -20,7 +20,7 @@ const DEFAULT_EXTENSIONS = ['.ts', '.tsx', '.mts', '.cts']
 const TRANSFORM_MAP = new Map<string, string>()
 
 async function checkRequestURL(parentURL: string, requestURL: string) {
-  const { ext } = parse(requestURL)
+  const { dir, name, ext } = parse(requestURL)
   const parentDir = join(parentURL.startsWith('file://') ? fileURLToPath(parentURL) : parentURL, '..')
   if (ext && ext !== '.js' && ext !== '.mjs') {
     try {
@@ -33,7 +33,7 @@ async function checkRequestURL(parentURL: string, requestURL: string) {
   } else {
     for (const ext of DEFAULT_EXTENSIONS) {
       try {
-        const url = join(parentDir, requestURL + ext)
+        const url = join(parentDir, dir, `${name}${ext}`)
         await fs.access(url, FSConstants.R_OK)
         return url
       } catch (e) {
@@ -59,7 +59,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
   if (parentURL && TRANSFORM_MAP.has(parentURL) && specifier.startsWith('.')) {
     const existedURL = await checkRequestURL(parentURL, specifier)
     if (existedURL) {
-      const url = `${existedURL}.mjs`
+      const { href: url } = pathToFileURL(existedURL)
       TRANSFORM_MAP.set(url, existedURL)
       return {
         url: new URL(url).href,
