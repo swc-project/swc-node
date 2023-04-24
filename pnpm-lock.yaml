@@ -171,7 +171,7 @@ importers:
         specifier: ^1.10.3
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.6.4
+        specifier: ^1.6.5
         version: link:../register
       typescript:
         specifier: '>= 4.3'
@@ -187,7 +187,7 @@ importers:
         specifier: ^1.10.3
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.6.4
+        specifier: ^1.6.5
         version: link:../register
     devDependencies:
       typescript:

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.5](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.4...@swc-node/register@1.6.5) (2023-04-24)
+
+### Bug Fixes
+
+- **register:** Fix to resolve adjacent file path ([#711](https://github.com/swc-project/swc-node/issues/711)) ([8dbea4f](https://github.com/swc-project/swc-node/commit/8dbea4fd0ac154cbc72088202a8ddf707e40fa13))
+- **register:** inline sourcemap ([#708](https://github.com/swc-project/swc-node/issues/708)) ([07eec33](https://github.com/swc-project/swc-node/commit/07eec334de984c32eca8551e1d9a647075b6b035))
+
 ## [1.6.4](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.3...@swc-node/register@1.6.4) (2023-04-10)
 
 ### Bug Fixes
