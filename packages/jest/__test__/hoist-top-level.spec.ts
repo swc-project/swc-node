@@ -1,5 +1,6 @@
-import { transformJest } from '@swc-node/core'
 import test from 'ava'
+
+const { process } = require('../index')
 
 const BrorrwFromTsJest = `
 const foo = 'foo'
@@ -36,6 +37,8 @@ const func2 = () => {
 `
 
 test('should hoist top level jest mock call', (t) => {
-  const { code } = transformJest(BrorrwFromTsJest, 'jest.spec.ts', { target: 'es2018', sourcemap: false })
+  const { code } = process(BrorrwFromTsJest, 'jest.spec.ts', {
+    transformerConfig: { target: 'es2018', sourcemap: false },
+  })
   t.snapshot(code)
 })

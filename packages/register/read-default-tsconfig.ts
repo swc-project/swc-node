@@ -101,45 +101,34 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
+    target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
+    jsx: isJsx,
     sourcemap: options.sourceMap && options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     esModuleInterop: options.esModuleInterop ?? false,
+    dynamicImport: true,
+    keepClassNames: true,
+    externalHelpers: Boolean(options.importHelpers),
+    react:
+      options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
+        ? {
+            pragma: options.jsxFactory,
+            pragmaFrag: options.jsxFragmentFactory,
+            importSource: options.jsxImportSource ?? 'react',
+            runtime: (options.jsx ?? 0) >= ts.JsxEmit.ReactJSX ? 'automatic' : 'classic',
+            useBuiltins: true,
+          }
+        : undefined,
+    paths: Object.fromEntries(
+      Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
+        aliasKey,
+        ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
+      ]),
+    ) as Options['paths'],
     swc: {
-      filename,
-      inputSourceMap: options.inlineSourceMap,
       sourceRoot: options.sourceRoot,
-      jsc: {
-        externalHelpers: Boolean(options.importHelpers),
-        parser: {
-          syntax: 'typescript',
-          tsx: isJsx,
-          dynamicImport: true,
-          decorators: options.experimentalDecorators,
-        },
-        paths: Object.fromEntries(
-          Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
-            aliasKey,
-            ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
-          ]),
-        ) as Options['paths'],
-        keepClassNames: true,
-        target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
-        transform: {
-          decoratorMetadata: options.emitDecoratorMetadata,
-          legacyDecorator: options.experimentalDecorators,
-          react:
-            options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
-              ? {
-                  pragma: options.jsxFactory,
-                  pragmaFrag: options.jsxFragmentFactory,
-                  importSource: options.jsxImportSource ?? 'react',
-                  runtime: (options.jsx ?? 0) >= ts.JsxEmit.ReactJSX ? 'automatic' : 'classic',
-                  useBuiltins: true,
-                }
-              : undefined,
-        },
-      },
+      inputSourceMap: options.inlineSourceMap,
     },
   }
 }
