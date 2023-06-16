@@ -20,6 +20,7 @@ export interface Options {
   dynamicImport?: boolean
   esModuleInterop?: boolean
   keepClassNames?: boolean
+  externalHelpers?: boolean
   react?: Partial<ReactConfig>
   paths?: {
     [from: string]: [string]
@@ -36,7 +37,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
       ? undefined
       : {
           target: opts.target ?? DEFAULT_ES_TARGET,
-          externalHelpers: jest ? true : false,
+          externalHelpers: jest ? true : Boolean(opts.externalHelpers),
           parser: {
             syntax: 'typescript' as const,
             tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),

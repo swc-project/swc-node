@@ -15,27 +15,16 @@ test('default values', (t) => {
     experimentalDecorators: false,
     emitDecoratorMetadata: false,
     esModuleInterop: false,
+    dynamicImport: true,
+    externalHelpers: false,
+    jsx: true,
+    paths: {},
+    keepClassNames: true,
+    target: 'es2018',
+    react: undefined,
     swc: {
-      filename,
       inputSourceMap: undefined,
       sourceRoot: undefined,
-      jsc: {
-        externalHelpers: false,
-        parser: {
-          syntax: 'typescript',
-          tsx: true,
-          dynamicImport: true,
-          decorators: undefined,
-        },
-        paths: {},
-        keepClassNames: true,
-        target: 'es2018',
-        transform: {
-          decoratorMetadata: undefined,
-          legacyDecorator: undefined,
-          react: undefined,
-        },
-      },
     },
   }
   t.deepEqual(swcConfig, expected)
@@ -51,18 +40,6 @@ test('should set the decorator config', (t) => {
   const expected = {
     experimentalDecorators: true,
     emitDecoratorMetadata: true,
-    swc: {
-      filename,
-      jsc: {
-        parser: {
-          decorators: true,
-        },
-        transform: {
-          decoratorMetadata: true,
-          legacyDecorator: true,
-        },
-      },
-    },
   }
   t.like(swcConfig, expected)
 })
@@ -75,22 +52,17 @@ test('should force the jsx  config', (t) => {
   const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
   const expected = {
     module: 'es6',
+    jsx: true,
+    react: {
+      pragma: options.jsxFactory,
+      pragmaFrag: options.jsxFragmentFactory,
+      importSource: 'react',
+      runtime: 'automatic',
+      useBuiltins: true,
+    },
     swc: {
-      filename,
-      jsc: {
-        parser: {
-          tsx: true,
-        },
-        transform: {
-          react: {
-            pragma: options.jsxFactory,
-            pragmaFrag: options.jsxFragmentFactory,
-            importSource: 'react',
-            runtime: 'automatic',
-            useBuiltins: true,
-          },
-        },
-      },
+      inputSourceMap: undefined,
+      sourceRoot: undefined,
     },
   }
   t.like(swcConfig, expected)
@@ -122,39 +94,28 @@ test('should set all values', (t) => {
   const expected = {
     module: 'commonjs',
     sourcemap: 'inline',
+    target: 'es5',
     experimentalDecorators: options.experimentalDecorators,
     emitDecoratorMetadata: options.emitDecoratorMetadata,
     esModuleInterop: options.esModuleInterop,
+    externalHelpers: true,
+    dynamicImport: true,
+    keepClassNames: true,
+    jsx: true,
+    react: {
+      pragma: options.jsxFactory,
+      pragmaFrag: options.jsxFragmentFactory,
+      importSource: options.jsxImportSource,
+      runtime: 'classic',
+      useBuiltins: true,
+    },
+    paths: {
+      '@test': [join(__dirname, './specific-path-1/test')],
+      '@another': [join(__dirname, './specific-path-2/another')],
+    },
     swc: {
-      filename,
       inputSourceMap: options.inlineSourceMap,
       sourceRoot: options.sourceRoot,
-      jsc: {
-        externalHelpers: options.importHelpers,
-        parser: {
-          syntax: 'typescript',
-          tsx: true,
-          dynamicImport: true,
-          decorators: options.experimentalDecorators,
-        },
-        paths: {
-          '@test': [join(__dirname, './specific-path-1/test')],
-          '@another': [join(__dirname, './specific-path-2/another')],
-        },
-        keepClassNames: true,
-        target: 'es5',
-        transform: {
-          decoratorMetadata: options.emitDecoratorMetadata,
-          legacyDecorator: options.experimentalDecorators,
-          react: {
-            pragma: options.jsxFactory,
-            pragmaFrag: options.jsxFragmentFactory,
-            importSource: options.jsxImportSource,
-            runtime: 'classic',
-            useBuiltins: true,
-          },
-        },
-      },
     },
   }
   t.deepEqual(swcConfig, expected)
