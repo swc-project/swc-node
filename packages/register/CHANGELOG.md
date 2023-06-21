@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.6](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.5...@swc-node/register@1.6.6) (2023-06-21)
+
+### Bug Fixes
+
+- tsCompilerOptionsToSwcConfig should not override default swc config for jest ([#714](https://github.com/swc-project/swc-node/issues/714)) ([60ea642](https://github.com/swc-project/swc-node/commit/60ea64284582ce3164ca3705976b4dc4215c2504))
+
 ## [1.6.5](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.4...@swc-node/register@1.6.5) (2023-04-24)
 
 ### Bug Fixes
