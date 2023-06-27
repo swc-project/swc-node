@@ -58,10 +58,12 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
         },
     minify: false,
     isModule: true,
-    module: {
-      type: options?.module ?? 'commonjs',
-      noInterop: !opts.esModuleInterop,
-    },
+    module: options?.swc?.swcrc
+      ? undefined 
+      : {
+        type: options?.module ?? 'commonjs',
+        noInterop: !opts.esModuleInterop,
+      },
     sourceMaps: jest || typeof opts.sourcemap === 'undefined' ? 'inline' : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
