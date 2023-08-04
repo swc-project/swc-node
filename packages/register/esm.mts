@@ -69,6 +69,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
     }
   }
   if (DEFAULT_EXTENSIONS.some((ext) => specifier.endsWith(ext))) {
+    specifier = specifier.startsWith('file://') ? specifier : pathToFileURL(specifier).toString()
     const newUrl = `${specifier}.mjs`
     TRANSFORM_MAP.set(newUrl, fileURLToPath(specifier))
     return {
