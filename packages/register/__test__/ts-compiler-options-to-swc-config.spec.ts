@@ -10,6 +10,7 @@ test('default values', (t) => {
   const filename = 'some-file.tsx'
   const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
   const expected = {
+    baseUrl: process.cwd(),
     module: 'es6',
     sourcemap: false,
     experimentalDecorators: false,
@@ -92,6 +93,7 @@ test('should set all values', (t) => {
   const filename = 'some-file.tsx'
   const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
   const expected = {
+    baseUrl: join(process.cwd(), options.baseUrl!),
     module: 'commonjs',
     sourcemap: 'inline',
     target: 'es5',
