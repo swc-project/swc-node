@@ -22,6 +22,7 @@ export interface Options {
   keepClassNames?: boolean
   externalHelpers?: boolean
   react?: Partial<ReactConfig>
+  baseUrl?: string
   paths?: {
     [from: string]: [string]
   }
