@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.5](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.4...@swc-node/core@1.10.5) (2023-08-18)
+
+### Bug Fixes
+
+- **core:** assign `baseUrl` property ([55c7b20](https://github.com/swc-project/swc-node/commit/55c7b204ddeb1ad2bfc701918ed76f5374414ebe))
+- **core:** Pass jsc.baseUrl ([#721](https://github.com/swc-project/swc-node/issues/721)) ([877bd58](https://github.com/swc-project/swc-node/commit/877bd58f44072d2f44f6164960271dc9e3fda873))
+
 ## [1.10.4](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.3...@swc-node/core@1.10.4) (2023-06-21)
 
 ### Bug Fixes

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.7](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.6...@swc-node/register@1.6.7) (2023-08-18)
+
+### Bug Fixes
+
+- **core:** Pass jsc.baseUrl ([#721](https://github.com/swc-project/swc-node/issues/721)) ([877bd58](https://github.com/swc-project/swc-node/commit/877bd58f44072d2f44f6164960271dc9e3fda873))
+- fix import absolute path support ([ffecee5](https://github.com/swc-project/swc-node/commit/ffecee519075cd8311101e1e2327d7402cd3ba1f))
+
 ## [1.6.6](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.5...@swc-node/register@1.6.6) (2023-06-21)
 
 ### Bug Fixes
