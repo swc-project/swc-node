@@ -83,22 +83,25 @@ export function compile(
       compilerOptions: options,
     })
     return injectInlineSourceMap({ filename, code: outputText, map: sourceMapText })
-  } else if (async) {
-    return transform(sourcecode, filename, tsCompilerOptionsToSwcConfig(options, filename)).then(({ code, map }) => {
+  }
+
+  let swcRegisterConfig: Options
+  if (process.env.SWCRC) {
+    // when SWCRC environment variable is set to true it will use swcrc file
+    swcRegisterConfig = {
+      swc: {
+        swcrc: true,
+      },
+    }
+  } else {
+    swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
+  }
+  
+  if (async) {
+    return transform(sourcecode, filename, swcRegisterConfig).then(({ code, map }) => {
       return injectInlineSourceMap({ filename, code, map })
     })
   } else {
-    let swcRegisterConfig: Options
-    if (process.env.SWCRC) {
-      // when SWCRC environment variable is set to true it will use swcrc file
-      swcRegisterConfig = {
-        swc: {
-          swcrc: true,
-        },
-      }
-    } else {
-      swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
-    }
     const { code, map } = transformSync(sourcecode, filename, swcRegisterConfig)
     return injectInlineSourceMap({ filename, code, map })
   }
