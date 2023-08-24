@@ -108,8 +108,8 @@ export function compile(
 }
 
 export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {}) {
-  if (!process.env.SWCRC) {
-    options = readDefaultTsConfig()
+  if (!process.env.SWCRC) { 
+    options = Object.keys(options).length ? options : readDefaultTsConfig() 
   }
   options.module = ts.ModuleKind.CommonJS
   installSourceMapSupport()
