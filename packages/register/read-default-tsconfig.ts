@@ -118,7 +118,8 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     target: toTsTarget(target),
     jsx: isJsx,
-    sourcemap: options.sourceMap && options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
+    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+    sourcemap: options.sourceMap || options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     useDefineForClassFields: getUseDefineForClassFields(options, target),
