@@ -9,11 +9,21 @@ import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
 import { compile } from '../lib/register.js'
 
-type ResolveFn = (
+interface ResolveContext {
+  conditions: string[]
+  parentURL: string | undefined
+}
+interface ResolveResult {
+  format?: string
+  shortCircuit?: boolean
+  url: string
+}
+type ResolveArgs = [
   specifier: string,
-  context?: { conditions: string[]; parentURL: string | undefined },
-  defaultResolve?: ResolveFn,
-) => Promise<{ url: string }>
+  context?: ResolveContext,
+  nextResolve?: (...args: ResolveArgs) => Promise<ResolveResult>,
+]
+type ResolveFn = (...args: Required<ResolveArgs>) => Promise<ResolveResult>
 
 const DEFAULT_EXTENSIONS = ['.ts', '.tsx', '.mts', '.cts']
 
@@ -79,19 +89,25 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
     }
   }
   if (parentURL && isAbsolute(parentURL)) {
-    return nextResolve!(specifier, {
+    return nextResolve(specifier, {
       ...context!,
       parentURL: pathToFileURL(parentURL).toString(),
     })
   }
-  return nextResolve!(specifier)
+  return nextResolve(specifier)
 }
 
-type LoadFn = (
-  url: string,
-  context: { format: string },
-  defaultLoad: LoadFn,
-) => Promise<{ format: string; source: string | ArrayBuffer | SharedArrayBuffer | Uint8Array }>
+interface LoadContext {
+  conditions: string[]
+  format: string | null | undefined
+}
+interface LoadResult {
+  format: string
+  shortCircuit?: boolean
+  source: string | ArrayBuffer | SharedArrayBuffer | Uint8Array
+}
+type LoadArgs = [url: string, context: LoadContext, nextLoad?: (...args: LoadArgs) => Promise<LoadResult>]
+type LoadFn = (...args: Required<LoadArgs>) => Promise<LoadResult>
 
 export const load: LoadFn = async (url, context, defaultLoad) => {
   const filePath = TRANSFORM_MAP.get(url)
@@ -100,10 +116,10 @@ export const load: LoadFn = async (url, context, defaultLoad) => {
     tsconfig.module = ts.ModuleKind.ESNext
     const code = await compile(await fs.readFile(filePath, 'utf8'), filePath, tsconfig, true)
     return {
-      format: context.format,
+      format: 'module',
       source: code,
       shortCircuit: true,
     }
   }
-  return defaultLoad(url, context, defaultLoad)
+  return defaultLoad(url, context)
 }
