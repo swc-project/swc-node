@@ -1,5 +1,3 @@
-import { constants as FSConstants, promises as fs } from 'fs'
-import { isAbsolute, join, parse } from 'path'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 import ts from 'typescript'
@@ -25,76 +23,38 @@ type ResolveArgs = [
 ]
 type ResolveFn = (...args: Required<ResolveArgs>) => Promise<ResolveResult>
 
-const DEFAULT_EXTENSIONS = ['.ts', '.tsx', '.mts', '.cts']
+const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
+tsconfig.module = ts.ModuleKind.ESNext
 
-const TRANSFORM_MAP = new Map<string, string>()
-
-async function checkRequestURL(parentURL: string, requestURL: string) {
-  const { dir, name, ext } = parse(requestURL)
-  const parentDir = join(parentURL.startsWith('file://') ? fileURLToPath(parentURL) : parentURL, '..')
-  if (ext && ext !== '.js' && ext !== '.mjs') {
-    try {
-      const url = join(parentDir, requestURL)
-      await fs.access(url, FSConstants.R_OK)
-      return url
-    } catch (e) {
-      // ignore
-    }
-  } else {
-    for (const ext of DEFAULT_EXTENSIONS) {
-      try {
-        const url = join(parentDir, dir, `${name}${ext}`)
-        await fs.access(url, FSConstants.R_OK)
-        return url
-      } catch (e) {
-        // ignore
-      }
-      try {
-        const url = join(parentDir, requestURL, `index${ext}`)
-        await fs.access(url, FSConstants.R_OK)
-        return url
-      } catch (e) {
-        // ignore
-      }
-    }
-  }
+const moduleResolutionCache = ts.createModuleResolutionCache(ts.sys.getCurrentDirectory(), (x) => x, tsconfig)
+const host: ts.ModuleResolutionHost = {
+  fileExists: ts.sys.fileExists,
+  readFile: ts.sys.readFile,
+}
+function resolveModuleName(specifier: string, parentURL: string) {
+  return ts.resolveModuleName(specifier, fileURLToPath(parentURL), tsconfig, host, moduleResolutionCache)
 }
 
 export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
-  const rawUrl = TRANSFORM_MAP.get(specifier)
-  if (rawUrl) {
-    return { url: new URL(rawUrl).href, format: 'module', shortCircuit: true }
-  }
   const { parentURL } = context ?? {}
-  if (parentURL && TRANSFORM_MAP.has(parentURL) && specifier.startsWith('.')) {
-    const existedURL = await checkRequestURL(parentURL, specifier)
-    if (existedURL) {
-      const { href: url } = pathToFileURL(existedURL)
-      TRANSFORM_MAP.set(url, existedURL)
+  if (parentURL) {
+    const { resolvedModule } = resolveModuleName(specifier, parentURL)
+    if (resolvedModule && !resolvedModule.isExternalLibraryImport) {
       return {
-        url: new URL(url).href,
+        format: 'ts',
+        url: pathToFileURL(resolvedModule.resolvedFileName).href,
         shortCircuit: true,
-        format: 'module',
       }
+    } else {
+      return nextResolve(specifier)
     }
-  }
-  if (DEFAULT_EXTENSIONS.some((ext) => specifier.endsWith(ext))) {
-    specifier = specifier.startsWith('file://') ? specifier : pathToFileURL(specifier).toString()
-    const newUrl = `${specifier}.mjs`
-    TRANSFORM_MAP.set(newUrl, fileURLToPath(specifier))
+  } else {
     return {
+      format: 'ts',
+      url: specifier,
       shortCircuit: true,
-      url: new URL(newUrl).href,
-      format: 'module',
     }
   }
-  if (parentURL && isAbsolute(parentURL)) {
-    return nextResolve(specifier, {
-      ...context!,
-      parentURL: pathToFileURL(parentURL).toString(),
-    })
-  }
-  return nextResolve(specifier)
 }
 
 interface LoadContext {
@@ -109,17 +69,17 @@ interface LoadResult {
 type LoadArgs = [url: string, context: LoadContext, nextLoad?: (...args: LoadArgs) => Promise<LoadResult>]
 type LoadFn = (...args: Required<LoadArgs>) => Promise<LoadResult>
 
-export const load: LoadFn = async (url, context, defaultLoad) => {
-  const filePath = TRANSFORM_MAP.get(url)
-  if (filePath) {
-    const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
-    tsconfig.module = ts.ModuleKind.ESNext
-    const code = await compile(await fs.readFile(filePath, 'utf8'), filePath, tsconfig, true)
+export const load: LoadFn = async (url, context, nextLoad) => {
+  if (context.format === 'ts') {
+    const { source } = await nextLoad(url, context)
+    const code = typeof source === 'string' ? source : Buffer.from(source).toString()
+    const compiled = await compile(code, url, tsconfig, true)
     return {
       format: 'module',
-      source: code,
+      source: compiled,
       shortCircuit: true,
     }
+  } else {
+    return nextLoad(url, context)
   }
-  return defaultLoad(url, context)
 }
