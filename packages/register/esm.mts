@@ -31,30 +31,37 @@ const host: ts.ModuleResolutionHost = {
   fileExists: ts.sys.fileExists,
   readFile: ts.sys.readFile,
 }
-function resolveModuleName(specifier: string, parentURL: string) {
-  return ts.resolveModuleName(specifier, fileURLToPath(parentURL), tsconfig, host, moduleResolutionCache)
-}
 
 export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
-  const { parentURL } = context ?? {}
-  if (parentURL) {
-    const { resolvedModule } = resolveModuleName(specifier, parentURL)
-    if (resolvedModule && !resolvedModule.isExternalLibraryImport) {
-      return {
-        format: 'ts',
-        url: pathToFileURL(resolvedModule.resolvedFileName).href,
-        shortCircuit: true,
-      }
-    } else {
-      return nextResolve(specifier)
-    }
-  } else {
+  // entrypoint
+  if (!context.parentURL) {
+    return { format: 'ts', url: specifier, shortCircuit: true }
+  }
+
+  // import/require from external library
+  if (context.parentURL.includes('/node_modules/')) {
+    return nextResolve(specifier)
+  }
+
+  const { resolvedModule } = ts.resolveModuleName(
+    specifier,
+    fileURLToPath(context.parentURL),
+    tsconfig,
+    host,
+    moduleResolutionCache,
+  )
+
+  // import from local project to local project
+  if (resolvedModule && !resolvedModule.isExternalLibraryImport) {
     return {
       format: 'ts',
-      url: specifier,
+      url: pathToFileURL(resolvedModule.resolvedFileName).href,
       shortCircuit: true,
     }
   }
+
+  // import from local project to external library (or unknown something)
+  return nextResolve(specifier)
 }
 
 interface LoadContext {
