@@ -122,11 +122,12 @@ Detail: [@swc-node/register](./packages/register)
 
 ### Install dependencies
 
-- `pnpm` latest
+- `pnpm i`
 
-### Build and test
+### Build and Test
 
-- `pnpm install`
+- `pnpm build`
+
 - `pnpm test`
 
 ## Sponsors
