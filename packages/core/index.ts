@@ -30,8 +30,9 @@ export interface Options {
 }
 
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
-  const opts = options == null ? {} : options
+  const opts = options ?? {}
   opts.esModuleInterop = opts.esModuleInterop ?? true
+  const moduleType = options?.module ?? 'commonjs'
   return {
     filename: path,
     jsc: options?.swc?.swcrc
@@ -61,11 +62,15 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
     minify: false,
     isModule: true,
     module: options?.swc?.swcrc
-      ? undefined 
+      ? undefined
       : {
-        type: options?.module ?? 'commonjs',
-        noInterop: !opts.esModuleInterop,
-      },
+          type: moduleType,
+          ...(moduleType === 'commonjs' || moduleType === 'umd' || moduleType === 'amd'
+            ? {
+                noInterop: !opts.esModuleInterop,
+              }
+            : undefined),
+        },
     sourceMaps: jest || typeof opts.sourcemap === 'undefined' ? 'inline' : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
