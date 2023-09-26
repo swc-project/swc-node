@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.8](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.7...@swc-node/register@1.6.8) (2023-09-26)
+
+### Bug Fixes
+
+- **register:** extension-aware module resolution and format handling ([e34f006](https://github.com/swc-project/swc-node/commit/e34f006484d89c53dd4cac7cface3c4d70841e34))
+
 ## [1.6.7](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.6...@swc-node/register@1.6.7) (2023-08-18)
 
 ### Bug Fixes
