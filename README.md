@@ -21,6 +21,8 @@ node --import @swc-node/register/esm-register script.ts # for esm project with n
 node --loader @swc-node/register/esm script.ts # for esm project with node<=20.5, deprecated
 ```
 
+Pass `--enable-source-maps` to node for esm projects
+
 Set environment variable SWCRC=true when you would like to load .swcrc file
 
 ```bash
