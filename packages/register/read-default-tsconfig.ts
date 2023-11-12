@@ -97,21 +97,31 @@ function toModule(moduleKind: ts.ModuleKind) {
   }
 }
 
+/**
+ * The default value for useDefineForClassFields depends on the emit target
+ * @see https://www.typescriptlang.org/tsconfig#useDefineForClassFields
+ */
+function getUseDefineForClassFields(compilerOptions: ts.CompilerOptions, target: ts.ScriptTarget): boolean {
+  return compilerOptions.useDefineForClassFields ?? target >= ts.ScriptTarget.ES2022
+}
+
 export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filename: string): Options {
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
+  const target = options.target ?? ts.ScriptTarget.ES2018
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
-    target: toTsTarget(options.target ?? ts.ScriptTarget.ES2018),
+    target: toTsTarget(target),
     jsx: isJsx,
     sourcemap: options.sourceMap && options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
+    useDefineForClassFields: getUseDefineForClassFields(options, target),
     esModuleInterop: options.esModuleInterop ?? false,
     dynamicImport: true,
     keepClassNames: true,
     externalHelpers: Boolean(options.importHelpers),
     react:
-      options.jsxFactory || options.jsxFragmentFactory || options.jsx || options.jsxImportSource
+      options.jsxFactory ?? options.jsxFragmentFactory ?? options.jsx ?? options.jsxImportSource
         ? {
             pragma: options.jsxFactory,
             pragmaFrag: options.jsxFragmentFactory,
