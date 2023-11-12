@@ -71,7 +71,11 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
               }
             : undefined),
         },
-    sourceMaps: jest || typeof opts.sourcemap === 'undefined' ? 'inline' : opts.sourcemap,
+    sourceMaps: options?.swc?.swcrc
+      ? undefined
+      : jest || typeof opts.sourcemap === 'undefined'
+      ? 'inline'
+      : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
     ...(options?.swc ?? {}),
