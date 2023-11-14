@@ -17,6 +17,7 @@ export interface Options {
   jsx?: boolean
   experimentalDecorators?: boolean
   emitDecoratorMetadata?: boolean
+  useDefineForClassFields?: boolean
   dynamicImport?: boolean
   esModuleInterop?: boolean
   keepClassNames?: boolean
@@ -49,6 +50,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
           transform: {
             legacyDecorator: Boolean(opts.experimentalDecorators),
             decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
+            useDefineForClassFields: Boolean(opts.useDefineForClassFields),
             react: options?.react,
             // @ts-expect-error
             hidden: {
