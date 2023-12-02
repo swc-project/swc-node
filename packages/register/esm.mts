@@ -34,17 +34,19 @@ const host: ts.ModuleResolutionHost = {
 const EXTENSIONS: string[] = [ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts]
 
 export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
+  const isTS = EXTENSIONS.some((ext) => specifier.endsWith(ext))
+
   // entrypoint
   if (!context.parentURL) {
     return {
-      format: EXTENSIONS.some((ext) => specifier.endsWith(ext)) ? 'ts' : undefined,
+      format: isTS ? 'ts' : undefined,
       url: specifier,
       shortCircuit: true,
     }
   }
 
   // import/require from external library
-  if (context.parentURL.includes('/node_modules/')) {
+  if (context.parentURL.includes('/node_modules/') && !isTS) {
     return nextResolve(specifier)
   }
 
