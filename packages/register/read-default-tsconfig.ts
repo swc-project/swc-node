@@ -137,6 +137,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
         ((aliasPaths as string[]) ?? []).map((path) => resolve(options.baseUrl ?? './', path)),
       ]),
     ) as Options['paths'],
+    ignoreDynamic: Boolean(process.env.SWC_NODE_IGNORE_DYNAMIC),
     swc: {
       sourceRoot: options.sourceRoot,
       inputSourceMap: options.inlineSourceMap,

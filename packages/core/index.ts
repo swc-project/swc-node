@@ -28,6 +28,7 @@ export interface Options {
     [from: string]: [string]
   }
   swc?: SwcOptions
+  ignoreDynamic?: boolean
 }
 
 function transformOption(path: string, options?: Options, jest = false): SwcOptions {
@@ -70,6 +71,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
           ...(moduleType === 'commonjs' || moduleType === 'umd' || moduleType === 'amd'
             ? {
                 noInterop: !opts.esModuleInterop,
+                ignoreDynamic: opts.ignoreDynamic,
               }
             : undefined),
         },
