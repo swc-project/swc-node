@@ -162,6 +162,9 @@ dist
 #/target
 Cargo.lock
 
+# idea
+.idea/
+
 *.node
 lib
 artifacts

@@ -17,7 +17,8 @@ Run TypeScript with node, without compilation or typechecking:
 ```bash
 npm i -D @swc-node/register
 node -r @swc-node/register script.ts
-node --loader @swc-node/register/esm script.ts # for esm project
+node --import @swc-node/register/esm-register script.ts # for esm project with node>=20.6
+node --loader @swc-node/register/esm script.ts # for esm project with node<=20.5, deprecated
 ```
 
 Set environment variable SWCRC=true when you would like to load .swcrc file
@@ -25,6 +26,14 @@ Set environment variable SWCRC=true when you would like to load .swcrc file
 ```bash
 SWCRC=true node -r @swc-node/register script.ts
 ```
+
+```typescript
+#!/usr/bin/env node --import swc-register-esm
+
+// your code
+```
+
+run with shebang, add `TS_NODE_PROJECT=null`(`#!/usr/bin/env TS_NODE_PROJECT=null node --import swc-register-esm`) to use ignore tsconfig.json
 
 ## @swc-node/core
 

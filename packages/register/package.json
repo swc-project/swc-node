@@ -75,6 +75,9 @@
     },
     "./esm": {
       "import": "./esm/esm.mjs"
+    },
+    "./esm-register": {
+      "import": "./esm/esm-register.mjs"
     }
   }
 }
