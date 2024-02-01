@@ -3,9 +3,9 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "./lib"
+    "outDir": "./lib",
   },
   "references": [{ "path": "../register" }],
-  "include": ["."],
-  "exclude": ["lib"]
+  "files": ["index.ts"],
+  "exclude": ["lib"],
 }

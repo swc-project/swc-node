@@ -1,6 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": [],
-  "files": ["src/index.ts"],
-  "references": [{ "path": "../core/tsconfig.project.json" }, { "path": "../register/tsconfig.project.json" }]
-}

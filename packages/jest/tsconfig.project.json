@@ -1,6 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": [],
-  "files": ["index.ts"],
-  "references": [{ "path": "../register" }]
-}

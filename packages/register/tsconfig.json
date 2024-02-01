@@ -3,8 +3,13 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "./lib"
+    "outDir": "./lib",
   },
+  "references": [
+    {
+      "path": "../core",
+    },
+  ],
   "include": ["."],
-  "exclude": ["lib"]
+  "exclude": ["lib"],
 }
