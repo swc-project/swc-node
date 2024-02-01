@@ -3,9 +3,8 @@
   "compilerOptions": {
     "composite": true,
     "rootDir": ".",
-    "outDir": "./lib"
+    "outDir": "./lib",
   },
   "include": ["."],
-  "files": ["./package.json"],
-  "exclude": ["lib"]
+  "exclude": ["./lib"],
 }

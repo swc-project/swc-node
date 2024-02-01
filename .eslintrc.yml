@@ -5,7 +5,7 @@ parserOptions:
     jsx: true
   ecmaVersion: 2020
   sourceType: module
-  project: ./tsconfig.json
+  project: ./tsconfig.lint.json
 
 env:
   browser: true
@@ -18,8 +18,7 @@ plugins:
 
 extends:
   - eslint:recommended
-  - plugin:prettier/recommended
-
+  - prettier
 rules:
   # 0 = off, 1 = warn, 2 = error
   'space-before-function-paren': 0

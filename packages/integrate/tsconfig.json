@@ -5,9 +5,14 @@
     "rootDir": ".",
     "outDir": "./lib",
     "jsx": "react-jsx",
-    "types": ["node", "jest"]
+    "types": ["node", "jest"],
   },
+  "references": [
+    {
+      "path": "../core",
+    },
+  ],
   "include": ["."],
   "files": ["./package.json"],
-  "exclude": ["lib"]
+  "exclude": ["lib"],
 }

@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "include": [],
-  "files": ["./register.ts", "./read-default-tsconfig.ts"]
-}

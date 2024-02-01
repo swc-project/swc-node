@@ -7,25 +7,23 @@ on:
 
 jobs:
   test:
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
-
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
-    name: stable - ${{ matrix.os }} - node@18
+    name: stable - ${{ matrix.os }} - node@20
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v2
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: 'pnpm'
 
       - name: 'Install dependencies'
@@ -48,18 +46,18 @@ jobs:
       - test
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Cache NPM dependencies
         uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key: npm-cache-${{ matrix.os }}-node@18
+          key: npm-cache-${{ matrix.os }}-node@20
 
       - name: 'Install dependencies'
         run: |
