@@ -57,18 +57,17 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.pnpm-store
-          key: npm-cache-${{ matrix.os }}-node@20
+          key: npm-cache-ubuntu-latest-node@20
+
+      - uses: pnpm/action-setup@v2
 
       - name: 'Install dependencies'
-        run: |
-          npm install -g corepack
-          corepack enable
-          pnpm install
+        run: pnpm install
 
       - name: Build TypeScript
         run: |
           pnpm build
-          rm ./packages/**/tsconfig.project.tsbuildinfo
+          rm ./packages/**/*.tsbuildinfo
 
       - name: Lerna publish
         run: |
