@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.7.0...@swc-node/register@1.8.0) (2024-02-01)
+
+### Bug Fixes
+
+- import ts from node_modules ([#744](https://github.com/swc-project/swc-node/issues/744)) ([c4485ca](https://github.com/swc-project/swc-node/commit/c4485ca185cb31e36126e0da4e0b79a03acfc79b))
+
+### Features
+
+- upgrade dependencies ([#751](https://github.com/swc-project/swc-node/issues/751)) ([653bd13](https://github.com/swc-project/swc-node/commit/653bd13c4ac84bd4bd28b886dc0f4e77362d0734))
+
 # [1.7.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.8...@swc-node/register@1.7.0) (2024-02-01)
 
 ### Bug Fixes
