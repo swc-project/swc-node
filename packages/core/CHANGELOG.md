@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.6...@swc-node/core@1.11.0) (2024-02-01)
+
+### Bug Fixes
+
+- **core:** respect useDefineForClassFields tsconfig value ([#740](https://github.com/swc-project/swc-node/issues/740)) ([9330c1a](https://github.com/swc-project/swc-node/commit/9330c1a1183723638b3c83cff63ec6f18a09294c))
+- respect sourceMaps swcrc value ([#742](https://github.com/swc-project/swc-node/issues/742)) ([df125c8](https://github.com/swc-project/swc-node/commit/df125c8335c25a4dd75c56f5210f822541707d93))
+
+### Features
+
+- **core:** add `ignoreDynamic` option ([4d32c17](https://github.com/swc-project/swc-node/commit/4d32c1700bb2bdb5c56afd26539598b0968dda84))
+
 ## [1.10.6](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.10.5...@swc-node/core@1.10.6) (2023-09-26)
 
 **Note:** Version bump only for package @swc-node/core

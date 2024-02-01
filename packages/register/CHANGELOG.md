@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.8...@swc-node/register@1.7.0) (2024-02-01)
+
+### Bug Fixes
+
+- **core:** respect useDefineForClassFields tsconfig value ([#740](https://github.com/swc-project/swc-node/issues/740)) ([9330c1a](https://github.com/swc-project/swc-node/commit/9330c1a1183723638b3c83cff63ec6f18a09294c))
+
+### Features
+
+- add esm-register for node>20.6 ([#748](https://github.com/swc-project/swc-node/issues/748)) ([23e511c](https://github.com/swc-project/swc-node/commit/23e511c47938d14a0c3d6fc542692469e6039433))
+- **register:** add `SWC_NODE_IGNORE_DYNAMIC` env option ([0862975](https://github.com/swc-project/swc-node/commit/08629752249dc27e9f5b72a9af606dfd6fd7b48a))
+
 ## [1.6.8](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.6.7...@swc-node/register@1.6.8) (2023-09-26)
 
 ### Bug Fixes
