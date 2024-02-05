@@ -94,7 +94,7 @@ export const load: LoadFn = async (url, context, nextLoad) => {
   if (context.format === 'ts') {
     const { source } = await nextLoad(url, context)
     const code = typeof source === 'string' ? source : Buffer.from(source).toString()
-    const compiled = await compile(code, url, tsconfig, true)
+    const compiled = await compile(code, fileURLToPath(url), tsconfig, true)
     return {
       format: 'module',
       source: compiled,
