@@ -4,6 +4,7 @@ import { CompilerOptions, convertCompilerOptionsFromJson } from 'typescript'
 import type { LoaderContext } from 'webpack'
 
 let swcConfig: Options
+
 function getSwcConfig(
   this: LoaderContext<{
     compilerOptions?: CompilerOptions
