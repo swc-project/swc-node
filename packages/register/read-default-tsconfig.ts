@@ -34,6 +34,12 @@ export function readDefaultTsConfig(
     const { config } = ts.readConfigFile(fullTsConfigPath, ts.sys.readFile)
 
     const { options, errors, fileNames } = ts.parseJsonConfigFileContent(config, ts.sys, dirname(fullTsConfigPath))
+
+    // if baseUrl not set, use dirname of tsconfig.json. align with ts https://www.typescriptlang.org/tsconfig#paths
+    if (options.paths && !options.baseUrl) {
+      options.baseUrl = dirname(fullTsConfigPath)
+    }
+
     if (!errors.length) {
       compilerOptions = options
       compilerOptions.files = fileNames
