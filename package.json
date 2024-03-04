@@ -31,7 +31,7 @@
     "lint": "eslint -c ./.eslintrc.yml .",
     "test": "ava",
     "test:jest": "jest --config jest.config.js",
-    "test:module": "cross-env SWC_NODE_PROJECT=packages/integrate-module/tsconfig.json node --loader=@swc-node/register/esm packages/integrate-module/src/index.ts",
+    "test:module": "cross-env SWC_NODE_PROJECT=packages/integrate-module/tsconfig.json node --import=@swc-node/register/esm-register packages/integrate-module/src/index.ts",
     "version": "pnpm install && git add .",
     "postinstall": "husky install"
   },

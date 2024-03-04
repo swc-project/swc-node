@@ -10,7 +10,7 @@ test('default values', (t) => {
   const filename = 'some-file.tsx'
   const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
   const expected = {
-    baseUrl: process.cwd(),
+    baseUrl: undefined,
     module: 'es6',
     sourcemap: false,
     experimentalDecorators: false,

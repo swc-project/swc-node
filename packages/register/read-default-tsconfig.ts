@@ -130,7 +130,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
             useBuiltins: true,
           }
         : undefined,
-    baseUrl: resolve(options.baseUrl ?? './'),
+    baseUrl: options.baseUrl ? resolve(options.baseUrl) : undefined,
     paths: Object.fromEntries(
       Object.entries(options.paths ?? {}).map(([aliasKey, aliasPaths]) => [
         aliasKey,
