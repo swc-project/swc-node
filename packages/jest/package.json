@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/jest",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "swc preprocessor for jest with source map support",
   "keywords": [
     "swc",
@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@node-rs/xxhash": "^1.6.2",
-    "@swc-node/core": "^1.12.0",
-    "@swc-node/register": "^1.8.0"
+    "@swc-node/core": "^1.13.0",
+    "@swc-node/register": "^1.9.0"
   },
   "peerDependencies": {
     "@swc/core": ">= 1.3",
