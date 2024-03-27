@@ -118,3 +118,5 @@ export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {
     ...hookOpts,
   })
 }
+
+export default register;
