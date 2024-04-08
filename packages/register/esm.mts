@@ -11,11 +11,13 @@ interface ResolveContext {
   conditions: string[]
   parentURL: string | undefined
 }
+
 interface ResolveResult {
   format?: string
   shortCircuit?: boolean
   url: string
 }
+
 type ResolveArgs = [
   specifier: string,
   context?: ResolveContext,
@@ -51,7 +53,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
   }
 
   const { resolvedModule } = ts.resolveModuleName(
-    specifier,
+    specifier.endsWith('file:') ? fileURLToPath(specifier) : specifier,
     fileURLToPath(context.parentURL),
     tsconfig,
     host,
@@ -82,11 +84,13 @@ interface LoadContext {
   conditions: string[]
   format: string | null | undefined
 }
+
 interface LoadResult {
   format: string
   shortCircuit?: boolean
   source: string | ArrayBuffer | SharedArrayBuffer | Uint8Array
 }
+
 type LoadArgs = [url: string, context: LoadContext, nextLoad?: (...args: LoadArgs) => Promise<LoadResult>]
 type LoadFn = (...args: Required<LoadArgs>) => Promise<LoadResult>
 
