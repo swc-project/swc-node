@@ -53,7 +53,7 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
   }
 
   const { resolvedModule } = ts.resolveModuleName(
-    specifier.endsWith('file:') ? fileURLToPath(specifier) : specifier,
+    specifier.startsWith('file:') ? fileURLToPath(specifier) : specifier,
     fileURLToPath(context.parentURL),
     tsconfig,
     host,
