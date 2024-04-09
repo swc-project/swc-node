@@ -1,6 +1,3 @@
-import { platform } from 'os'
-import { resolve } from 'path'
-
 import { Options, transform, transformSync } from '@swc-node/core'
 import { installSourceMapSupport, SourcemapMap } from '@swc-node/sourcemap-support'
 import { addHook } from 'pirates'
@@ -8,8 +5,28 @@ import * as ts from 'typescript'
 
 import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from './read-default-tsconfig'
 
-const DEFAULT_EXTENSIONS = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx']
-const PLATFORM = platform()
+const DEFAULT_EXTENSIONS = [
+  ts.Extension.Js,
+  ts.Extension.Ts,
+  ts.Extension.Jsx,
+  ts.Extension.Tsx,
+  ts.Extension.Mjs,
+  ts.Extension.Mts,
+  ts.Extension.Cjs,
+  ts.Extension.Cts,
+  '.es6',
+  '.es',
+]
+
+export const AVAILABLE_TS_EXTENSION_PATTERN = new RegExp(
+  `(?<!\\.d(${[ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts, ts.Extension.Cts].map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
+  'i',
+)
+
+export const AVAILABLE_EXTENSION_PATTERN = new RegExp(
+  `(?<!\\.d(${DEFAULT_EXTENSIONS.map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
+  'i',
+)
 
 const injectInlineSourceMap = ({
   filename,
@@ -32,49 +49,51 @@ const injectInlineSourceMap = ({
 export function compile(
   sourcecode: string,
   filename: string,
-  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  options: ts.CompilerOptions & {
+    fallbackToTs?: (filename: string) => boolean
+  },
 ): string
 
 export function compile(
   sourcecode: string,
   filename: string,
-  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  options: ts.CompilerOptions & {
+    fallbackToTs?: (filename: string) => boolean
+  },
   async: false,
 ): string
 
 export function compile(
   sourcecode: string,
   filename: string,
-  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  options: ts.CompilerOptions & {
+    fallbackToTs?: (filename: string) => boolean
+  },
   async: true,
 ): Promise<string>
 
 export function compile(
   sourcecode: string,
   filename: string,
-  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  options: ts.CompilerOptions & {
+    fallbackToTs?: (filename: string) => boolean
+  },
   async: boolean,
 ): string | Promise<string>
 
 export function compile(
   sourcecode: string,
   filename: string,
-  options: ts.CompilerOptions & { fallbackToTs?: (filename: string) => boolean },
+  options: ts.CompilerOptions & {
+    fallbackToTs?: (filename: string) => boolean
+  },
   async = false,
 ) {
-  if (filename.endsWith('.d.ts')) {
-    return ''
-  }
-  if (options.files && (options.files as string[]).length) {
-    if (
-      PLATFORM === 'win32' &&
-      (options.files as string[]).every((file) => filename !== resolve(process.cwd(), file))
-    ) {
-      return sourcecode
-    }
-    if (PLATFORM !== 'win32' && (options.files as string[]).every((file) => !filename.endsWith(file))) {
-      return sourcecode
-    }
+  if (
+    (filename.includes('node_modules') && !AVAILABLE_TS_EXTENSION_PATTERN.test(filename)) ||
+    !AVAILABLE_EXTENSION_PATTERN.test(filename)
+  ) {
+    return sourcecode
   }
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
     delete options.fallbackToTs
@@ -96,7 +115,7 @@ export function compile(
   } else {
     swcRegisterConfig = tsCompilerOptionsToSwcConfig(options, filename)
   }
-  
+
   if (async) {
     return transform(sourcecode, filename, swcRegisterConfig).then(({ code, map }) => {
       return injectInlineSourceMap({ filename, code, map })
@@ -108,8 +127,8 @@ export function compile(
 }
 
 export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {}) {
-  if (!process.env.SWCRC) { 
-    options = Object.keys(options).length ? options : readDefaultTsConfig() 
+  if (!process.env.SWCRC) {
+    options = Object.keys(options).length ? options : readDefaultTsConfig()
   }
   options.module = ts.ModuleKind.CommonJS
   installSourceMapSupport()
