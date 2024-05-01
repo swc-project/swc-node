@@ -52,12 +52,12 @@
     "typescript": ">= 4.3"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.13",
-    "@swc/helpers": "^0.5.3",
+    "@swc/core": "^1.4.17",
+    "@swc/helpers": "^0.5.11",
     "@types/debug": "^4.1.12",
     "lodash": "^4.17.21",
     "sinon": "^17.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "funding": {
     "type": "github",

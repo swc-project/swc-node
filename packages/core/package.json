@@ -45,8 +45,8 @@
     "@swc/types": ">= 0.1"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.13",
-    "@swc/types": "^0.1.5"
+    "@swc/core": "^1.4.17",
+    "@swc/types": "^0.1.6"
   },
   "funding": {
     "type": "github",
