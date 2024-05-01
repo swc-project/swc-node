@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.0...@swc-node/register@1.9.1) (2024-05-01)
+
+### Bug Fixes
+
+- **register:** fix esm entry resolver for third-party executer, close [#762](https://github.com/swc-project/swc-node/issues/762) ([#766](https://github.com/swc-project/swc-node/issues/766)) ([9e6c02f](https://github.com/swc-project/swc-node/commit/9e6c02feb9a19d9782981f984084885e92dae031))
+- support compile js files. close [#761](https://github.com/swc-project/swc-node/issues/761) ([#767](https://github.com/swc-project/swc-node/issues/767)) ([016f1aa](https://github.com/swc-project/swc-node/commit/016f1aab2a17d2512d30b5a12848ed1941b59e49))
+
 # [1.9.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.7.0...@swc-node/register@1.9.0) (2024-03-05)
 
 ### Bug Fixes

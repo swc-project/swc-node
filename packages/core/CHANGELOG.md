@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.1](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.13.0...@swc-node/core@1.13.1) (2024-05-01)
+
+### Bug Fixes
+
+- support compile js files. close [#761](https://github.com/swc-project/swc-node/issues/761) ([#767](https://github.com/swc-project/swc-node/issues/767)) ([016f1aa](https://github.com/swc-project/swc-node/commit/016f1aab2a17d2512d30b5a12848ed1941b59e49))
+
 # [1.13.0](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.11.0...@swc-node/core@1.13.0) (2024-03-05)
 
 ### Features

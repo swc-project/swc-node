@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/register",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "SWC node register",
   "keywords": [
     "swc",
@@ -40,7 +40,7 @@
     "url": "https://github.com/swc-project/swc-node/issues"
   },
   "dependencies": {
-    "@swc-node/core": "^1.13.0",
+    "@swc-node/core": "^1.13.1",
     "@swc-node/sourcemap-support": "^0.5.0",
     "colorette": "^2.0.20",
     "debug": "^4.3.4",
