@@ -36,39 +36,39 @@
     "postinstall": "husky install"
   },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/plugin-transform-typescript": "^7.23.6",
-    "@babel/preset-env": "^7.23.9",
-    "@babel/preset-typescript": "^7.23.3",
+    "@babel/core": "^7.24.5",
+    "@babel/plugin-transform-typescript": "^7.24.5",
+    "@babel/preset-env": "^7.24.5",
+    "@babel/preset-typescript": "^7.24.1",
     "@swc-node/core": "workspace:*",
     "@swc-node/jest": "workspace:*",
     "@swc-node/register": "workspace:*",
     "@types/babel__core": "^7.20.5",
     "@types/benchmark": "^2.1.5",
-    "@types/lodash": "^4.14.202",
-    "@types/node": "^20.11.15",
+    "@types/lodash": "^4.17.0",
+    "@types/node": "^20.12.7",
     "@types/sinon": "^17.0.3",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
-    "ava": "^6.1.1",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
+    "@typescript-eslint/parser": "^7.8.0",
+    "ava": "^6.1.2",
     "benchmark": "^2.1.4",
     "colorette": "^2.0.20",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.20.0",
-    "eslint": "^8.56.0",
+    "esbuild": "^0.20.2",
+    "eslint": "8",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
-    "husky": "^9.0.8",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
-    "lerna": "^8.0.2",
-    "lint-staged": "^15.2.1",
+    "lerna": "^8.1.2",
+    "lint-staged": "^15.2.2",
     "lodash": "^4.17.21",
-    "prettier": "^3.2.4",
-    "react": "^18.2.0",
+    "prettier": "^3.2.5",
+    "react": "^18.3.1",
     "rxjs": "^7.8.1",
     "sinon": "^17.0.1",
     "tslib": "^2.6.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "lint-staged": {
     "*.@(js|ts|tsx|mts)": [
@@ -102,5 +102,5 @@
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
-  "packageManager": "pnpm@8.15.1"
+  "packageManager": "pnpm@9.0.6"
 }

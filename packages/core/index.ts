@@ -78,8 +78,8 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
     sourceMaps: options?.swc?.swcrc
       ? undefined
       : jest || typeof opts.sourcemap === 'undefined'
-      ? 'inline'
-      : opts.sourcemap,
+        ? 'inline'
+        : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
     ...(options?.swc ?? {}),
