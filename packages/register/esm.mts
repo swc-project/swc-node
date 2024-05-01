@@ -1,3 +1,4 @@
+import type { LoadHook, ResolveHook } from 'node:module'
 import { fileURLToPath, pathToFileURL } from 'url'
 
 import ts from 'typescript'
@@ -5,25 +6,7 @@ import ts from 'typescript'
 // @ts-expect-error
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
-import { compile } from '../lib/register.js'
-
-interface ResolveContext {
-  conditions: string[]
-  parentURL: string | undefined
-}
-
-interface ResolveResult {
-  format?: string
-  shortCircuit?: boolean
-  url: string
-}
-
-type ResolveArgs = [
-  specifier: string,
-  context?: ResolveContext,
-  nextResolve?: (...args: ResolveArgs) => Promise<ResolveResult>,
-]
-type ResolveFn = (...args: Required<ResolveArgs>) => Promise<ResolveResult>
+import { AVAILABLE_EXTENSION_PATTERN, AVAILABLE_TS_EXTENSION_PATTERN, compile } from '../lib/register.js'
 
 const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
 tsconfig.module = ts.ModuleKind.ESNext
@@ -33,23 +16,22 @@ const host: ts.ModuleResolutionHost = {
   fileExists: ts.sys.fileExists,
   readFile: ts.sys.readFile,
 }
-const EXTENSIONS: string[] = [ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts]
 
-export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
-  const isTS = EXTENSIONS.some((ext) => specifier.endsWith(ext))
+export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
+  if (!AVAILABLE_EXTENSION_PATTERN.test(specifier)) {
+    return nextResolve(specifier)
+  }
 
   // entrypoint
   if (!context.parentURL) {
     return {
-      format: isTS ? 'ts' : undefined,
+      importAttributes: {
+        ...context.importAttributes,
+        swc: 'entrypoint',
+      },
       url: specifier,
       shortCircuit: true,
     }
-  }
-
-  // import/require from external library
-  if (context.parentURL.includes('/node_modules/') && !isTS) {
-    return nextResolve(specifier)
   }
 
   const { resolvedModule } = ts.resolveModuleName(
@@ -60,39 +42,25 @@ export const resolve: ResolveFn = async (specifier, context, nextResolve) => {
     moduleResolutionCache,
   )
 
-  // import from local project to local project TS file
+  // local project file
   if (
     resolvedModule &&
-    !resolvedModule.resolvedFileName.includes('/node_modules/') &&
-    EXTENSIONS.includes(resolvedModule.extension)
+    (!resolvedModule.resolvedFileName.includes('/node_modules/') ||
+      AVAILABLE_TS_EXTENSION_PATTERN.test(resolvedModule.resolvedFileName))
   ) {
     return {
-      format: 'ts',
       url: pathToFileURL(resolvedModule.resolvedFileName).href,
       shortCircuit: true,
+      importAttributes: {
+        ...context.importAttributes,
+        swc: resolvedModule.resolvedFileName,
+      },
     }
   }
 
-  // import from local project to either:
-  // - something TS couldn't resolve
-  // - external library
-  // - local project non-TS file
+  // files could not resolved by typescript
   return nextResolve(specifier)
 }
-
-interface LoadContext {
-  conditions: string[]
-  format: string | null | undefined
-}
-
-interface LoadResult {
-  format: string
-  shortCircuit?: boolean
-  source: string | ArrayBuffer | SharedArrayBuffer | Uint8Array
-}
-
-type LoadArgs = [url: string, context: LoadContext, nextLoad?: (...args: LoadArgs) => Promise<LoadResult>]
-type LoadFn = (...args: Required<LoadArgs>) => Promise<LoadResult>
 
 const tsconfigForSWCNode = {
   ...tsconfig,
@@ -100,10 +68,18 @@ const tsconfigForSWCNode = {
   baseUrl: undefined,
 }
 
-export const load: LoadFn = async (url, context, nextLoad) => {
-  if (context.format === 'ts') {
-    const { source } = await nextLoad(url, context)
-    const code = typeof source === 'string' ? source : Buffer.from(source).toString()
+export const load: LoadHook = async (url, context, nextLoad) => {
+  const swcAttribute = context.importAttributes.swc
+
+  if (swcAttribute) {
+    delete context.importAttributes.swc
+
+    const { source } = await nextLoad(url, {
+      ...context,
+      format: 'ts' as any,
+    })
+
+    const code = !source || typeof source === 'string' ? source : Buffer.from(source).toString()
     const compiled = await compile(code, fileURLToPath(url), tsconfigForSWCNode, true)
     return {
       format: 'module',

@@ -4,7 +4,11 @@
     "target": "ESNext",
     "module": "ESNext",
     "composite": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": "./",
+    "paths": {
+      "@subdirectory/*": ["./src/subdirectory/*"],
+    },
   },
-  "include": ["src"]
+  "include": ["src"],
 }

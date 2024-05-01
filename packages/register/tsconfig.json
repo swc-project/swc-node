@@ -11,5 +11,5 @@
     },
   ],
   "include": ["."],
-  "exclude": ["lib"],
+  "exclude": ["lib", "__test__"],
 }

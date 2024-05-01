@@ -87,6 +87,7 @@
   },
   "ava": {
     "extensions": [
+      "js",
       "ts",
       "tsx"
     ],
@@ -95,7 +96,7 @@
     ],
     "cache": false,
     "files": [
-      "packages/**/*.spec.{ts,tsx}"
+      "packages/**/*.spec.{js,ts,tsx}"
     ],
     "environmentVariables": {
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
