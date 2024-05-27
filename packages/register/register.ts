@@ -19,12 +19,12 @@ const DEFAULT_EXTENSIONS = [
 ]
 
 export const AVAILABLE_TS_EXTENSION_PATTERN = new RegExp(
-  `(?<!\\.d(${[ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts, ts.Extension.Cts].map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
+  `((?<!\\.d)(${[ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts, ts.Extension.Cts].map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
   'i',
 )
 
 export const AVAILABLE_EXTENSION_PATTERN = new RegExp(
-  `(?<!\\.d(${DEFAULT_EXTENSIONS.map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
+  `((?<!\\.d)(${DEFAULT_EXTENSIONS.map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
   'i',
 )
 
