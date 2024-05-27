@@ -122,6 +122,9 @@ importers:
       '@swc-node/core':
         specifier: ^1.13.0
         version: link:../core
+      '@swc-node/register':
+        specifier: workspace:*
+        version: link:../register
       '@swc/helpers':
         specifier: ^0.5.11
         version: 0.5.11
@@ -146,6 +149,9 @@ importers:
       sinon:
         specifier: ^17.0.1
         version: 17.0.1
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
 
   packages/integrate-module:
     dependencies:

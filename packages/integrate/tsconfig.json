@@ -6,13 +6,17 @@
     "outDir": "./lib",
     "jsx": "react-jsx",
     "types": ["node", "jest"],
+    "allowImportingTsExtensions": true
   },
   "references": [
     {
-      "path": "../core",
+      "path": "../core"
     },
+    {
+      "path": "../register"
+    }
   ],
   "include": ["."],
   "files": ["./package.json"],
-  "exclude": ["lib"],
+  "exclude": ["lib"]
 }
