@@ -30,12 +30,12 @@ SWCRC=true node -r @swc-node/register script.ts
 ```
 
 ```typescript
-#!/usr/bin/env node --import swc-register-esm
+#!/usr/bin/env node --import @swc-node/register/esm-register
 
 // your code
 ```
 
-run with shebang, add `TS_NODE_PROJECT=null`(`#!/usr/bin/env TS_NODE_PROJECT=null node --import swc-register-esm`) to use ignore tsconfig.json
+run with shebang, add `TS_NODE_PROJECT=null`(`#!/usr/bin/env TS_NODE_PROJECT=null node --import @swc-node/register/esm-register`) to use ignore tsconfig.json
 
 ## @swc-node/core
 
