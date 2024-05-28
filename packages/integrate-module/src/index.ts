@@ -4,6 +4,7 @@ import test from 'node:test'
 
 import { supportedExtensions } from 'file-type'
 
+import { CompiledClass } from './compiled.js'
 import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
 import { baz } from './subdirectory/index.mjs'
@@ -28,4 +29,9 @@ await test('resolve nested entry point', () => {
 
 await test('resolve paths', () => {
   assert.equal(subBar(), 'bar')
+})
+
+await test('compiled js file with .d.ts', () => {
+  const instance = new CompiledClass()
+  assert.equal(instance.name, 'CompiledClass')
 })
