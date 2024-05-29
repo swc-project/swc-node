@@ -1,14 +1,12 @@
 /* eslint import/order: off */
+import { bar as subBar } from '@subdirectory/bar.mjs'
+import { supportedExtensions } from 'file-type'
 import assert from 'node:assert'
 import test from 'node:test'
-
-import { supportedExtensions } from 'file-type'
-
 import { CompiledClass } from './compiled.js'
 import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
 import { baz } from './subdirectory/index.mjs'
-import { bar as subBar } from '@subdirectory/bar.mjs'
 import './js-module.mjs'
 
 await test('file-type should work', () => {
