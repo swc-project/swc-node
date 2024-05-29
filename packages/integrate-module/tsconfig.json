@@ -7,8 +7,8 @@
     "outDir": "dist",
     "baseUrl": "./",
     "paths": {
-      "@subdirectory/*": ["./src/subdirectory/*"],
-    },
+      "@subdirectory/*": ["./src/subdirectory/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "package.json"]
 }
