@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.1...@swc-node/register@1.9.2) (2024-06-08)
+
+### Bug Fixes
+
+- fix ts extension detect regex, close [#775](https://github.com/swc-project/swc-node/issues/775) [#774](https://github.com/swc-project/swc-node/issues/774) [#772](https://github.com/swc-project/swc-node/issues/772) ([#777](https://github.com/swc-project/swc-node/issues/777)) ([fd85848](https://github.com/swc-project/swc-node/commit/fd8584802b2d08ceef9fa0012ac7e47e30c8b130))
+
 ## [1.9.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.0...@swc-node/register@1.9.1) (2024-05-01)
 
 ### Bug Fixes
