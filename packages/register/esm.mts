@@ -18,7 +18,7 @@ const host: ts.ModuleResolutionHost = {
 }
 
 export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
-  if (!AVAILABLE_EXTENSION_PATTERN.test(specifier)) {
+  if (specifier.startsWith('file:') && !AVAILABLE_EXTENSION_PATTERN.test(specifier)) {
     return nextResolve(specifier)
   }
 
