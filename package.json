@@ -102,5 +102,5 @@
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
-  "packageManager": "pnpm@9.0.6"
+  "packageManager": "pnpm@9.4.0"
 }
