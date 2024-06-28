@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.2...@swc-node/register@1.10.0) (2024-06-28)
+
+### Bug Fixes
+
+- **esm-resolver:** only return early if the specifier is an unsupported file ([#789](https://github.com/swc-project/swc-node/issues/789)) ([014cf6a](https://github.com/swc-project/swc-node/commit/014cf6a1df0f58568bad296a3eac3f76c31abdde))
+
+### Features
+
+- try to resolve format for absolute path import ([86fb5d2](https://github.com/swc-project/swc-node/commit/86fb5d2f660c8dc1f8a73ba54fbc242aba628768))
+- update esm module resolver ([92f05d4](https://github.com/swc-project/swc-node/commit/92f05d4a305e83446ee4ff6e66d3f42b474490e6))
+
 ## [1.9.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.1...@swc-node/register@1.9.2) (2024-06-08)
 
 ### Bug Fixes

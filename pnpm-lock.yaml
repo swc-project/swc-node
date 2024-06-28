@@ -82,7 +82,7 @@ importers:
         version: 29.7.0(@types/node@20.12.7)
       lerna:
         specifier: ^8.1.2
-        version: 8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))(encoding@0.1.13)
+        version: 8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17)(encoding@0.1.13)
       lint-staged:
         specifier: ^15.2.2
         version: 15.2.2
@@ -181,7 +181,7 @@ importers:
         specifier: ^1.13.1
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.9.2
+        specifier: ^1.10.0
         version: link:../register
       typescript:
         specifier: '>= 5.0'
@@ -200,7 +200,7 @@ importers:
         specifier: ^1.13.1
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.9.2
+        specifier: ^1.10.0
         version: link:../register
     devDependencies:
       typescript:
@@ -208,7 +208,7 @@ importers:
         version: 5.4.5
       webpack:
         specifier: ^5.91.0
-        version: 5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2)
+        version: 5.91.0(@swc/core@1.4.17)(esbuild@0.20.2)
 
   packages/register:
     dependencies:
@@ -6245,10 +6245,10 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.15
 
-  '@lerna/create@8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))(encoding@0.1.13)':
+  '@lerna/create@8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17)(encoding@0.1.13)':
     dependencies:
       '@npmcli/run-script': 7.0.2
-      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))
+      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 19.0.11(encoding@0.1.13)
       byte-size: 8.1.1
@@ -6285,7 +6285,7 @@ snapshots:
       npm-packlist: 5.1.1
       npm-registry-fetch: 14.0.5
       npmlog: 6.0.2
-      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))
+      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)
       p-map: 4.0.0
       p-map-series: 2.1.0
       p-queue: 6.6.2
@@ -6462,28 +6462,28 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@nrwl/devkit@17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))':
+  '@nrwl/devkit@17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))':
     dependencies:
-      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))
+      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))
     transitivePeerDependencies:
       - nx
 
-  '@nrwl/tao@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))':
+  '@nrwl/tao@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)':
     dependencies:
-      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))
+      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)
       tslib: 2.6.2
     transitivePeerDependencies:
       - '@swc-node/register'
       - '@swc/core'
       - debug
 
-  '@nx/devkit@17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))':
+  '@nx/devkit@17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))':
     dependencies:
-      '@nrwl/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))
+      '@nrwl/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))
       ejs: 3.1.9
       enquirer: 2.3.6
       ignore: 5.3.1
-      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))
+      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)
       semver: 7.5.3
       tmp: 0.2.1
       tslib: 2.6.2
@@ -9207,11 +9207,11 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  lerna@8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))(encoding@0.1.13):
+  lerna@8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17)(encoding@0.1.13):
     dependencies:
-      '@lerna/create': 8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))(encoding@0.1.13)
+      '@lerna/create': 8.1.2(@swc-node/register@packages+register)(@swc/core@1.4.17)(encoding@0.1.13)
       '@npmcli/run-script': 7.0.2
-      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)))
+      '@nx/devkit': 17.3.1(nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17))
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 19.0.11(encoding@0.1.13)
       byte-size: 8.1.1
@@ -9254,7 +9254,7 @@ snapshots:
       npm-packlist: 5.1.1
       npm-registry-fetch: 14.0.5
       npmlog: 6.0.2
-      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))
+      nx: 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)
       p-map: 4.0.0
       p-map-series: 2.1.0
       p-pipe: 3.1.0
@@ -9811,9 +9811,9 @@ snapshots:
       gauge: 4.0.4
       set-blocking: 2.0.0
 
-  nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11)):
+  nx@17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17):
     dependencies:
-      '@nrwl/tao': 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17(@swc/helpers@0.5.11))
+      '@nrwl/tao': 17.3.1(@swc-node/register@packages+register)(@swc/core@1.4.17)
       '@yarnpkg/lockfile': 1.1.0
       '@yarnpkg/parsers': 3.0.0-rc.46
       '@zkochan/js-yaml': 0.0.6
@@ -10670,14 +10670,14 @@ snapshots:
 
   temp-dir@3.0.0: {}
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2)):
+  terser-webpack-plugin@5.3.10(@swc/core@1.4.17)(esbuild@0.20.2)(webpack@5.91.0(@swc/core@1.4.17)(esbuild@0.20.2)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.1
       terser: 5.27.0
-      webpack: 5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2)
+      webpack: 5.91.0(@swc/core@1.4.17)(esbuild@0.20.2)
     optionalDependencies:
       '@swc/core': 1.4.17(@swc/helpers@0.5.11)
       esbuild: 0.20.2
@@ -10911,7 +10911,7 @@ snapshots:
 
   webpack-sources@3.2.3: {}
 
-  webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2):
+  webpack@5.91.0(@swc/core@1.4.17)(esbuild@0.20.2):
     dependencies:
       '@types/eslint-scope': 3.7.4
       '@types/estree': 1.0.5
@@ -10934,7 +10934,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2)(webpack@5.91.0(@swc/core@1.4.17(@swc/helpers@0.5.11))(esbuild@0.20.2))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.4.17)(esbuild@0.20.2)(webpack@5.91.0(@swc/core@1.4.17)(esbuild@0.20.2))
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     transitivePeerDependencies:
