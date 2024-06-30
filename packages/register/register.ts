@@ -89,10 +89,7 @@ export function compile(
   },
   async = false,
 ) {
-  if (
-    (filename.includes('node_modules') && !AVAILABLE_TS_EXTENSION_PATTERN.test(filename)) ||
-    !AVAILABLE_EXTENSION_PATTERN.test(filename)
-  ) {
+  if (!AVAILABLE_TS_EXTENSION_PATTERN.test(filename)) {
     return sourcecode
   }
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
