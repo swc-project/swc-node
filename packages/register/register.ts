@@ -23,11 +23,6 @@ export const AVAILABLE_TS_EXTENSION_PATTERN = new RegExp(
   'i',
 )
 
-export const AVAILABLE_EXTENSION_PATTERN = new RegExp(
-  `((?<!\\.d)(${DEFAULT_EXTENSIONS.map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
-  'i',
-)
-
 const injectInlineSourceMap = ({
   filename,
   code,

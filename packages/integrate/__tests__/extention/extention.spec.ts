@@ -1,10 +1,9 @@
-import { AVAILABLE_EXTENSION_PATTERN, AVAILABLE_TS_EXTENSION_PATTERN } from '@swc-node/register/register.ts'
+import { AVAILABLE_TS_EXTENSION_PATTERN } from '@swc-node/register/register.ts'
 import test from 'ava'
 import * as ts from 'typescript'
 
 const tsExtensions = [ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts, ts.Extension.Cts]
 const nonTsExtensions = [ts.Extension.Js, ts.Extension.Jsx, ts.Extension.Mjs, ts.Extension.Cjs, '.es6', '.es']
-const defaultExtensions = [...tsExtensions, ...nonTsExtensions]
 const ignoreExtensions = ['.txt', '.json', '.xml']
 
 test(`AVAILABLE_TS_EXTENSION_PATTERN matches TypeScript extensions`, (t) => {
@@ -22,17 +21,5 @@ test(`AVAILABLE_TS_EXTENSION_PATTERN does not match d.ts`, (t) => {
 test(`AVAILABLE_TS_EXTENSION_PATTERN does not match non-ts extensions`, (t) => {
   ;[...nonTsExtensions, ...ignoreExtensions].forEach((ext) => {
     t.false(AVAILABLE_TS_EXTENSION_PATTERN.test(`file${ext}`))
-  })
-})
-
-test(`AVAILABLE_EXTENSION_PATTERN matches default extensions`, (t) => {
-  defaultExtensions.forEach((ext) => {
-    t.true(AVAILABLE_EXTENSION_PATTERN.test(`file${ext}`))
-  })
-})
-
-test(`AVAILABLE_EXTENSION_PATTERN does not match non-default extensions`, (t) => {
-  ignoreExtensions.forEach((ext) => {
-    t.false(AVAILABLE_EXTENSION_PATTERN.test(`file${ext}`))
   })
 })
