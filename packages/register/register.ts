@@ -47,7 +47,7 @@ const injectInlineSourceMap = ({
 }
 
 export function compile(
-  sourcecode: string,
+  sourcecode: string | undefined,
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
@@ -55,7 +55,7 @@ export function compile(
 ): string
 
 export function compile(
-  sourcecode: string,
+  sourcecode: string | undefined,
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
@@ -64,7 +64,7 @@ export function compile(
 ): string
 
 export function compile(
-  sourcecode: string,
+  sourcecode: string | undefined,
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
@@ -73,7 +73,7 @@ export function compile(
 ): Promise<string>
 
 export function compile(
-  sourcecode: string,
+  sourcecode: string | undefined,
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
@@ -82,7 +82,7 @@ export function compile(
 ): string | Promise<string>
 
 export function compile(
-  sourcecode: string,
+  sourcecode: string | undefined,
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
@@ -90,6 +90,7 @@ export function compile(
   async = false,
 ) {
   if (
+    typeof sourcecode === 'undefined' ||
     (filename.includes('node_modules') && !AVAILABLE_TS_EXTENSION_PATTERN.test(filename)) ||
     !AVAILABLE_EXTENSION_PATTERN.test(filename)
   ) {
