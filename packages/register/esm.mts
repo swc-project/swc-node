@@ -197,7 +197,11 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   }
 
   // local project file
-  if (path && !path.includes('/node_modules/')) {
+  if (
+    path &&
+    ((process.platform !== 'win32' && !path.includes('/node_modules/')) ||
+      (process.platform === 'win32' && !path.includes('\\node_modules\\')))
+  ) {
     debug('resolved: typescript', specifier, path)
 
     return addShortCircuitSignal({
