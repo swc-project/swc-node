@@ -1,9 +1,10 @@
 import { readFile } from 'fs/promises'
 import { createRequire, type LoadFnOutput, type LoadHook, type ResolveFnOutput, type ResolveHook } from 'node:module'
-import { extname } from 'path'
+import { extname, join } from 'path'
 import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'url'
 
 import debugFactory from 'debug'
+import { ResolverFactory } from 'oxc-resolver'
 import ts from 'typescript'
 
 // @ts-expect-error
@@ -16,11 +17,27 @@ const debug = debugFactory('@swc-node')
 const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
 tsconfig.module = ts.ModuleKind.ESNext
 
-const moduleResolutionCache = ts.createModuleResolutionCache(ts.sys.getCurrentDirectory(), (x) => x, tsconfig)
-const host: ts.ModuleResolutionHost = {
-  fileExists: ts.sys.fileExists,
-  readFile: ts.sys.readFile,
-}
+const TSCONFIG_PATH = (function () {
+  const pathFromEnv =
+    process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json')
+  if (!pathFromEnv.startsWith('/')) {
+    return join(process.cwd(), pathFromEnv)
+  }
+  return pathFromEnv
+})()
+
+const resolver = new ResolverFactory({
+  tsconfig: {
+    configFile: TSCONFIG_PATH,
+    references: 'auto',
+  },
+  conditionNames: ['node', 'import'],
+  extensionAlias: {
+    '.js': ['.ts', '.js'],
+    '.mjs': ['.mts', '.mjs'],
+    '.cjs': ['.cts', '.cjs'],
+  },
+})
 
 const addShortCircuitSignal = <T extends ResolveFnOutput | LoadFnOutput>(input: T): T => {
   return {
@@ -169,25 +186,27 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     return addShortCircuitSignal(await nextResolve(specifier))
   }
 
-  const { resolvedModule } = ts.resolveModuleName(
+  const { error, path } = await resolver.async(
+    join(fileURLToPath(context.parentURL), '..'),
     specifier.startsWith('file:') ? fileURLToPath(specifier) : specifier,
-    fileURLToPath(context.parentURL),
-    tsconfig,
-    host,
-    moduleResolutionCache,
   )
+
+  if (error) {
+    console.error(error)
+    throw error
+  }
 
   // local project file
   if (
-    resolvedModule &&
-    !resolvedModule.resolvedFileName.includes('/node_modules/') &&
-    AVAILABLE_TS_EXTENSION_PATTERN.test(resolvedModule.resolvedFileName)
+    path &&
+    ((process.platform !== 'win32' && !path.includes('/node_modules/')) ||
+      (process.platform === 'win32' && !path.includes('\\node_modules\\')))
   ) {
-    debug('resolved: typescript', specifier, resolvedModule.resolvedFileName)
+    debug('resolved: typescript', specifier, path)
 
     return addShortCircuitSignal({
       ...context,
-      url: pathToFileURL(resolvedModule.resolvedFileName).href,
+      url: pathToFileURL(path).href,
       format: 'module',
     })
   }

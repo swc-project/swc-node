@@ -82,7 +82,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
         : opts.sourcemap,
     inlineSourcesContent: true,
     swcrc: false,
-    ...(options?.swc ?? {}),
+    ...options?.swc,
   }
 }
 
