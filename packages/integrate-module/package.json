@@ -8,8 +8,8 @@
     "p-timeout": "^6.1.2"
   },
   "devDependencies": {
-    "@swc/core": "^1.4.17",
+    "@swc/core": "^1.6.6",
     "@swc-node/register": "workspace:*",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   }
 }
