@@ -31,6 +31,7 @@ const resolver = new ResolverFactory({
     configFile: TSCONFIG_PATH,
     references: 'auto',
   },
+  conditionNames: ['node', 'import'],
   extensionAlias: {
     '.js': ['.ts', '.js'],
     '.mjs': ['.mts', '.mjs'],
