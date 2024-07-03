@@ -5,6 +5,9 @@ on:
     branches: [master, develop]
   pull_request:
 
+env:
+  OXC_LOG: 'debug'
+
 jobs:
   test:
     strategy:
@@ -18,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
 
       - name: Setup node
         uses: actions/setup-node@v4
@@ -54,7 +57,7 @@ jobs:
           node-version: 20
 
       - name: Cache NPM dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
           key: npm-cache-ubuntu-latest-node@20
