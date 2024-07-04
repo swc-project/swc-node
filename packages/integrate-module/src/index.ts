@@ -13,6 +13,8 @@ import { baz } from './subdirectory/index.mjs'
 import { Component } from './component.js'
 import './js-module.mjs'
 
+const { foo: fooWithQuery } = await import(`./foo.mjs?q=${Date.now()}`)
+
 await test('file-type should work', () => {
   assert.ok(supportedExtensions.has('jpg'))
 })
@@ -31,6 +33,10 @@ await test('resolve nested entry point', () => {
 
 await test('resolve paths', () => {
   assert.equal(subBar(), 'bar')
+})
+
+await test('resolve with query', () => {
+  assert.equal(fooWithQuery(), 'foo')
 })
 
 await test('compiled js file with .d.ts', () => {

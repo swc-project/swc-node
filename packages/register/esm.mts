@@ -202,10 +202,10 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
       (process.platform === 'win32' && !path.includes('\\node_modules\\')))
   ) {
     debug('resolved: typescript', specifier, path)
-
+    const url = new URL(join('file://', path))
     return addShortCircuitSignal({
       ...context,
-      url: pathToFileURL(path).href,
+      url: url.href,
       format: 'module',
     })
   }
