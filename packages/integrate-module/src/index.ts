@@ -4,11 +4,13 @@ import test from 'node:test'
 
 import { bar as subBar } from '@subdirectory/bar.mjs'
 import { supportedExtensions } from 'file-type'
+import { renderToString } from 'react-dom/server'
 
 import { CompiledClass } from './compiled.js'
 import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
 import { baz } from './subdirectory/index.mjs'
+import { Component } from './component.js'
 import './js-module.mjs'
 
 await test('file-type should work', () => {
@@ -34,4 +36,8 @@ await test('resolve paths', () => {
 await test('compiled js file with .d.ts', () => {
   const instance = new CompiledClass()
   assert.equal(instance.name, 'CompiledClass')
+})
+
+await test('jsx should work', () => {
+  assert.equal(renderToString(Component()), '<div>Component</div>')
 })
