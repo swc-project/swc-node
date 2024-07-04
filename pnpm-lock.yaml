@@ -156,6 +156,18 @@ importers:
       '@swc/core':
         specifier: ^1.6.6
         version: 1.6.6(@swc/helpers@0.5.11)
+      '@types/react':
+        specifier: ^18.3.3
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.3.0
+        version: 18.3.0
+      react:
+        specifier: ^18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.3.1
+        version: 18.3.1(react@18.3.1)
       typescript:
         specifier: ^5.5.3
         version: 5.5.3

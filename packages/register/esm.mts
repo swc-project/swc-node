@@ -33,7 +33,7 @@ const resolver = new ResolverFactory({
   },
   conditionNames: ['node', 'import'],
   extensionAlias: {
-    '.js': ['.ts', '.js'],
+    '.js': ['.ts', '.tsx', '.js'],
     '.mjs': ['.mts', '.mjs'],
     '.cjs': ['.cts', '.cjs'],
   },
@@ -192,8 +192,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   )
 
   if (error) {
-    console.error(error)
-    throw error
+    throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`)
   }
 
   // local project file

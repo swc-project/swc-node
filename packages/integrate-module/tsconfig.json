@@ -4,6 +4,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "composite": true,
+    "jsx": "react-jsx",
     "outDir": "dist",
     "baseUrl": "./",
     "paths": {
