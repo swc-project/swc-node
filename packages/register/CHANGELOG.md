@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.0...@swc-node/register@1.10.1) (2024-07-05)
+
+### Bug Fixes
+
+- **register:** do not send undefined source code for compilation ([#797](https://github.com/swc-project/swc-node/issues/797)) ([3499611](https://github.com/swc-project/swc-node/commit/3499611349c3bff2ab9d0eef7cb27b118f5305bf))
+- **register:** ensure TS compiler option to SWC config transformer respects inline source map option ([#726](https://github.com/swc-project/swc-node/issues/726)) ([59f2d99](https://github.com/swc-project/swc-node/commit/59f2d99aa0f8d4ebe67d2b5b792e28c811b82420))
+- **register:** file path with query ([#801](https://github.com/swc-project/swc-node/issues/801)) ([9e53df0](https://github.com/swc-project/swc-node/commit/9e53df0c40cc443820352098602a61f7a39e1330))
+- **register:** tsx file ([#800](https://github.com/swc-project/swc-node/issues/800)) ([1071d8d](https://github.com/swc-project/swc-node/commit/1071d8d8f55e42822556ad0f16e14a7562242073))
+
 # [1.10.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.9.2...@swc-node/register@1.10.0) (2024-06-28)
 
 ### Bug Fixes
