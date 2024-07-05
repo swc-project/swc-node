@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.1...@swc-node/register@1.10.2) (2024-07-05)
+
+### Bug Fixes
+
+- **register:** resolve builtin modules without node: protocal ([#803](https://github.com/swc-project/swc-node/issues/803)) ([a4a6832](https://github.com/swc-project/swc-node/commit/a4a68320ef03385fab8d1f0b32203ad14c887590))
+
 ## [1.10.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.0...@swc-node/register@1.10.1) (2024-07-05)
 
 ### Bug Fixes
