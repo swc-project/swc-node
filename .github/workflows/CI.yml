@@ -63,7 +63,7 @@ jobs:
           path: ~/.pnpm-store
           key: npm-cache-ubuntu-latest-node@20
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v4
 
       - name: 'Install dependencies'
         run: pnpm install
