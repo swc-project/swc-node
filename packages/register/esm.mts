@@ -14,6 +14,62 @@ import { AVAILABLE_TS_EXTENSION_PATTERN, compile } from '../lib/register.js'
 
 const debug = debugFactory('@swc-node')
 
+const builtin = new Set([
+  'assert',
+  'assert/strict',
+  'async_hooks',
+  'buffer',
+  'child_process',
+  'cluster',
+  'console',
+  'constants',
+  'crypto',
+  'dgram',
+  'diagnostics_channel',
+  'dns',
+  'dns/promises',
+  'domain',
+  'events',
+  'fs',
+  'fs/promises',
+  'http',
+  'http2',
+  'https',
+  'inspector',
+  'inspector/promises',
+  'module',
+  'net',
+  'os',
+  'path',
+  'path/posix',
+  'path/win32',
+  'perf_hooks',
+  'process',
+  'punycode',
+  'querystring',
+  'readline',
+  'readline/promises',
+  'repl',
+  'stream',
+  'stream/consumers',
+  'stream/promises',
+  'stream/web',
+  'string_decoder',
+  'timers',
+  'timers/promises',
+  'tls',
+  'trace_events',
+  'tty',
+  'url',
+  'util',
+  'util/types',
+  'v8',
+  'vm',
+  'wasi',
+  'worker_threads',
+  'zlib',
+])
+
 const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
 tsconfig.module = ts.ModuleKind.ESNext
 
@@ -123,8 +179,6 @@ export const getPackageType = async (url: string) => {
   return packageJson?.type ?? undefined
 }
 
-const INTERNAL_MODULE_PATTERN = /^(node|nodejs):/
-
 const EXTENSION_MODULE_MAP = {
   '.mjs': 'module',
   '.cjs': 'commonjs',
@@ -139,11 +193,20 @@ const EXTENSION_MODULE_MAP = {
 export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   debug('resolve', specifier, JSON.stringify(context))
 
-  if (INTERNAL_MODULE_PATTERN.test(specifier)) {
+  if (specifier.startsWith('node:') || specifier.startsWith('nodejs:')) {
     debug('skip resolve: internal format', specifier)
 
     return addShortCircuitSignal({
       url: specifier,
+      format: 'builtin',
+    })
+  }
+
+  if (builtin.has(specifier)) {
+    debug('skip resolve: internal format', specifier)
+
+    return addShortCircuitSignal({
+      url: `node:${specifier}`,
       format: 'builtin',
     })
   }

@@ -2,9 +2,11 @@
 import assert from 'node:assert'
 import test from 'node:test'
 
+import { RepositoryState } from '@napi-rs/simple-git'
 import { bar as subBar } from '@subdirectory/bar.mjs'
 import { supportedExtensions } from 'file-type'
 import { renderToString } from 'react-dom/server'
+import { simpleGit } from 'simple-git'
 
 import { CompiledClass } from './compiled.js'
 import { foo } from './foo.mjs'
@@ -46,4 +48,12 @@ await test('compiled js file with .d.ts', () => {
 
 await test('jsx should work', () => {
   assert.equal(renderToString(Component()), '<div>Component</div>')
+})
+
+await test('resolve @napi-rs projects', () => {
+  assert.equal(RepositoryState.ApplyMailbox, 10)
+})
+
+await test('resolve simple-git', () => {
+  assert.ok(simpleGit)
 })

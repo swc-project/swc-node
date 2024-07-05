@@ -22,6 +22,9 @@ interface _Unused8 {}
 interface _Unused9 {}
 
 test('should work with sourcemaps', (t) => {
+  if (process.platform === 'win32') {
+    return t.pass('Skip on Windows')
+  }
   const projectRoot = join(__dirname, '..', '..', '..', '..')
   t.snapshot(
     new Error().stack
