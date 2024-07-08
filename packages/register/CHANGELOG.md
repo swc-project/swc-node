@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.3](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.2...@swc-node/register@1.10.3) (2024-07-08)
+
+### Bug Fixes
+
+- **register:** support moduleResolution Bundler ([#806](https://github.com/swc-project/swc-node/issues/806)) ([aab1e0f](https://github.com/swc-project/swc-node/commit/aab1e0f383f0ecd02d31916872f39de86d723467))
+
 ## [1.10.2](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.1...@swc-node/register@1.10.2) (2024-07-05)
 
 ### Bug Fixes
