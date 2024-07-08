@@ -4,17 +4,31 @@ import { extname, join } from 'path'
 import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'url'
 
 import debugFactory from 'debug'
-import { ResolverFactory } from 'oxc-resolver'
+import { EnforceExtension, ResolverFactory } from 'oxc-resolver'
 import ts from 'typescript'
 
 // @ts-expect-error
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
-import { AVAILABLE_TS_EXTENSION_PATTERN, compile } from '../lib/register.js'
+import { compile } from '../lib/register.js'
 
 const debug = debugFactory('@swc-node')
 
 const builtin = new Set([
+  '_http_agent',
+  '_http_client',
+  '_http_common',
+  '_http_incoming',
+  '_http_outgoing',
+  '_http_server',
+  '_stream_duplex',
+  '_stream_passthrough',
+  '_stream_readable',
+  '_stream_transform',
+  '_stream_wrap',
+  '_stream_writable',
+  '_tls_common',
+  '_tls_wrap',
   'assert',
   'assert/strict',
   'async_hooks',
@@ -36,7 +50,6 @@ const builtin = new Set([
   'http2',
   'https',
   'inspector',
-  'inspector/promises',
   'module',
   'net',
   'os',
@@ -48,13 +61,13 @@ const builtin = new Set([
   'punycode',
   'querystring',
   'readline',
-  'readline/promises',
   'repl',
   'stream',
   'stream/consumers',
   'stream/promises',
   'stream/web',
   'string_decoder',
+  'sys',
   'timers',
   'timers/promises',
   'tls',
@@ -65,7 +78,6 @@ const builtin = new Set([
   'util/types',
   'v8',
   'vm',
-  'wasi',
   'worker_threads',
   'zlib',
 ])
@@ -88,6 +100,8 @@ const resolver = new ResolverFactory({
     references: 'auto',
   },
   conditionNames: ['node', 'import'],
+  enforceExtension: EnforceExtension.Auto,
+  extensions: ['.js', '.mjs', '.cjs', '.ts', 'tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
   extensionAlias: {
     '.js': ['.ts', '.tsx', '.js'],
     '.mjs': ['.mts', '.mjs'],
