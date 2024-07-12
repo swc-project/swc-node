@@ -30,7 +30,7 @@ SWCRC=true node -r @swc-node/register script.ts
 ```
 
 ```typescript
-#!/usr/bin/env node --import @swc-node/register/esm-register
+#!/usr/bin/env -S node --import @swc-node/register/esm-register
 
 // your code
 ```
