@@ -178,6 +178,8 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
 
+  packages/integrate-module/src/cjs: {}
+
   packages/jest:
     dependencies:
       '@node-rs/xxhash':
