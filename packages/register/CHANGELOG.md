@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.4](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.3...@swc-node/register@1.10.4) (2024-07-12)
+
+### Bug Fixes
+
+- **register:** resolve internal cjs module ([#811](https://github.com/swc-project/swc-node/issues/811)) ([9aad5b0](https://github.com/swc-project/swc-node/commit/9aad5b0a86dbe58aed8cba9c57524ad8e553f21c))
+
 ## [1.10.3](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.2...@swc-node/register@1.10.3) (2024-07-08)
 
 ### Bug Fixes
