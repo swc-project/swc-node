@@ -168,3 +168,6 @@ Cargo.lock
 *.node
 lib
 artifacts
+packages/core/index.js
+packages/core/index.d.ts
+packages/core/index.js.map
