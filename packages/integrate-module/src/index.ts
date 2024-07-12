@@ -9,6 +9,7 @@ import { renderToString } from 'react-dom/server'
 import { simpleGit } from 'simple-git'
 
 import { CompiledClass } from './compiled.js'
+import cjs from './cjs'
 import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
 import { baz } from './subdirectory/index.mjs'
@@ -56,4 +57,8 @@ await test('resolve @napi-rs projects', () => {
 
 await test('resolve simple-git', () => {
   assert.ok(simpleGit)
+})
+
+await test('resolve local cjs module', () => {
+  assert.equal(cjs.default(), 'default.default')
 })

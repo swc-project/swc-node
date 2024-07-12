@@ -44,7 +44,7 @@
     "@swc-node/sourcemap-support": "^0.5.1",
     "colorette": "^2.0.20",
     "debug": "^4.3.5",
-    "oxc-resolver": "^1.9.2",
+    "oxc-resolver": "^1.10.0",
     "pirates": "^4.0.6",
     "tslib": "^2.6.3"
   },

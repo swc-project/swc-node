@@ -1,5 +1,12 @@
 import { readFile } from 'fs/promises'
-import { createRequire, type LoadFnOutput, type LoadHook, type ResolveFnOutput, type ResolveHook } from 'node:module'
+import {
+  createRequire,
+  type LoadFnOutput,
+  type LoadHook,
+  type ResolveFnOutput,
+  type ResolveHook,
+  builtinModules,
+} from 'node:module'
 import { extname, join } from 'path'
 import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'url'
 
@@ -14,73 +21,7 @@ import { compile } from '../lib/register.js'
 
 const debug = debugFactory('@swc-node')
 
-const builtin = new Set([
-  '_http_agent',
-  '_http_client',
-  '_http_common',
-  '_http_incoming',
-  '_http_outgoing',
-  '_http_server',
-  '_stream_duplex',
-  '_stream_passthrough',
-  '_stream_readable',
-  '_stream_transform',
-  '_stream_wrap',
-  '_stream_writable',
-  '_tls_common',
-  '_tls_wrap',
-  'assert',
-  'assert/strict',
-  'async_hooks',
-  'buffer',
-  'child_process',
-  'cluster',
-  'console',
-  'constants',
-  'crypto',
-  'dgram',
-  'diagnostics_channel',
-  'dns',
-  'dns/promises',
-  'domain',
-  'events',
-  'fs',
-  'fs/promises',
-  'http',
-  'http2',
-  'https',
-  'inspector',
-  'module',
-  'net',
-  'os',
-  'path',
-  'path/posix',
-  'path/win32',
-  'perf_hooks',
-  'process',
-  'punycode',
-  'querystring',
-  'readline',
-  'repl',
-  'stream',
-  'stream/consumers',
-  'stream/promises',
-  'stream/web',
-  'string_decoder',
-  'sys',
-  'timers',
-  'timers/promises',
-  'tls',
-  'trace_events',
-  'tty',
-  'url',
-  'util',
-  'util/types',
-  'v8',
-  'vm',
-  'worker_threads',
-  'zlib',
-])
+const builtin = new Set(builtinModules)
 
 const tsconfig: ts.CompilerOptions = readDefaultTsConfig()
 tsconfig.module = ts.ModuleKind.ESNext
@@ -263,7 +204,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     return addShortCircuitSignal(await nextResolve(specifier))
   }
 
-  const { error, path } = await resolver.async(
+  const { error, path, moduleType } = await resolver.async(
     join(fileURLToPath(context.parentURL), '..'),
     specifier.startsWith('file:') ? fileURLToPath(specifier) : specifier,
   )
@@ -283,7 +224,12 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     return addShortCircuitSignal({
       ...context,
       url: url.href,
-      format: 'module',
+      format:
+        moduleType === 'module'
+          ? 'module'
+          : path.endsWith('cjs') || path.endsWith('cts') || moduleType === 'commonjs' || !moduleType
+            ? 'commonjs'
+            : 'module',
     })
   }
 
