@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.6](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.5...@swc-node/register@1.10.6) (2024-07-13)
+
+### Bug Fixes
+
+- **register:** node18 compatible issues ([#814](https://github.com/swc-project/swc-node/issues/814)) ([6bbe5c2](https://github.com/swc-project/swc-node/commit/6bbe5c25f0348d9c8c47dc5c38d394784cf26214))
+
 ## [1.10.5](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.4...@swc-node/register@1.10.5) (2024-07-13)
 
 ### Bug Fixes
