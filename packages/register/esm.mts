@@ -42,7 +42,7 @@ const resolver = new ResolverFactory({
   },
   conditionNames: ['node', 'import'],
   enforceExtension: EnforceExtension.Auto,
-  extensions: ['.js', '.mjs', '.cjs', '.ts', 'tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
+  extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
   extensionAlias: {
     '.js': ['.ts', '.tsx', '.js'],
     '.mjs': ['.mts', '.mjs'],
@@ -138,6 +138,7 @@ const EXTENSION_MODULE_MAP = {
   '.mjs': 'module',
   '.cjs': 'commonjs',
   '.ts': 'module',
+  '.tsx': 'module',
   '.mts': 'module',
   '.cts': 'commonjs',
   '.json': 'json',
