@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.5](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.4...@swc-node/register@1.10.5) (2024-07-13)
+
+### Bug Fixes
+
+- **register:** allow running .tsx file ([#812](https://github.com/swc-project/swc-node/issues/812)) ([6a49076](https://github.com/swc-project/swc-node/commit/6a49076bd235ad95099887f1d89569ca89ac26bb))
+- **register:** resolve .cjs/.cts file in esm package ([#813](https://github.com/swc-project/swc-node/issues/813)) ([154ee94](https://github.com/swc-project/swc-node/commit/154ee94224fd3c98e9e2fe22ad401c96e4dd2f5e))
+
 ## [1.10.4](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.3...@swc-node/register@1.10.4) (2024-07-12)
 
 ### Bug Fixes
