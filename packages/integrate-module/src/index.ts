@@ -14,6 +14,7 @@ import { foo } from './foo.mjs'
 import { bar } from './subdirectory/bar.mjs'
 import { baz } from './subdirectory/index.mjs'
 import { Component } from './component.js'
+import { common } from './common.cjs'
 import './js-module.mjs'
 
 const { foo: fooWithQuery } = await import(`./foo.mjs?q=${Date.now()}`)
@@ -61,4 +62,8 @@ await test('resolve simple-git', () => {
 
 await test('resolve local cjs module', () => {
   assert.equal(cjs.default(), 'default.default')
+})
+
+await test('resolve commonjs module', () => {
+  assert.equal(common, 'common')
 })
