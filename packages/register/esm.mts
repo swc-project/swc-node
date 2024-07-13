@@ -1,4 +1,4 @@
-import { readFile } from 'fs/promises'
+import { readFile } from 'node:fs/promises'
 import {
   createRequire,
   type LoadFnOutput,
@@ -7,8 +7,8 @@ import {
   type ResolveHook,
   builtinModules,
 } from 'node:module'
-import { extname, join } from 'path'
-import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'url'
+import { extname, join } from 'node:path'
+import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'node:url'
 
 import debugFactory from 'debug'
 import { EnforceExtension, ResolverFactory } from 'oxc-resolver'
@@ -225,11 +225,11 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
       ...context,
       url: url.href,
       format:
-        moduleType === 'module'
-          ? 'module'
-          : path.endsWith('cjs') || path.endsWith('cts') || moduleType === 'commonjs' || !moduleType
-            ? 'commonjs'
-            : 'module',
+        path.endsWith('cjs') || path.endsWith('cts') || moduleType === 'commonjs' || !moduleType
+          ? 'commonjs'
+          : moduleType === 'module'
+            ? 'module'
+            : 'commonjs',
     })
   }
 
