@@ -279,6 +279,14 @@ export const load: LoadHook = async (url, context, nextLoad) => {
 
   const { source, format: resolvedFormat } = await nextLoad(url, context)
 
+  if (!source) {
+    debug('No source', url, resolvedFormat)
+    return {
+      source,
+      format: resolvedFormat,
+    }
+  }
+
   debug('loaded', url, resolvedFormat)
 
   const code = !source || typeof source === 'string' ? source : Buffer.from(source).toString()
