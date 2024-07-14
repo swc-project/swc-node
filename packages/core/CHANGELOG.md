@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.3](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.13.2...@swc-node/core@1.13.3) (2024-07-14)
+
+### Bug Fixes
+
+- **register:** enable keepImportAttributes in SWC options ([#816](https://github.com/swc-project/swc-node/issues/816)) ([33568ee](https://github.com/swc-project/swc-node/commit/33568ee42dfb580b4b739ecf89ba7ebb85c45330))
+- **register:** resolve internal cjs module ([#811](https://github.com/swc-project/swc-node/issues/811)) ([9aad5b0](https://github.com/swc-project/swc-node/commit/9aad5b0a86dbe58aed8cba9c57524ad8e553f21c))
+
 ## [1.13.2](https://github.com/swc-project/swc-node/compare/@swc-node/core@1.13.1...@swc-node/core@1.13.2) (2024-07-05)
 
 **Note:** Version bump only for package @swc-node/core
