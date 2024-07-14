@@ -16,6 +16,8 @@ import { baz } from './subdirectory/index.mjs'
 import { Component } from './component.js'
 import { common } from './common.cjs'
 import './js-module.mjs'
+import pgkJson from '../package.json' assert { type: 'json' }
+import pgkJsonWith from '../package.json' with { type: 'json' }
 
 const { foo: fooWithQuery } = await import(`./foo.mjs?q=${Date.now()}`)
 
@@ -66,4 +68,9 @@ await test('resolve local cjs module', () => {
 
 await test('resolve commonjs module', () => {
   assert.equal(common, 'common')
+})
+
+await test('resolve json file', () => {
+  assert.equal(pgkJson.name, 'integrate-module')
+  assert.equal(pgkJsonWith.name, 'integrate-module')
 })
