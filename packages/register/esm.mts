@@ -7,7 +7,7 @@ import {
   type ResolveHook,
   builtinModules,
 } from 'node:module'
-import { extname, join } from 'node:path'
+import { extname, isAbsolute, join } from 'node:path'
 import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'node:url'
 
 import debugFactory from 'debug'
@@ -29,7 +29,7 @@ tsconfig.module = ts.ModuleKind.ESNext
 const TSCONFIG_PATH = (function () {
   const pathFromEnv =
     process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json')
-  if (!pathFromEnv.startsWith('/')) {
+  if (!isAbsolute(pathFromEnv)) {
     return join(process.cwd(), pathFromEnv)
   }
   return pathFromEnv
