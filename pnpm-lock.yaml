@@ -165,6 +165,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.0
         version: 18.3.0
+      esmock:
+        specifier: ^2.6.6
+        version: 2.6.6
       ipaddr.js:
         specifier: ^2.2.0
         version: 2.2.0
@@ -2709,6 +2712,10 @@ packages:
   eslint-scope@5.1.1:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
+
+  esmock@2.6.6:
+    resolution: {integrity: sha512-Ay1IQ/qbZV1j8IqRY5o4GYNyX8Y6qDJVVYRZtQ0WFOqUPf26++qW/LyNaHrxz79QGB4F1xuDTCPRYA5XRNuqZg==}
+    engines: {node: '>=14.16.0'}
 
   esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
@@ -7750,6 +7757,8 @@ snapshots:
     dependencies:
       esrecurse: 4.3.0
       estraverse: 4.3.0
+
+  esmock@2.6.6: {}
 
   esprima@4.0.1: {}
 

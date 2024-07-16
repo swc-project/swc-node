@@ -17,7 +17,7 @@ import ts from 'typescript'
 // @ts-expect-error
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
-import { compile } from '../lib/register.js'
+import { compile, DEFAULT_EXTENSIONS } from '../lib/register.js'
 
 const debug = debugFactory('@swc-node')
 
