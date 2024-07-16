@@ -5,7 +5,7 @@ import * as ts from 'typescript'
 
 import { readDefaultTsConfig, tsCompilerOptionsToSwcConfig } from './read-default-tsconfig'
 
-const DEFAULT_EXTENSIONS = [
+const DEFAULT_EXTENSIONS = new Set([
   ts.Extension.Js,
   ts.Extension.Ts,
   ts.Extension.Jsx,
@@ -16,17 +16,7 @@ const DEFAULT_EXTENSIONS = [
   ts.Extension.Cts,
   '.es6',
   '.es',
-]
-
-export const AVAILABLE_TS_EXTENSION_PATTERN = new RegExp(
-  `((?<!\\.d)(${[ts.Extension.Ts, ts.Extension.Tsx, ts.Extension.Mts, ts.Extension.Cts].map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
-  'i',
-)
-
-export const AVAILABLE_EXTENSION_PATTERN = new RegExp(
-  `((?<!\\.d)(${DEFAULT_EXTENSIONS.map((ext) => ext.replace(/^\./, '\\.')).join('|')}))$`,
-  'i',
-)
+])
 
 const injectInlineSourceMap = ({
   filename,
@@ -89,12 +79,8 @@ export function compile(
   },
   async = false,
 ) {
-  if (
-    typeof sourcecode === 'undefined' ||
-    (filename.includes('node_modules') && !AVAILABLE_TS_EXTENSION_PATTERN.test(filename)) ||
-    !AVAILABLE_EXTENSION_PATTERN.test(filename)
-  ) {
-    return sourcecode
+  if (sourcecode == null) {
+    return
   }
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
     delete options.fallbackToTs
@@ -134,7 +120,7 @@ export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {
   options.module = ts.ModuleKind.CommonJS
   installSourceMapSupport()
   return addHook((code, filename) => compile(code, filename, options), {
-    exts: DEFAULT_EXTENSIONS,
+    exts: Array.from(DEFAULT_EXTENSIONS),
     ...hookOpts,
   })
 }

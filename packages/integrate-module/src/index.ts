@@ -4,6 +4,7 @@ import test from 'node:test'
 
 import { RepositoryState } from '@napi-rs/simple-git'
 import { bar as subBar } from '@subdirectory/bar.mjs'
+import esmock from 'esmock'
 import { supportedExtensions } from 'file-type'
 import { renderToString } from 'react-dom/server'
 import { simpleGit } from 'simple-git'
@@ -78,4 +79,14 @@ await test('resolve json file', () => {
 
 await test('resolve ipaddr.js', () => {
   assert.ok(ipaddr.isValid('192.168.1.1'))
+})
+
+await test('esmock should work', async () => {
+  const main = await esmock('./mocked.ts', {
+    path: {
+      basename: () => 'hello',
+    },
+  })
+
+  assert.strictEqual(main.pathbasenamewrap(), 'hello')
 })
