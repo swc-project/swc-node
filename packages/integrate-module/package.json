@@ -13,6 +13,7 @@
     "@swc-node/register": "workspace:*",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "ipaddr.js": "^2.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "simple-git": "^3.25.0",

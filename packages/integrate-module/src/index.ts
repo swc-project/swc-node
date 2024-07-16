@@ -7,6 +7,7 @@ import { bar as subBar } from '@subdirectory/bar.mjs'
 import { supportedExtensions } from 'file-type'
 import { renderToString } from 'react-dom/server'
 import { simpleGit } from 'simple-git'
+import ipaddr from 'ipaddr.js'
 
 import { CompiledClass } from './compiled.js'
 import cjs from './cjs'
@@ -73,4 +74,8 @@ await test('resolve commonjs module', () => {
 await test('resolve json file', () => {
   assert.equal(pgkJson.name, 'integrate-module')
   assert.equal(pgkJsonWith.name, 'integrate-module')
+})
+
+await test('resolve ipaddr.js', () => {
+  assert.ok(ipaddr.isValid('192.168.1.1'))
 })
