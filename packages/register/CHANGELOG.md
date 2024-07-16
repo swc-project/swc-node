@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.8](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.7...@swc-node/register@1.10.8) (2024-07-16)
+
+### Bug Fixes
+
+- **register:** bump oxc-resolver ([#824](https://github.com/swc-project/swc-node/issues/824)) ([2792552](https://github.com/swc-project/swc-node/commit/2792552302baa854c1efd8dc77b435fa86b84cf1))
+- **register:** default TSCONFIG_PATH on windows. ([#818](https://github.com/swc-project/swc-node/issues/818)) ([92a3bbf](https://github.com/swc-project/swc-node/commit/92a3bbf329269a1d123ea4513541d3a6a418dd2d))
+- **register:** remove file extension tests in compile ([#825](https://github.com/swc-project/swc-node/issues/825)) ([7c686f1](https://github.com/swc-project/swc-node/commit/7c686f13aa644bc280143f399ab60fc7fd8a9da3))
+
 ## [1.10.7](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.6...@swc-node/register@1.10.7) (2024-07-14)
 
 **Note:** Version bump only for package @swc-node/register
