@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/loader",
-  "version": "1.5.11",
+  "version": "1.5.12",
   "description": "Webpack loader powered by swc",
   "keywords": [
     "swc",
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@swc-node/core": "^1.13.3",
-    "@swc-node/register": "^1.10.8"
+    "@swc-node/register": "^1.10.9"
   },
   "peerDependencies": {
     "typescript": ">= 4.3",

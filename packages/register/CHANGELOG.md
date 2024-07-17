@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.9](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.8...@swc-node/register@1.10.9) (2024-07-17)
+
+### Bug Fixes
+
+- **register:** skip load files in node_modules ([#828](https://github.com/swc-project/swc-node/issues/828)) ([f6816c1](https://github.com/swc-project/swc-node/commit/f6816c160191052454aae232ce75b9a8f8b3d9a5))
+
 ## [1.10.8](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.7...@swc-node/register@1.10.8) (2024-07-16)
 
 ### Bug Fixes
