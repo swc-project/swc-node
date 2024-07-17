@@ -9,6 +9,7 @@ import { supportedExtensions } from 'file-type'
 import { renderToString } from 'react-dom/server'
 import { simpleGit } from 'simple-git'
 import ipaddr from 'ipaddr.js'
+import postgres from 'postgres'
 
 import { CompiledClass } from './compiled.js'
 import cjs from './cjs'
@@ -89,4 +90,10 @@ await test('esmock should work', async () => {
   })
 
   assert.strictEqual(main.pathbasenamewrap(), 'hello')
+})
+
+await test('postgres should work', async () => {
+  postgres({
+    host: 'postgres://localhost',
+  })
 })
