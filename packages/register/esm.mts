@@ -215,11 +215,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   }
 
   // local project file
-  if (
-    path &&
-    ((process.platform !== 'win32' && !path.includes('/node_modules/')) ||
-      (process.platform === 'win32' && !path.includes('\\node_modules\\')))
-  ) {
+  if (path && isPathNotInNodeModules(path)) {
     debug('resolved: typescript', specifier, path)
     const url = new URL(join('file://', path))
     return addShortCircuitSignal({
@@ -272,6 +268,12 @@ export const load: LoadHook = async (url, context, nextLoad) => {
     return nextLoad(url, context)
   }
 
+  if (url.includes('/node_modules/')) {
+    debug('skip load: node_modules', url)
+
+    return nextLoad(url, context)
+  }
+
   if (['builtin', 'json', 'wasm'].includes(context.format)) {
     debug('loaded: internal format', url)
     return nextLoad(url, context)
@@ -299,4 +301,11 @@ export const load: LoadHook = async (url, context, nextLoad) => {
     format: resolvedFormat,
     source: compiled,
   })
+}
+
+function isPathNotInNodeModules(path: string) {
+  return (
+    (process.platform !== 'win32' && !path.includes('/node_modules/')) ||
+    (process.platform === 'win32' && !path.includes('\\node_modules\\'))
+  )
 }
