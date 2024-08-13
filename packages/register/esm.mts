@@ -292,7 +292,13 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   debug('loaded', url, resolvedFormat)
 
   const code = !source || typeof source === 'string' ? source : Buffer.from(source).toString()
-  const compiled = await compile(code, url, tsconfigForSWCNode, true)
+
+  // url may be essentially an arbitrary string, but fixing the binding module, which currently
+  // expects a real file path, to correctly interpret this doesn't have an obvious solution,
+  // and would likely be a breaking change anyway. Do a best effort to give a real path
+  // like it expects, which at least fixes relative input sourcemap paths.
+  const filename = url.startsWith('file:') ? fileURLToPath(url) : url
+  const compiled = await compile(code, filename, tsconfigForSWCNode, true)
 
   debug('compiled', url, resolvedFormat)
 
