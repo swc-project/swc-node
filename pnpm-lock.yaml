@@ -204,6 +204,9 @@ importers:
         specifier: '>= 5.0'
         version: 5.5.4
     devDependencies:
+      '@jest/transform':
+        specifier: ^29.7.0
+        version: 29.7.0
       '@swc/core':
         specifier: ^1.6.6
         version: 1.7.12(@swc/helpers@0.5.12)
