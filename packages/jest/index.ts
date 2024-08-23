@@ -40,7 +40,7 @@ export = {
       const tsConfigObject = readDefaultTsConfig(tsconfig)
       return transformJest(src, path, {
         ...tsCompilerOptionsToSwcConfig(tsConfigObject, path),
-        ...getJestTransformConfig(jestConfig),
+        ...transformerConfig,
       })
     }
     return src
