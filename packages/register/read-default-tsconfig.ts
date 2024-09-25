@@ -118,8 +118,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     target: toTsTarget(target),
     jsx: isJsx,
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-    sourcemap: options.sourceMap || options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
+    sourcemap: options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     useDefineForClassFields: getUseDefineForClassFields(options, target),
@@ -128,7 +127,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     keepClassNames: true,
     externalHelpers: Boolean(options.importHelpers),
     react:
-      options.jsxFactory ?? options.jsxFragmentFactory ?? options.jsx ?? options.jsxImportSource
+      (options.jsxFactory ?? options.jsxFragmentFactory ?? options.jsx ?? options.jsxImportSource)
         ? {
             pragma: options.jsxFactory,
             pragmaFrag: options.jsxFragmentFactory,
