@@ -30,6 +30,7 @@ test('should work with sourcemaps', (t) => {
     new Error().stack
       ?.split('\n')
       .map((l) => l.replace(projectRoot, ''))
+      .filter((n) => !n.includes('node:internal'))
       .join('\n'),
   )
 })
