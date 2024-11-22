@@ -75,8 +75,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       oxlint:
-        specifier: ^0.12.0
-        version: 0.12.0
+        specifier: ^0.13.0
+        version: 0.13.0
       prettier:
         specifier: ^3.3.2
         version: 3.3.3
@@ -1586,43 +1586,43 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@oxlint/darwin-arm64@0.12.0':
-    resolution: {integrity: sha512-UydkjcAImpmBn8JYaMPg0zJrwgWJMGvJagvCnyPfyiBRWAN83Kq+BDgJZgIq+2Te6kvlnoiHWNJKVJmpy0f0BA==}
+  '@oxlint/darwin-arm64@0.13.0':
+    resolution: {integrity: sha512-TFVi4gWKmn4oUoaS6AUU6cvlA+xLCIHQWA27LdnyfmRDerxHSWaG4yPNq9bvhDAeeEWqid5+TR5ndu4WRhEr5A==}
     cpu: [arm64]
     os: [darwin]
 
-  '@oxlint/darwin-x64@0.12.0':
-    resolution: {integrity: sha512-bxLyiAiHzXB56w7cf50YNPpZlK+PMxA8GgHutRSoNK/Z/BR/xsibNLs/9YNUnjHB+PF19+EbIRtJxoHjmbRr8g==}
+  '@oxlint/darwin-x64@0.13.0':
+    resolution: {integrity: sha512-ihbegvRXcED2Bgz9Lt4AGFoNfvh/tUZPrFR5DZ3Hn8muab+PEFfXXXKcelSDpTB4za5bDXz6dZcAUUfQUWPwxg==}
     cpu: [x64]
     os: [darwin]
 
-  '@oxlint/linux-arm64-gnu@0.12.0':
-    resolution: {integrity: sha512-jVkmfoMjPKFDIZySmpykwrCmx5xhpLJdMpUAR8ycEkFRJFp5qKLWZd6cEjiMb7gxmWN6qcCvDVTF/zEs3aRpyQ==}
+  '@oxlint/linux-arm64-gnu@0.13.0':
+    resolution: {integrity: sha512-k4r03/29d+IdcT30B6H5TpWT7bFrkqbRrFQ5VS6GX5ISN0yRdagu4Q08sDimCTTXvg5H9Z/sHmxbw7tbjGGW4w==}
     cpu: [arm64]
     os: [linux]
 
-  '@oxlint/linux-arm64-musl@0.12.0':
-    resolution: {integrity: sha512-8VdV1nKYDj7AFaw1a03Ih43/+pUS/hhMZbTFLRMpvlVp1cPtdB77c+bl/OdiJ/BwNTzLIzr/GrospwCoEJkQKg==}
+  '@oxlint/linux-arm64-musl@0.13.0':
+    resolution: {integrity: sha512-m+LFHCwNydIrGHDz1VPTaQsZewaqYadKhzyjsw4TRf0g5fxeEC4tkv6MI80D2S//QO6DJi8VcnPfVqGWoS5vQQ==}
     cpu: [arm64]
     os: [linux]
 
-  '@oxlint/linux-x64-gnu@0.12.0':
-    resolution: {integrity: sha512-MacAt8N4XU5DeoHcseXLom/z+B0seecCz8vGAH4ppF2EH49o7NbN7VvFsw2nZ2QNO/4vw+pdS1BHXLTr9lY6zQ==}
+  '@oxlint/linux-x64-gnu@0.13.0':
+    resolution: {integrity: sha512-Kixb9MXi5muDKsrNo5k7TANEE3DuUUSKIgoBN68LbX4n2owjCsq/gnzVjQ/rDK0vFn0JQMxMXWjBZvV64ybXMQ==}
     cpu: [x64]
     os: [linux]
 
-  '@oxlint/linux-x64-musl@0.12.0':
-    resolution: {integrity: sha512-/ZBDJ9wpUE6bB05nniQl29kD5vJUMg6n75LdHD8F6ThXfsHGI/n7Je3gzggnXokgf9UQpTUPWrWlfEuWVCBMag==}
+  '@oxlint/linux-x64-musl@0.13.0':
+    resolution: {integrity: sha512-wCCsesDf05G0bjXMrxAvH36Cl4q0oavR3fo4N5NJyyrRdZ+feAZSsfaHRpvlqkJyUM3vhP6emKrXzIN5fp22dw==}
     cpu: [x64]
     os: [linux]
 
-  '@oxlint/win32-arm64@0.12.0':
-    resolution: {integrity: sha512-hY1ya9dv8VY8113YSSDfMs/989aFmoA2fIZco8uxTxIEVl9nGY6tDtpgKZqUIiGrrMbDO8BBb1G5jsekmfexbA==}
+  '@oxlint/win32-arm64@0.13.0':
+    resolution: {integrity: sha512-xO6oZ+0yjYuEviKqRUVWMuYvzYqJDHd0IcBss8J2o45OS9SH+mNNk5gZJm9uKbDdmFZcDn2OlZxAiygVMxHt9g==}
     cpu: [arm64]
     os: [win32]
 
-  '@oxlint/win32-x64@0.12.0':
-    resolution: {integrity: sha512-NHLJolo4sZk3nu/bPNuaJ+6p5DdHoRuZAjyuSO6CnLgpmZcYqx7LgngA/x2oB/bLgi4Hv9twjHjODc5Ce5o14g==}
+  '@oxlint/win32-x64@0.13.0':
+    resolution: {integrity: sha512-NiiaQ/AD1ILQ8cXRxdjE/dRMCRABFbelSYqoFrrklV2Y7hwtF0Law48GvM5ysQbz/NHVpQpnVNQOQ3cevywn3w==}
     cpu: [x64]
     os: [win32]
 
@@ -3839,8 +3839,8 @@ packages:
   oxc-resolver@2.0.1:
     resolution: {integrity: sha512-xEbYdEGwafn+Y2GTyW0BGC3iIjJZXl+fxrIkyheew5mZrDODmPXJf2qwsa1ocBeVUC51g9e835vNZ9tRR5fYCg==}
 
-  oxlint@0.12.0:
-    resolution: {integrity: sha512-M0vWq8KYtp4vpweRxcdCiVO8QFwzoRyp5bWTMrEL/0Z+GDKCMJltac7H3T3T09FIiktOZLvID733d7OcKk/caw==}
+  oxlint@0.13.0:
+    resolution: {integrity: sha512-YUwybs9U5siS54Q+vVkxMQXiNF6LHeLRxihj6toUFwrYSxL1wsV6HUiAS8Vig+USDIGoEDdGBgpq29iwWDjYHw==}
     engines: {node: '>=14.*'}
     hasBin: true
 
@@ -6444,28 +6444,28 @@ snapshots:
   '@oxc-resolver/binding-win32-x64-msvc@2.0.1':
     optional: true
 
-  '@oxlint/darwin-arm64@0.12.0':
+  '@oxlint/darwin-arm64@0.13.0':
     optional: true
 
-  '@oxlint/darwin-x64@0.12.0':
+  '@oxlint/darwin-x64@0.13.0':
     optional: true
 
-  '@oxlint/linux-arm64-gnu@0.12.0':
+  '@oxlint/linux-arm64-gnu@0.13.0':
     optional: true
 
-  '@oxlint/linux-arm64-musl@0.12.0':
+  '@oxlint/linux-arm64-musl@0.13.0':
     optional: true
 
-  '@oxlint/linux-x64-gnu@0.12.0':
+  '@oxlint/linux-x64-gnu@0.13.0':
     optional: true
 
-  '@oxlint/linux-x64-musl@0.12.0':
+  '@oxlint/linux-x64-musl@0.13.0':
     optional: true
 
-  '@oxlint/win32-arm64@0.12.0':
+  '@oxlint/win32-arm64@0.13.0':
     optional: true
 
-  '@oxlint/win32-x64@0.12.0':
+  '@oxlint/win32-x64@0.13.0':
     optional: true
 
   '@pkgjs/parseargs@0.11.0':
@@ -9133,16 +9133,16 @@ snapshots:
       '@oxc-resolver/binding-win32-arm64-msvc': 2.0.1
       '@oxc-resolver/binding-win32-x64-msvc': 2.0.1
 
-  oxlint@0.12.0:
+  oxlint@0.13.0:
     optionalDependencies:
-      '@oxlint/darwin-arm64': 0.12.0
-      '@oxlint/darwin-x64': 0.12.0
-      '@oxlint/linux-arm64-gnu': 0.12.0
-      '@oxlint/linux-arm64-musl': 0.12.0
-      '@oxlint/linux-x64-gnu': 0.12.0
-      '@oxlint/linux-x64-musl': 0.12.0
-      '@oxlint/win32-arm64': 0.12.0
-      '@oxlint/win32-x64': 0.12.0
+      '@oxlint/darwin-arm64': 0.13.0
+      '@oxlint/darwin-x64': 0.13.0
+      '@oxlint/linux-arm64-gnu': 0.13.0
+      '@oxlint/linux-arm64-musl': 0.13.0
+      '@oxlint/linux-x64-gnu': 0.13.0
+      '@oxlint/linux-x64-musl': 0.13.0
+      '@oxlint/win32-arm64': 0.13.0
+      '@oxlint/win32-x64': 0.13.0
 
   p-finally@1.0.0: {}
 
