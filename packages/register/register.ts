@@ -97,6 +97,7 @@ export function compile(
     swcRegisterConfig = {
       swc: {
         swcrc: true,
+        configFile: process.env.SWC_CONFIG_FILE
       },
     }
   } else {
