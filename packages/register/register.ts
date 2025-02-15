@@ -41,6 +41,7 @@ export function compile(
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
+    configFileOpts?: ConfigFileOptions
   },
 ): string
 
@@ -49,6 +50,7 @@ export function compile(
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
+    configFileOpts?: ConfigFileOptions
   },
   async: false,
 ): string
@@ -58,6 +60,7 @@ export function compile(
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
+    configFileOpts?: ConfigFileOptions
   },
   async: true,
 ): Promise<string>
@@ -67,6 +70,7 @@ export function compile(
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
+    configFileOpts?: ConfigFileOptions
   },
   async: boolean,
 ): string | Promise<string>
@@ -76,12 +80,14 @@ export function compile(
   filename: string,
   options: ts.CompilerOptions & {
     fallbackToTs?: (filename: string) => boolean
+    configFileOpts?: ConfigFileOptions
   },
   async = false,
 ) {
   if (sourcecode == null) {
     return
   }
+
   if (options && typeof options.fallbackToTs === 'function' && options.fallbackToTs(filename)) {
     delete options.fallbackToTs
     const { outputText, sourceMapText } = ts.transpileModule(sourcecode, {
@@ -91,9 +97,14 @@ export function compile(
     return injectInlineSourceMap({ filename, code: outputText, map: sourceMapText })
   }
 
+  const configFileOpts: ConfigFileOptions | undefined = structuredClone(options?.configFileOpts)
+  if (options) {
+    delete options.configFileOpts
+  }
+
   let swcRegisterConfig: Options
-  if (process.env.SWCRC) {
-    // when SWCRC environment variable is set to true it will use swcrc file
+  // When SWCRC environment variable is set to true or mode is SWCRC it will use .swcrc file
+  if (process.env.SWCRC || configFileOpts?.mode === ConfigFileMode.SWCRC) {
     swcRegisterConfig = {
       swc: {
         swcrc: true,
@@ -113,13 +124,26 @@ export function compile(
   }
 }
 
-export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {}) {
-  if (!process.env.SWCRC) {
-    options = Object.keys(options).length ? options : readDefaultTsConfig()
+export enum ConfigFileMode {
+  SWCRC = 'swcrc',
+  TSCONFIG = 'tsconfig',
+}
+
+export interface ConfigFileOptions {
+  mode: ConfigFileMode
+  path: string
+}
+
+export function register(options: Partial<ts.CompilerOptions> = {}, hookOpts = {}, configFileOpts?: ConfigFileOptions) {
+  let compilerOptions: Partial<ts.CompilerOptions & { configFileOpts?: ConfigFileOptions }> = {}
+
+  if (!process.env.SWCRC && configFileOpts?.mode !== ConfigFileMode.SWCRC) {
+    compilerOptions = Object.keys(options).length ? options : readDefaultTsConfig(configFileOpts?.path)
   }
+
   options.module = ts.ModuleKind.CommonJS
   installSourceMapSupport()
-  return addHook((code, filename) => compile(code, filename, options), {
+  return addHook((code, filename) => compile(code, filename, compilerOptions), {
     exts: Array.from(DEFAULT_EXTENSIONS),
     ...hookOpts,
   })
