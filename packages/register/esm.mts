@@ -217,7 +217,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   // local project file
   if (path && isPathNotInNodeModules(path)) {
     debug('resolved: typescript', specifier, path)
-    const url = new URL(join('file://', path))
+    const url = new URL('file://' + join(path))
     return addShortCircuitSignal({
       ...context,
       url: url.href,
