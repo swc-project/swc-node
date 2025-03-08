@@ -144,8 +144,8 @@ importers:
   packages/integrate-module:
     dependencies:
       file-type:
-        specifier: ^19.0.0
-        version: 19.6.0
+        specifier: ^20.0.0
+        version: 20.0.0
       p-timeout:
         specifier: ^6.1.2
         version: 6.1.3
@@ -1632,9 +1632,6 @@ packages:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
     engines: {node: '>= 8.0.0'}
 
-  '@sec-ant/readable-stream@0.4.1':
-    resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
-
   '@sigstore/bundle@2.3.2':
     resolution: {integrity: sha512-wueKWDk70QixNLB363yHc2D2ItTgYiMTdPwK8D9dKQMR3ZQ0c35IxP5xnwQ8cNLoCgCRcHf14kE+CLIvNX1zmA==}
     engines: {node: ^16.14.0 || >=18.0.0}
@@ -1761,6 +1758,10 @@ packages:
 
   '@swc/types@0.1.15':
     resolution: {integrity: sha512-XKaZ+dzDIQ9Ot9o89oJQ/aluI17+VvUnIpYJTcZtvv1iYX6MzHh3Ik2CSR7MdPKpPwfZXHBeCingb2b4PoDVdw==}
+
+  '@tokenizer/inflate@0.2.6':
+    resolution: {integrity: sha512-SdR/i05U7Xhnsq36iyIq/ZiGGw4PKzw4ww3bOq80Pjj4wyXpqyTcgrgdDdGlcatnlvzNJx8CQw3hp6QZvkUwhA==}
+    engines: {node: '>=16'}
 
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
@@ -2707,6 +2708,9 @@ packages:
   fb-watchman@2.0.2:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
 
+  fflate@0.8.2:
+    resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
+
   figures@3.2.0:
     resolution: {integrity: sha512-yaduQFRKLXYOGgEn6AZau90j3ggSOyiqXU0F9JZfeXYhNa+Jk4X+s45A2zg5jns87GAFa34BBm2kXw4XpNcbdg==}
     engines: {node: '>=8'}
@@ -2715,8 +2719,8 @@ packages:
     resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
     engines: {node: '>=18'}
 
-  file-type@19.6.0:
-    resolution: {integrity: sha512-VZR5I7k5wkD0HgFnMsq5hOsSc710MJMu5Nc5QYsbe38NN5iPV/XTObYLc/cpttRTf6lX538+5uO1ZQRhYibiZQ==}
+  file-type@20.0.0:
+    resolution: {integrity: sha512-w8Z+QqWtEPIfyoPx9lDhzR52UjY5PfZunJ6lmH48oCR2gVbV52Aaw2bVtbi7P4EAlSpjn8xmNDiRAieYaabEIQ==}
     engines: {node: '>=18'}
 
   file-uri-to-path@1.0.0:
@@ -2832,10 +2836,6 @@ packages:
   get-stream@8.0.1:
     resolution: {integrity: sha512-VaUJspBffn/LMCJVoMvSAdmscJyS1auj5Zulnn5UoYcY531UWmdwhRWkcGKnGU93m5HSXP9LP2usOryrBtQowA==}
     engines: {node: '>=16'}
-
-  get-stream@9.0.1:
-    resolution: {integrity: sha512-kVCxPF3vQM/N0B1PmoqVUqgHP+EeVjmZSQn+1oCRPxd2P21P2F19lIgbR3HBosbB1PUhOAoctJnfEn2GbN2eZA==}
-    engines: {node: '>=18'}
 
   git-raw-commits@3.0.0:
     resolution: {integrity: sha512-b5OHmZ3vAgGrDn/X0kS+9qCfNKWe4K/jFnhwzVWWg0/k5eLa3060tZShrRg8Dja5kPc+YjS0Gc6y7cRr44Lpjw==}
@@ -3127,10 +3127,6 @@ packages:
   is-stream@3.0.0:
     resolution: {integrity: sha512-LnQR4bZ9IADDRSkvpqMGvt/tEJWclzklNgSw48V5EAaAeDd6qGvN8ei6k5p0tvxSR171VmGyHuTiAOfxAbr8kA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
-
-  is-stream@4.0.1:
-    resolution: {integrity: sha512-Dnz92NInDqYckGEUJv689RbRiTSEHCQ7wOVeALbkOz999YpqT46yMRIGtSNl2iCL1waAZSx40+h59NV/EwzV/A==}
-    engines: {node: '>=18'}
 
   is-text-path@1.0.1:
     resolution: {integrity: sha512-xFuJpne9oFz5qDaodwmmG08e3CawH/2ZV8Qqza1Ko7Sk8POWbkRdwIoAWVhqvq0XeUzANEhKo2n0IXUGBm7A/w==}
@@ -4463,8 +4459,8 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
 
-  strtok3@9.0.1:
-    resolution: {integrity: sha512-ERPW+XkvX9W2A+ov07iy+ZFJpVdik04GhDA4eVogiG9hpC97Kem2iucyzhFxbFRvQ5o2UckFtKZdp1hkGvnrEw==}
+  strtok3@10.0.1:
+    resolution: {integrity: sha512-7OOJepVlvlcgjW/fLNCsIqpNleAoi1y0LTRWGnOpABOSpRmw+65HvnruoOCnjpaQ1efnlYpQ/JwHKuaombnuXQ==}
     engines: {node: '>=16'}
 
   supertap@3.0.1:
@@ -6456,8 +6452,6 @@ snapshots:
       estree-walker: 2.0.2
       picomatch: 2.3.1
 
-  '@sec-ant/readable-stream@0.4.1': {}
-
   '@sigstore/bundle@2.3.2':
     dependencies:
       '@sigstore/protobuf-specs': 0.3.2
@@ -6574,6 +6568,14 @@ snapshots:
   '@swc/types@0.1.15':
     dependencies:
       '@swc/counter': 0.1.3
+
+  '@tokenizer/inflate@0.2.6':
+    dependencies:
+      debug: 4.3.7
+      fflate: 0.8.2
+      token-types: 6.0.0
+    transitivePeerDependencies:
+      - supports-color
 
   '@tokenizer/token@0.3.0': {}
 
@@ -7627,6 +7629,8 @@ snapshots:
     dependencies:
       bser: 2.1.1
 
+  fflate@0.8.2: {}
+
   figures@3.2.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -7635,12 +7639,14 @@ snapshots:
     dependencies:
       is-unicode-supported: 2.1.0
 
-  file-type@19.6.0:
+  file-type@20.0.0:
     dependencies:
-      get-stream: 9.0.1
-      strtok3: 9.0.1
+      '@tokenizer/inflate': 0.2.6
+      strtok3: 10.0.1
       token-types: 6.0.0
       uint8array-extras: 1.4.0
+    transitivePeerDependencies:
+      - supports-color
 
   file-uri-to-path@1.0.0: {}
 
@@ -7739,11 +7745,6 @@ snapshots:
   get-stream@6.0.1: {}
 
   get-stream@8.0.1: {}
-
-  get-stream@9.0.1:
-    dependencies:
-      '@sec-ant/readable-stream': 0.4.1
-      is-stream: 4.0.1
 
   git-raw-commits@3.0.0:
     dependencies:
@@ -8036,8 +8037,6 @@ snapshots:
   is-stream@2.0.1: {}
 
   is-stream@3.0.0: {}
-
-  is-stream@4.0.1: {}
 
   is-text-path@1.0.1:
     dependencies:
@@ -9707,7 +9706,7 @@ snapshots:
       minimist: 1.2.8
       through: 2.3.8
 
-  strtok3@9.0.1:
+  strtok3@10.0.1:
     dependencies:
       '@tokenizer/token': 0.3.0
       peek-readable: 5.3.1
