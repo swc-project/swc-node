@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.10](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.9...@swc-node/register@1.10.10) (2025-03-13)
+
+### Bug Fixes
+
+- **deps:** update dependency oxc-resolver to v2 ([#858](https://github.com/swc-project/swc-node/issues/858)) ([fca85bd](https://github.com/swc-project/swc-node/commit/fca85bd1ba1705455ca8c7adb345690cb029b4d3))
+- **deps:** update dependency oxc-resolver to v3 ([#887](https://github.com/swc-project/swc-node/issues/887)) ([ff409a7](https://github.com/swc-project/swc-node/commit/ff409a787a68fd2dc2a81cd8703ee5a452dbe445))
+- **deps:** update dependency oxc-resolver to v5 ([#910](https://github.com/swc-project/swc-node/issues/910)) ([9bf404a](https://github.com/swc-project/swc-node/commit/9bf404a8a245e67cb57dc2cad9b40c05bea6f96e))
+- **register/esm:** pass file urls as paths ([#840](https://github.com/swc-project/swc-node/issues/840)) ([27d922d](https://github.com/swc-project/swc-node/commit/27d922d64c046d48dda94733c5277171b0a358bd))
+- **register:** Windows path ([#906](https://github.com/swc-project/swc-node/issues/906)) ([406a3d8](https://github.com/swc-project/swc-node/commit/406a3d886cb86dffe6626c752233012c6f853375))
+
 ## [1.10.9](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.8...@swc-node/register@1.10.9) (2024-07-17)
 
 ### Bug Fixes
