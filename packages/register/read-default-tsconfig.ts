@@ -8,6 +8,8 @@ import * as ts from 'typescript'
 
 const debug = debugFactory('@swc-node')
 
+const configCache: Record<string, Partial<ts.CompilerOptions & { fallbackToTs: (path: string) => boolean }>> = {}
+
 export function readDefaultTsConfig(
   tsConfigPath = process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json'),
 ) {
@@ -24,6 +26,10 @@ export function readDefaultTsConfig(
   }
 
   const fullTsConfigPath = resolve(tsConfigPath)
+
+  if (fullTsConfigPath in configCache) {
+    return configCache[fullTsConfigPath]
+  }
 
   if (!existsSync(fullTsConfigPath)) {
     return compilerOptions
@@ -49,6 +55,8 @@ export function readDefaultTsConfig(
   } catch (e) {
     console.info(yellow(`Read ${tsConfigPath} failed: ${(e as Error).message}`))
   }
+
+  configCache[fullTsConfigPath] = compilerOptions
 
   return compilerOptions
 }
@@ -128,7 +136,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     keepClassNames: true,
     externalHelpers: Boolean(options.importHelpers),
     react:
-      options.jsxFactory ?? options.jsxFragmentFactory ?? options.jsx ?? options.jsxImportSource
+      (options.jsxFactory ?? options.jsxFragmentFactory ?? options.jsx ?? options.jsxImportSource)
         ? {
             pragma: options.jsxFactory,
             pragmaFrag: options.jsxFragmentFactory,
