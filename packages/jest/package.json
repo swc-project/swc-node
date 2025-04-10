@@ -38,7 +38,8 @@
   },
   "devDependencies": {
     "@swc/core": "^1.6.6",
-    "@swc/types": "^0.1.9"
+    "@swc/types": "^0.1.9",
+    "@jest/transform": "^29.7.0"
   },
   "repository": {
     "type": "git",
