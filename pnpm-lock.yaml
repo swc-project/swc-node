@@ -66,8 +66,8 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.9.1)
       lerna:
-        specifier: 8.2.1
-        version: 8.2.1(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)
+        specifier: 8.2.2
+        version: 8.2.2(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)
       lint-staged:
         specifier: ^15.2.7
         version: 15.2.10
@@ -1153,8 +1153,8 @@ packages:
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
 
-  '@lerna/create@8.2.1':
-    resolution: {integrity: sha512-Cz2u/fwc03D1EE6VFZCLMmI8FIUtGmxHQ3ECeNblsxv9i0YSKWe4Xm18sjO1xltG/K5ByiH8/HMeY9dlyAv22A==}
+  '@lerna/create@8.2.2':
+    resolution: {integrity: sha512-1yn1MvWn2Yz0SFgTTQnef2m1YedF7KwqLLVIOrGkgQrkVHzsveAIk1A1RcRa2yyUh+siKI1YcJ7lUZIEt+qQ3Q==}
     engines: {node: '>=18.0.0'}
 
   '@mapbox/node-pre-gyp@1.0.11':
@@ -3397,8 +3397,8 @@ packages:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
 
-  lerna@8.2.1:
-    resolution: {integrity: sha512-Xwjv9/4ixp7fpBWhtvp7dz4NoQT8DEf7hzibHKCgu/8kmZUHeXsTn+TKspHqhI+p4YDmdkDnkg8xmymz73kVOg==}
+  lerna@8.2.2:
+    resolution: {integrity: sha512-GkqBELTG4k7rfzAwRok2pKBvhNo046Hfwcj7TuhDah3q58/BBBAqvIFLfqEI5fglnNOs6maMSn6/MWjccQE55A==}
     engines: {node: '>=18.0.0'}
     hasBin: true
 
@@ -5895,7 +5895,7 @@ snapshots:
 
   '@kwsites/promise-deferred@1.1.1': {}
 
-  '@lerna/create@8.2.1(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)(typescript@5.6.3)':
+  '@lerna/create@8.2.2(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)(typescript@5.6.3)':
     dependencies:
       '@npmcli/arborist': 7.5.4
       '@npmcli/package-json': 5.2.0
@@ -8470,9 +8470,9 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  lerna@8.2.1(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13):
+  lerna@8.2.2(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13):
     dependencies:
-      '@lerna/create': 8.2.1(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)(typescript@5.6.3)
+      '@lerna/create': 8.2.2(@swc-node/register@packages+register)(@swc/core@1.9.2(@swc/helpers@0.5.15))(encoding@0.1.13)(typescript@5.6.3)
       '@npmcli/arborist': 7.5.4
       '@npmcli/package-json': 5.2.0
       '@npmcli/run-script': 8.1.0
