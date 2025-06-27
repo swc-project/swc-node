@@ -11,6 +11,7 @@ import { extname, isAbsolute, join } from 'node:path'
 import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'node:url'
 
 import debugFactory from 'debug'
+import { getConditions } from 'get-conditions'
 import { EnforceExtension, ResolverFactory } from 'oxc-resolver'
 import ts from 'typescript'
 
@@ -40,7 +41,7 @@ const resolver = new ResolverFactory({
     configFile: TSCONFIG_PATH,
     references: 'auto',
   },
-  conditionNames: ['node', 'import'],
+  conditionNames: ['import'].concat(getConditions()),
   enforceExtension: EnforceExtension.Auto,
   extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
   extensionAlias: {
