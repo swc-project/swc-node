@@ -45,11 +45,12 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
           parser: {
             syntax: 'typescript' as const,
             tsx: typeof opts.jsx !== 'undefined' ? opts.jsx : path.endsWith('.tsx'),
-            decorators: Boolean(opts.experimentalDecorators),
+            decorators: true,
             dynamicImport: Boolean(opts.dynamicImport),
           },
           transform: {
             legacyDecorator: Boolean(opts.experimentalDecorators),
+            decoratorVersion: Boolean(opts.experimentalDecorators) ? '2021-12' : '2022-03',
             decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
             useDefineForClassFields: Boolean(opts.useDefineForClassFields),
             react: options?.react,
