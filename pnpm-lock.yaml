@@ -144,8 +144,8 @@ importers:
   packages/integrate-module:
     dependencies:
       file-type:
-        specifier: ^20.0.0
-        version: 20.0.0
+        specifier: ^21.0.0
+        version: 21.0.0
       p-timeout:
         specifier: ^6.1.2
         version: 6.1.3
@@ -1778,9 +1778,9 @@ packages:
   '@swc/types@0.1.15':
     resolution: {integrity: sha512-XKaZ+dzDIQ9Ot9o89oJQ/aluI17+VvUnIpYJTcZtvv1iYX6MzHh3Ik2CSR7MdPKpPwfZXHBeCingb2b4PoDVdw==}
 
-  '@tokenizer/inflate@0.2.6':
-    resolution: {integrity: sha512-SdR/i05U7Xhnsq36iyIq/ZiGGw4PKzw4ww3bOq80Pjj4wyXpqyTcgrgdDdGlcatnlvzNJx8CQw3hp6QZvkUwhA==}
-    engines: {node: '>=16'}
+  '@tokenizer/inflate@0.2.7':
+    resolution: {integrity: sha512-MADQgmZT1eKjp06jpI2yozxaU9uVs4GzzgSL+uEq7bVcJ9V1ZXQkeGNql1fsSI0gMy1vhvNTNbUqrx+pZfJVmg==}
+    engines: {node: '>=18'}
 
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
@@ -2478,6 +2478,15 @@ packages:
       supports-color:
         optional: true
 
+  debug@4.4.1:
+    resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
   decamelize-keys@1.1.1:
     resolution: {integrity: sha512-WiPxgEirIV0/eIOMcnFBA3/IJZAZqKnwAwWyvvdi4lsr1WCN22nhdf/3db3DoZcUjTV2SqfzIwNyp6y2xs3nmg==}
     engines: {node: '>=0.10.0'}
@@ -2739,9 +2748,9 @@ packages:
     resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
     engines: {node: '>=18'}
 
-  file-type@20.0.0:
-    resolution: {integrity: sha512-w8Z+QqWtEPIfyoPx9lDhzR52UjY5PfZunJ6lmH48oCR2gVbV52Aaw2bVtbi7P4EAlSpjn8xmNDiRAieYaabEIQ==}
-    engines: {node: '>=18'}
+  file-type@21.0.0:
+    resolution: {integrity: sha512-ek5xNX2YBYlXhiUXui3D/BXa3LdqPmoLJ7rqEx2bKJ7EAUEfmXgW0Das7Dc6Nr9MvqaOnIqiPV0mZk/r/UpNAg==}
+    engines: {node: '>=20'}
 
   file-uri-to-path@1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
@@ -3983,10 +3992,6 @@ packages:
     resolution: {integrity: sha512-5HviZNaZcfqP95rwpv+1HDgUamezbqdSYTyzjTvwtJSnIH+3vnbmWsItli8OFEndS984VT55M3jduxZbX351gg==}
     engines: {node: '>=12'}
 
-  peek-readable@5.3.1:
-    resolution: {integrity: sha512-GVlENSDW6KHaXcd9zkZltB7tCLosKB/4Hg0fqBJkAoBgYG2Tn1xtMgXtSUuMU9AK/gCm/tTdT8mgAeF4YNeeqw==}
-    engines: {node: '>=14.16'}
-
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
 
@@ -4456,9 +4461,9 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  strtok3@10.0.1:
-    resolution: {integrity: sha512-7OOJepVlvlcgjW/fLNCsIqpNleAoi1y0LTRWGnOpABOSpRmw+65HvnruoOCnjpaQ1efnlYpQ/JwHKuaombnuXQ==}
-    engines: {node: '>=16'}
+  strtok3@10.3.4:
+    resolution: {integrity: sha512-KIy5nylvC5le1OdaaoCJ07L+8iQzJHGH6pWDuzS+d07Cu7n1MZ2x26P8ZKIWfbK02+XIL8Mp4RkWeqdUCrDMfg==}
+    engines: {node: '>=18'}
 
   supertap@3.0.1:
     resolution: {integrity: sha512-u1ZpIBCawJnO+0QePsEiOknOfCRq0yERxiAchT0i4li0WHNUJbf0evXXSXOcCAR4M8iMDoajXYmstm/qO81Isw==}
@@ -6589,9 +6594,9 @@ snapshots:
     dependencies:
       '@swc/counter': 0.1.3
 
-  '@tokenizer/inflate@0.2.6':
+  '@tokenizer/inflate@0.2.7':
     dependencies:
-      debug: 4.3.7
+      debug: 4.4.1
       fflate: 0.8.2
       token-types: 6.0.0
     transitivePeerDependencies:
@@ -7412,6 +7417,10 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
+  debug@4.4.1:
+    dependencies:
+      ms: 2.1.3
+
   decamelize-keys@1.1.1:
     dependencies:
       decamelize: 1.2.0
@@ -7658,10 +7667,10 @@ snapshots:
     dependencies:
       is-unicode-supported: 2.1.0
 
-  file-type@20.0.0:
+  file-type@21.0.0:
     dependencies:
-      '@tokenizer/inflate': 0.2.6
-      strtok3: 10.0.1
+      '@tokenizer/inflate': 0.2.7
+      strtok3: 10.3.4
       token-types: 6.0.0
       uint8array-extras: 1.4.0
     transitivePeerDependencies:
@@ -9255,8 +9264,6 @@ snapshots:
 
   path-type@5.0.0: {}
 
-  peek-readable@5.3.1: {}
-
   picocolors@1.1.1: {}
 
   picomatch@2.3.1: {}
@@ -9697,10 +9704,9 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  strtok3@10.0.1:
+  strtok3@10.3.4:
     dependencies:
       '@tokenizer/token': 0.3.0
-      peek-readable: 5.3.1
 
   supertap@3.0.1:
     dependencies:
