@@ -123,7 +123,11 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   const target = options.target ?? ts.ScriptTarget.ES2018
 
-  const enableInlineSourceMap = options.inlineSourceMap ?? Boolean(process.env.SWC_NODE_INLINE_SOURCE_MAP)
+  const enableInlineSourceMap =
+    options.inlineSourceMap ??
+    (typeof process.env.SWC_NODE_INLINE_SOURCE_MAP === 'string'
+      ? Boolean(process.env.SWC_NODE_INLINE_SOURCE_MAP)
+      : undefined)
 
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
