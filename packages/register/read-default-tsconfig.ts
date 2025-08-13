@@ -122,12 +122,15 @@ function getUseDefineForClassFields(compilerOptions: ts.CompilerOptions, target:
 export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filename: string): Options {
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   const target = options.target ?? ts.ScriptTarget.ES2018
+
+  const enableInlineSourceMap = options.inlineSourceMap ?? Boolean(process.env.SWC_NODE_INLINE_SOURCE_MAP)
+
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     target: toTsTarget(target),
     jsx: isJsx,
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-    sourcemap: options.sourceMap || options.inlineSourceMap ? 'inline' : Boolean(options.sourceMap),
+    sourcemap: options.sourceMap || enableInlineSourceMap ? 'inline' : Boolean(options.sourceMap),
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     useDefineForClassFields: getUseDefineForClassFields(options, target),
@@ -155,7 +158,7 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
     ignoreDynamic: Boolean(process.env.SWC_NODE_IGNORE_DYNAMIC),
     swc: {
       sourceRoot: options.sourceRoot,
-      inputSourceMap: options.inlineSourceMap,
+      inputSourceMap: enableInlineSourceMap,
     },
   }
 }
