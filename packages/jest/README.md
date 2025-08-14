@@ -30,6 +30,7 @@ module.exports = {
 
       // configuration
       {
+        tsconfig: '<rootDir>/tsconfig-test.json',
         dynamicImport: true,
         react: {
           pragma: 'h',
