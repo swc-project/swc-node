@@ -181,10 +181,10 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     })
   }
 
-  const parsedUrl = new URL(specifier)
+  const parsedUrl = parseUrl(specifier)
 
   // as entrypoint, just return specifier
-  if (!context.parentURL || parsedUrl.protocol === 'file:') {
+  if (!context.parentURL || parsedUrl?.protocol === 'file:') {
     debug('skip resolve: absolute path or entrypoint', specifier)
 
     let format: ResolveFnOutput['format'] = null
@@ -322,3 +322,14 @@ function isPathNotInNodeModules(path: string) {
     (process.platform === 'win32' && !path.includes('\\node_modules\\'))
   )
 }
+
+const parseUrl =
+  typeof URL.parse === 'function'
+    ? URL.parse
+    : (url: string) => {
+        try {
+          return new URL(url)
+        } catch {
+          return null
+        }
+      }
