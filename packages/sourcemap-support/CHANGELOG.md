@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.5.1...@swc-node/sourcemap-support@0.6.0) (2025-08-17)
+
+### Features
+
+- upgrade deps ([#954](https://github.com/swc-project/swc-node/issues/954)) ([ca6e80c](https://github.com/swc-project/swc-node/commit/ca6e80c8cab6b506f9177f0ddd8d37a7c4186b2c))
+
 ## [0.5.1](https://github.com/swc-project/swc-node/compare/@swc-node/sourcemap-support@0.5.0...@swc-node/sourcemap-support@0.5.1) (2024-07-05)
 
 **Note:** Version bump only for package @swc-node/sourcemap-support

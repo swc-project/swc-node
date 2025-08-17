@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.10...@swc-node/register@1.11.0) (2025-08-17)
+
+### Bug Fixes
+
+- **deps:** update dependency oxc-resolver to v6 ([#926](https://github.com/swc-project/swc-node/issues/926)) ([b5a1d1f](https://github.com/swc-project/swc-node/commit/b5a1d1f2e433c0311c69adece0f60c7db9586cfe))
+- **deps:** update dependency oxc-resolver to v8 ([#930](https://github.com/swc-project/swc-node/issues/930)) ([1c89635](https://github.com/swc-project/swc-node/commit/1c896356dc5573bd4c6103a94bb7cbc7376a6f05))
+
+### Features
+
+- **register:** add new env `SWC_NODE_INLINE_SOURCE_MAP` ([#953](https://github.com/swc-project/swc-node/issues/953)) ([34ae8eb](https://github.com/swc-project/swc-node/commit/34ae8ebcaf3f2bf170368d558b60ed07dc1ae674))
+- **register:** respect conditions from Node.js ([#955](https://github.com/swc-project/swc-node/issues/955)) ([20abe92](https://github.com/swc-project/swc-node/commit/20abe92fe6eb4fce42b5d490899b74acfda3c387))
+- upgrade deps ([#954](https://github.com/swc-project/swc-node/issues/954)) ([ca6e80c](https://github.com/swc-project/swc-node/commit/ca6e80c8cab6b506f9177f0ddd8d37a7c4186b2c))
+
+### Performance Improvements
+
+- **register:** cache readDefaultTsConfig results ([#918](https://github.com/swc-project/swc-node/issues/918)) ([0306f60](https://github.com/swc-project/swc-node/commit/0306f60402f9b86c275d108641d93f2d33dc9a52))
+
 ## [1.10.10](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.9...@swc-node/register@1.10.10) (2025-03-13)
 
 ### Bug Fixes

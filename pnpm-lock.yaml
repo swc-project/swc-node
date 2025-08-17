@@ -200,10 +200,10 @@ importers:
         specifier: ^1.7.6
         version: 1.7.6
       '@swc-node/core':
-        specifier: ^1.13.3
+        specifier: ^1.14.0
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.10.10
+        specifier: ^1.11.0
         version: link:../register
       typescript:
         specifier: '>= 5.0'
@@ -219,10 +219,10 @@ importers:
   packages/loader:
     dependencies:
       '@swc-node/core':
-        specifier: ^1.13.3
+        specifier: ^1.14.0
         version: link:../core
       '@swc-node/register':
-        specifier: ^1.10.10
+        specifier: ^1.11.0
         version: link:../register
     devDependencies:
       typescript:
@@ -235,10 +235,10 @@ importers:
   packages/register:
     dependencies:
       '@swc-node/core':
-        specifier: ^1.13.3
+        specifier: ^1.14.0
         version: link:../core
       '@swc-node/sourcemap-support':
-        specifier: ^0.5.1
+        specifier: ^0.6.0
         version: link:../sourcemap-support
       colorette:
         specifier: ^2.0.20
