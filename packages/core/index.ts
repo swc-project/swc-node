@@ -1,10 +1,11 @@
 import {
   transform as swcTransform,
   transformSync as swcTransformSync,
-  Options as SwcOptions,
-  ReactConfig,
-  Config,
-  JscTarget,
+  type Options as SwcOptions,
+  type ReactConfig,
+  type Config,
+  type JscTarget,
+  type TransformConfig as SwcTransformConfig,
 } from '@swc/core'
 
 // Oldest LTS Node.js supported target
@@ -16,6 +17,7 @@ export interface Options {
   sourcemap?: Config['sourceMaps']
   jsx?: boolean
   experimentalDecorators?: boolean
+  decoratorVersion?: SwcTransformConfig['decoratorVersion']
   emitDecoratorMetadata?: boolean
   useDefineForClassFields?: boolean
   dynamicImport?: boolean
@@ -50,6 +52,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
           },
           transform: {
             legacyDecorator: Boolean(opts.experimentalDecorators),
+            decoratorVersion: opts.decoratorVersion ?? '2021-12',
             decoratorMetadata: Boolean(opts.emitDecoratorMetadata),
             useDefineForClassFields: Boolean(opts.useDefineForClassFields),
             react: options?.react,
