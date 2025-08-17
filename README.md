@@ -17,7 +17,7 @@ Run TypeScript with node, without compilation or typechecking:
 ```bash
 npm i -D @swc-node/register
 node -r @swc-node/register script.ts
-node --import @swc-node/register/esm-register script.ts # for esm project with node>=20.6
+node --import @swc-node/register/esm-register --enable-source-maps script.ts # for esm project with node>=20.6
 node --loader @swc-node/register/esm script.ts # for esm project with node<=20.5, deprecated
 ```
 
