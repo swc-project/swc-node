@@ -4,6 +4,7 @@ import test from 'node:test'
 
 import { RepositoryState } from '@napi-rs/simple-git'
 import { bar as subBar } from '@subdirectory/bar.mjs'
+import { name } from '@swc-node/test-conditions'
 import esmock from 'esmock'
 import { supportedExtensions } from 'file-type'
 import { renderToString } from 'react-dom/server'
@@ -96,4 +97,8 @@ await test('postgres should work', async () => {
   postgres({
     host: 'postgres://localhost',
   })
+})
+
+await test('resolve conditions', () => {
+  assert.equal(name, 'from-dev')
 })

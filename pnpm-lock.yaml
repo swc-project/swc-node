@@ -96,6 +96,8 @@ importers:
         specifier: ^5.9.2
         version: 5.9.2
 
+  packages/conditions: {}
+
   packages/core:
     devDependencies:
       '@swc/core':
@@ -156,6 +158,9 @@ importers:
       '@swc-node/register':
         specifier: workspace:*
         version: link:../register
+      '@swc-node/test-conditions':
+        specifier: workspace:*
+        version: link:../conditions
       '@swc/core':
         specifier: ^1.13.3
         version: 1.13.3(@swc/helpers@0.5.17)
