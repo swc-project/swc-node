@@ -74,6 +74,7 @@ jobs:
 
       - name: Publish
         run: |
+          npm install -g npm
           pnpm publish -r --access public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
