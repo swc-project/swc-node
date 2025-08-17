@@ -6,6 +6,7 @@
     "outDir": "./lib",
     "jsx": "react-jsx",
     "types": ["node", "jest"],
+    "emitDeclarationOnly": true,
     "allowImportingTsExtensions": true
   },
   "references": [
