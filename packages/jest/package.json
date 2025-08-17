@@ -27,7 +27,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@node-rs/xxhash": "^1.7.3",
+    "@node-rs/xxhash": "^1.7.6",
     "@swc-node/core": "^1.13.3",
     "@swc-node/register": "^1.10.10"
   },
@@ -37,8 +37,8 @@
     "typescript": ">= 5.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.6.6",
-    "@swc/types": "^0.1.9"
+    "@swc/core": "^1.13.3",
+    "@swc/types": "^0.1.24"
   },
   "repository": {
     "type": "git",

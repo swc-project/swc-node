@@ -1,11 +1,9 @@
-import fs from 'fs'
-import os from 'os'
-import { join } from 'path'
+import fs from 'node:fs'
+import os from 'node:os'
+import { join } from 'node:path'
 
 import * as babel from '@babel/core'
-// @ts-expect-error
 import * as envPreset from '@babel/preset-env'
-// @ts-expect-error
 import * as tsPreset from '@babel/preset-typescript'
 import { transformSync as transformSyncNapi, transform as transformNapi } from '@swc-node/core'
 import Benchmark, { Suite } from 'benchmark'

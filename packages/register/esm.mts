@@ -8,7 +8,7 @@ import {
   builtinModules,
 } from 'node:module'
 import { extname, isAbsolute, join } from 'node:path'
-import { fileURLToPath, parse as parseUrl, pathToFileURL } from 'node:url'
+import { fileURLToPath, URL, pathToFileURL } from 'node:url'
 
 import debugFactory from 'debug'
 import { EnforceExtension, ResolverFactory } from 'oxc-resolver'
@@ -17,7 +17,7 @@ import ts from 'typescript'
 // @ts-expect-error
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
-import { compile, DEFAULT_EXTENSIONS } from '../lib/register.js'
+import { compile } from '../lib/register.js'
 
 const debug = debugFactory('@swc-node')
 
@@ -48,7 +48,13 @@ const resolver = new ResolverFactory({
     '.mjs': ['.mts', '.mjs'],
     '.cjs': ['.cts', '.cjs'],
   },
+  moduleType: true,
 })
+
+async function getModuleType(path: string): Promise<'module' | 'commonjs' | undefined> {
+  const pkgJsonReadContent = await readPackageJSON(path)
+  return pkgJsonReadContent?.type
+}
 
 const addShortCircuitSignal = <T extends ResolveFnOutput | LoadFnOutput>(input: T): T => {
   return {
@@ -175,10 +181,10 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     })
   }
 
-  const parsedUrl = parseUrl(specifier)
+  const parsedUrl = URL.parse(specifier)
 
   // as entrypoint, just return specifier
-  if (!context.parentURL || parsedUrl.protocol === 'file:') {
+  if (!context.parentURL || parsedUrl?.protocol === 'file:') {
     debug('skip resolve: absolute path or entrypoint', specifier)
 
     let format: ResolveFnOutput['format'] = null
@@ -205,7 +211,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     return addShortCircuitSignal(await nextResolve(specifier))
   }
 
-  const { error, path, moduleType } = await resolver.async(
+  const { error, path, moduleType, packageJsonPath } = await resolver.async(
     join(fileURLToPath(context.parentURL), '..'),
     specifier.startsWith('file:') ? fileURLToPath(specifier) : specifier,
   )
@@ -216,15 +222,16 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
 
   // local project file
   if (path && isPathNotInNodeModules(path)) {
-    debug('resolved: typescript', specifier, path)
+    debug('resolved: typescript', specifier, moduleType, path)
     const url = new URL('file://' + join(path))
+    const mt = moduleType ?? (packageJsonPath ? await getModuleType(packageJsonPath) : null)
     return addShortCircuitSignal({
       ...context,
       url: url.href,
       format:
-        path.endsWith('cjs') || path.endsWith('cts') || moduleType === 'commonjs' || !moduleType
+        path.endsWith('cjs') || path.endsWith('cts') || mt === 'commonjs' || !mt
           ? 'commonjs'
-          : moduleType === 'module'
+          : mt === 'module'
             ? 'module'
             : 'commonjs',
     })
@@ -274,7 +281,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
     return nextLoad(url, context)
   }
 
-  if (['builtin', 'json', 'wasm'].includes(context.format)) {
+  if (context.format && ['builtin', 'json', 'wasm'].includes(context.format)) {
     debug('loaded: internal format', url)
     return nextLoad(url, context)
   }
@@ -291,7 +298,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
 
   debug('loaded', url, resolvedFormat)
 
-  const code = !source || typeof source === 'string' ? source : Buffer.from(source).toString()
+  const code = !source || typeof source === 'string' ? source : Buffer.from(source as ArrayBuffer).toString()
 
   // url may be essentially an arbitrary string, but fixing the binding module, which currently
   // expects a real file path, to correctly interpret this doesn't have an obvious solution,
