@@ -181,10 +181,10 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     })
   }
 
-  const parsedUrl = URL.parse(specifier)
+  const parsedUrl = new URL(specifier)
 
   // as entrypoint, just return specifier
-  if (!context.parentURL || parsedUrl?.protocol === 'file:') {
+  if (!context.parentURL || parsedUrl.protocol === 'file:') {
     debug('skip resolve: absolute path or entrypoint', specifier)
 
     let format: ResolveFnOutput['format'] = null
