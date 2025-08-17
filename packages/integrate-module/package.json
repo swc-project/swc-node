@@ -11,6 +11,7 @@
     "@napi-rs/simple-git": "^0.1.22",
     "@swc/core": "^1.13.3",
     "@swc-node/register": "workspace:*",
+    "@swc-node/test-conditions": "workspace:*",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "esmock": "^2.7.1",

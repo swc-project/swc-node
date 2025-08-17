@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "name": "@swc-node/test-conditions",
+  "private": true,
+  "types": "./types.d.ts",
+  "exports": {
+    ".": {
+      "dev": "./dev.js",
+      "import": "./index.js"
+    }
+  }
+}

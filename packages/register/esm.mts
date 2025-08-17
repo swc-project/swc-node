@@ -11,7 +11,7 @@ import { extname, isAbsolute, join } from 'node:path'
 import { fileURLToPath, URL, pathToFileURL } from 'node:url'
 
 import debugFactory from 'debug'
-import { EnforceExtension, ResolverFactory } from 'oxc-resolver'
+import { EnforceExtension, ResolverFactory, type NapiResolveOptions } from 'oxc-resolver'
 import ts from 'typescript'
 
 // @ts-expect-error
@@ -34,22 +34,6 @@ const TSCONFIG_PATH = (function () {
   }
   return pathFromEnv
 })()
-
-const resolver = new ResolverFactory({
-  tsconfig: {
-    configFile: TSCONFIG_PATH,
-    references: 'auto',
-  },
-  conditionNames: ['node', 'import'],
-  enforceExtension: EnforceExtension.Auto,
-  extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
-  extensionAlias: {
-    '.js': ['.ts', '.tsx', '.js'],
-    '.mjs': ['.mts', '.mjs'],
-    '.cjs': ['.cts', '.cjs'],
-  },
-  moduleType: true,
-})
 
 async function getModuleType(path: string): Promise<'module' | 'commonjs' | undefined> {
   const pkgJsonReadContent = await readPackageJSON(path)
@@ -152,8 +136,36 @@ const EXTENSION_MODULE_MAP = {
   '.node': 'commonjs',
 } as const
 
+let conditions: string[] | undefined = undefined
+
+const resolverOptions: NapiResolveOptions = {
+  tsconfig: {
+    configFile: TSCONFIG_PATH,
+    references: 'auto',
+  },
+  conditionNames: ['node', 'import'],
+  enforceExtension: EnforceExtension.Auto,
+  extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.mts', '.cts', '.json', '.wasm', '.node'],
+  extensionAlias: {
+    '.js': ['.ts', '.tsx', '.js'],
+    '.mjs': ['.mts', '.mjs'],
+    '.cjs': ['.cts', '.cjs'],
+  },
+  moduleType: true,
+}
+
+let resolver = new ResolverFactory(resolverOptions)
+
 export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   debug('resolve', specifier, JSON.stringify(context))
+
+  if (!conditions) {
+    conditions = context.conditions
+    resolver = resolver.cloneWithOptions({
+      ...resolverOptions,
+      conditionNames: conditions,
+    })
+  }
 
   if (specifier.startsWith('node:') || specifier.startsWith('nodejs:')) {
     debug('skip resolve: internal format', specifier)
