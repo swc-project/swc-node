@@ -28,14 +28,16 @@ function getJestTransformConfig(jestConfig: JestConfig26 | JestConfig27): Option
 const defaultTsConfig = readDefaultTsConfig()
 
 export = {
-  process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27): Output | string {
-    if (/\.(tsx?|jsx?|mjs)$/.test(path)) {
+  process(src: string, path: string, jestConfig: JestConfig26 | JestConfig27): Output {
+    if (/\.[cm]?[jt]sx?$/.test(path)) {
       return transformJest(src, path, {
         ...tsCompilerOptionsToSwcConfig(defaultTsConfig, path),
         ...getJestTransformConfig(jestConfig),
       })
     }
-    return src
+
+    // Since Jest 28, "process" no longer accepts a string output.
+    return { code: src }
   },
   getCacheKey(src: string, _filepath: string, config: Options) {
     return xxh64(src + JSON.stringify(config)).toString(16)
