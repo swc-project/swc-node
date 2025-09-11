@@ -195,6 +195,18 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
 
   const parsedUrl = parseUrl(specifier)
 
+  if (context.parentURL && parsedUrl?.protocol === 'file:') {
+    debug('skip resolve: dynamic import', specifier);
+    return addShortCircuitSignal({
+      ...context,
+      url: specifier,
+      importAttributes: {
+        ...context.importAttributes,
+        dynamic: true
+      }
+    });
+  }
+
   // as entrypoint, just return specifier
   if (!context.parentURL || parsedUrl?.protocol === 'file:') {
     debug('skip resolve: absolute path or entrypoint', specifier)
@@ -280,6 +292,12 @@ const tsconfigForSWCNode = {
 
 export const load: LoadHook = async (url, context, nextLoad) => {
   debug('load', url, JSON.stringify(context))
+
+  if (context.importAttributes.dynamic) {
+    debug('skip load: dynamic file url', url);
+    delete context.importAttributes.dynamic;
+    return nextLoad(url, context);
+  }
 
   if (url.startsWith('data:')) {
     debug('skip load: data url', url)
