@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "file-type": "^21.0.0",
-    "p-timeout": "^6.1.4"
+    "p-timeout": "^7.0.0"
   },
   "devDependencies": {
     "@napi-rs/simple-git": "^0.1.22",
