@@ -42,8 +42,8 @@ importers:
         specifier: ^24.3.0
         version: 24.10.4
       '@types/sinon':
-        specifier: ^17.0.4
-        version: 17.0.4
+        specifier: ^21.0.0
+        version: 21.0.0
       ava:
         specifier: ^6.4.1
         version: 6.4.1(encoding@0.1.13)
@@ -1954,8 +1954,8 @@ packages:
   '@types/react@19.2.7':
     resolution: {integrity: sha512-MWtvHrGZLFttgeEj28VXHxpmwYbor/ATPYbBfSFZEIRK0ecCFLl2Qo55z52Hss+UV9CRN7trSeq1zbgx7YDWWg==}
 
-  '@types/sinon@17.0.4':
-    resolution: {integrity: sha512-RHnIrhfPO3+tJT0s7cFaXGZvsL4bbR3/k7z3P312qMS4JaS2Tk+KiwiLx1S0rQ56ERj00u1/BtdyVd0FY+Pdew==}
+  '@types/sinon@21.0.0':
+    resolution: {integrity: sha512-+oHKZ0lTI+WVLxx1IbJDNmReQaIsQJjN2e7UUrJHEeByG7bFeKJYsv1E75JxTQ9QKJDp21bAa/0W2Xo4srsDnw==}
 
   '@types/sinonjs__fake-timers@15.0.1':
     resolution: {integrity: sha512-Ko2tjWJq8oozHzHV+reuvS5KYIRAokHnGbDwGh/J64LntgpbuylF74ipEL24HCyRjf9FOlBiBHWBR1RlVKsI1w==}
@@ -6921,7 +6921,7 @@ snapshots:
     dependencies:
       csstype: 3.2.3
 
-  '@types/sinon@17.0.4':
+  '@types/sinon@21.0.0':
     dependencies:
       '@types/sinonjs__fake-timers': 15.0.1
 
