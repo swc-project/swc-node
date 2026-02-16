@@ -126,3 +126,32 @@ test('should set all values', (t) => {
   }
   t.deepEqual(swcConfig, expected)
 })
+
+test('should support ES2023 target', (t) => {
+  const options: ts.CompilerOptions = {
+    target: ts.ScriptTarget.ES2023,
+  }
+  const filename = 'some-file.ts'
+  const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
+  t.is(swcConfig.target, 'es2023')
+  t.is(swcConfig.useDefineForClassFields, true)
+})
+
+test('should support ES2024 target', (t) => {
+  const options: ts.CompilerOptions = {
+    target: ts.ScriptTarget.ES2024,
+  }
+  const filename = 'some-file.ts'
+  const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
+  t.is(swcConfig.target, 'es2024')
+  t.is(swcConfig.useDefineForClassFields, true)
+})
+
+test('should map ESNext to es2024', (t) => {
+  const options: ts.CompilerOptions = {
+    target: ts.ScriptTarget.ESNext,
+  }
+  const filename = 'some-file.ts'
+  const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
+  t.is(swcConfig.target, 'es2024')
+})
