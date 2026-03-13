@@ -18,6 +18,8 @@ import ts from 'typescript'
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
 import { compile } from '../lib/register.js'
+// @ts-expect-error
+import { shouldSkipTransformForRuntimeJs } from '../lib/transform-cache.js'
 
 const debug = debugFactory('@swc-node')
 
@@ -278,8 +280,6 @@ const tsconfigForSWCNode = {
   baseUrl: undefined,
 }
 
-const ESM_SKIP_COMPILE_EXTENSIONS = new Set(['.js', '.mjs', '.cjs', '.es', '.es6'])
-
 export const load: LoadHook = async (url, context, nextLoad) => {
   debug('load', url, JSON.stringify(context))
 
@@ -320,7 +320,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   // like it expects, which at least fixes relative input sourcemap paths.
   const filename = url.startsWith('file:') ? fileURLToPath(url) : url
 
-  if (shouldSkipCompileInEsmLoader(filename)) {
+  if (shouldSkipTransformForRuntimeJs(filename, code, tsconfigForSWCNode.module)) {
     debug('skip compile: runtime js module', url)
     return addShortCircuitSignal({
       format: resolvedFormat,
@@ -356,8 +356,3 @@ const parseUrl =
           return null
         }
       }
-
-function shouldSkipCompileInEsmLoader(filename: string): boolean {
-  const extension = extname(filename).toLowerCase()
-  return ESM_SKIP_COMPILE_EXTENSIONS.has(extension)
-}

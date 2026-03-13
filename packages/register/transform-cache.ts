@@ -1,10 +1,15 @@
 import fs from 'node:fs'
+import path from 'node:path'
+import * as ts from 'typescript'
 import { createHash } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import debugFactory from 'debug'
+import stableStringify from 'json-stable-stringify'
 
-const stableStringify = require('json-stable-stringify') as (value: unknown) => string
+const LOOKS_LIKE_ESM_SYNTAX_REGEX = /(?:^|\n)\s*import\s|(?:^|\n)\s*export\s|\bimport\.meta\b/
+
+const JS_RUNTIME_EXTENSIONS = new Set([ts.Extension.Js, ts.Extension.Mjs, ts.Extension.Cjs, '.es6', '.es'])
 
 interface TransformCacheEntry {
   code: string
@@ -94,7 +99,7 @@ function getOptionsSignature(options: Record<string, unknown>): string {
 
   // Options are usually reused for most compiles in one process; cache the
   // normalized signature so hash generation stays near O(source length).
-  const signature = stableStringify(options)
+  const signature = stableStringify(options)!
   optionsSignatureCache.set(options, signature)
   return signature
 }
@@ -218,4 +223,32 @@ export function clearTransformCache(options: { memory?: boolean; disk?: boolean 
 
 export function getTransformCacheDirectory() {
   return CACHE_DIRECTORY
+}
+
+export function shouldSkipTransformForRuntimeJs(
+  filename: string,
+  sourcecode: string,
+  moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015,
+  swcrcEnabled: boolean = Boolean(process.env.SWCRC),
+): boolean {
+  // Respect SWCRC workflows first. When users opt into external SWC config,
+  // consistency with that config takes priority over local fast-path heuristics.
+  if (swcrcEnabled) {
+    return false
+  }
+
+  const extension = path.extname(filename).toLowerCase()
+  if (!JS_RUNTIME_EXTENSIONS.has(extension)) {
+    return false
+  }
+
+  // In non-CommonJS output modes, runtime JS files are already executable for
+  // Node, so compiling them again mostly adds overhead.
+  if (moduleKind !== ts.ModuleKind.CommonJS) {
+    return true
+  }
+
+  // CommonJS mode is where accidental ESM-in-JS files usually break at runtime,
+  // so we keep the transform path only when file content indicates that risk.
+  return !LOOKS_LIKE_ESM_SYNTAX_REGEX.test(sourcecode)
 }

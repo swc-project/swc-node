@@ -5,8 +5,8 @@ import * as ts from 'typescript'
 import * as swcCore from '@swc-node/core'
 import { SourcemapMap } from '@swc-node/sourcemap-support'
 
-import { clearTransformCache, compile } from '../register'
-import { clearTransformCacheForTest } from '../transform-cache'
+import { compile } from '../register'
+import { clearTransformCache } from '../transform-cache'
 
 const originalEnv = { ...process.env }
 const emptyMap = '{"version":3,"sources":[],"names":[],"mappings":""}'

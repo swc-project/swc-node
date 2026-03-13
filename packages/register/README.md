@@ -141,7 +141,6 @@ Environment variables:
   - default: `${os.tmpdir()}/swc-node-${process.getuid() ?? process.pid}`
 - `SWC_NODE_CACHE_TTL_DAYS=7` disk cache retention in days.
 - `SWC_NODE_CACHE_MEMORY_LIMIT=2000` max in-process transform entries.
-- `SWC_NODE_CACHE_DEBUG=1` print cache hit/miss/store/skip lines to stderr.
 
 Programmatic cache control:
 
