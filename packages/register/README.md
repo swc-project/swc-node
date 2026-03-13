@@ -137,9 +137,7 @@ And if failed to parse `tsconfig.json`, `@swc-node/register` will print warning 
 Environment variables:
 
 - `SWC_NODE_CACHE=0` disable cache.
-- `SWC_NODE_CACHE_DIR=/path/to/cache` choose disk cache directory.
-  - default: `${os.tmpdir()}/swc-node-${process.getuid() ?? process.pid}`
-- `SWC_NODE_CACHE_TTL_DAYS=7` disk cache retention in days.
+- `SWC_NODE_CACHE_DIR=./path/to/cache` choose disk cache directory.
 - `SWC_NODE_CACHE_MEMORY_LIMIT=2000` max in-process transform entries.
 
 Programmatic cache control:

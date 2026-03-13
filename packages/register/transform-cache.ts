@@ -42,7 +42,6 @@ const SWC_VERSION = readPackageVersion('@swc/core/package.json')
 const memoryCache = new Map<string, TransformCacheEntry>()
 let optionsSignatureCache = new WeakMap<Record<string, unknown>, string>()
 let cacheDirectoryReady = false
-let cleanupAttempted = false
 
 export function getCachedTransform(cacheKey: string): TransformCacheEntry | undefined {
   if (!CACHE_ENABLED) {
@@ -146,42 +145,8 @@ function ensureCacheDirectory() {
     cacheDirectoryReady = true
   }
 
-  if (!cleanupAttempted) {
-    cleanupAttempted = true
-
-    // Trigger cleanup only after cache is actually used, so startup work stays
-    // minimal for short-lived commands.
-    void cleanupStaleDiskCache()
-  }
-}
-
-async function cleanupStaleDiskCache() {
-  if (!Number.isFinite(CACHE_TTL_DAYS) || CACHE_TTL_DAYS <= 0) {
-    return
-  }
-
-  try {
-    const files = fs.readdirSync(CACHE_DIRECTORY)
-    const now = Date.now()
-    const maxAgeMs = CACHE_TTL_DAYS * 24 * 60 * 60 * 1000
-
-    // Age-based eviction keeps disk usage stable without maintaining additional metadata files.
-    for (const file of files) {
-      if (!file.endsWith('.json')) {
-        // Non-cache files should not be touched, and may indicate a non-standard cache setup (e.g. with a symlink).
-        return
-      }
-
-      const fullPath = join(CACHE_DIRECTORY, file)
-      const ageMs = now - fs.statSync(fullPath).mtimeMs
-
-      if (ageMs > maxAgeMs) {
-        fs.unlinkSync(fullPath)
-      }
-    }
-  } catch (error) {
-    debug('Failed to cleanup cache directory', error)
-  }
+  // Note that we do not attempt to clean up old cache files since we store it
+  // on tmpdir and we assume the OS take care of that.
 }
 
 function readPackageVersion(path: string): string {
