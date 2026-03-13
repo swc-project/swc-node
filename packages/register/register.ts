@@ -116,7 +116,6 @@ export function compile(
   // Fast-path before cache work for files intentionally left as runtime JS.
   // This keeps cache logs meaningful and avoids unnecessary key generation.
   if (!fallbackToTs && shouldSkipTransformForRuntimeJs(filename, sourcecode, options)) {
-    logCacheDebug('skip', filename)
     return sourcecode
   }
 
