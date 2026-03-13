@@ -96,6 +96,47 @@ importers:
         specifier: ^5.9.2
         version: 5.9.3
 
+  packages/cli:
+    dependencies:
+      '@swc-node/register':
+        specifier: ^1.11.1
+        version: link:../register
+      '@swc/core':
+        specifier: ^1.15.18
+        version: 1.15.18(@swc/helpers@0.5.19)
+      cross-spawn:
+        specifier: ^7.0.6
+        version: 7.0.6
+    devDependencies:
+      '@types/cross-spawn':
+        specifier: ^6.0.6
+        version: 6.0.6
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+
+  packages/cli/__test__/fixtures/cjs-imports-esm: {}
+
+  packages/cli/__test__/fixtures/cjs-only: {}
+
+  packages/cli/__test__/fixtures/decorator-metadata: {}
+
+  packages/cli/__test__/fixtures/esm-only: {}
+
+  packages/cli/__test__/fixtures/mixed: {}
+
+  packages/cli/__test__/fixtures/node-modules: {}
+
+  packages/cli/__test__/fixtures/non-erasable: {}
+
+  packages/cli/__test__/fixtures/test-discovery: {}
+
+  packages/cli/__test__/fixtures/test-runner: {}
+
+  packages/cli/__test__/fixtures/tsconfig-paths: {}
+
+  packages/cli/__test__/fixtures/watch: {}
+
   packages/conditions: {}
 
   packages/core:
@@ -2145,6 +2186,9 @@ packages:
 
   '@types/benchmark@2.1.5':
     resolution: {integrity: sha512-cKio2eFB3v7qmKcvIHLUMw/dIx/8bhWPuzpzRT4unCPRTD8VdA9Zb0afxpcxOqR4PixRS7yT42FqGS8BYL8g1w==}
+
+  '@types/cross-spawn@6.0.6':
+    resolution: {integrity: sha512-fXRhhUkG4H3TQk5dBhQ7m/JDdSNHKwR2BBia62lhwEIq9xGiQKLxd6LymNhn47SjXhsUEPmxi+PKw2OkW4LLjA==}
 
   '@types/debug@4.1.12':
     resolution: {integrity: sha512-vIChWdVG3LG1SMxEvI/AK+FWJthlrqlTu7fbrlywTkkaONwk/UAGaULXRlf8vkzFBLVm0zkMdCquhL5aOjhXPQ==}
@@ -7224,6 +7268,10 @@ snapshots:
       '@babel/types': 7.29.0
 
   '@types/benchmark@2.1.5': {}
+
+  '@types/cross-spawn@6.0.6':
+    dependencies:
+      '@types/node': 24.12.0
 
   '@types/debug@4.1.12':
     dependencies:
