@@ -1,6 +1,6 @@
 {
-  "name": "@arthurfiorette/swc-cli",
-  "version": "1.0.2",
+  "name": "@swc-node/cli",
+  "version": "1.0.0",
   "description": "CLI tool intended to be a drop-in replacement for node, powered by swc.",
   "keywords": [
     "swc",
@@ -18,7 +18,7 @@
     "node"
   ],
   "author": "Arthur Fiorette <me@arthur.place>",
-  "homepage": "https://github.com/arthurfiorette/swc-node",
+  "homepage": "https://github.com/swc-project/swc-node",
   "license": "MIT",
   "bin": {
     "swc-node": "./index.js"
@@ -41,10 +41,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arthurfiorette/swc-node.git"
+    "url": "git+https://github.com/swc-project/swc-node.git"
   },
   "bugs": {
-    "url": "https://github.com/arthurfiorette/swc-node/issues"
+    "url": "https://github.com/swc-project/swc-node/issues"
   },
   "funding": {
     "type": "github",
