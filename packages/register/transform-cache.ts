@@ -29,7 +29,6 @@ const debug = debugFactory('@swc-node')
 const CACHE_ENABLED = isEnabled(process.env.SWC_NODE_CACHE, true)
 const CACHE_DIRECTORY =
   process.env.SWC_NODE_CACHE_DIR ?? join(tmpdir(), `swc-node-${process.getuid?.() ?? process.pid}`)
-const CACHE_TTL_DAYS = Number(process.env.SWC_NODE_CACHE_TTL_DAYS ?? '7')
 const MEMORY_CACHE_LIMIT = Number(process.env.SWC_NODE_CACHE_MEMORY_LIMIT ?? '2000')
 
 if (!Number.isFinite(MEMORY_CACHE_LIMIT) || MEMORY_CACHE_LIMIT < 0) {
@@ -182,7 +181,6 @@ export function clearTransformCache(options: { memory?: boolean; disk?: boolean 
     }
 
     cacheDirectoryReady = false
-    cleanupAttempted = false
   }
 }
 
