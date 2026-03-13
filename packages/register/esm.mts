@@ -278,6 +278,8 @@ const tsconfigForSWCNode = {
   baseUrl: undefined,
 }
 
+const ESM_SKIP_COMPILE_EXTENSIONS = new Set(['.js', '.mjs', '.cjs', '.es', '.es6'])
+
 export const load: LoadHook = async (url, context, nextLoad) => {
   debug('load', url, JSON.stringify(context))
 
@@ -317,6 +319,15 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   // and would likely be a breaking change anyway. Do a best effort to give a real path
   // like it expects, which at least fixes relative input sourcemap paths.
   const filename = url.startsWith('file:') ? fileURLToPath(url) : url
+
+  if (shouldSkipCompileInEsmLoader(filename)) {
+    debug('skip compile: runtime js module', url)
+    return addShortCircuitSignal({
+      format: resolvedFormat,
+      source,
+    })
+  }
+
   const compiled = await compile(code, filename, tsconfigForSWCNode, true)
 
   debug('compiled', url, resolvedFormat)
@@ -345,3 +356,8 @@ const parseUrl =
           return null
         }
       }
+
+function shouldSkipCompileInEsmLoader(filename: string): boolean {
+  const extension = extname(filename).toLowerCase()
+  return ESM_SKIP_COMPILE_EXTENSIONS.has(extension)
+}

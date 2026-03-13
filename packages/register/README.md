@@ -127,3 +127,43 @@ Respect the boolean value in `tsconfig`.
 `TypeScript` gives files list to `@swc-node/register`, if parse `tsconfig.json` failed or files list empty, `@swc-node/register` will transform all files which were required.
 
 And if failed to parse `tsconfig.json`, `@swc-node/register` will print warning which contains failed reason.
+
+## Performance tuning
+
+### Transform cache
+
+`@swc-node/register` now keeps a transform cache (memory + disk) keyed by source, filename, compiler options, and runtime versions.
+
+Environment variables:
+
+- `SWC_NODE_CACHE=0` disable cache.
+- `SWC_NODE_CACHE_DIR=/path/to/cache` choose disk cache directory.
+  - default: `${os.tmpdir()}/swc-node-${process.getuid() ?? process.pid}`
+- `SWC_NODE_CACHE_TTL_DAYS=7` disk cache retention in days.
+- `SWC_NODE_CACHE_MEMORY_LIMIT=2000` max in-process transform entries.
+- `SWC_NODE_CACHE_DEBUG=1` print cache hit/miss/store/skip lines to stderr.
+
+Programmatic cache control:
+
+```js
+const { clearTransformCache, getTransformCacheDirectory } = require('@swc-node/register/register')
+
+// clear memory + disk (default)
+clearTransformCache()
+
+// clear only memory cache
+clearTransformCache({ memory: true, disk: false })
+
+// inspect resolved disk cache path
+console.log(getTransformCacheDirectory())
+```
+
+### Source map memory mode
+
+Use `SWC_NODE_SOURCE_MAP_MODE` to tune source map memory behavior:
+
+- `auto` (default): inline maps when Node native source maps are enabled, otherwise map-store mode.
+- `inline`: inline data URL source maps only.
+- `store`: in-memory map store only (`source-map-support` path).
+- `both`: inline + store (highest memory use, mainly for compatibility/debug edge cases).
+- `none`: disable both inline/store map injection.
