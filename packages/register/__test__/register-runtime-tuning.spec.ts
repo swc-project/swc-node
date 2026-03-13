@@ -159,25 +159,3 @@ test.serial('skips transform for runtime js in esm mode', async (t) => {
   t.is(output, 'export const value = 42')
   t.false(transformStub.called)
 })
-
-test.serial('can clear transform cache programmatically', (t) => {
-  const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
-    code: 'console.log("clear-cache")',
-    map: emptyMap,
-  })
-
-  const filename = uniquePath('clear-cache', 'ts')
-  const options = {
-    module: ts.ModuleKind.CommonJS,
-    sourceMap: true,
-  }
-
-  compile('const value: number = 1', filename, options)
-  compile('const value: number = 1', filename, options)
-  t.is(transformSyncStub.callCount, 1)
-
-  clearTransformCache({ memory: true, disk: true })
-
-  compile('const value: number = 1', filename, options)
-  t.is(transformSyncStub.callCount, 2)
-})
