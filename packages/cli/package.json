@@ -1,0 +1,57 @@
+{
+  "name": "@swc-node/cli",
+  "version": "1.0.0",
+  "description": "CLI tool intended to be a drop-in replacement for node, powered by swc.",
+  "keywords": [
+    "swc",
+    "babel",
+    "ts-node",
+    "napi-rs",
+    "uglify",
+    "node-rs",
+    "napi-rs",
+    "napi",
+    "n-api",
+    "esbuild",
+    "tsc",
+    "webpack",
+    "node"
+  ],
+  "author": "Arthur Fiorette <me@arthur.place>",
+  "homepage": "https://github.com/swc-project/swc-node",
+  "license": "MIT",
+  "bin": {
+    "swc-node": "./index.js"
+  },
+  "files": [
+    "lib",
+    "LICENSE",
+    "index.js",
+    "register-cjs.js",
+    "register-esm.js"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "dependencies": {
+    "@swc/core": "^1.15.18",
+    "@swc-node/register": "^1.11.1",
+    "cross-spawn": "^7.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swc-project/swc-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swc-project/swc-node/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/arthurfiorette"
+  },
+  "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
+    "typescript": "^5.9.3"
+  }
+}
