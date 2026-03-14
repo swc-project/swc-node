@@ -61,7 +61,6 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
               jest,
             },
           },
-          minify: false,
           keepClassNames: opts.keepClassNames,
           paths: opts.paths,
           baseUrl: opts.baseUrl,
