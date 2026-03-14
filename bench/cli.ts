@@ -16,11 +16,11 @@ const tsxTmpDir = resolve(cacheRoot, 'tmp')
 
 const workloads = [
   {
-    name: 'rxjs package',
+    name: 'rxjs',
     entrypoint: resolve(fixtureDir, 'rxjs.ts'),
   },
   {
-    name: 'typescript package',
+    name: 'typescript',
     entrypoint: resolve(fixtureDir, 'ts.ts'),
   },
 ] as const
@@ -28,12 +28,16 @@ const workloads = [
 type RunMode = 'cached' | 'uncached'
 
 type Runner = {
-  name: 'tsx' | 'swc-node'
+  name: 'tsx' | 'swc-node' | 'node'
   cliFile: string
-  envForMode: (mode: RunMode) => NodeJS.ProcessEnv
+  envForMode?: (mode: RunMode) => NodeJS.ProcessEnv
 }
 
 const runners: Runner[] = [
+  {
+    name: 'node',
+    cliFile: '', // Use node directly without a CLI wrapper
+  },
   {
     name: 'tsx',
     cliFile: tsxCli,
@@ -56,7 +60,7 @@ const runners: Runner[] = [
 ]
 
 function runCli(name: string, cliFile: string, entrypoint: string, env: NodeJS.ProcessEnv) {
-  const result = spawnSync(process.execPath, [cliFile, entrypoint], {
+  const result = spawnSync(process.execPath, [cliFile, entrypoint].filter(Boolean), {
     cwd: fixtureDir,
     env,
     stdio: 'pipe',
@@ -79,64 +83,52 @@ resetCacheDirectories()
 
 for (const workload of workloads) {
   for (const runner of runners) {
-    runCli(
-      `${runner.name} (${workload.name}, cached prewarm)`,
-      runner.cliFile,
-      workload.entrypoint,
-      runner.envForMode('cached'),
-    )
-    runCli(
-      `${runner.name} (${workload.name}, uncached preflight)`,
-      runner.cliFile,
-      workload.entrypoint,
-      runner.envForMode('uncached'),
-    )
+    if (runner.envForMode) {
+      runCli(
+        `${runner.name} (${workload.name}, cached prewarm)`,
+        runner.cliFile,
+        workload.entrypoint,
+        runner.envForMode('cached'),
+      )
+      runCli(
+        `${runner.name} (${workload.name}, uncached preflight)`,
+        runner.cliFile,
+        workload.entrypoint,
+        runner.envForMode('uncached'),
+      )
+    } else {
+      runCli(`${runner.name} (${workload.name},preflight)`, runner.cliFile, workload.entrypoint, process.env)
+    }
   }
 }
 
 boxplot(() => {
-  const workload = workloads[0]
+  for (const workload of workloads) {
+    for (const runner of runners) {
+      if (runner.envForMode) {
+        bench(`${runner.name} uncached (${workload.name})`, () =>
+          runCli(
+            `${runner.name} uncached (${workload.name})`,
+            runner.cliFile,
+            workload.entrypoint,
+            runner.envForMode!('uncached'),
+          ),
+        )
 
-  for (const runner of runners) {
-    bench(`${runner.name} uncached (${workload.name})`, () =>
-      runCli(
-        `${runner.name} uncached (${workload.name})`,
-        runner.cliFile,
-        workload.entrypoint,
-        runner.envForMode('uncached'),
-      ),
-    )
-    bench(`${runner.name} cached (${workload.name})`, () =>
-      runCli(
-        `${runner.name} cached (${workload.name})`,
-        runner.cliFile,
-        workload.entrypoint,
-        runner.envForMode('cached'),
-      ),
-    ).baseline(runner.name === 'tsx')
-  }
-})
-
-boxplot(() => {
-  const workload = workloads[1]
-
-  for (const runner of runners) {
-    bench(`${runner.name} uncached (${workload.name})`, () =>
-      runCli(
-        `${runner.name} uncached (${workload.name})`,
-        runner.cliFile,
-        workload.entrypoint,
-        runner.envForMode('uncached'),
-      ),
-    )
-    bench(`${runner.name} cached (${workload.name})`, () =>
-      runCli(
-        `${runner.name} cached (${workload.name})`,
-        runner.cliFile,
-        workload.entrypoint,
-        runner.envForMode('cached'),
-      ),
-    ).baseline(runner.name === 'tsx')
+        bench(`${runner.name} cached (${workload.name})`, () =>
+          runCli(
+            `${runner.name} cached (${workload.name})`,
+            runner.cliFile,
+            workload.entrypoint,
+            runner.envForMode!('cached'),
+          ),
+        ).baseline(runner.name === 'node')
+      } else {
+        bench(`${runner.name} (${workload.name})`, () =>
+          runCli(`${runner.name} (${workload.name})`, runner.cliFile, workload.entrypoint, process.env),
+        ).baseline(runner.name === 'node')
+      }
+    }
   }
 })
 
