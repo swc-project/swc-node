@@ -1,8 +1,5 @@
 import { parseArgs } from 'node:util'
 
-import { readDefaultTsConfig } from '@swc-node/register/read-default-tsconfig'
-import { compile } from '@swc-node/register/register'
-
 type OptionToken = {
   kind: string
   name?: string
@@ -39,7 +36,8 @@ export function parseCliArgs(rawArgs: string[]): ParsedCliArgs {
   })
 
   const tsconfigPath = typeof values.tsconfig === 'string' ? values.tsconfig : undefined
-  const transformedArgs = transformInlineCodeArgs(rawArgs, tokens, tsconfigPath)
+  const hasInlineCode = typeof values.eval === 'string' || typeof values.print === 'string'
+  const transformedArgs = hasInlineCode ? transformInlineCodeArgs(rawArgs, tokens, tsconfigPath) : rawArgs
   const repl = shouldOpenRepl(positionals, values, rawArgs)
 
   return {
@@ -62,6 +60,11 @@ function shouldOpenRepl(positionals: string[], values: Record<string, unknown>, 
 }
 
 function transformInlineCodeArgs(args: string[], tokens: OptionToken[], tsconfigPath?: string): string[] {
+  // Only import the register and readDefaultTsConfig when needed to avoid unnecessary dependencies for users who don't use --eval or --print.
+  const { readDefaultTsConfig } =
+    require('@swc-node/register/read-default-tsconfig') as typeof import('@swc-node/register/read-default-tsconfig')
+  const { compile } = require('@swc-node/register/register') as typeof import('@swc-node/register/register')
+
   // readDefaultTsConfig caches by resolved tsconfig path internally, so calling
   // this here and later in register bootstrap remains cheap for repeated runs.
   const compilerOptions = readDefaultTsConfig(tsconfigPath)
