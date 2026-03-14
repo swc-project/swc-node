@@ -10,6 +10,29 @@ const debug = debugFactory('@swc-node')
 
 const configCache: Record<string, Partial<ts.CompilerOptions & { fallbackToTs: (path: string) => boolean }>> = {}
 
+// Keep compatibility with the legacy SWC_NODE_INLINE_SOURCE_MAP env by
+// mapping it to SWC_NODE_SOURCE_MAP_MODE=inline.
+if (typeof process.env.SWC_NODE_INLINE_SOURCE_MAP === 'string') {
+  process.env.SWC_NODE_SOURCE_MAP_MODE = 'inline'
+}
+
+export function getSourceMapMode(): { inline: boolean; store: boolean } {
+  switch (process.env.SWC_NODE_SOURCE_MAP_MODE?.trim().toLowerCase()) {
+    case 'both':
+      return { inline: true, store: true }
+    case 'inline':
+      return { inline: true, store: false }
+    case 'store':
+      return { inline: false, store: true }
+    case 'none':
+      return { inline: false, store: false }
+  }
+
+  // In auto mode, follow runtime capability: native source maps favor inline,
+  // non-native stacks favor store mode.
+  return process.sourceMapsEnabled ? { inline: true, store: false } : { inline: false, store: true }
+}
+
 export function readDefaultTsConfig(
   tsConfigPath = process.env.SWC_NODE_PROJECT ?? process.env.TS_NODE_PROJECT ?? join(process.cwd(), 'tsconfig.json'),
 ) {
@@ -123,18 +146,15 @@ export function tsCompilerOptionsToSwcConfig(options: ts.CompilerOptions, filena
   const isJsx = filename.endsWith('.tsx') || filename.endsWith('.jsx') || Boolean(options.jsx)
   const target = options.target ?? ts.ScriptTarget.ES2018
 
-  const enableInlineSourceMap =
-    options.inlineSourceMap ??
-    (typeof process.env.SWC_NODE_INLINE_SOURCE_MAP === 'string'
-      ? Boolean(process.env.SWC_NODE_INLINE_SOURCE_MAP)
-      : undefined)
+  const sourceMapModeName = process.env.SWC_NODE_SOURCE_MAP_MODE?.trim().toLowerCase()
+  const enableInlineSourceMap = options.inlineSourceMap ?? (sourceMapModeName === 'inline' ? true : undefined)
+  const shouldEmitSourceMap = Boolean(options.sourceMap || enableInlineSourceMap)
 
   return {
     module: toModule(options.module ?? ts.ModuleKind.ES2015),
     target: toTsTarget(target),
     jsx: isJsx,
-    // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-    sourcemap: options.sourceMap || enableInlineSourceMap ? 'inline' : Boolean(options.sourceMap),
+    sourcemap: enableInlineSourceMap ? 'inline' : shouldEmitSourceMap,
     experimentalDecorators: options.experimentalDecorators ?? false,
     emitDecoratorMetadata: options.emitDecoratorMetadata ?? false,
     useDefineForClassFields: getUseDefineForClassFields(options, target),
