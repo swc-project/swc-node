@@ -61,12 +61,7 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
               jest,
             },
           },
-          minify: {
-            compress: true,
-            // Keep class and function names because debuggers don't use the `names` property from the source map
-            mangle: false,
-            inlineSourcesContent: true,
-          },
+          minify: false,
           keepClassNames: opts.keepClassNames,
           paths: opts.paths,
           baseUrl: opts.baseUrl,
