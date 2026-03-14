@@ -130,12 +130,12 @@ function readDiskCache(key: string): TransformCacheEntry | undefined {
 }
 
 function writeDiskCache(key: string, value: TransformCacheEntry) {
-  try {
-    ensureCacheDirectory()
-    fs.writeFileSync(join(CACHE_DIRECTORY, `${key}.json`), JSON.stringify(value), 'utf8')
-  } catch (error) {
+  ensureCacheDirectory()
+
+  // Ensure writes are non blocking
+  void fs.promises.writeFile(join(CACHE_DIRECTORY, `${key}.json`), JSON.stringify(value), 'utf8').catch((error) => {
     debug('Failed to write cache file', error)
-  }
+  })
 }
 
 function ensureCacheDirectory() {
