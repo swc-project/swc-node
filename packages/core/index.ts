@@ -68,7 +68,8 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
             keepImportAttributes: true,
           },
         },
-    minify: false,
+    // Smaller output for cache
+    minify: true,
     isModule: true,
     module: options?.swc?.swcrc
       ? undefined

@@ -126,3 +126,14 @@ test('should set all values', (t) => {
   }
   t.deepEqual(swcConfig, expected)
 })
+
+test('sourceMap without inlineSourceMap keeps external map output', (t) => {
+  const options: ts.CompilerOptions = {
+    sourceMap: true,
+    inlineSourceMap: false,
+  }
+
+  const swcConfig = tsCompilerOptionsToSwcConfig(options, 'some-file.ts')
+
+  t.is(swcConfig.sourcemap, true)
+})

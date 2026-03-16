@@ -18,6 +18,8 @@ import ts from 'typescript'
 import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
 // @ts-expect-error
 import { compile } from '../lib/register.js'
+// @ts-expect-error
+import { shouldSkipTransformForRuntimeJs } from '../lib/transform-cache.js'
 
 const debug = debugFactory('@swc-node')
 
@@ -317,6 +319,15 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   // and would likely be a breaking change anyway. Do a best effort to give a real path
   // like it expects, which at least fixes relative input sourcemap paths.
   const filename = url.startsWith('file:') ? fileURLToPath(url) : url
+
+  if (shouldSkipTransformForRuntimeJs(filename, code, tsconfigForSWCNode.module)) {
+    debug('skip compile: runtime js module', url)
+    return addShortCircuitSignal({
+      format: resolvedFormat,
+      source,
+    })
+  }
+
   const compiled = await compile(code, filename, tsconfigForSWCNode, true)
 
   debug('compiled', url, resolvedFormat)
