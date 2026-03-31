@@ -5,3 +5,5 @@ dist
 temp
 target
 pnpm-lock.yaml
+# Line positions are significant for the sourcemap integration test
+packages/integrate/__tests__/sourcemaps/throw-with-interfaces.ts

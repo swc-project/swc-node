@@ -71,6 +71,15 @@ test('should force the jsx  config', (t) => {
   t.like(swcConfig, expected)
 })
 
+test('should set sourcemap to true when sourceMap is true and inlineSourceMap is not set', (t) => {
+  const options: ts.CompilerOptions = {
+    sourceMap: true,
+  }
+  const filename = 'some-file.ts'
+  const swcConfig = tsCompilerOptionsToSwcConfig(options, filename)
+  t.like(swcConfig, { sourcemap: true })
+})
+
 test('should set all values', (t) => {
   const options: ts.CompilerOptions = {
     module: ts.ModuleKind.CommonJS,
