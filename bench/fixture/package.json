@@ -1,0 +1,9 @@
+{
+  "name": "swc-node-bench-rxjs-fixture",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "rxjs": "^7.8.2",
+    "typescript": "^5.9.3"
+  }
+}
