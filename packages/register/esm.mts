@@ -228,7 +228,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     specifier.startsWith('file:') ? fileURLToPath(specifier) : specifier,
   )
 
- if (error) {
+  if (error) {
     debug('oxc-resolver error, falling back to node resolver', specifier, error);
     try {
       const res = await nextResolve(specifier);
