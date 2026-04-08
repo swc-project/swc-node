@@ -229,7 +229,14 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   )
 
   if (error) {
-    throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`)
+    debug('oxc-resolver error, falling back to node resolver', specifier, error);
+    try {
+      const res = await nextResolve(specifier);
+      return addShortCircuitSignal(res);
+    }
+    catch (resolveError) {
+      throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`);
+    }
   }
 
   // local project file
