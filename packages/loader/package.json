@@ -47,7 +47,7 @@
     "url": "https://github.com/sponsors/Brooooooklyn"
   },
   "devDependencies": {
-    "typescript": "^5.9.2",
+    "typescript": "^6.0.0",
     "webpack": "^5.101.2"
   }
 }

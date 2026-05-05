@@ -64,7 +64,7 @@
     "rxjs": "^7.8.2",
     "sinon": "^21.0.0",
     "tslib": "^2.8.1",
-    "typescript": "^5.9.2"
+    "typescript": "^6.0.0"
   },
   "lint-staged": {
     "*.@(js|ts|tsx|mts)": [

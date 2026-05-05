@@ -93,8 +93,8 @@ importers:
         specifier: ^2.8.1
         version: 2.8.1
       typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/conditions: {}
 
@@ -140,8 +140,8 @@ importers:
         specifier: ^21.0.0
         version: 21.1.2
       typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/integrate-module:
     dependencies:
@@ -189,8 +189,8 @@ importers:
         specifier: ^3.28.0
         version: 3.36.0
       typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/integrate-module/src/cjs: {}
 
@@ -226,8 +226,8 @@ importers:
         version: link:../register
     devDependencies:
       typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
       webpack:
         specifier: ^5.101.2
         version: 5.106.2(@swc/core@1.15.30(@swc/helpers@0.5.21))(esbuild@0.28.0)
@@ -272,8 +272,8 @@ importers:
         specifier: ^21.0.0
         version: 21.1.2
       typescript:
-        specifier: ^5.9.2
-        version: 5.9.3
+        specifier: ^6.0.0
+        version: 6.0.3
 
   packages/sourcemap-support:
     dependencies:
@@ -5019,6 +5019,11 @@ packages:
 
   typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  typescript@6.0.3:
+    resolution: {integrity: sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -10368,6 +10373,8 @@ snapshots:
   typedarray@0.0.6: {}
 
   typescript@5.9.3: {}
+
+  typescript@6.0.3: {}
 
   uglify-js@3.19.3:
     optional: true
