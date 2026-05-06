@@ -57,7 +57,7 @@
     "@swc/helpers": "^0.5.17",
     "@types/debug": "^4.1.12",
     "lodash": "^4.17.21",
-    "sinon": "^21.0.0",
+    "sinon": "^22.0.0",
     "typescript": "^5.9.2"
   },
   "funding": {
