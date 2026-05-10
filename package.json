@@ -98,8 +98,5 @@
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
-  "packageManager": "pnpm@11.0.9",
-  "pnpm": {
-    "onlyBuiltDependencies": ["@swc/core", "esbuild", "nx", "unrs-resolver"]
-  }
+  "packageManager": "pnpm@11.0.9"
 }
