@@ -3,11 +3,6 @@ lockfileVersion: '9.0'
 settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
-  onlyBuiltDependencies:
-    - '@swc/core'
-    - esbuild
-    - nx
-    - unrs-resolver
 
 importers:
 
@@ -7169,7 +7164,6 @@ snapshots:
       '@swc/core-win32-ia32-msvc': 1.15.33
       '@swc/core-win32-x64-msvc': 1.15.33
       '@swc/helpers': 0.5.21
-    requiresBuild: true
 
   '@swc/counter@0.1.3': {}
 
@@ -8185,7 +8179,6 @@ snapshots:
       '@esbuild/win32-arm64': 0.28.0
       '@esbuild/win32-ia32': 0.28.0
       '@esbuild/win32-x64': 0.28.0
-    requiresBuild: true
 
   escalade@3.2.0: {}
 
@@ -9704,7 +9697,6 @@ snapshots:
       '@swc/core': 1.15.33(@swc/helpers@0.5.21)
     transitivePeerDependencies:
       - debug
-    requiresBuild: true
 
   once@1.4.0:
     dependencies:
@@ -10554,7 +10546,6 @@ snapshots:
       '@unrs/resolver-binding-win32-arm64-msvc': 1.11.1
       '@unrs/resolver-binding-win32-ia32-msvc': 1.11.1
       '@unrs/resolver-binding-win32-x64-msvc': 1.11.1
-    requiresBuild: true
 
   upath@2.0.1: {}
 
