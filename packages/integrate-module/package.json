@@ -8,7 +8,7 @@
     "p-timeout": "^7.0.0"
   },
   "devDependencies": {
-    "@napi-rs/simple-git": "^0.1.22",
+    "@napi-rs/simple-git": "^1.0.0",
     "@swc/core": "^1.13.3",
     "@swc-node/register": "workspace:*",
     "@swc-node/test-conditions": "workspace:*",
