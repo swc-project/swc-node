@@ -2,12 +2,18 @@ import fs from 'node:fs'
 import path from 'node:path'
 import * as ts from 'typescript'
 import { createHash } from 'node:crypto'
-import { tmpdir } from 'node:os'
+import { tmpdir, userInfo } from 'node:os'
 import { join } from 'node:path'
 import debugFactory from 'debug'
 import stableStringify from 'json-stable-stringify'
 
 const LOOKS_LIKE_ESM_SYNTAX_REGEX = /(?:^|\n)\s*import\s|(?:^|\n)\s*export\s|\bimport\.meta\b/
+
+// Strong JSX signals: a closing element `</Tag`, a self-closing element
+// `<Tag ... />`, or a fragment `<>`. These are rare in plain JS (a `<`/`>`
+// comparison matches none of them), so a hit reliably means the file needs the
+// JSX transform and must not be skipped.
+const LOOKS_LIKE_JSX_REGEX = /<\/[A-Za-z]|<[A-Za-z][^>]*\/>|<>/
 
 const JS_RUNTIME_EXTENSIONS = new Set([ts.Extension.Js, ts.Extension.Mjs, ts.Extension.Cjs, '.es6', '.es'])
 
@@ -27,9 +33,32 @@ interface TransformCacheKeyInput {
 const debug = debugFactory('@swc-node')
 
 const CACHE_ENABLED = isEnabled(process.env.SWC_NODE_CACHE, true)
-const CACHE_DIRECTORY =
-  process.env.SWC_NODE_CACHE_DIR ?? join(tmpdir(), `swc-node-${process.getuid?.() ?? process.pid}`)
 const MEMORY_CACHE_LIMIT = Number(process.env.SWC_NODE_CACHE_MEMORY_LIMIT ?? '2000')
+
+// A stable per-user segment so the on-disk cache is shared across runs by the
+// same user. Windows has no getuid(); falling back to the pid there would give
+// every process a throwaway directory and defeat the disk cache entirely.
+function cacheUserSegment(): string {
+  if (typeof process.getuid === 'function') {
+    return String(process.getuid())
+  }
+  try {
+    const name = userInfo().username
+    if (name) {
+      return name.replace(/[^a-zA-Z0-9_-]/g, '_')
+    }
+  } catch {
+    // userInfo() can throw when there is no backing passwd entry.
+  }
+  return 'default'
+}
+
+// Resolved lazily rather than frozen at import time so SWC_NODE_CACHE_DIR is
+// honored whenever it is set (including by tests) and getTransformCacheDirectory
+// always reflects the current value.
+function getCacheDirectory(): string {
+  return process.env.SWC_NODE_CACHE_DIR ?? join(tmpdir(), `swc-node-${cacheUserSegment()}`)
+}
 
 if (!Number.isFinite(MEMORY_CACHE_LIMIT) || MEMORY_CACHE_LIMIT < 0) {
   throw new Error(`Invalid value for SWC_NODE_CACHE_MEMORY_LIMIT: ${process.env.SWC_NODE_CACHE_MEMORY_LIMIT}`)
@@ -40,7 +69,8 @@ const SWC_VERSION = readPackageVersion('@swc/core/package.json')
 
 const memoryCache = new Map<string, TransformCacheEntry>()
 let optionsSignatureCache = new WeakMap<Record<string, unknown>, string>()
-let cacheDirectoryReady = false
+let ensuredCacheDirectory: string | undefined
+let diskWriteCounter = 0
 
 export function getCachedTransform(cacheKey: string): TransformCacheEntry | undefined {
   if (!CACHE_ENABLED) {
@@ -120,8 +150,8 @@ function setMemoryCache(key: string, value: TransformCacheEntry) {
 
 function readDiskCache(key: string): TransformCacheEntry | undefined {
   try {
-    ensureCacheDirectory()
-    const file = fs.readFileSync(join(CACHE_DIRECTORY, `${key}.json`), 'utf8')
+    const directory = ensureCacheDirectory()
+    const file = fs.readFileSync(join(directory, `${key}.json`), 'utf8')
     return JSON.parse(file) as TransformCacheEntry
   } catch (error) {
     debug('Failed to read cache file', error)
@@ -130,22 +160,35 @@ function readDiskCache(key: string): TransformCacheEntry | undefined {
 }
 
 function writeDiskCache(key: string, value: TransformCacheEntry) {
-  ensureCacheDirectory()
+  const directory = ensureCacheDirectory()
+  const target = join(directory, `${key}.json`)
 
-  // Ensure writes are non blocking
-  void fs.promises.writeFile(join(CACHE_DIRECTORY, `${key}.json`), JSON.stringify(value), 'utf8').catch((error) => {
-    debug('Failed to write cache file', error)
-  })
+  // Write to a unique temp file then atomically rename into place. A crash or
+  // concurrent writer can then only leave a stray .tmp file, never a
+  // partial/zero-byte entry that a reader could observe at the final path.
+  // Writes stay non-blocking (fire-and-forget).
+  const tmp = `${target}.${process.pid}.${diskWriteCounter++}.tmp`
+
+  void fs.promises
+    .writeFile(tmp, JSON.stringify(value), 'utf8')
+    .then(() => fs.promises.rename(tmp, target))
+    .catch((error) => {
+      debug('Failed to write cache file', error)
+      void fs.promises.rm(tmp, { force: true }).catch(() => {})
+    })
 }
 
-function ensureCacheDirectory() {
-  if (!cacheDirectoryReady) {
-    fs.mkdirSync(CACHE_DIRECTORY, { recursive: true })
-    cacheDirectoryReady = true
+function ensureCacheDirectory(): string {
+  const directory = getCacheDirectory()
+
+  if (ensuredCacheDirectory !== directory) {
+    fs.mkdirSync(directory, { recursive: true })
+    ensuredCacheDirectory = directory
   }
 
   // Note that we do not attempt to clean up old cache files since we store it
   // on tmpdir and we assume the OS take care of that.
+  return directory
 }
 
 function readPackageVersion(path: string): string {
@@ -175,23 +218,24 @@ export function clearTransformCache(options: { memory?: boolean; disk?: boolean 
 
   if (disk) {
     try {
-      fs.rmSync(CACHE_DIRECTORY, { recursive: true, force: true })
+      fs.rmSync(getCacheDirectory(), { recursive: true, force: true })
     } catch (error) {
       debug('Failed to clear cache directory', error)
     }
 
-    cacheDirectoryReady = false
+    ensuredCacheDirectory = undefined
   }
 }
 
 export function getTransformCacheDirectory() {
-  return CACHE_DIRECTORY
+  return getCacheDirectory()
 }
 
 export function shouldSkipTransformForRuntimeJs(
   filename: string,
   sourcecode: string,
   moduleKind: ts.ModuleKind = ts.ModuleKind.ES2015,
+  jsxEnabled = false,
   swcrcEnabled: boolean = Boolean(process.env.SWCRC),
 ): boolean {
   // Respect SWCRC workflows first. When users opt into external SWC config,
@@ -202,6 +246,14 @@ export function shouldSkipTransformForRuntimeJs(
 
   const extension = path.extname(filename).toLowerCase()
   if (!JS_RUNTIME_EXTENSIONS.has(extension)) {
+    return false
+  }
+
+  // JSX in a .js file must be transformed; skipping would ship raw JSX to the
+  // runtime and throw a SyntaxError. Never skip when JSX is configured or the
+  // source looks like JSX. This guard runs before the module-kind branch so it
+  // also protects ESM mode, which would otherwise skip every .js unconditionally.
+  if (jsxEnabled || LOOKS_LIKE_JSX_REGEX.test(sourcecode)) {
     return false
   }
 

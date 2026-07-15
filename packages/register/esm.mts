@@ -320,7 +320,7 @@ export const load: LoadHook = async (url, context, nextLoad) => {
   // like it expects, which at least fixes relative input sourcemap paths.
   const filename = url.startsWith('file:') ? fileURLToPath(url) : url
 
-  if (shouldSkipTransformForRuntimeJs(filename, code, tsconfigForSWCNode.module)) {
+  if (shouldSkipTransformForRuntimeJs(filename, code, tsconfigForSWCNode.module, Boolean(tsconfigForSWCNode.jsx))) {
     debug('skip compile: runtime js module', url)
     return addShortCircuitSignal({
       format: resolvedFormat,

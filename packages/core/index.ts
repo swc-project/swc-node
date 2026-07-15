@@ -24,6 +24,13 @@ export interface Options {
   esModuleInterop?: boolean
   keepClassNames?: boolean
   externalHelpers?: boolean
+  /**
+   * Minify (compress) the transpiled output. Off by default: `@swc-node/core`
+   * emits readable code, and consumers such as `@swc-node/register` cache and
+   * execute that output directly. Opt in when smaller output matters more than
+   * readability (e.g. shrinking an on-disk transform cache).
+   */
+  minify?: boolean
   react?: Partial<ReactConfig>
   baseUrl?: string
   paths?: {
@@ -68,8 +75,8 @@ function transformOption(path: string, options?: Options, jest = false): SwcOpti
             keepImportAttributes: true,
           },
         },
-    // Smaller output for cache
-    minify: true,
+    // Opt-in only; keep readable output by default (see Options.minify).
+    minify: opts.minify ?? false,
     isModule: true,
     module: options?.swc?.swcrc
       ? undefined

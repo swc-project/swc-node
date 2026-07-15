@@ -164,3 +164,20 @@ Use `SWC_NODE_SOURCE_MAP_MODE` to tune source map memory behavior:
 - `store`: in-memory map store only (`source-map-support` path).
 - `both`: inline + store (highest memory use, mainly for compatibility/debug edge cases).
 - `none`: disable both inline/store map injection.
+
+### Skipping compilation for runtime JS
+
+Plain JavaScript files (`.js`, `.mjs`, `.cjs`, `.es`, `.es6`) that Node can already
+execute are passed through without an SWC transform, which speeds up startup. A
+file is still transformed when it needs to be — it contains JSX, it uses ESM
+syntax under CommonJS output, or an `.swcrc` is in effect.
+
+Known caveats (kept intentionally, for speed):
+
+- A `tsconfig.json` `paths` alias imported via **dynamic** `import('@alias/…')` in a
+  passed-through `.js` file is not rewritten, so the alias will not resolve. Static
+  `import`/`require` are unaffected. Use `.ts`/`.mts` (or a static import) if you
+  rely on alias resolution here.
+- Dynamically `import()`-ing a CommonJS module from a passed-through `.js` file
+  yields a native module namespace rather than SWC's interop shape (`ns.default`
+  instead of `ns`).

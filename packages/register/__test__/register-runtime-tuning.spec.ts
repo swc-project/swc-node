@@ -159,3 +159,75 @@ test.serial('skips transform for runtime js in esm mode', async (t) => {
   t.is(output, 'export const value = 42')
   t.false(transformStub.called)
 })
+
+test.serial('transforms jsx in a .js file when jsx is configured (commonjs)', (t) => {
+  const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
+    code: 'h("div", null, "hi")',
+    map: emptyMap,
+  })
+
+  const output = compile('const view = () => <div>hi</div>', uniquePath('jsx-cjs', 'js'), {
+    module: ts.ModuleKind.CommonJS,
+    sourceMap: true,
+    jsx: ts.JsxEmit.React,
+  })
+
+  t.true(output.includes('h("div"'))
+  t.true(transformSyncStub.calledOnce)
+})
+
+test.serial('transforms jsx in a .js file in esm mode instead of skipping', async (t) => {
+  const transformStub = sinon.stub(swcCore, 'transform').resolves({
+    code: 'h("div", null, "hi")',
+    map: emptyMap,
+  })
+
+  const output = await compile(
+    'export const view = () => <div>hi</div>',
+    uniquePath('jsx-esm', 'js'),
+    {
+      module: ts.ModuleKind.ESNext,
+      sourceMap: true,
+      jsx: ts.JsxEmit.React,
+    },
+    true,
+  )
+
+  t.true(output.includes('h("div"'))
+  t.true(transformStub.calledOnce)
+})
+
+test.serial('does not skip a .js file whose content looks like jsx even without jsx config', (t) => {
+  const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
+    code: 'compiled',
+    map: emptyMap,
+  })
+
+  // A closing tag `</div>` alone is a strong JSX signal and must block the skip.
+  compile('const view = () => <div>hi</div>', uniquePath('jsx-content', 'js'), {
+    module: ts.ModuleKind.CommonJS,
+    sourceMap: true,
+  })
+
+  t.true(transformSyncStub.calledOnce)
+})
+
+test.serial('async compile returns a Promise even on a warm cache hit', async (t) => {
+  sinon.stub(swcCore, 'transform').resolves({
+    code: 'console.log("async-contract")',
+    map: emptyMap,
+  })
+
+  const filename = uniquePath('async-contract', 'ts')
+  const source = `const value: number = ${Date.now()}`
+  const options = { module: ts.ModuleKind.ESNext, sourceMap: true }
+
+  const cold = compile(source, filename, { ...options }, true)
+  t.is(typeof (cold as Promise<string>).then, 'function')
+  await cold
+
+  // Warm hit previously returned a bare string, breaking `.then()` callers.
+  const warm = compile(source, filename, { ...options }, true)
+  t.is(typeof (warm as Promise<string>).then, 'function')
+  t.is(typeof (await warm), 'string')
+})

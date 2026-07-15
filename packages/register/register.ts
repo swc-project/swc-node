@@ -26,10 +26,14 @@ const DEFAULT_EXTENSIONS = new Set([
 
 // Runtime knobs here are process-scoped and comparatively cheap to read, so
 // they gate cache safety without paying per-module deep serialization costs.
+// Every env var that changes transform output must appear here, otherwise a
+// warm cache would serve output produced under a different configuration.
 const CacheRuntimeSalt = [
   process.env.SWCRC ? 'swcrc=1' : 'swcrc=0',
   `swcConfig=${process.env.SWC_CONFIG_FILE ?? ''}`,
   `sourceMapMode=${process.env.SWC_NODE_SOURCE_MAP_MODE ?? 'auto'}`,
+  // Toggles import()/import.meta rewriting, so it changes emitted code.
+  `ignoreDynamic=${process.env.SWC_NODE_IGNORE_DYNAMIC ? '1' : '0'}`,
 ].join(';')
 
 const injectInlineSourceMap = ({
@@ -113,10 +117,14 @@ export function compile(
 
   delete options.fallbackToTs
 
+  // Preserve the overloaded return contract: an async caller may `.then()` the
+  // result, so every synchronous return below must be wrapped when async.
+  const finalize = (result: string): string | Promise<string> => (async ? Promise.resolve(result) : result)
+
   // Fast-path before cache work for files intentionally left as runtime JS.
   // This keeps cache logs meaningful and avoids unnecessary key generation.
-  if (!fallbackToTs && shouldSkipTransformForRuntimeJs(filename, sourcecode, options.module)) {
-    return sourcecode
+  if (!fallbackToTs && shouldSkipTransformForRuntimeJs(filename, sourcecode, options.module, Boolean(options.jsx))) {
+    return finalize(sourcecode)
   }
 
   const cacheInput = {
@@ -132,7 +140,7 @@ export function compile(
   if (cacheEntry) {
     // Keep source-map behavior consistent for cache hits, otherwise stack trace
     // semantics would differ between warm and cold compiles.
-    return injectInlineSourceMap({ filename, code: cacheEntry.code, map: cacheEntry.map })
+    return finalize(injectInlineSourceMap({ filename, code: cacheEntry.code, map: cacheEntry.map }))
   }
 
   if (fallbackToTs) {
@@ -142,7 +150,7 @@ export function compile(
     })
 
     setCachedTransform(cacheKey, { code: outputText, map: sourceMapText })
-    return injectInlineSourceMap({ filename, code: outputText, map: sourceMapText })
+    return finalize(injectInlineSourceMap({ filename, code: outputText, map: sourceMapText }))
   }
 
   let swcRegisterConfig: Options
