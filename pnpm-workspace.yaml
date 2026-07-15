@@ -1,1 +1,6 @@
 packages: ['packages/**']
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  nx: true
+  unrs-resolver: true

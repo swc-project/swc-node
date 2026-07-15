@@ -52,17 +52,17 @@
     "benchmark": "^2.1.4",
     "colorette": "^2.0.20",
     "cross-env": "^10.0.0",
-    "esbuild": "^0.27.0",
+    "esbuild": "^0.28.0",
     "husky": "^9.1.7",
     "jest": "^30.0.5",
-    "lerna": "9.0.6",
-    "lint-staged": "^16.1.5",
+    "lerna": "9.0.7",
+    "lint-staged": "^17.0.0",
     "lodash": "^4.17.21",
     "oxlint": "^1.12.0",
     "prettier": "^3.6.2",
     "react": "^19.1.1",
     "rxjs": "^7.8.2",
-    "sinon": "^21.0.0",
+    "sinon": "^22.0.0",
     "tslib": "^2.8.1",
     "typescript": "^5.9.2"
   },
@@ -98,5 +98,5 @@
       "SWC_NODE_PROJECT": "./tsconfig.test.json"
     }
   },
-  "packageManager": "pnpm@10.32.1"
+  "packageManager": "pnpm@11.13.0"
 }
