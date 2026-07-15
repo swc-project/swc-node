@@ -36,10 +36,10 @@
     "postinstall": "husky"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.3",
-    "@babel/plugin-transform-typescript": "^7.28.0",
-    "@babel/preset-env": "^7.28.3",
-    "@babel/preset-typescript": "^7.27.1",
+    "@babel/core": "^8.0.0",
+    "@babel/plugin-transform-typescript": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
+    "@babel/preset-typescript": "^8.0.0",
     "@swc-node/core": "workspace:*",
     "@swc-node/jest": "workspace:*",
     "@swc-node/register": "workspace:*",
