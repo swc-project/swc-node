@@ -234,6 +234,9 @@ importers:
 
   packages/register:
     dependencies:
+      '@node-rs/xxhash':
+        specifier: ^1.7.6
+        version: 1.7.6
       '@swc-node/core':
         specifier: ^1.14.1
         version: 1.14.1(@swc/core@1.15.43(@swc/helpers@0.5.23))(@swc/types@0.1.27)

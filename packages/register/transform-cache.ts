@@ -1,9 +1,9 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import * as ts from 'typescript'
-import { createHash } from 'node:crypto'
 import { tmpdir, userInfo } from 'node:os'
 import { join } from 'node:path'
+import { xxh64 } from '@node-rs/xxhash'
 import debugFactory from 'debug'
 import stableStringify from 'json-stable-stringify'
 
@@ -103,20 +103,21 @@ export function setCachedTransform(cacheKey: string, value: TransformCacheEntry)
 
 export function createCacheKey(input: TransformCacheKeyInput): string {
   // Keep cache reuse scoped to both source intent and toolchain version so
-  // stale compiled output is not reused across upgrades/config changes.
-  const hash = createHash('sha1')
-  hash.update(input.sourcecode)
-  hash.update('\0')
-  hash.update(input.filename)
-  hash.update('\0')
-  hash.update(input.fallbackToTs ? 'ts' : 'swc')
-  hash.update('\0')
-  hash.update(getOptionsSignature(input.options))
-  hash.update('\0')
-  hash.update(input.runSalt)
-  hash.update('\0')
-  hash.update(`register:${REGISTER_VERSION};swc:${SWC_VERSION}`)
-  return hash.digest('hex')
+  // stale compiled output is not reused across upgrades/config changes. NUL
+  // separators keep field boundaries unambiguous.
+  const payload = [
+    input.sourcecode,
+    input.filename,
+    input.fallbackToTs ? 'ts' : 'swc',
+    getOptionsSignature(input.options),
+    input.runSalt,
+    `register:${REGISTER_VERSION};swc:${SWC_VERSION}`,
+  ].join('\0')
+
+  // xxh64 over a byte Buffer: faster than a crypto hash over strings on this
+  // per-file hot path, and 64-bit collision odds are negligible for a transform
+  // cache. Matches @swc-node/jest's hashing and standard build-cache practice.
+  return xxh64(Buffer.from(payload)).toString(16)
 }
 
 function getOptionsSignature(options: Record<string, unknown>): string {

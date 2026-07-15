@@ -40,6 +40,7 @@
     "url": "https://github.com/swc-project/swc-node/issues"
   },
   "dependencies": {
+    "@node-rs/xxhash": "^1.7.6",
     "@swc-node/core": "^1.14.1",
     "@swc-node/sourcemap-support": "^0.6.1",
     "colorette": "^2.0.20",
