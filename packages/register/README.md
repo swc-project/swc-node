@@ -127,3 +127,57 @@ Respect the boolean value in `tsconfig`.
 `TypeScript` gives files list to `@swc-node/register`, if parse `tsconfig.json` failed or files list empty, `@swc-node/register` will transform all files which were required.
 
 And if failed to parse `tsconfig.json`, `@swc-node/register` will print warning which contains failed reason.
+
+## Performance tuning
+
+### Transform cache
+
+`@swc-node/register` now keeps a transform cache (memory + disk) keyed by source, filename, compiler options, and runtime versions.
+
+Environment variables:
+
+- `SWC_NODE_CACHE=0` disable cache.
+- `SWC_NODE_CACHE_DIR=./path/to/cache` choose disk cache directory.
+- `SWC_NODE_CACHE_MEMORY_LIMIT=2000` max in-process transform entries.
+
+Programmatic cache control:
+
+```js
+const { clearTransformCache, getTransformCacheDirectory } = require('@swc-node/register/register')
+
+// clear memory + disk (default)
+clearTransformCache()
+
+// clear only memory cache
+clearTransformCache({ memory: true, disk: false })
+
+// inspect resolved disk cache path
+console.log(getTransformCacheDirectory())
+```
+
+### Source map memory mode
+
+Use `SWC_NODE_SOURCE_MAP_MODE` to tune source map memory behavior:
+
+- `auto` (default): inline maps when Node native source maps are enabled, otherwise map-store mode.
+- `inline`: inline data URL source maps only.
+- `store`: in-memory map store only (`source-map-support` path).
+- `both`: inline + store (highest memory use, mainly for compatibility/debug edge cases).
+- `none`: disable both inline/store map injection.
+
+### Skipping compilation for runtime JS
+
+Plain JavaScript files (`.js`, `.mjs`, `.cjs`, `.es`, `.es6`) that Node can already
+execute are passed through without an SWC transform, which speeds up startup. A
+file is still transformed when it needs to be — it contains JSX, it uses ESM
+syntax under CommonJS output, or an `.swcrc` is in effect.
+
+Known caveats (kept intentionally, for speed):
+
+- A `tsconfig.json` `paths` alias imported via **dynamic** `import('@alias/…')` in a
+  passed-through `.js` file is not rewritten, so the alias will not resolve. Static
+  `import`/`require` are unaffected. Use `.ts`/`.mts` (or a static import) if you
+  rely on alias resolution here.
+- Dynamically `import()`-ing a CommonJS module from a passed-through `.js` file
+  yields a native module namespace rather than SWC's interop shape (`ns.default`
+  instead of `ns`).
