@@ -307,6 +307,13 @@ export const load: LoadHook = async (url, context, nextLoad) => {
     return nextLoad(url, context)
   }
 
+  // import attributes are handled by the default loader,
+  // e.g. `with { type: 'text' }` since Node.js 26.5 (behind --experimental-import-text)
+  if (context.importAttributes?.type) {
+    debug('skip load: import attributes', url)
+    return nextLoad(url, context)
+  }
+
   const { source, format: resolvedFormat } = await nextLoad(url, context)
 
   if (!source) {

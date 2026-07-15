@@ -1,6 +1,8 @@
 /* eslint import/order: off */
 import assert from 'node:assert'
+import { spawnSync } from 'node:child_process'
 import test from 'node:test'
+import { fileURLToPath } from 'node:url'
 
 import { RepositoryState } from '@napi-rs/simple-git'
 import { bar as subBar } from '@subdirectory/bar.mjs'
@@ -101,4 +103,22 @@ await test('postgres should work', async () => {
 
 await test('resolve conditions', () => {
   assert.equal(name, 'from-dev')
+})
+
+// `with { type: 'text' }` is supported since Node.js 26.5, behind --experimental-import-text
+const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(Number)
+const supportsTextImports = nodeMajor > 26 || (nodeMajor === 26 && nodeMinor >= 5)
+
+await test('text import attributes should pass through to the default loader', { skip: !supportsTextImports }, () => {
+  const { status, stderr } = spawnSync(
+    process.execPath,
+    [
+      '--experimental-import-text',
+      '--import=@swc-node/register/esm-register',
+      fileURLToPath(new URL('./text-import/index.ts', import.meta.url)),
+    ],
+    { env: process.env },
+  )
+
+  assert.equal(status, 0, stderr?.toString())
 })
