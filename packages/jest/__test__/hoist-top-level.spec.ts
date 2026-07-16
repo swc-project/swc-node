@@ -1,6 +1,8 @@
 import test from 'ava'
 
-const { process } = require('../index')
+import jestTransformer from '../lib/index.js'
+
+const { process } = jestTransformer
 
 const BrorrwFromTsJest = `
 const foo = 'foo'

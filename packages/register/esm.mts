@@ -138,6 +138,13 @@ const EXTENSION_MODULE_MAP = {
   '.node': 'commonjs',
 } as const
 
+// Source extensions swc-node is responsible for transforming. A file: URL import
+// that lands on one of these must flow through the resolver/transform below
+// instead of the runtime dynamic-import fast path, otherwise the file is loaded
+// untransformed (this is how test runners such as AVA import `.ts` test files).
+// Already-runnable files (.mjs/.cjs/…) keep the native fast path that #883 needs.
+const TRANSFORMABLE_SOURCE_EXTENSIONS = new Set(['.ts', '.tsx', '.mts', '.cts', '.js', '.jsx'])
+
 let conditions: string[] | undefined = undefined
 
 const resolverOptions: NapiResolveOptions = {
@@ -197,7 +204,17 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
 
   const parsedUrl = parseUrl(specifier)
 
-  if (context.parentURL && parsedUrl?.protocol === 'file:') {
+  // A file: URL specifier that arrives with a parentURL is either a runtime
+  // dynamic import (`await import('file://…')`, see #883) or a test runner such
+  // as AVA importing a source file. When it points at a source file swc-node is
+  // responsible for transforming, let it fall through to the resolver/transform
+  // below; skipping it would load the raw, untransformed source. Files Node can
+  // already execute (.mjs/.cjs/…) keep the native fast path that #883 needs.
+  const isParentedFileUrl = Boolean(context.parentURL) && parsedUrl?.protocol === 'file:'
+  const shouldTransformParentedFileUrl =
+    isParentedFileUrl && TRANSFORMABLE_SOURCE_EXTENSIONS.has(extname(parsedUrl!.pathname).toLowerCase())
+
+  if (isParentedFileUrl && !shouldTransformParentedFileUrl) {
     debug('skip resolve: dynamic import', specifier)
     return addShortCircuitSignal({
       ...context,
@@ -243,13 +260,12 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   )
 
   if (error) {
-    debug('oxc-resolver error, falling back to node resolver', specifier, error);
+    debug('oxc-resolver error, falling back to node resolver', specifier, error)
     try {
-      const res = await nextResolve(specifier);
-      return addShortCircuitSignal(res);
-    }
-    catch (resolveError) {
-      throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`);
+      const res = await nextResolve(specifier)
+      return addShortCircuitSignal(res)
+    } catch (resolveError) {
+      throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`)
     }
   }
 

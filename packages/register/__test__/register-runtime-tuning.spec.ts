@@ -1,12 +1,20 @@
+import { createRequire } from 'node:module'
+
 import test from 'ava'
 import sinon from 'sinon'
 import * as ts from 'typescript'
 
-import * as swcCore from '@swc-node/core'
 import { SourcemapMap } from '@swc-node/sourcemap-support'
 
-import { compile } from '../register'
-import { clearTransformCache } from '../transform-cache'
+import { compile } from '../lib/register.js'
+import { clearTransformCache } from '../lib/transform-cache.js'
+
+// @swc-node/core is CommonJS. Import it through require so this test holds the
+// exact same singleton that ../lib/register.js loads internally; an ESM `import
+// * as` namespace is frozen and cannot be stubbed. Stubbing the singleton's
+// transform functions is then observed by the compile() calls under test.
+const require = createRequire(import.meta.url)
+const swcCore = require('@swc-node/core')
 
 const originalEnv = { ...process.env }
 const emptyMap = '{"version":3,"sources":[],"names":[],"mappings":""}'

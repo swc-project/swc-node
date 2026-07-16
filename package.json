@@ -87,8 +87,8 @@
       "ts",
       "tsx"
     ],
-    "require": [
-      "@swc-node/register"
+    "nodeArguments": [
+      "--import=@swc-node/register/esm-register"
     ],
     "cache": false,
     "files": [

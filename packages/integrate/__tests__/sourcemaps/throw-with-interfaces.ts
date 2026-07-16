@@ -12,6 +12,6 @@ interface Unused7 { g: string }
 interface Unused8 { h: number }
 interface Unused9 { i: boolean }
 
-exports.throwError = function throwError() {
+export function throwError() {
   throw new Error('sourcemap-test')
 }
