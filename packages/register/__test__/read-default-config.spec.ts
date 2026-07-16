@@ -1,11 +1,14 @@
 import { join, dirname } from 'path'
 
 import test from 'ava'
-import { omit } from 'lodash'
+import lodash from 'lodash'
 import sinon from 'sinon'
 import * as ts from 'typescript'
 
-import { readDefaultTsConfig } from '../read-default-tsconfig'
+import { readDefaultTsConfig } from '../lib/read-default-tsconfig.js'
+
+const { omit } = lodash
+const __dirname = import.meta.dirname
 
 test('should read tsconfig from cwd if without any config', (t) => {
   delete process.env.SWC_NODE_PROJECT

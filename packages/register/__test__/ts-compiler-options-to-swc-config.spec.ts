@@ -3,7 +3,9 @@ import { join } from 'path'
 import test from 'ava'
 import * as ts from 'typescript'
 
-import { tsCompilerOptionsToSwcConfig } from '../read-default-tsconfig'
+import { tsCompilerOptionsToSwcConfig } from '../lib/read-default-tsconfig.js'
+
+const __dirname = import.meta.dirname
 
 test('default values', (t) => {
   const options: ts.CompilerOptions = {}

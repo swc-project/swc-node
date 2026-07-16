@@ -38,6 +38,10 @@ jobs:
         run: pnpm build
 
       - name: Test bindings
+        # Force bash on Windows too: with the default PowerShell shell only the
+        # last command's exit code surfaces, so a failing `pnpm test` would be
+        # masked by a passing `pnpm test:module` and the job would go green.
+        shell: bash
         run: |
           pnpm test
           pnpm test:jest
