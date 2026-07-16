@@ -5,7 +5,7 @@ import { tmpdir, userInfo } from 'node:os'
 import { join } from 'node:path'
 import { xxh64 } from '@node-rs/xxhash'
 import debugFactory from 'debug'
-import stableStringify from 'json-stable-stringify'
+import stableStringify from 'fast-json-stable-stringify'
 
 const LOOKS_LIKE_ESM_SYNTAX_REGEX = /(?:^|\n)\s*import\s|(?:^|\n)\s*export\s|\bimport\.meta\b/
 
