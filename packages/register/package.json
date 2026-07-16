@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "@node-rs/xxhash": "^1.7.6",
-    "@swc-node/core": "^1.14.1",
+    "@swc-node/core": "workspace:*",
     "@swc-node/sourcemap-support": "^0.6.1",
     "colorette": "^2.0.20",
     "debug": "^4.4.1",

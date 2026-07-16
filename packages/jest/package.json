@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@node-rs/xxhash": "^1.7.6",
-    "@swc-node/core": "^1.14.1",
-    "@swc-node/register": "^1.11.1"
+    "@swc-node/core": "workspace:*",
+    "@swc-node/register": "workspace:*"
   },
   "peerDependencies": {
     "@swc/core": ">= 1.4.13",
