@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.12.0...@swc-node/register@1.12.1) (2026-07-18)
+
+### Bug Fixes
+
+- **register:** always inline source maps in auto mode so debuggers work ([#1062](https://github.com/swc-project/swc-node/issues/1062)) ([986094d](https://github.com/swc-project/swc-node/commit/986094db00e9aad0d4296fe910624b72c10f1737)), closes [#1059](https://github.com/swc-project/swc-node/issues/1059)
+
 # [1.11.0](https://github.com/swc-project/swc-node/compare/@swc-node/register@1.10.10...@swc-node/register@1.11.0) (2025-08-17)
 
 ### Bug Fixes

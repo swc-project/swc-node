@@ -1,6 +1,6 @@
 {
   "name": "@swc-node/jest",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "swc preprocessor for jest with source map support",
   "keywords": [
     "swc",
