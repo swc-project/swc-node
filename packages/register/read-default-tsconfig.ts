@@ -28,9 +28,17 @@ export function getSourceMapMode(): { inline: boolean; store: boolean } {
       return { inline: false, store: false }
   }
 
-  // In auto mode, follow runtime capability: native source maps favor inline,
-  // non-native stacks favor store mode.
-  return process.sourceMapsEnabled ? { inline: true, store: false } : { inline: false, store: true }
+  // In auto mode, always inline the map: the V8 inspector reads the inline
+  // sourceMappingURL off the running code to bind breakpoints, and it does so
+  // regardless of `process.sourceMapsEnabled` (which only governs how Node
+  // rewrites Error.stack). Gating inline emission on that flag broke debuggers
+  // in 1.12.0 (https://github.com/swc-project/swc-node/issues/1059).
+  //
+  // Additionally store the map when native source maps are off so
+  // @swc-node/sourcemap-support keeps Error.stack line numbers correct; when
+  // native maps are on, Node handles stack traces and storing would just retain
+  // a duplicate map.
+  return process.sourceMapsEnabled ? { inline: true, store: false } : { inline: true, store: true }
 }
 
 export function readDefaultTsConfig(

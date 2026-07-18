@@ -124,6 +124,37 @@ test.serial('supports sourcemap store-only mode to avoid inline map payload', (t
   t.true(SourcemapMap.has(filename))
 })
 
+test.serial('auto source map mode inlines the map so debuggers can bind breakpoints', (t) => {
+  // Regression guard for https://github.com/swc-project/swc-node/issues/1059.
+  // In auto mode (no SWC_NODE_SOURCE_MAP_MODE) the emitted code must carry an
+  // inline sourceMappingURL even when process.sourceMapsEnabled is false. The V8
+  // inspector reads that inline map to bind breakpoints, and it does so
+  // regardless of --enable-source-maps. Dropping the inline map here is what
+  // broke the debugger in 1.12.0.
+  delete process.env.SWC_NODE_SOURCE_MAP_MODE
+
+  const previousSourceMaps = process.sourceMapsEnabled
+  process.setSourceMapsEnabled(false)
+  t.teardown(() => process.setSourceMapsEnabled(previousSourceMaps))
+
+  sinon.stub(swcCore, 'transformSync').returns({
+    code: 'console.log("auto-inline")',
+    map: emptyMap,
+  })
+
+  const filename = uniquePath('sourcemap-auto', 'ts')
+  const output = compile('const x = 1', filename, {
+    module: ts.ModuleKind.CommonJS,
+    sourceMap: true,
+  })
+
+  // Inline map present -> the inspector can map breakpoints back to source.
+  t.true(output.includes('sourceMappingURL'))
+  // Stored map present -> sourcemap-support keeps Error.stack correct when native
+  // source maps are off.
+  t.true(SourcemapMap.has(filename))
+})
+
 test.serial('skips transform for plain js in commonjs mode', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync')
 
