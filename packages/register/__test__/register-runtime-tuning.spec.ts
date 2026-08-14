@@ -16,6 +16,15 @@ import { clearTransformCache } from '../lib/transform-cache.js'
 const require = createRequire(import.meta.url)
 const swcCore = require('@swc-node/core')
 
+// Under the synchronous hooks (`@swc-node/register/esm-register-next`) `require()`
+// itself is customized, so `@swc-node/core` is served from its TypeScript source
+// rather than its published CommonJS build. swc emits ESM exports as getters, which
+// matches the read-only semantics of ES module bindings but leaves nothing for
+// sinon to replace. These tests exercise `compile()` internals rather than loader
+// behaviour, so they run against whichever build exposes a stubbable seam.
+const isSwcCoreStubbable = Boolean(Object.getOwnPropertyDescriptor(swcCore, 'transformSync')?.writable)
+const serial = isSwcCoreStubbable ? test.serial : test.serial.skip
+
 const originalEnv = { ...process.env }
 const emptyMap = '{"version":3,"sources":[],"names":[],"mappings":""}'
 
@@ -34,7 +43,7 @@ test.afterEach.always(() => {
   process.env = { ...originalEnv }
 })
 
-test.serial('reuses transform cache for sync compile', (t) => {
+serial('reuses transform cache for sync compile', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
     code: 'console.log("cached")',
     map: emptyMap,
@@ -56,7 +65,7 @@ test.serial('reuses transform cache for sync compile', (t) => {
   t.is(transformSyncStub.callCount, 1)
 })
 
-test.serial('reuses transform cache for async compile', async (t) => {
+serial('reuses transform cache for async compile', async (t) => {
   const transformStub = sinon.stub(swcCore, 'transform').resolves({
     code: 'console.log("cached-async")',
     map: emptyMap,
@@ -88,7 +97,7 @@ test.serial('reuses transform cache for async compile', async (t) => {
   t.true(transformStub.callCount <= 1)
 })
 
-test.serial('supports sourcemap inline-only mode to reduce map-store memory', (t) => {
+serial('supports sourcemap inline-only mode to reduce map-store memory', (t) => {
   process.env.SWC_NODE_SOURCE_MAP_MODE = 'inline'
 
   sinon.stub(swcCore, 'transformSync').returns({
@@ -106,7 +115,7 @@ test.serial('supports sourcemap inline-only mode to reduce map-store memory', (t
   t.false(SourcemapMap.has(filename))
 })
 
-test.serial('supports sourcemap store-only mode to avoid inline map payload', (t) => {
+serial('supports sourcemap store-only mode to avoid inline map payload', (t) => {
   process.env.SWC_NODE_SOURCE_MAP_MODE = 'store'
 
   sinon.stub(swcCore, 'transformSync').returns({
@@ -124,7 +133,7 @@ test.serial('supports sourcemap store-only mode to avoid inline map payload', (t
   t.true(SourcemapMap.has(filename))
 })
 
-test.serial('auto source map mode inlines the map so debuggers can bind breakpoints', (t) => {
+serial('auto source map mode inlines the map so debuggers can bind breakpoints', (t) => {
   // Regression guard for https://github.com/swc-project/swc-node/issues/1059.
   // In auto mode (no SWC_NODE_SOURCE_MAP_MODE) the emitted code must carry an
   // inline sourceMappingURL even when process.sourceMapsEnabled is false. The V8
@@ -155,7 +164,7 @@ test.serial('auto source map mode inlines the map so debuggers can bind breakpoi
   t.true(SourcemapMap.has(filename))
 })
 
-test.serial('skips transform for plain js in commonjs mode', (t) => {
+serial('skips transform for plain js in commonjs mode', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync')
 
   const output = compile('module.exports = 42', uniquePath('plain-cjs', 'js'), {
@@ -167,7 +176,7 @@ test.serial('skips transform for plain js in commonjs mode', (t) => {
   t.false(transformSyncStub.called)
 })
 
-test.serial('still transforms js with esm syntax in commonjs mode', (t) => {
+serial('still transforms js with esm syntax in commonjs mode', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
     code: 'exports.value = 42',
     map: emptyMap,
@@ -182,7 +191,7 @@ test.serial('still transforms js with esm syntax in commonjs mode', (t) => {
   t.true(transformSyncStub.calledOnce)
 })
 
-test.serial('skips transform for runtime js in esm mode', async (t) => {
+serial('skips transform for runtime js in esm mode', async (t) => {
   const transformStub = sinon.stub(swcCore, 'transform')
 
   const output = await compile(
@@ -199,7 +208,7 @@ test.serial('skips transform for runtime js in esm mode', async (t) => {
   t.false(transformStub.called)
 })
 
-test.serial('transforms jsx in a .js file when jsx is configured (commonjs)', (t) => {
+serial('transforms jsx in a .js file when jsx is configured (commonjs)', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
     code: 'h("div", null, "hi")',
     map: emptyMap,
@@ -215,7 +224,7 @@ test.serial('transforms jsx in a .js file when jsx is configured (commonjs)', (t
   t.true(transformSyncStub.calledOnce)
 })
 
-test.serial('transforms jsx in a .js file in esm mode instead of skipping', async (t) => {
+serial('transforms jsx in a .js file in esm mode instead of skipping', async (t) => {
   const transformStub = sinon.stub(swcCore, 'transform').resolves({
     code: 'h("div", null, "hi")',
     map: emptyMap,
@@ -236,7 +245,7 @@ test.serial('transforms jsx in a .js file in esm mode instead of skipping', asyn
   t.true(transformStub.calledOnce)
 })
 
-test.serial('does not skip a .js file whose content looks like jsx even without jsx config', (t) => {
+serial('does not skip a .js file whose content looks like jsx even without jsx config', (t) => {
   const transformSyncStub = sinon.stub(swcCore, 'transformSync').returns({
     code: 'compiled',
     map: emptyMap,
@@ -251,7 +260,7 @@ test.serial('does not skip a .js file whose content looks like jsx even without 
   t.true(transformSyncStub.calledOnce)
 })
 
-test.serial('async compile returns a Promise even on a warm cache hit', async (t) => {
+serial('async compile returns a Promise even on a warm cache hit', async (t) => {
   sinon.stub(swcCore, 'transform').resolves({
     code: 'console.log("async-contract")',
     map: emptyMap,

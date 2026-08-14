@@ -109,12 +109,26 @@ await test('resolve conditions', () => {
 const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(Number)
 const supportsTextImports = nodeMajor > 26 || (nodeMajor === 26 && nodeMinor >= 5)
 
-await test('text import attributes should pass through to the default loader', { skip: !supportsTextImports }, () => {
+await test('text import attributes should pass through to the default loader for @swc-node/register/esm-register', { skip: !supportsTextImports }, () => {
   const { status, stderr } = spawnSync(
     process.execPath,
     [
       '--experimental-import-text',
       '--import=@swc-node/register/esm-register',
+      fileURLToPath(new URL('./text-import/index.ts', import.meta.url)),
+    ],
+    { env: process.env },
+  )
+
+  assert.equal(status, 0, stderr?.toString())
+})
+
+await test('text import attributes should pass through to the default loader  @swc-node/register/esm-register-next', { skip: !supportsTextImports }, () => {
+  const { status, stderr } = spawnSync(
+    process.execPath,
+    [
+      '--experimental-import-text',
+      '--import=@swc-node/register/esm-register-next',
       fileURLToPath(new URL('./text-import/index.ts', import.meta.url)),
     ],
     { env: process.env },
