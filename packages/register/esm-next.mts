@@ -1,5 +1,5 @@
-import { readFile } from 'node:fs/promises'
-import { createRequire, type LoadHook, type ResolveHook } from 'node:module'
+import { readFileSync } from 'node:fs'
+import { createRequire, type LoadHookSync, type ResolveHookSync } from 'node:module'
 import { join } from 'node:path'
 import { URL, pathToFileURL } from 'node:url'
 
@@ -13,6 +13,7 @@ import {
   debug,
   formatForResolvedPath,
   formatFromExtension,
+  getCompilerOptions,
   getResolver,
   isPathNotInNodeModules,
   packageJSONCache,
@@ -21,12 +22,11 @@ import {
   planResolve,
   planTransform,
   shouldDelegateLoad,
-  tsconfigForSWCNode,
 } from './esm-shared.mjs'
 
-const readFileIfExists = async (path: string) => {
+const readFileIfExists = (path: string) => {
   try {
-    const content = await readFile(path, 'utf-8')
+    const content = readFileSync(path, 'utf-8')
 
     return parsePackageJSON(content)
   } catch (e) {
@@ -39,24 +39,23 @@ const readFileIfExists = async (path: string) => {
   }
 }
 
-const readPackageJSON = async (path: string) => {
+const readPackageJSON = (path: string) => {
   if (packageJSONCache.has(path)) {
     return packageJSONCache.get(path)
   }
 
-  const res = (await readFileIfExists(path)) as PackageJson
+  const res = readFileIfExists(path) as PackageJson
   packageJSONCache.set(path, res)
   return res
 }
 
-async function getModuleType(path: string): Promise<'module' | 'commonjs' | undefined> {
-  const pkgJsonReadContent = await readPackageJSON(path)
-  return pkgJsonReadContent?.type
+function getModuleType(path: string): 'module' | 'commonjs' | undefined {
+  return readPackageJSON(path)?.type
 }
 
-export const getPackageType = async (url: string) => {
+export const getPackageType = (url: string) => {
   for (const path of packageJSONPathsFor(url)) {
-    const packageJson = await readPackageJSON(path)
+    const packageJson = readPackageJSON(path)
 
     if (packageJson) {
       return packageJson.type ?? undefined
@@ -66,24 +65,27 @@ export const getPackageType = async (url: string) => {
   return undefined
 }
 
-export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
+export const resolve: ResolveHookSync = (specifier, context, nextResolve) => {
   debug('resolve', specifier, JSON.stringify(context))
 
   const resolver = getResolver(context.conditions)
-  const plan = planResolve(specifier, context)
+  // Builtins are handed down the chain: these hooks run ahead of the ones
+  // registered with `module.register()`, and claiming `node:*` here would hide
+  // builtins from loaders that mock them.
+  const plan = planResolve(specifier, context, { shortCircuitBuiltins: false })
 
   if (plan.kind === 'result') {
     return plan.output
   }
 
   if (plan.kind === 'next') {
-    return addShortCircuitSignal(await nextResolve(specifier))
+    return addShortCircuitSignal(nextResolve(specifier))
   }
 
   if (plan.kind === 'entrypoint') {
     const format =
       plan.ext === '.js'
-        ? (await getPackageType(plan.url)) === 'module'
+        ? getPackageType(plan.url) === 'module'
           ? 'module'
           : 'commonjs'
         : formatFromExtension(plan.ext)
@@ -94,13 +96,12 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
     })
   }
 
-  const { error, path, moduleType, packageJsonPath } = await resolver.async(plan.parentDir, plan.request)
+  const { error, path, moduleType, packageJsonPath } = resolver.sync(plan.parentDir, plan.request)
 
   if (error) {
     debug('oxc-resolver error, falling back to node resolver', specifier, error)
     try {
-      const res = await nextResolve(specifier)
-      return addShortCircuitSignal(res)
+      return addShortCircuitSignal(nextResolve(specifier))
     } catch (resolveError) {
       throw new Error(`${error}: ${specifier} cannot be resolved in ${context.parentURL}`)
     }
@@ -110,7 +111,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   if (path && isPathNotInNodeModules(path)) {
     debug('resolved: typescript', specifier, moduleType, path)
     const url = new URL('file://' + join(path))
-    const mt = moduleType ?? (packageJsonPath ? await getModuleType(packageJsonPath) : null)
+    const mt = moduleType ?? (packageJsonPath ? getModuleType(packageJsonPath) : null)
 
     return addShortCircuitSignal({
       ...context,
@@ -121,7 +122,7 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
 
   try {
     // files could not resolved by typescript or resolved as dts, fallback to use node resolver
-    const res = await nextResolve(specifier)
+    const res = nextResolve(specifier)
     debug('resolved: fallback node', specifier, res.url, res.format)
     return addShortCircuitSignal(res)
   } catch (resolveError) {
@@ -142,26 +143,27 @@ export const resolve: ResolveHook = async (specifier, context, nextResolve) => {
   }
 }
 
-export const load: LoadHook = async (url, context, nextLoad) => {
+export const load: LoadHookSync = (url, context, nextLoad) => {
   debug('load', url, JSON.stringify(context))
 
   if (shouldDelegateLoad(url, context)) {
     return nextLoad(url, context)
   }
 
-  const loaded = await nextLoad(url, context)
-  const plan = planTransform(url, loaded, tsconfigForSWCNode, shouldSkipTransformForRuntimeJs)
+  const loaded = nextLoad(url, context)
+  // Unlike the asynchronous hooks, the source returned here is what the CommonJS
+  // loader evaluates, so a file resolved as CommonJS must be emitted as CommonJS.
+  const plan = planTransform(url, loaded, getCompilerOptions(loaded.format), shouldSkipTransformForRuntimeJs)
 
   if (plan.kind === 'passthrough') {
     return plan.output
   }
 
-  const compiled = await compile(plan.code, plan.filename, plan.options, true)
+  const compiled = compile(plan.code, plan.filename, plan.options, false)
 
   debug('compiled', url, plan.format)
 
   return addShortCircuitSignal({
-    // for lazy: ts-node think format would undefined, actually it should not, keep it as original temporarily
     format: plan.format,
     source: compiled,
   })

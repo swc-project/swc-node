@@ -46,6 +46,7 @@ jobs:
           pnpm test
           pnpm test:jest
           pnpm test:module
+          pnpm test:module:next
 
   publish:
     name: Publish

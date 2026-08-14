@@ -32,6 +32,8 @@
     "test": "ava",
     "test:jest": "jest --config jest.config.js",
     "test:module": "cross-env SWC_NODE_PROJECT=packages/integrate-module/tsconfig.json node --enable-source-maps --conditions=dev --import=@swc-node/register/esm-register packages/integrate-module/src/index.ts",
+    "test:next": "cross-env SWC_NODE_ESM_LOADER=@swc-node/register/esm-register-next ava",
+    "test:module:next": "cross-env SWC_NODE_ESM_LOADER=@swc-node/register/esm-register-next SWC_NODE_PROJECT=packages/integrate-module/tsconfig.json node --enable-source-maps --conditions=dev --import=@swc-node/register/esm-register-next packages/integrate-module/src/index.ts",
     "postinstall": "husky"
   },
   "devDependencies": {
@@ -79,23 +81,6 @@
     "trailingComma": "all",
     "singleQuote": true,
     "arrowParens": "always"
-  },
-  "ava": {
-    "extensions": [
-      "js",
-      "ts",
-      "tsx"
-    ],
-    "nodeArguments": [
-      "--import=@swc-node/register/esm-register"
-    ],
-    "cache": false,
-    "files": [
-      "packages/**/*.spec.{js,ts,tsx}"
-    ],
-    "environmentVariables": {
-      "SWC_NODE_PROJECT": "./tsconfig.test.json"
-    }
   },
   "packageManager": "pnpm@11.17.0"
 }

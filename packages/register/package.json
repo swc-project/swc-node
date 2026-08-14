@@ -82,6 +82,12 @@
     },
     "./esm-register": {
       "import": "./esm/esm-register.mjs"
+    },
+    "./esm-next": {
+      "import": "./esm/esm-next.mjs"
+    },
+    "./esm-register-next": {
+      "import": "./esm/esm-register-next.mjs"
     }
   }
 }
