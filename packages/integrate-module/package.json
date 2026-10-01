@@ -19,7 +19,7 @@
     "postgres": "^3.4.7",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "simple-git": "^3.28.0",
+    "simple-git": "^4.0.0",
     "typescript": "^5.9.2"
   }
 }
