@@ -171,8 +171,8 @@ importers:
         specifier: ^19.1.7
         version: 19.2.4(@types/react@19.2.18)
       esmock:
-        specifier: ^2.7.1
-        version: 2.7.6
+        specifier: ^3.0.0
+        version: 3.0.0
       ipaddr.js:
         specifier: ^2.2.0
         version: 2.5.0
@@ -3172,9 +3172,9 @@ packages:
     resolution: {integrity: sha512-2NxwbF/hZ0KpepYN0cNbo+FN6XoK7GaHlQhgx/hIZl6Va0bF45RQOOwhLIy8lQDbuCiadSLCBnH2CFYquit5bw==}
     engines: {node: '>=8.0.0'}
 
-  esmock@2.7.6:
-    resolution: {integrity: sha512-Moibxg8tl+wUeuDZZxHC9yVFi+rYITrPsu8/JDmO9AWVaXiWrFyvklruDv7pP7h3t0UqqPpZiCaZ51lzwVRK8A==}
-    engines: {node: '>=14.16.0'}
+  esmock@3.0.0:
+    resolution: {integrity: sha512-pAMErd5EJ5LdERCsNypz23EgLERY1DAccin0lo9odUqAn5zAhXJbhdHddAx6WycMl9clexmAIStL0f5axvdvsg==}
+    engines: {node: ^22.15 || ^24 || >=26}
 
   esprima@4.0.1:
     resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
@@ -7465,8 +7465,8 @@ snapshots:
 
   agent-base@9.0.0: {}
 
-  ajv-formats@2.1.1(ajv@8.20.0):
-    optionalDependencies:
+  ajv-formats@2.1.1:
+    dependencies:
       ajv: 8.20.0
 
   ajv-keywords@5.1.0(ajv@8.20.0):
@@ -8133,7 +8133,7 @@ snapshots:
       esrecurse: 4.3.0
       estraverse: 4.3.0
 
-  esmock@2.7.6: {}
+  esmock@3.0.0: {}
 
   esprima@4.0.1: {}
 
@@ -9974,7 +9974,7 @@ snapshots:
     dependencies:
       '@types/json-schema': 7.0.15
       ajv: 8.20.0
-      ajv-formats: 2.1.1(ajv@8.20.0)
+      ajv-formats: 2.1.1
       ajv-keywords: 5.1.0(ajv@8.20.0)
 
   semver@6.3.1: {}
