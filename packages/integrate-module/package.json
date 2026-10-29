@@ -16,7 +16,7 @@
     "@types/react-dom": "^19.1.7",
     "esmock": "^2.7.1",
     "ipaddr.js": "^2.2.0",
-    "postgres": "^3.4.7",
+    "postgres": "^4.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "simple-git": "^3.28.0",
