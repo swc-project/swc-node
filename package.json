@@ -82,5 +82,5 @@
     "singleQuote": true,
     "arrowParens": "always"
   },
-  "packageManager": "pnpm@11.28.10"
+  "packageManager": "pnpm@12.16.1"
 }
