@@ -14,7 +14,7 @@
     "@swc-node/test-conditions": "workspace:*",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
-    "esmock": "^2.7.1",
+    "esmock": "^3.0.0",
     "ipaddr.js": "^2.2.0",
     "postgres": "^3.4.7",
     "react": "^19.1.1",
